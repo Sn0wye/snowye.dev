@@ -24,6 +24,10 @@ export const {
       background: '#08070b',
       hover: '#212024',
       command: 'rgba(255, 255, 255, 0.05)',
+      linkedin: '#0A66C2',
+      instagram:
+        'linear-gradient(90deg, rgba(255,214,0,1) 0%, rgba(255,122,0,1) 50%, rgba(255,0,105,1) 100%)',
+      github: '#777777',
     },
     fonts: {
       body: 'Biotif, sans-serif',
@@ -58,6 +62,7 @@ const globalStyles = globalCss({
     padding: '0',
     WebkitFontSmoothing: 'antialiased',
     background: '$background',
+    border: 0,
   },
   kbd: {
     color: '$background',
