@@ -41,6 +41,15 @@ export default function CommandBar({ children }: PropsWithChildren) {
       icon: <Icon className='ri-file-copy-line' />,
     },
     {
+      id: 'email',
+      name: 'Send Email',
+      shortcut: ['e'],
+      keywords: 'send-email',
+      section: 'General',
+      perform: () => router.push('/contact'),
+      icon: <Icon className='ri-mail-line' />,
+    },
+    {
       id: 'source',
       name: 'View Source',
       shortcut: ['s'],
