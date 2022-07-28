@@ -17,7 +17,7 @@ import {
 } from './styles';
 
 export function Navbar() {
-  const router = useRouter();
+  const { asPath } = useRouter();
   const pages = ['About', 'Projects'];
   const [hovered, setHovered] = useState('');
   const { query } = useKBar();
@@ -48,7 +48,7 @@ export function Navbar() {
                       onHoverStart={() => setHovered(page)}
                       onHoverEnd={() => setHovered('')}
                       css={
-                        router.pathname === path
+                        asPath === path
                           ? {
                               color: '$primary',
                               '&::after': { opacity: 1 },
