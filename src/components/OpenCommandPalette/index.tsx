@@ -37,4 +37,5 @@ export function OpenCommandPalette() {
       </Button>
     );
   }
+  return null;
 }
