@@ -24,9 +24,10 @@ export const {
       background: '#08070b',
       hover: '#212024',
       command: 'rgba(255, 255, 255, 0.05)',
-      linkedin: '#0A66C2',
-      instagram:
-        'linear-gradient(90deg, rgba(255,214,0,1) 0%, rgba(255,122,0,1) 50%, rgba(255,0,105,1) 100%)',
+      linkedin: '#0077b5',
+      // instagramGradient:
+      //   'linear-gradient(90deg, rgba(255,214,0,1) 0%, rgba(255,122,0,1) 50%, rgba(255,0,105,1) 100%)',
+      instagram: '#e1306c',
       github: '#777777',
     },
     fonts: {

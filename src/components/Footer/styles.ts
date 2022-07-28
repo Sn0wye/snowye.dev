@@ -25,7 +25,7 @@ export const Anchor = styled('a', {
     marginBottom: '0.25rem',
     fontWeight: 'bold',
     fill: '$primary',
-    opacity: 0,
+    opacity: 1,
     width: '1rem',
     height: '1rem',
     transition: 'opacity $durwation ease-in-out',
@@ -62,10 +62,10 @@ export const Anchor = styled('a', {
       },
       instagram: {
         '&:hover': {
-          color: '$pink',
+          color: '$instagram',
         },
         '& svg': {
-          fill: '$pink',
+          fill: '$instagram',
         },
       },
     },
