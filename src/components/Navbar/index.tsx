@@ -16,7 +16,7 @@ import {
   NavContainer,
 } from './styles';
 
-export default function Navbar() {
+export function Navbar() {
   const router = useRouter();
   const pages = ['About', 'Projects'];
   const [hovered, setHovered] = useState('');
