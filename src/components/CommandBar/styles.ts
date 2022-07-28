@@ -33,12 +33,6 @@ export const GroupName = styled('div', {
   background: '$command',
 });
 
-export const Icon = styled('i', {
-  fontSize: '1.25rem',
-  position: 'relative',
-  top: '-2px',
-});
-
 export const Kbd = styled('kbd', {
   background: 'rgba(255, 255, 255, .1)',
   color: '$secondary',
@@ -86,6 +80,13 @@ export const ResultStyle = styled('div', {
   margin: 0,
   cursor: 'pointer',
   color: '$secondary',
+
+  '& svg': {
+    width: '1.25rem',
+    height: '1.25rem',
+    position: 'relative',
+    top: -2,
+  },
 
   variants: {
     active: {

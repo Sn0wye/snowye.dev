@@ -7,12 +7,22 @@ import {
 } from 'kbar';
 import { useRouter } from 'next/router';
 import { forwardRef, PropsWithChildren, Ref, useState } from 'react';
+import {
+  RiBracesLine,
+  RiFileCopyLine,
+  RiGithubLine,
+  RiHome5Line,
+  RiInstagramLine,
+  RiLightbulbLine,
+  RiLinkedinLine,
+  RiMailLine,
+  RiUserLine,
+} from 'react-icons/ri';
 import Toast from '../Toast';
 import {
   ActionRow,
   Animator,
   GroupName,
-  Icon,
   Kbd,
   Positioner,
   ResultStyle,
@@ -38,7 +48,7 @@ export default function CommandBar({ children }: PropsWithChildren) {
       keywords: 'copy-url',
       section: 'General',
       perform: copyUrl,
-      icon: <Icon className='ri-file-copy-line' />,
+      icon: <RiFileCopyLine />,
     },
     {
       id: 'email',
@@ -47,7 +57,7 @@ export default function CommandBar({ children }: PropsWithChildren) {
       keywords: 'send-email',
       section: 'General',
       perform: () => router.push('/contact'),
-      icon: <Icon className='ri-mail-line' />,
+      icon: <RiMailLine />,
     },
     {
       id: 'source',
@@ -57,7 +67,7 @@ export default function CommandBar({ children }: PropsWithChildren) {
       section: 'General',
       perform: () =>
         window.open('https://github.com/Sn0wye/portfolio', '_blank'),
-      icon: <Icon className='ri-braces-line' />,
+      icon: <RiBracesLine />,
     },
     {
       id: 'home',
@@ -66,7 +76,7 @@ export default function CommandBar({ children }: PropsWithChildren) {
       keywords: 'go-home',
       section: 'Go To',
       perform: () => router.push('/'),
-      icon: <Icon className='ri-home-5-line' />,
+      icon: <RiHome5Line />,
     },
     {
       id: 'about',
@@ -75,7 +85,7 @@ export default function CommandBar({ children }: PropsWithChildren) {
       keywords: 'go-about',
       section: 'Go To',
       perform: () => router.push('/about'),
-      icon: <Icon className='ri-user-line' />,
+      icon: <RiUserLine />,
     },
     {
       id: 'projects',
@@ -84,7 +94,7 @@ export default function CommandBar({ children }: PropsWithChildren) {
       keywords: 'go-projects',
       section: 'Go To',
       perform: () => router.push('/projects'),
-      icon: <Icon className='ri-lightbulb-line' />,
+      icon: <RiLightbulbLine />,
     },
     {
       id: 'github',
@@ -93,7 +103,7 @@ export default function CommandBar({ children }: PropsWithChildren) {
       keywords: 'go-github',
       section: 'Follow',
       perform: () => window.open('https://github.com/Sn0wye', '_blank'),
-      icon: <Icon className='ri-github-line' />,
+      icon: <RiGithubLine />,
     },
     {
       id: 'linkedin',
@@ -103,7 +113,17 @@ export default function CommandBar({ children }: PropsWithChildren) {
       section: 'Follow',
       perform: () =>
         window.open('https://linkedin.com/in/gabriel-trzimajewski', '_blank'),
-      icon: <Icon className='ri-linkedin-line' />,
+      icon: <RiLinkedinLine />,
+    },
+    {
+      id: 'instagram',
+      name: 'Instagram',
+      shortcut: ['f', 'i'],
+      keywords: 'go-instagram',
+      section: 'Follow',
+      perform: () =>
+        window.open('https://www.instagram.com/gabtrzimajewski', '_blank'),
+      icon: <RiInstagramLine />,
     },
   ];
 
