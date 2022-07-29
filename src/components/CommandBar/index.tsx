@@ -18,7 +18,7 @@ import {
   RiMailLine,
   RiUserLine,
 } from 'react-icons/ri';
-import Toast from '../Toast';
+import { Toast } from '../Toast';
 import {
   ActionRow,
   Animator,
@@ -145,7 +145,7 @@ export default function CommandBar({ children }: PropsWithChildren) {
       <Toast
         title='Copied :D'
         description='You can now share it with anyone.'
-        isSuccess={true}
+        isSuccess
         showToast={showToast}
         setShowToast={setShowToast}
       />
