@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { OpenCommandPalette } from '../components/OpenCommandPalette';
-import { Container, Content } from './home.style';
+import { Container, Content, Title } from './home.style';
 
 interface HomeProps {
   title: string;
@@ -20,7 +20,7 @@ export default function Home({ title, description }: HomeProps) {
       <Container>
         <Content>
           <div>
-            <h1>{title}</h1>
+            <Title>{title}</Title>
             <p>
               <strong>FrontEnd Developer on its own.</strong>
               <br />
