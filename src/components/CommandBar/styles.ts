@@ -11,6 +11,23 @@ export const Positioner = styled(KBarPositioner, {
   padding: '14vh 1rem 1rem',
   background: 'rgba(0, 0, 0, .8)',
   boxSizing: 'border-box',
+
+  // '& > div > div > div': {
+  //   '&:hover': {
+  //     background: 'red',
+  //   },
+
+  //   '&::-webkit-scrollbar': {
+  //     width: '0.5rem',
+  //   },
+  //   '&::-webkit-scrollbar-track': {
+  //     background: 'transparent',
+  //   },
+  //   '&::-webkit-scrollbar-thumb': {
+  //     background: 'rgba(0, 0, 0, 0.5)',
+  //     borderRadius: '0.25rem',
+  //   },
+  // },
 });
 
 export const Search = styled(KBarSearch, {
@@ -68,6 +85,20 @@ export const Animator = styled(KBarAnimator, {
     backgroundColor: '$command',
     WebkitBackdropFilter: 'saturate(300%) blur(25px)',
     backdropFilter: 'saturate(300%) blur(25px)',
+  },
+
+  '& > div > div': {
+    '&::-webkit-scrollbar': {
+      width: '0.375rem',
+    },
+    '&::-webkit-scrollbar-track': {
+      background: '#151417',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: '#8257e6',
+      borderRadius: '10px',
+      border: '10px solid #8257e6',
+    },
   },
 });
 
