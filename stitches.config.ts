@@ -65,6 +65,10 @@ const globalStyles = globalCss({
     background: '$background',
     border: 0,
   },
+  '::selection': {
+    background: '#8257e6',
+    color: '$background',
+  },
   kbd: {
     color: '$background',
     background: '$secondary',
