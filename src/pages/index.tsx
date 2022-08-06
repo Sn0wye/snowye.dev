@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
+import { Layout } from '../components/Layout';
 import { OpenCommandPalette } from '../components/OpenCommandPalette';
 import { Container, Content, Title } from './home.style';
 
@@ -10,7 +11,7 @@ interface HomeProps {
 
 export default function Home({ title, description }: HomeProps) {
   return (
-    <>
+    <Layout>
       <Head>
         <title>{title}</title>
         <meta content={title} property='og:title' />
@@ -30,7 +31,7 @@ export default function Home({ title, description }: HomeProps) {
           </div>
         </Content>
       </Container>
-    </>
+    </Layout>
   );
 }
 
