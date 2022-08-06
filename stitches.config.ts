@@ -137,7 +137,7 @@ const globalStyles = globalCss({
     color: '$secondary',
     fontStyle: 'italic',
     margin: '0',
-    paddingLeft: '1.25remF',
+    paddingLeft: '1.25rem',
   },
   a: {
     borderBottom: '1px solid $primary',
