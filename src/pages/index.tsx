@@ -23,7 +23,7 @@ export default function Home({ title, description }: HomeProps) {
           <div>
             <Title>{title}</Title>
             <p>
-              <strong>FrontEnd Developer on its own.</strong>
+              <strong>FrontEnd Engineer on its own.</strong>
               <br />
               {description}
             </p>
@@ -42,5 +42,6 @@ export const getStaticProps: GetStaticProps = () => {
       description:
         'A guy who loves helping people and turning the world into a better place.',
     },
+    revalidate: 1 * 60 * 60 * 24, // 1 day
   };
 };
