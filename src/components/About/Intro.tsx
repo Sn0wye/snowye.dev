@@ -25,7 +25,7 @@ export const Intro = () => {
         >
           <strong>Hey, I&apos;m Gabriel Trzimajewski!</strong>
           <Pronunciation />I started simply browsing in the internet and
-          randomly discovered Javascript on{' '}
+          randomly discovered Javascript at{' '}
           <strong>
             <a
               href='https://rocketseat.com.br'
