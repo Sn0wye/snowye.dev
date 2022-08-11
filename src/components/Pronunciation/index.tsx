@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { RiPauseCircleFill, RiPlayCircleFill } from 'react-icons/ri';
 import { Button } from './styles';
 
-export default function Pronunciation() {
+export function Pronunciation() {
   const pronunciationAudio = useRef<HTMLMediaElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
