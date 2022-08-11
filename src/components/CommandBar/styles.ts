@@ -11,23 +11,6 @@ export const Positioner = styled(KBarPositioner, {
   padding: '14vh 1rem 1rem',
   background: 'rgba(0, 0, 0, .8)',
   boxSizing: 'border-box',
-
-  // '& > div > div > div': {
-  //   '&:hover': {
-  //     background: 'red',
-  //   },
-
-  //   '&::-webkit-scrollbar': {
-  //     width: '0.5rem',
-  //   },
-  //   '&::-webkit-scrollbar-track': {
-  //     background: 'transparent',
-  //   },
-  //   '&::-webkit-scrollbar-thumb': {
-  //     background: 'rgba(0, 0, 0, 0.5)',
-  //     borderRadius: '0.25rem',
-  //   },
-  // },
 });
 
 export const Search = styled(KBarSearch, {
