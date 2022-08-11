@@ -1,4 +1,6 @@
-export const jobs = [
+import type { Job } from '../components/About/Career';
+
+export const jobs: Job[] = [
   {
     jobTitle: 'Junior Frontend Engineer Freelance',
     company: 'Coff3e',
