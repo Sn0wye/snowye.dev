@@ -2,7 +2,7 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { Layout } from '../components/Layout';
 import { OpenCommandPalette } from '../components/OpenCommandPalette';
-import { Container, Content, Title } from './home.style';
+import { Container, Content, Title } from '../styles/home';
 
 interface HomeProps {
   title: string;
