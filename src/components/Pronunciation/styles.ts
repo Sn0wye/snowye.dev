@@ -12,9 +12,8 @@ export const Button = styled('button', {
   transform: 'none',
   transition: 'transform 0.2s ease-in-out',
   '&:hover': { transform: 'scale(1.1) translateZ(0)' },
-});
-
-export const Icon = styled('i', {
-  fontSize: '1.5rem',
-  lineHeight: '2rem',
+  '& svg': {
+    width: '1.5rem',
+    height: '1.5rem',
+  },
 });
