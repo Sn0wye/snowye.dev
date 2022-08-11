@@ -69,6 +69,17 @@ const globalStyles = globalCss({
     background: '#8257e6',
     color: '$background',
   },
+  '::-webkit-scrollbar': {
+    width: '0.375rem',
+  },
+  '::-webkit-scrollbar-track': {
+    background: '#151417',
+  },
+  '::-webkit-scrollbar-thumb': {
+    backgroundColor: '#8257e6',
+    borderRadius: '10px',
+    border: '10px solid #8257e6',
+  },
   kbd: {
     color: '$background',
     background: '$secondary',
