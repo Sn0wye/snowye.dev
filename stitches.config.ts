@@ -82,9 +82,9 @@ const globalStyles = globalCss({
     background: '#151417',
   },
   '::-webkit-scrollbar-thumb': {
-    backgroundColor: '#8257e6',
+    backgroundColor: '$primary',
     borderRadius: '10px',
-    border: '10px solid #8257e6',
+    border: '10px solid $primary',
   },
   kbd: {
     color: '$background',
