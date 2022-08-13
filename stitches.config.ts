@@ -52,6 +52,12 @@ export const {
     bp3: '(max-width: 780px)',
     bp4: '(max-width: 1024px)',
   },
+  utils: {
+    size: (value: string) => ({
+      width: value,
+      height: value,
+    }),
+  },
 });
 
 const globalStyles = globalCss({
