@@ -66,7 +66,7 @@ export default function CommandBar({ children }: PropsWithChildren) {
       keywords: 'view-source',
       section: 'General',
       perform: () =>
-        window.open('https://github.com/Sn0wye/portfolio', '_blank'),
+        window.open('https://github.com/Sn0wye/snowye.dev', '_blank'),
       icon: <RiBracesLine />,
     },
     {
