@@ -9,7 +9,7 @@ interface AboutProps {
   title: string;
   description: string;
   tagline: string;
-  image: string;
+  imagePath: string;
   primaryColor: string;
   secondaryColor: string;
 }
@@ -18,7 +18,7 @@ export default function About({
   title,
   description,
   tagline,
-  image,
+  imagePath,
   primaryColor,
   secondaryColor,
 }: AboutProps) {
@@ -35,7 +35,7 @@ export default function About({
         <meta content={stripHtml(description)} name='description' />
         <meta content={stripHtml(description)} property='og:description' />
         <meta content='https://snowye.dev/about' property='og:url' />
-        <meta content={`https://snowye.dev${image}`} property='og:image' />
+        <meta content={`https://snowye.dev${imagePath}`} property='og:image' />
       </Head>
 
       <Intro />
@@ -56,7 +56,7 @@ export const getStaticProps: GetStaticProps = () => {
     title: 'About | Gabriel Trzimajewski',
     description: `My name is Gabriel Trzimajewski. aka Snowye ✌️. I'm a Frontend Engineer on its own. I'm a guy who loves helping people and turning the world into a better place.`,
     tagline: 'Code. Sleep. Repeat.',
-    image: '/static/images/snowye-bw.jpg',
+    imagePath: '/static/imagePaths/snowye-bw.jpg',
     primaryColor: 'pink',
     secondaryColor: 'purple',
   };
