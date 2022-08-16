@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
+import { Career } from '../../components/About/Career';
 import { Intro } from '../../components/About/Intro';
 import { Base } from '../../components/Base';
 import { stripHtml } from '../../utils/stripHtml';
@@ -45,7 +46,7 @@ export default function About({
       </blockquote>
 
       <h2>Career</h2>
-      {/* <Career /> */}
+      <Career />
     </Base>
   );
 }
