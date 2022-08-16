@@ -28,8 +28,7 @@ export function Pronunciation() {
     >
       {isPlaying ? <RiPauseCircleFill /> : <RiPlayCircleFill />}
       <audio
-        src='/static/audio/'
-        //TODO: Record the audio
+        src='/static/audio/pronunciation.mp3'
         ref={pronunciationAudio}
         onEnded={() => setIsPlaying(false)}
       />
