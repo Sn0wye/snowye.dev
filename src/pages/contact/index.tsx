@@ -39,15 +39,11 @@ export default function Contact({
     formState: { errors },
   } = useForm<IEmailInputs>({
     resolver: zodResolver(emailSchema),
-    mode: 'onChange',
   });
 
-  async function onSubmit(data: any) {
-    console.log(data);
-
+  async function onSubmit(data: IEmailInputs) {
     try {
       await api.post('/email', data);
-
       setIsEmailSent(true);
       setShowToast(true);
     } catch (e) {
