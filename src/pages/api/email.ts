@@ -1,5 +1,6 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
+import { IEmailInputs } from '../../schemas/Email';
 
 export default async function SendMail(
   req: NextApiRequest,
@@ -7,7 +8,7 @@ export default async function SendMail(
 ) {
   if (req.method === 'POST') {
     try {
-      const data = req.body;
+      const data: IEmailInputs = req.body;
 
       const mailTransporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
@@ -21,9 +22,12 @@ export default async function SendMail(
 
       const mailDetails = {
         from: data.name,
-        to: process.env.NODEMAILER_USER,
+        to: String(process.env.NODEMAILER_USER),
         subject: `${data.name} - via snowye.dev`,
-        text: data.message,
+        text: `
+        Name: ${data.name}
+        Email: ${data.email}
+        ${data.message}`,
       };
 
       await mailTransporter.sendMail(mailDetails, (err) => {
