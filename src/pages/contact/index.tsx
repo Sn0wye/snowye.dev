@@ -36,6 +36,7 @@ export default function Contact({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<IEmailInputs>({
     resolver: zodResolver(emailSchema),
@@ -46,6 +47,7 @@ export default function Contact({
       await api.post('/email', data);
       setIsEmailSent(true);
       setShowToast(true);
+      reset();
     } catch (e) {
       console.error(e);
       setIsEmailSent(false);
