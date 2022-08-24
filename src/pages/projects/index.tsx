@@ -55,7 +55,7 @@ export default function Projects({
 
       <h2>Featured Projects</h2>
       <FeaturedProjects
-        featured={['Personal Portfolio', 'iFinance', 'Spaces']}
+        featured={['Personal Portfolio', 'iFinance', 'Spaces', 'duque.dev']}
       />
 
       <h2>All Projects</h2>

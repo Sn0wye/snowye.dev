@@ -38,6 +38,12 @@ export const projects: Projects = [
           'A simple and straightforward todo app to get your tasks done best.',
         icon: <BsCardChecklist />,
       },
+      {
+        title: 'duque.dev',
+        url: 'https://duque.dev',
+        description: "Portfolio developed for Felipe Duque's.",
+        icon: <FaIdBadge />,
+      },
     ],
   },
 ];
