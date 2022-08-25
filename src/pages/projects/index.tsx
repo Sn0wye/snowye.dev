@@ -1,8 +1,8 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { Base } from '../../components/Base';
-import { AllProjects } from '../../components/Projects/AllProjects';
-import { FeaturedProjects } from '../../components/Projects/FeaturedProjects';
+import { AllProjects } from '../../components/containers/Projects/AllProjects';
+import { FeaturedProjects } from '../../components/containers/Projects/FeaturedProjects';
 import { projects } from '../../data/projects';
 import { getTotalProjects } from '../../utils/getTotalProjects';
 import { stripHtml } from '../../utils/stripHtml';
