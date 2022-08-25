@@ -16,9 +16,10 @@ import {
   NavContainer,
 } from './styles';
 
+export const pages = ['About', 'Projects'];
+
 export function Navbar() {
   const { asPath } = useRouter();
-  const pages = ['About', 'Projects'];
   const [hovered, setHovered] = useState('');
   const { query } = useKBar();
 
