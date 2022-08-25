@@ -41,27 +41,31 @@ const links: Link[] = [
 ];
 
 export function Footer() {
-  const renderLink = (link: Link, index: number) => {
-    if (link.url.startsWith('http')) {
-      return (
-        <Anchor key={index} href={link.url} target='_blank' type={link.variant}>
-          <Title>{link.title}</Title>
-          {link.icon}
-        </Anchor>
-      );
-    }
-
-    return (
-      <Link key={index} href={link.url} passHref>
-        <Anchor type={link.variant}>
-          <Title>{link.title}</Title>
-          {link.icon}
-        </Anchor>
-      </Link>
-    );
-  };
-
   return (
-    <Container>{links.map((link, index) => renderLink(link, index))}</Container>
+    <Container>
+      {links.map((link, index) => (
+        <LinkComponent key={index} link={link} index={index} />
+      ))}
+    </Container>
   );
 }
+
+const LinkComponent = ({ link, index }: { link: Link; index: number }) => {
+  if (link.url.startsWith('http')) {
+    return (
+      <Anchor key={index} href={link.url} target='_blank' type={link.variant}>
+        <Title>{link.title}</Title>
+        {link.icon}
+      </Anchor>
+    );
+  }
+
+  return (
+    <Link key={index} href={link.url} passHref>
+      <Anchor type={link.variant}>
+        <Title>{link.title}</Title>
+        {link.icon}
+      </Anchor>
+    </Link>
+  );
+};
