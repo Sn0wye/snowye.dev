@@ -23,7 +23,6 @@ describe('<Toast />', () => {
 
     expect(getByText('Title')).toBeInTheDocument();
     expect(getByText('Description')).toBeInTheDocument();
-    expect(getByText('Title')).toBeInTheDocument();
     expect(getByText('Mock')).toBeInTheDocument();
   });
 });
