@@ -1,4 +1,4 @@
-import type { Job } from '../components/About/Career';
+import type { Job } from '../components/containers/About/Career';
 
 export const jobs: Job[] = [
   {

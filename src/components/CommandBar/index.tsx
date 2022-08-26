@@ -1,12 +1,8 @@
-import {
-  Action,
-  KBarPortal,
-  KBarProvider,
-  KBarResults,
-  useMatches,
-} from 'kbar';
+import type { Action } from 'kbar';
+import { KBarPortal, KBarProvider, KBarResults, useMatches } from 'kbar';
 import { useRouter } from 'next/router';
-import { forwardRef, PropsWithChildren, Ref, useState } from 'react';
+import type { PropsWithChildren, Ref } from 'react';
+import { forwardRef, useState } from 'react';
 import {
   RiBracesLine,
   RiFileCopyLine,

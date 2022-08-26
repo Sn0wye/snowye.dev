@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { projects } from '../../data/projects';
-import { FeaturedProject } from '../FeaturedProject';
+import { projects } from '../../../data/projects';
+import { FeaturedProject } from '../../FeaturedProject';
 import { StyledFeaturedProjects } from './styles';
 
 interface FeaturedProjectsProps {

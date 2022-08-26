@@ -29,6 +29,7 @@ export function FeaturedProject({
       target='_blank'
       onHoverStart={() => onHover(title)}
       onHoverEnd={() => onHover('')}
+      data-testid='featuredProject'
     >
       {icon && icon}
       <Body>

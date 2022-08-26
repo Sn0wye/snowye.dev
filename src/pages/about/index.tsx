@@ -1,8 +1,8 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import { Career } from '../../components/About/Career';
-import { Intro } from '../../components/About/Intro';
 import { Base } from '../../components/Base';
+import { Career } from '../../components/containers/About/Career';
+import { Intro } from '../../components/containers/About/Intro';
 import { stripHtml } from '../../utils/stripHtml';
 
 interface AboutProps {

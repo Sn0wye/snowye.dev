@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Pronunciation } from '../Pronunciation';
+import { Pronunciation } from '../../Pronunciation';
 import { Container, Paragraph, Section } from './styles';
 
 export const Intro = () => {

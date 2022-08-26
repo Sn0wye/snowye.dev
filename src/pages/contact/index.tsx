@@ -10,7 +10,7 @@ import {
   Input,
   Label,
   Textarea,
-} from '../../components/Contact/styles';
+} from '../../components/containers/Contact/styles';
 import { Toast } from '../../components/Toast';
 import { api } from '../../lib/api';
 import { emailSchema, IEmailInputs } from '../../schemas/Email';
