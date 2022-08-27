@@ -30,11 +30,7 @@ export default async function SendMail(
         ${data.message}`,
       };
 
-      await mailTransporter.sendMail(mailDetails, (err) => {
-        if (err) {
-          return res.status(500).json({ error: err });
-        }
-      });
+      await mailTransporter.sendMail(mailDetails);
       return res.status(200).json({ message: 'Email sent' });
     } catch (err: any) {
       res
