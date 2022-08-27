@@ -71,10 +71,6 @@ const globalStyles = globalCss({
     background: '$background',
     border: 0,
   },
-  '::selection': {
-    background: '#8257e6',
-    color: '$background',
-  },
   '::-webkit-scrollbar': {
     width: '0.375rem',
   },
