@@ -1,6 +1,5 @@
 import { BsCardChecklist } from 'react-icons/bs';
 import { FaIdBadge } from 'react-icons/fa';
-import { RiMoneyDollarBoxFill } from 'react-icons/ri';
 
 export type Projects = {
   year: string;
@@ -25,12 +24,12 @@ export const projects: Projects = [
         description: "This portfolio. It's open souce!",
         icon: <FaIdBadge />,
       },
-      {
-        title: 'iFinance',
-        url: 'https://', //TODO: Put the deploy link here
-        description: 'Finances app to keep track of your gains and dispenses',
-        icon: <RiMoneyDollarBoxFill />,
-      },
+      // {
+      //   title: 'iFinance',
+      //   url: 'https://', //TODO: Put the deploy link here
+      //   description: 'Finances app to keep track of your gains and dispenses',
+      //   icon: <RiMoneyDollarBoxFill />,
+      // },
       {
         title: 'Spaces',
         url: 'https://spaces-todo.netlify.app',
@@ -41,7 +40,7 @@ export const projects: Projects = [
       {
         title: 'duque.dev',
         url: 'https://duque.dev',
-        description: "Portfolio developed for Felipe Duque's.",
+        description: 'Portfolio developed for Felipe Duque.',
         icon: <FaIdBadge />,
       },
     ],
