@@ -16,7 +16,7 @@ import {
   NavContainer,
 } from './styles';
 
-export const pages = ['About', 'Projects'];
+export const pages = ['About', 'Projects', 'Contact'];
 
 export function Navbar() {
   const { asPath } = useRouter();
