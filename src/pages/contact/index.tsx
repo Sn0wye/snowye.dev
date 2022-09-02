@@ -116,7 +116,7 @@ export default function Contact({
 
 export async function getStaticProps() {
   const meta = {
-    title: 'Contact || Gabriel Trzimajewski',
+    title: 'Contact | Gabriel Trzimajewski',
     tagline: 'Email me. As in the good old days.',
     primaryColor: 'purple',
     secondaryColor: 'cyan',
