@@ -32,7 +32,7 @@ export const projects: Projects = [
       // },
       {
         title: 'Spaces',
-        url: 'https://spaces-todo.netlify.app',
+        url: 'https://spaces.snowye.dev/',
         description:
           'A simple and straightforward todo app to get your tasks done best.',
         icon: <BsCardChecklist />,
