@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
+import Typewriter from 'typewriter-effect';
 import { Layout } from '../components/Layout';
 import { OpenCommandPalette } from '../components/OpenCommandPalette';
 import { Container, Content, Title } from '../styles/home';
@@ -25,7 +26,13 @@ export default function Home({ title, description }: HomeProps) {
             <p>
               <strong>FrontEnd Engineer on its own.</strong>
               <br />
-              {description}
+              <Typewriter 
+              options={{
+                strings: description,
+                autoStart: true,
+                deleteSpeed: 80,
+              }}
+            />
             </p>
             <OpenCommandPalette />
           </div>
