@@ -23,17 +23,17 @@ export default function Home({ title, description }: HomeProps) {
         <Content>
           <div>
             <Title>{title}</Title>
-            <p>
+            <div>
               <strong>FrontEnd Engineer on its own.</strong>
-              <br />
               <Typewriter 
               options={{
                 strings: description,
                 autoStart: true,
                 deleteSpeed: 80,
+                delay: 60,
               }}
             />
-            </p>
+            </div>
             <OpenCommandPalette />
           </div>
         </Content>
