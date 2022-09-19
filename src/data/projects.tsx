@@ -19,7 +19,7 @@ export const projects: Projects = [
         title: 'Personal Portfolio',
         url: 'https://github.com/Sn0wye/snowye.dev',
         description: "This portfolio. It's open souce!",
-        iconName: 'assesment',
+        iconName: 'book',
       },
       // {
       //   title: 'iFinance',
