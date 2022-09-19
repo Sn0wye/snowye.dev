@@ -1,4 +1,5 @@
-import { Dispatch, SetStateAction } from 'react';
+import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import { Dispatch, SetStateAction, useRef } from 'react';
 import type { Project } from '../../data/projects';
 import {
   Body,
@@ -6,23 +7,31 @@ import {
   Hover,
   Project as StyledProject,
   Stats,
-  Title,
+  Title
 } from './styles';
 
-interface FeaturedProjectProps extends Project {
+interface FeaturedProjectProps {
+  project: Project;
   onHover: Dispatch<SetStateAction<string>>;
   isHovered: boolean;
 }
 
 export function FeaturedProject({
-  title,
-  url,
-  description,
-  icon,
-  stats,
+  project,
   onHover,
   isHovered,
 }: FeaturedProjectProps) {
+  const {
+    title,
+    url,
+    description,
+    iconName,
+    stats
+  } = project;
+  
+  const icon = require(`../../../public/static/icons/${iconName}.json`)
+  const iconRef = useRef<LottieRefCurrentProps | null>(null);
+  
   return (
     <StyledProject
       href={url}
@@ -30,8 +39,16 @@ export function FeaturedProject({
       onHoverStart={() => onHover(title)}
       onHoverEnd={() => onHover('')}
       data-testid='featuredProject'
+      onMouseEnter={() => iconRef.current?.play()}
+      onMouseLeave={() => iconRef.current?.stop()}
     >
-      {icon && icon}
+      <Lottie
+        lottieRef={iconRef}
+        style={{ width: 24, height: 24, marginBottom: 10 }}
+        animationData={icon}
+        loop={false}
+        autoplay={!isHovered}
+        />
       <Body>
         <Title>{title}</Title>
         <Description>{description}</Description>
