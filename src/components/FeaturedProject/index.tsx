@@ -47,7 +47,7 @@ export function FeaturedProject({
         style={{ width: 24, height: 24, marginBottom: 10 }}
         animationData={icon}
         loop={false}
-        autoplay={!isHovered}
+        autoplay={false}
         />
       <Body>
         <Title>{title}</Title>
