@@ -1,19 +1,9 @@
 import type { Action } from 'kbar';
 import { KBarPortal, KBarProvider, KBarResults, useMatches } from 'kbar';
+import Lottie, { LottieComponentProps, LottieRefCurrentProps } from 'lottie-react';
 import { useRouter } from 'next/router';
-import type { PropsWithChildren, Ref } from 'react';
-import { forwardRef, useState } from 'react';
-import {
-  RiBracesLine,
-  RiFileCopyLine,
-  RiGithubLine,
-  RiHome5Line,
-  RiInstagramLine,
-  RiLightbulbLine,
-  RiLinkedinLine,
-  RiMailLine,
-  RiUserLine,
-} from 'react-icons/ri';
+import { forwardRef, PropsWithChildren, ReactElement, Ref, useRef, useState } from 'react';
+import { RiGithubLine, RiInstagramLine, RiLinkedinLine } from 'react-icons/ri';
 import { Toast } from '../Toast';
 import {
   ActionRow,
@@ -24,10 +14,24 @@ import {
   ResultStyle,
   Search,
   Shortcut,
-  StyledAction,
+  StyledAction
 } from './styles';
 
+import aboutIcon from '../../../public/static/icons/about.json';
+import copyLinkIcon from '../../../public/static/icons/copy-link.json';
+import emailIcon from '../../../public/static/icons/email.json';
+import homeIcon from '../../../public/static/icons/home.json';
+import projectsIcon from '../../../public/static/icons/projects.json';
+import sourceIcon from '../../../public/static/icons/source.json';
+
 export default function CommandBar({ children }: PropsWithChildren) {
+  const copyLinkRef = useRef<LottieRefCurrentProps>(null)
+  const emailRef = useRef<LottieRefCurrentProps>(null)
+  const sourceRef = useRef<LottieRefCurrentProps>(null)
+  const homeRef = useRef<LottieRefCurrentProps>(null)
+  const aboutRef = useRef<LottieRefCurrentProps>(null)
+  const projectsRef = useRef<LottieRefCurrentProps>(null)
+
   const router = useRouter();
   const [showToast, setShowToast] = useState(false);
 
@@ -35,6 +39,9 @@ export default function CommandBar({ children }: PropsWithChildren) {
     navigator.clipboard.writeText(window.location.href);
     setShowToast(true);
   };
+
+  const iconStyle = { width: 24, height: 24 }
+
 
   const actions = [
     {
@@ -44,7 +51,8 @@ export default function CommandBar({ children }: PropsWithChildren) {
       keywords: 'copy-url',
       section: 'General',
       perform: copyUrl,
-      icon: <RiFileCopyLine />,
+      icon: <Lottie lottieRef={copyLinkRef} style={iconStyle} animationData={copyLinkIcon} loop={false} autoplay={false} />,
+
     },
     {
       id: 'email',
@@ -53,7 +61,7 @@ export default function CommandBar({ children }: PropsWithChildren) {
       keywords: 'send-email',
       section: 'General',
       perform: () => router.push('/contact'),
-      icon: <RiMailLine />,
+      icon: <Lottie lottieRef={emailRef} style={iconStyle} animationData={emailIcon} loop={false} autoplay={false} />,
     },
     {
       id: 'source',
@@ -63,7 +71,7 @@ export default function CommandBar({ children }: PropsWithChildren) {
       section: 'General',
       perform: () =>
         window.open('https://github.com/Sn0wye/snowye.dev', '_blank'),
-      icon: <RiBracesLine />,
+      icon: <Lottie lottieRef={sourceRef} style={iconStyle} animationData={sourceIcon} loop={false} autoplay={false} />,
     },
     {
       id: 'home',
@@ -72,7 +80,7 @@ export default function CommandBar({ children }: PropsWithChildren) {
       keywords: 'go-home',
       section: 'Go To',
       perform: () => router.push('/'),
-      icon: <RiHome5Line />,
+      icon: <Lottie lottieRef={homeRef} style={iconStyle} animationData={homeIcon} loop={false} autoplay={false} />,
     },
     {
       id: 'about',
@@ -81,7 +89,7 @@ export default function CommandBar({ children }: PropsWithChildren) {
       keywords: 'go-about',
       section: 'Go To',
       perform: () => router.push('/about'),
-      icon: <RiUserLine />,
+      icon: <Lottie lottieRef={aboutRef} style={iconStyle} animationData={aboutIcon} loop={false} autoplay={false} />,
     },
     {
       id: 'projects',
@@ -90,7 +98,7 @@ export default function CommandBar({ children }: PropsWithChildren) {
       keywords: 'go-projects',
       section: 'Go To',
       perform: () => router.push('/projects'),
-      icon: <RiLightbulbLine />,
+      icon: <Lottie lottieRef={projectsRef} style={iconStyle} animationData={projectsIcon} loop={false} autoplay={false} />,
     },
     {
       id: 'github',
@@ -165,13 +173,25 @@ function RenderResults() {
   );
 }
 
+interface TAction extends Action {
+  icon: ReactElement<LottieComponentProps>;
+}
+
 interface ResultItemProps {
-  action: Action;
+  action: TAction;
   active: boolean;
 }
 
 const ResultItem = forwardRef(
   ({ action, active }: ResultItemProps, ref: Ref<HTMLDivElement>) => {
+
+    if (active) {
+      action.icon.props.lottieRef?.current?.play()
+    } else {
+      action.icon.props.lottieRef?.current?.stop()
+    }
+    console.log(action.icon.props)
+  
     return (
       <ResultStyle ref={ref} active={active}>
         <StyledAction>

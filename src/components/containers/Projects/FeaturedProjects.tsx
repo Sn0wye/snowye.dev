@@ -23,11 +23,7 @@ export const FeaturedProjects = ({ featured }: FeaturedProjectsProps) => {
         .map((item, index) => (
           <FeaturedProject
             key={index}
-            title={item.title}
-            url={item.url}
-            description={item.description}
-            icon={item.icon}
-            stats={item.stats}
+            project={item}
             onHover={setIsHovered}
             isHovered={item.title === isHovered}
           />
