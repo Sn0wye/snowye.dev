@@ -9,11 +9,4 @@ export const jobs: Job[] = [
     endDate: '2022-04-01',
     location: 'São Paulo, SP',
   },
-  {
-    jobTitle: 'Your job title here',
-    company: 'Your company here',
-    companyUrl: 'https://your-company-here.com/',
-    startDate: new Date().toISOString().split('T')[0],
-    location: 'Your location here',
-  },
 ];
