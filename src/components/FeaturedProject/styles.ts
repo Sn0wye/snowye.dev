@@ -17,11 +17,10 @@ export const Project = styled(motion.a, {
   border: '0',
   borderRadius: '$borderRadius',
   textDecoration: 'none',
-  maxWidth: '8.75rem',
   width: 'auto',
   padding: '1.25rem',
   '&:hover': { opacity: 1 },
-  '@bp2': { width: 180 },
+  '@bp2': { width: 180, maxWidth: '8.75rem', },
   '& svg': {
     size: '1.5rem',
     margin: '0 auto 0.75rem 0',
