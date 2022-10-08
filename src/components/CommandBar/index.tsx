@@ -190,8 +190,7 @@ const ResultItem = forwardRef(
     } else {
       action.icon.props.lottieRef?.current?.stop()
     }
-    console.log(action.icon.props)
-  
+    
     return (
       <ResultStyle ref={ref} active={active}>
         <StyledAction>
