@@ -40,6 +40,10 @@ export const projects: Projects = [
         description: 'Portfolio developed for Felipe Duque.',
         iconName: 'bolt',
       },
+      {
+        title: 'Coffee Delivery',
+        url: 'https://coffee-delivery-pied.vercel.app/'
+      }
     ],
   },
 ];
