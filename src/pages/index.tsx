@@ -1,8 +1,8 @@
-import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Typewriter from 'typewriter-effect';
 import { Layout } from '../components/Layout';
 import { OpenCommandPalette } from '../components/OpenCommandPalette';
+import { getLocaleProps, useI18n } from '../locales';
 import { Container, Content, Title } from '../styles/home';
 
 interface HomeProps {
@@ -10,29 +10,32 @@ interface HomeProps {
   description: string;
 }
 
-export default function Home({ title, description }: HomeProps) {
+export default function Home() {
+  const { scopedT } = useI18n();
+  const t = scopedT('pages.home');
+
   return (
     <Layout>
       <Head>
-        <title>{title}</title>
-        <meta content={title} property='og:title' />
-        <meta content={description} name='description' />
-        <meta content={description} property='og:description' />
+        <title>{t('title')}</title>
+        <meta content={t('title')} property='og:title' />
+        <meta content={t('description')} name='description' />
+        <meta content={t('description')} property='og:description' />
       </Head>
       <Container>
         <Content>
           <div>
-            <Title>{title}</Title>
+            <Title>{t('title')}</Title>
             <div>
-              <strong>FrontEnd Engineer on its own.</strong>
-              <Typewriter 
-              options={{
-                strings: description,
-                autoStart: true,
-                deleteSpeed: 80,
-                delay: 60,
-              }}
-            />
+              <strong>{t('meta')}</strong>
+              <Typewriter
+                options={{
+                  strings: t('description'),
+                  autoStart: true,
+                  deleteSpeed: 80,
+                  delay: 60
+                }}
+              />
             </div>
             <OpenCommandPalette />
           </div>
@@ -42,13 +45,4 @@ export default function Home({ title, description }: HomeProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps = () => {
-  return {
-    props: {
-      title: 'Gabriel Trzimajewski',
-      description:
-        'A guy who loves helping people and turning the world into a better place.',
-    },
-    revalidate: 1 * 60 * 60 * 24, // 1 day
-  };
-};
+export const getStaticProps = getLocaleProps();
