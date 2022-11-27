@@ -9,27 +9,26 @@ import {
   FormGroup,
   Input,
   Label,
-  Textarea,
+  Textarea
 } from '../../components/containers/Contact/styles';
 import { Toast } from '../../components/Toast';
 import { api } from '../../lib/api';
+import { getLocaleProps, useI18n } from '../../locales';
 import { emailSchema, IEmailInputs } from '../../schemas/Email';
 import { stripHtml } from '../../utils/stripHtml';
 
 interface ContactProps {
-  title: string;
-  tagline: string;
   primaryColor: string;
   secondaryColor: string;
 }
 
 export default function Contact({
-  title,
-  tagline,
   primaryColor,
-  secondaryColor,
+  secondaryColor
 }: ContactProps) {
-  const description = `<strong>I love chatting</strong> with software engineers, tech founders, students, and creators. <strong>I'm a busy person</strong>, so I can't promise that I'll reply to your email right away, but I'll try my best to respond in a timely manner.`;
+  const { scopedT } = useI18n();
+  const t = scopedT('pages.contact');
+
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
@@ -37,9 +36,9 @@ export default function Contact({
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors }
   } = useForm<IEmailInputs>({
-    resolver: zodResolver(emailSchema),
+    resolver: zodResolver(emailSchema)
   });
 
   async function onSubmit(data: IEmailInputs) {
@@ -59,35 +58,35 @@ export default function Contact({
     <Base
       primaryColor={primaryColor}
       secondaryColor={secondaryColor}
-      title={title}
-      tagline={tagline}
+      title={t('title')}
+      tagline={t('tagline')}
     >
       <Head>
-        <title>{title}</title>
-        <meta content={title} property='og:title' />
-        <meta content={stripHtml(description)} name='description' />
-        <meta content={stripHtml(description)} property='og:description' />
+        <title>{t('title')}</title>
+        <meta content={t('title')} property='og:title' />
+        <meta content={stripHtml(t('description'))} name='description' />
+        <meta content={stripHtml(t('description'))} property='og:description' />
         <meta content='https://github.dev/contact' property='og:url' />
       </Head>
 
       <div>
-        <p dangerouslySetInnerHTML={{ __html: description }} />
-        <h2>Send an email</h2>
+        <p dangerouslySetInnerHTML={{ __html: t('description') }} />
+        <h2>{t('email')}</h2>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <FormGroup>
-            <Label htmlFor='name'>Name</Label>
+            <Label htmlFor='name'>{t('labels.name')}</Label>
             <Input placeholder='John Doe' {...register('name')} />
             {errors.name && <p>{errors.name.message}</p>}
           </FormGroup>
           <FormGroup>
-            <Label htmlFor='email'>Email</Label>
+            <Label htmlFor='email'>{t('labels.email')}</Label>
             <Input placeholder='john@doe.com' {...register('email')} />
             {errors.email && <p>{errors.email.message}</p>}
           </FormGroup>
           <FormGroup>
-            <Label htmlFor='message'>Message</Label>
+            <Label htmlFor='message'>{t('labels.message')}</Label>
             <Textarea
-              placeholder='Your message here :P'
+              placeholder={t('placeholders.message')}
               rows={4}
               {...register('message')}
             />
@@ -99,11 +98,11 @@ export default function Contact({
         </Form>
 
         <Toast
-          title={isEmailSent ? 'Email sent :D' : 'Error :('}
+          title={isEmailSent ? t('toast.success.title') : t('toast.fail.title')}
           description={
             isEmailSent
-              ? 'Thanks for taking the time to write it.'
-              : 'Something wrong happened. Try again later.'
+              ? t('toast.success.description')
+              : t('toast.fail.description')
           }
           isSuccess={isEmailSent}
           showToast={showToast}
@@ -114,13 +113,11 @@ export default function Contact({
   );
 }
 
-export async function getStaticProps() {
+export const getStaticProps = getLocaleProps(() => {
   const meta = {
-    title: 'Contact | Gabriel Trzimajewski',
-    tagline: 'Email me. As in the good old days.',
     primaryColor: 'purple',
-    secondaryColor: 'cyan',
+    secondaryColor: 'cyan'
   };
 
   return { props: meta };
-}
+});
