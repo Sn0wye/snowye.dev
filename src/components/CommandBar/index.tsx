@@ -1,8 +1,18 @@
 import type { Action } from 'kbar';
 import { KBarPortal, KBarProvider, KBarResults, useMatches } from 'kbar';
-import Lottie, { LottieComponentProps, LottieRefCurrentProps } from 'lottie-react';
+import Lottie, {
+  LottieComponentProps,
+  LottieRefCurrentProps
+} from 'lottie-react';
 import { useRouter } from 'next/router';
-import { forwardRef, PropsWithChildren, ReactElement, Ref, useRef, useState } from 'react';
+import {
+  forwardRef,
+  PropsWithChildren,
+  ReactElement,
+  Ref,
+  useRef,
+  useState
+} from 'react';
 import { RiGithubLine, RiInstagramLine, RiLinkedinLine } from 'react-icons/ri';
 import { Toast } from '../Toast';
 import {
@@ -23,112 +33,162 @@ import emailIcon from '../../../public/static/icons/email.json';
 import homeIcon from '../../../public/static/icons/home.json';
 import projectsIcon from '../../../public/static/icons/projects.json';
 import sourceIcon from '../../../public/static/icons/source.json';
+import { useI18n } from '../../locales';
 
 export default function CommandBar({ children }: PropsWithChildren) {
-  const copyLinkRef = useRef<LottieRefCurrentProps>(null)
-  const emailRef = useRef<LottieRefCurrentProps>(null)
-  const sourceRef = useRef<LottieRefCurrentProps>(null)
-  const homeRef = useRef<LottieRefCurrentProps>(null)
-  const aboutRef = useRef<LottieRefCurrentProps>(null)
-  const projectsRef = useRef<LottieRefCurrentProps>(null)
+  const copyLinkRef = useRef<LottieRefCurrentProps>(null);
+  const emailRef = useRef<LottieRefCurrentProps>(null);
+  const sourceRef = useRef<LottieRefCurrentProps>(null);
+  const homeRef = useRef<LottieRefCurrentProps>(null);
+  const aboutRef = useRef<LottieRefCurrentProps>(null);
+  const projectsRef = useRef<LottieRefCurrentProps>(null);
 
   const router = useRouter();
   const [showToast, setShowToast] = useState(false);
+
+  const { scopedT } = useI18n();
+  const t = scopedT('common.kbar');
 
   const copyUrl = () => {
     navigator.clipboard.writeText(window.location.href);
     setShowToast(true);
   };
 
-  const iconStyle = { width: 24, height: 24 }
-
+  const iconStyle = { width: 24, height: 24 };
 
   const actions = [
     {
       id: 'copy',
-      name: 'Copy URL',
+      name: t('actions.copy'),
       shortcut: ['u'],
       keywords: 'copy-url',
-      section: 'General',
+      section: t('sections.general'),
       perform: copyUrl,
-      icon: <Lottie lottieRef={copyLinkRef} style={iconStyle} animationData={copyLinkIcon} loop={false} autoplay={false} />,
-
+      icon: (
+        <Lottie
+          lottieRef={copyLinkRef}
+          style={iconStyle}
+          animationData={copyLinkIcon}
+          loop={false}
+          autoplay={false}
+        />
+      )
     },
     {
       id: 'email',
-      name: 'Send Email',
+      name: t('actions.email'),
       shortcut: ['e'],
       keywords: 'send-email',
-      section: 'General',
+      section: t('sections.general'),
       perform: () => router.push('/contact'),
-      icon: <Lottie lottieRef={emailRef} style={iconStyle} animationData={emailIcon} loop={false} autoplay={false} />,
+      icon: (
+        <Lottie
+          lottieRef={emailRef}
+          style={iconStyle}
+          animationData={emailIcon}
+          loop={false}
+          autoplay={false}
+        />
+      )
     },
     {
       id: 'source',
-      name: 'View Source',
+      name: t('actions.source'),
       shortcut: ['s'],
       keywords: 'view-source',
-      section: 'General',
+      section: t('sections.general'),
       perform: () =>
         window.open('https://github.com/Sn0wye/snowye.dev', '_blank'),
-      icon: <Lottie lottieRef={sourceRef} style={iconStyle} animationData={sourceIcon} loop={false} autoplay={false} />,
+      icon: (
+        <Lottie
+          lottieRef={sourceRef}
+          style={iconStyle}
+          animationData={sourceIcon}
+          loop={false}
+          autoplay={false}
+        />
+      )
     },
     {
       id: 'home',
-      name: 'Home',
+      name: t('actions.home'),
       shortcut: ['g', 'h'],
       keywords: 'go-home',
-      section: 'Go To',
+      section: t('sections.goto'),
       perform: () => router.push('/'),
-      icon: <Lottie lottieRef={homeRef} style={iconStyle} animationData={homeIcon} loop={false} autoplay={false} />,
+      icon: (
+        <Lottie
+          lottieRef={homeRef}
+          style={iconStyle}
+          animationData={homeIcon}
+          loop={false}
+          autoplay={false}
+        />
+      )
     },
     {
       id: 'about',
-      name: 'About',
+      name: t('actions.about'),
       shortcut: ['g', 'a'],
       keywords: 'go-about',
-      section: 'Go To',
+      section: t('sections.goto'),
       perform: () => router.push('/about'),
-      icon: <Lottie lottieRef={aboutRef} style={iconStyle} animationData={aboutIcon} loop={false} autoplay={false} />,
+      icon: (
+        <Lottie
+          lottieRef={aboutRef}
+          style={iconStyle}
+          animationData={aboutIcon}
+          loop={false}
+          autoplay={false}
+        />
+      )
     },
     {
       id: 'projects',
-      name: 'Projects',
+      name: t('actions.projects'),
       shortcut: ['g', 'p'],
       keywords: 'go-projects',
-      section: 'Go To',
+      section: t('sections.goto'),
       perform: () => router.push('/projects'),
-      icon: <Lottie lottieRef={projectsRef} style={iconStyle} animationData={projectsIcon} loop={false} autoplay={false} />,
+      icon: (
+        <Lottie
+          lottieRef={projectsRef}
+          style={iconStyle}
+          animationData={projectsIcon}
+          loop={false}
+          autoplay={false}
+        />
+      )
     },
     {
       id: 'github',
-      name: 'Github',
+      name: 'GitHub',
       shortcut: ['f', 'g'],
       keywords: 'go-github',
-      section: 'Follow',
+      section: t('sections.follow'),
       perform: () => window.open('https://github.com/Sn0wye', '_blank'),
-      icon: <RiGithubLine />,
+      icon: <RiGithubLine />
     },
     {
       id: 'linkedin',
       name: 'LinkedIn',
       shortcut: ['f', 'l'],
       keywords: 'go-linkedin',
-      section: 'Follow',
+      section: t('sections.follow'),
       perform: () =>
         window.open('https://linkedin.com/in/gabriel-trzimajewski', '_blank'),
-      icon: <RiLinkedinLine />,
+      icon: <RiLinkedinLine />
     },
     {
       id: 'instagram',
       name: 'Instagram',
       shortcut: ['f', 'i'],
       keywords: 'go-instagram',
-      section: 'Follow',
+      section: t('sections.follow'),
       perform: () =>
         window.open('https://www.instagram.com/gabtrzimajewski', '_blank'),
-      icon: <RiInstagramLine />,
-    },
+      icon: <RiInstagramLine />
+    }
   ];
 
   return (
@@ -147,8 +207,8 @@ export default function CommandBar({ children }: PropsWithChildren) {
       </KBarProvider>
 
       <Toast
-        title='Copied :D'
-        description='You can now share it with anyone.'
+        title={t('toast.title')}
+        description={t('toast.description')}
         isSuccess
         showToast={showToast}
         setShowToast={setShowToast}
@@ -184,14 +244,13 @@ interface ResultItemProps {
 
 const ResultItem = forwardRef(
   ({ action, active }: ResultItemProps, ref: Ref<HTMLDivElement>) => {
-
     if (active) {
-      action.icon.props.lottieRef?.current?.play()
+      action.icon.props.lottieRef?.current?.play();
     } else {
-      action.icon.props.lottieRef?.current?.stop()
+      action.icon.props.lottieRef?.current?.stop();
     }
-    console.log(action.icon.props)
-  
+    console.log(action.icon.props);
+
     return (
       <ResultStyle ref={ref} active={active}>
         <StyledAction>
