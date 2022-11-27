@@ -21,6 +21,7 @@ specifiers:
   kbar: ^0.1.0-beta.36
   lottie-react: ^2.3.1
   next: 12.2.2
+  next-international: ^0.3.6
   nodemailer: ^6.7.8
   react: 18.2.0
   react-dom: 18.2.0
@@ -41,6 +42,7 @@ dependencies:
   kbar: 0.1.0-beta.38_biqbaboplfbrettd7655fr4n2y
   lottie-react: 2.3.1_biqbaboplfbrettd7655fr4n2y
   next: 12.2.2_biqbaboplfbrettd7655fr4n2y
+  next-international: 0.3.6_next@12.2.2+react@18.2.0
   nodemailer: 6.8.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -2556,6 +2558,10 @@ packages:
       side-channel: 1.0.4
     dev: true
 
+  /international-types/0.3.6:
+    resolution: {integrity: sha512-gTBCQBNq0L2qGA4VRWZR3mJaHlfhgG/htdSEu/o0hzR6belYGBlPR7OfayoV+47ApmxUdxkIqlT4MdfaNQ971Q==}
+    dev: false
+
   /is-arguments/1.1.1:
     resolution: {integrity: sha512-8Q7EARjzEnKpt/PCD7e1cgUS0a6X8u5tdSiMqXhojOdoV9TsMsiO+9VLC5vAmO8N7/GmXn7yjR8qnA6bVAEzfA==}
     engines: {node: '>= 0.4'}
@@ -2997,6 +3003,17 @@ packages:
   /natural-compare/1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
+
+  /next-international/0.3.6_next@12.2.2+react@18.2.0:
+    resolution: {integrity: sha512-W9WM3Zz0ZaiLNCKWs+OYQ06dwA7yUcujhMVlgZtVzUjGLJT6kvnUjiMMQNMmwbjbjsoLyMEUa+Zzoi3a8D/82A==}
+    peerDependencies:
+      next: ^12.0.0 || ^11.0.0
+      react: ^18.0.0 || ^17.0.0
+    dependencies:
+      international-types: 0.3.6
+      next: 12.2.2_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+    dev: false
 
   /next/12.2.2_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-zAYFY45aBry/PlKONqtlloRFqU/We3zWYdn2NoGvDZkoYUYQSJC8WMcalS5C19MxbCZLUVCX7D7a6gTGgl2yLg==}
