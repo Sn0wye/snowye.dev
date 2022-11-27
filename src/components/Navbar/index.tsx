@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useI18n } from '../../locales';
 import {
   Anchor,
   Aside,
@@ -13,15 +14,17 @@ import {
   List,
   LogoButton,
   Nav,
-  NavContainer,
+  NavContainer
 } from './styles';
 
-export const pages = ['About', 'Projects', 'Contact'];
+export const pages = ['about', 'projects', 'contact'] as const;
 
 export function Navbar() {
   const { asPath } = useRouter();
   const [hovered, setHovered] = useState('');
   const { query } = useKBar();
+  const { scopedT } = useI18n();
+  const t = scopedT('common.navbar');
 
   return (
     <Header>
@@ -37,7 +40,7 @@ export function Navbar() {
       </Link>
       <Nav>
         <List>
-          {pages.map((page) => {
+          {pages.map(page => {
             const path = `/${page.toLowerCase()}`;
             const isHovered = hovered === page;
 
@@ -52,7 +55,7 @@ export function Navbar() {
                         asPath === path
                           ? {
                               color: '$primary',
-                              '&::after': { opacity: 1 },
+                              '&::after': { opacity: 1 }
                             }
                           : {}
                       }
@@ -65,7 +68,7 @@ export function Navbar() {
                           exit={{ opacity: 0 }}
                         />
                       )}
-                      {page}
+                      {t(page)}
                     </NavContainer>
                   </Anchor>
                 </Link>
