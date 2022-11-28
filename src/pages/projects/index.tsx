@@ -64,7 +64,7 @@ export default function Projects({
         }}
       />
 
-      <h2>Featured Projects</h2>
+      <h2>{t('featured')}</h2>
       <FeaturedProjects
         featured={[
           'Personal Portfolio',

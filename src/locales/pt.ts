@@ -44,7 +44,7 @@ export default {
   'pages.projects.title': 'Projetos | Gabriel Trzimajewski',
   'pages.projects.description':
     'Projetos paralelos são uma forma de converter seus <strong>pensamentos e personalidade</strong> em código. Aqui você pode ver os <strong>{totalProjects} diferentes</strong> aplicativos, projetos e bibliotecas em que tenho trabalhado.',
-  'pages.projects.featured': 'Featured Projects',
+  'pages.projects.featured': 'Projetos em Destaque',
   'pages.projects.all': 'Todos os projetos',
 
   'pages.projects.portfolio.title': 'Portfólio Pessoal',
