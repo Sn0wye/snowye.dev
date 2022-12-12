@@ -8,7 +8,7 @@ import {
   IconContainer,
   Root,
   Title,
-  Viewport,
+  Viewport
 } from './styles';
 
 interface ToastProps {
@@ -26,7 +26,7 @@ export function Toast({
   isSuccess,
   showToast,
   setShowToast,
-  children,
+  children
 }: ToastProps) {
   const iconColor = isSuccess ? '#4cb782' : '#b75c4c';
   const Icon = (props: IconBaseProps) => {

@@ -10,7 +10,7 @@ export const Positioner = styled(KBarPositioner, {
   inset: '0px',
   padding: '14vh 1rem 1rem',
   background: 'rgba(0, 0, 0, .8)',
-  boxSizing: 'border-box',
+  boxSizing: 'border-box'
 });
 
 export const Search = styled(KBarSearch, {
@@ -22,7 +22,7 @@ export const Search = styled(KBarSearch, {
   border: 'none',
   margin: 0,
   background: '$command',
-  color: '$primary',
+  color: '$primary'
 });
 
 export const GroupName = styled('div', {
@@ -30,31 +30,31 @@ export const GroupName = styled('div', {
   fontSize: '0.625rem',
   textTransform: 'uppercase',
   letterSpacing: '1px',
-  background: '$command',
+  background: '$command'
 });
 
 export const Kbd = styled('kbd', {
   background: 'rgba(255, 255, 255, .1)',
   color: '$secondary',
   padding: '0.25rem 0.5rem',
-  textTransform: 'uppercase',
+  textTransform: 'uppercase'
 });
 
 export const Shortcut = styled('div', {
   display: 'grid',
   gridAutoFlow: 'column',
-  gap: '0.25rem',
+  gap: '0.25rem'
 });
 
 export const StyledAction = styled('div', {
   display: 'flex',
   gap: '0.5rem',
-  alignItems: 'center',
+  alignItems: 'center'
 });
 
 export const ActionRow = styled('div', {
   display: 'flex',
-  flexDirection: 'column',
+  flexDirection: 'column'
 });
 
 export const Animator = styled(KBarAnimator, {
@@ -67,12 +67,12 @@ export const Animator = styled(KBarAnimator, {
   '@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none))': {
     backgroundColor: '$command',
     WebkitBackdropFilter: 'saturate(300%) blur(25px)',
-    backdropFilter: 'saturate(300%) blur(25px)',
+    backdropFilter: 'saturate(300%) blur(25px)'
   },
 
   '& > div > div::-webkit-scrollbar': {
-    display: 'none',
-  },
+    display: 'none'
+  }
 });
 
 export const ResultStyle = styled('div', {
@@ -89,15 +89,15 @@ export const ResultStyle = styled('div', {
     width: '1.25rem',
     height: '1.25rem',
     position: 'relative',
-    top: -2,
+    top: -2
   },
 
   variants: {
     active: {
       true: {
         color: '$primary',
-        background: 'rgba(255, 255, 255, 0.1)',
-      },
-    },
-  },
+        background: 'rgba(255, 255, 255, 0.1)'
+      }
+    }
+  }
 });

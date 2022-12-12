@@ -16,7 +16,7 @@ export function Base({
   primaryColor,
   secondaryColor,
   tagline,
-  title,
+  title
 }: BaseProps) {
   return (
     <Wrapper>
@@ -26,8 +26,8 @@ export function Base({
           '& ::selection': {
             background: `$${primaryColor}`,
             color: '#000',
-            WebkitTextFillColor: '#000',
-          },
+            WebkitTextFillColor: '#000'
+          }
         }}
       >
         <PostContent>
@@ -38,7 +38,7 @@ export function Base({
                 135deg,
                 $${primaryColor} 0%,
                 $${secondaryColor} 100%
-              );`,
+              );`
               }}
             >
               {tagline ? tagline : title}

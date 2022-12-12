@@ -7,18 +7,18 @@ const projects = [
     projects: [
       {
         title: '1',
-        url: '1',
+        url: '1'
       },
       {
         title: '2',
-        url: '2',
+        url: '2'
       },
       {
         title: '3',
-        url: '3',
-      },
-    ],
-  },
+        url: '3'
+      }
+    ]
+  }
 ];
 
 it('should cont the total projects correctly', () => {

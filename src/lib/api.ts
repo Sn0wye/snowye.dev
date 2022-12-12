@@ -6,5 +6,5 @@ const base = isProduction
   : 'http://localhost:3000/api';
 
 export const api = axios.create({
-  baseURL: base,
+  baseURL: base
 });

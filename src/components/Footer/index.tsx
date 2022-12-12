@@ -18,26 +18,26 @@ const links: Link[] = [
     title: 'Email',
     url: '/contact',
     icon: <RiMailLine />,
-    variant: 'email',
+    variant: 'email'
   },
   {
     title: 'GitHub',
     url: 'https://github.com/Sn0wye',
     icon: <BsGithub />,
-    variant: 'github',
+    variant: 'github'
   },
   {
     title: 'LinkedIn',
     url: 'https://linkedin.com/in/gabriel-trzimajewski',
     icon: <BsLinkedin />,
-    variant: 'linkedin',
+    variant: 'linkedin'
   },
   {
     title: 'Instagram',
     url: 'https://instagram.com/gabtrzimajewski',
     icon: <FaInstagram />,
-    variant: 'instagram',
-  },
+    variant: 'instagram'
+  }
 ];
 
 export function Footer() {

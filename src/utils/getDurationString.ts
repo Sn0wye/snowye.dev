@@ -3,7 +3,7 @@ import { intervalToDuration, parseISO } from 'date-fns';
 export const getDurationString = (startDate: string, endDate?: string) => {
   const interval = {
     start: parseISO(startDate),
-    end: endDate ? parseISO(endDate) : new Date(),
+    end: endDate ? parseISO(endDate) : new Date()
   };
   const durationObj = intervalToDuration(interval);
 

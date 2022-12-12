@@ -14,7 +14,7 @@ export const Header = styled('header', {
   top: '0',
   zIndex: 3,
   marginTop: '0.75rem',
-  '@bp2': { marginTop: '0' },
+  '@bp2': { marginTop: '0' }
 });
 
 export const List = styled('ul', {
@@ -24,7 +24,7 @@ export const List = styled('ul', {
   display: 'inline-flex',
   position: 'relative',
   top: '0.3125rem',
-  '@bp1': { justifyContent: 'space-around' },
+  '@bp1': { justifyContent: 'space-around' }
 });
 
 export const CmdButton = styled('button', {
@@ -38,12 +38,12 @@ export const CmdButton = styled('button', {
   cursor: 'pointer',
   padding: '0.35rem',
   transition: 'background $duration ease-in-out',
-  '&:hover': { background: '$hover' },
+  '&:hover': { background: '$hover' }
 });
 
 export const CmdIcon = styled(RiCommandLine, {
   width: '1.5rem',
-  height: '1.5rem',
+  height: '1.5rem'
 });
 
 export const LogoButton = styled('a', {
@@ -62,7 +62,7 @@ export const LogoButton = styled('a', {
   fontWeight: 700,
   textDecoration: 'none',
   marginLeft: '0.75rem',
-  fontFamily: '$heading',
+  fontFamily: '$heading'
 });
 
 export const Nav = styled('nav', {
@@ -71,20 +71,20 @@ export const Nav = styled('nav', {
   order: 2,
   flexBasis: '100%',
   '@bp2': { order: 0, flexBasis: 'initial' },
-  '@bp3': { overflowX: 'scroll', overflowY: 'hidden' },
+  '@bp3': { overflowX: 'scroll', overflowY: 'hidden' }
 });
 
 export const Aside = styled('div', {
   display: 'flex',
   alignItems: 'center',
   paddingRight: '0.75rem',
-  marginLeft: 'auto',
+  marginLeft: 'auto'
 });
 
 export const Anchor = styled('a', {
   border: 0,
   position: 'relative',
-  '&:hover, &:focus': { opacity: 1 },
+  '&:hover, &:focus': { opacity: 1 }
 });
 
 export const NavContainer = styled(motion.span, {
@@ -99,7 +99,7 @@ export const NavContainer = styled(motion.span, {
   textTransform: 'uppercase',
   transition: 'color $duration ease-in-out',
   '&:hover': {
-    color: '$primary',
+    color: '$primary'
   },
   '&::after': {
     content: '""',
@@ -112,8 +112,8 @@ export const NavContainer = styled(motion.span, {
     width: '1.25rem',
     background: 'rgb(255, 255, 255)',
     opacity: 0,
-    transition: 'opacity $duration ease-in-out',
-  },
+    transition: 'opacity $duration ease-in-out'
+  }
 });
 
 export const Hover = styled(motion.span, {
@@ -124,5 +124,5 @@ export const Hover = styled(motion.span, {
   background: '$hover',
   padding: 20,
   borderRadius: '$borderRadius',
-  zIndex: -1,
+  zIndex: -1
 });

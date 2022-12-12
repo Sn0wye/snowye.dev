@@ -6,5 +6,5 @@ export const StyledFeaturedProjects = styled(motion.div, {
   display: 'flex',
   flexWrap: 'wrap',
   flexDirection: 'column',
-  '@bp2': { flexDirection: 'row' },
+  '@bp2': { flexDirection: 'row' }
 });

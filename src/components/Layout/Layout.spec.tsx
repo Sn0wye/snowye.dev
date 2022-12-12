@@ -6,8 +6,8 @@ import { Layout } from '.';
 vi.mock('next/router', () => {
   return {
     useRouter: () => ({
-      asPath: '/',
-    }),
+      asPath: '/'
+    })
   };
 });
 
@@ -15,9 +15,9 @@ vi.mock('kbar', () => {
   return {
     useKBar: () => ({
       query: {
-        toggle: () => {},
-      },
-    }),
+        toggle: () => {}
+      }
+    })
   };
 });
 

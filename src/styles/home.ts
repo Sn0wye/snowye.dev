@@ -3,7 +3,7 @@ import { styled } from '../../stitches.config';
 export const Title = styled('h1', {
   background: 'linear-gradient(90deg, #9442FE, #3378FF)',
   WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent',
+  WebkitTextFillColor: 'transparent'
 });
 
 export const Container = styled('div', {
@@ -14,7 +14,7 @@ export const Container = styled('div', {
   alignItems: 'center',
   display: 'flex',
   maxWidth: '760px',
-  '@bp2': { width: 800, padding: '$navHeightDesktop 0' },
+  '@bp2': { width: 800, padding: '$navHeightDesktop 0' }
 });
 
 export const Content = styled('main', {
@@ -25,5 +25,5 @@ export const Content = styled('main', {
   position: 'relative',
   zIndex: 1,
   height: '100%',
-  padding: '0 1.25rem',
+  padding: '0 1.25rem'
 });

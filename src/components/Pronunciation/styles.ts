@@ -14,6 +14,6 @@ export const Button = styled('button', {
   '&:hover': { transform: 'scale(1.1) translateZ(0)' },
   '& svg': {
     width: '1.5rem',
-    height: '1.5rem',
-  },
+    height: '1.5rem'
+  }
 });

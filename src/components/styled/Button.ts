@@ -17,5 +17,5 @@ export const Button = styled('button', {
   textDecoration: 'none',
   transition: 'colors $duration ease-in-out',
   '&:hover': { background: '$hover', color: '$primary', opacity: 1 },
-  '&:hover kbd': { background: '$primary' },
+  '&:hover kbd': { background: '$primary' }
 });

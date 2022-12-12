@@ -16,8 +16,8 @@ export default async function SendMail(
         service: 'gmail',
         auth: {
           user: process.env.NODEMAILER_USER,
-          pass: process.env.NODEMAILER_PASSWORD,
-        },
+          pass: process.env.NODEMAILER_PASSWORD
+        }
       });
 
       const mailDetails = {
@@ -27,7 +27,7 @@ export default async function SendMail(
         text: `
         Name: ${data.name}
         Email: ${data.email}
-        ${data.message}`,
+        ${data.message}`
       };
 
       await mailTransporter.sendMail(mailDetails);

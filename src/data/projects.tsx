@@ -19,31 +19,31 @@ export const projects: Projects = [
         title: 'Personal Portfolio',
         url: 'https://github.com/Sn0wye/snowye.dev',
         description: "This portfolio. It's open souce!",
-        iconName: 'book',
+        iconName: 'book'
       },
       {
         title: 'iFinance',
         url: 'https://ifinance.snowye.dev',
         description: 'Finances app to keep track of your gains and dispenses',
-        iconName: 'savings',
+        iconName: 'savings'
       },
       {
         title: 'Spaces',
         url: 'https://spaces.snowye.dev/',
         description:
           'A simple and straightforward todo app to get your tasks done best.',
-        iconName: 'assignment',
+        iconName: 'assignment'
       },
       {
         title: 'duque.dev',
         url: 'https://duque.dev',
         description: 'Portfolio developed for Felipe Duque.',
-        iconName: 'bolt',
+        iconName: 'bolt'
       },
       {
         title: 'Coffee Delivery',
         url: 'https://coffee-delivery-pied.vercel.app/'
       }
-    ],
-  },
+    ]
+  }
 ];

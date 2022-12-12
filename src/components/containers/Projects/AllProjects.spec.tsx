@@ -14,7 +14,7 @@ describe('<AllProjects />', () => {
     const { getByText } = render(<AllProjects />);
 
     for (const project in projects) {
-      projects[project].projects.forEach((project) => {
+      projects[project].projects.forEach(project => {
         expect(getByText(project.title)).toBeInTheDocument();
       });
     }

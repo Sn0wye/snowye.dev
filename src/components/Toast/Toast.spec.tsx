@@ -9,7 +9,7 @@ const baseProps = {
   isSuccess: true,
   showToast: true,
   setShowToast: () => {},
-  children: <span>Mock</span>,
+  children: <span>Mock</span>
 };
 
 describe('<Toast />', () => {

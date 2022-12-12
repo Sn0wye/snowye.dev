@@ -6,8 +6,8 @@ import { Navbar, pages } from '.';
 vi.mock('next/router', () => {
   return {
     useRouter: () => ({
-      asPath: '/',
-    }),
+      asPath: '/'
+    })
   };
 });
 
@@ -15,9 +15,9 @@ vi.mock('kbar', () => {
   return {
     useKBar: () => ({
       query: {
-        toggle: () => {},
-      },
-    }),
+        toggle: () => {}
+      }
+    })
   };
 });
 
@@ -30,7 +30,7 @@ describe('<Navbar />', () => {
   it('should render the links correctly', () => {
     const { getByText } = render(<Navbar />);
 
-    pages.forEach((page) => {
+    pages.forEach(page => {
       expect(getByText(page)).toBeInTheDocument();
     });
   });

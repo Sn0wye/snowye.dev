@@ -7,6 +7,6 @@ export const jobs: Job[] = [
     companyUrl: 'https://coff3e.dev/',
     startDate: '2022-03-01',
     endDate: '2022-04-01',
-    location: 'São Paulo, SP',
-  },
+    location: 'São Paulo, SP'
+  }
 ];

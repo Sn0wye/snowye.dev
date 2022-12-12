@@ -6,7 +6,7 @@ export const Hover = styled(motion.span, {
   inset: 0,
   background: '$hover',
   borderRadius: '$borderRadius',
-  zIndex: -1,
+  zIndex: -1
 });
 
 export const Project = styled(motion.a, {
@@ -20,27 +20,27 @@ export const Project = styled(motion.a, {
   width: 'auto',
   padding: '1.25rem',
   '&:hover': { opacity: 1 },
-  '@bp2': { width: 180, maxWidth: '8.75rem', },
+  '@bp2': { width: 180, maxWidth: '8.75rem' },
   '& svg': {
     size: '1.5rem',
-    margin: '0 auto 0.75rem 0',
-  },
+    margin: '0 auto 0.75rem 0'
+  }
 });
 
 export const Body = styled('div', {
-  flex: '1 1 auto',
+  flex: '1 1 auto'
 });
 
 export const Title = styled('p', {
   color: '$primary',
   margin: '0',
-  fontSize: '18px',
+  fontSize: '18px'
 });
 
 export const Description = styled('p', {
   margin: '0',
   color: '$secondary',
-  lineHeight: '24px',
+  lineHeight: '24px'
 });
 
 export const Stats = styled('p', {
@@ -50,5 +50,5 @@ export const Stats = styled('p', {
   display: 'inline-block',
   fontWeight: 500,
   letterSpacing: '1.2px',
-  fontSize: '12px',
+  fontSize: '12px'
 });

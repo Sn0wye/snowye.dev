@@ -10,11 +10,13 @@ const projectMock: Project = {
   url: '/test',
   iconName: 'book',
   stats: '400k+ Sales'
-}
+};
 
 describe('<FeaturedProject />', () => {
   it('should render properly', () => {
-    const { container } = render(<FeaturedProject onHover={() => {}} isHovered project={projectMock} />)
+    const { container } = render(
+      <FeaturedProject onHover={() => {}} isHovered project={projectMock} />
+    );
     expect(container).toBeInTheDocument();
   });
 

@@ -5,5 +5,5 @@ export const Wrapper = styled('div', {
   flexDirection: 'column',
   minHeight: '100vh',
   position: 'relative',
-  zIndex: 0,
+  zIndex: 0
 });

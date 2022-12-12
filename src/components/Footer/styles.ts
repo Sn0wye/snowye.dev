@@ -5,7 +5,7 @@ export const Container = styled('footer', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  padding: '1.25rem 0',
+  padding: '1.25rem 0'
 });
 
 export const Anchor = styled('a', {
@@ -19,7 +19,7 @@ export const Anchor = styled('a', {
   transition: 'color $duration ease-in-out',
   '&:hover, &:focus': {
     color: '$primary',
-    opacity: 1,
+    opacity: 1
   },
   '& svg': {
     marginBottom: '0.25rem',
@@ -29,50 +29,50 @@ export const Anchor = styled('a', {
     width: '1rem',
     height: '1rem',
     transition: 'opacity $durwation ease-in-out',
-    '@bp2': { opacity: 0, fontSize: '1rem' },
+    '@bp2': { opacity: 0, fontSize: '1rem' }
   },
   '&:hover svg': {
-    opacity: 1,
+    opacity: 1
   },
   variants: {
     type: {
       linkedin: {
         '&:hover': {
-          color: '$linkedin',
+          color: '$linkedin'
         },
         '& svg': {
-          fill: '$linkedin',
-        },
+          fill: '$linkedin'
+        }
       },
       email: {
         '&:hover': {
-          color: '$primary',
+          color: '$primary'
         },
         '& svg': {
-          fill: '$primary',
-        },
+          fill: '$primary'
+        }
       },
       github: {
         '&:hover': {
-          color: '$github',
+          color: '$github'
         },
         '& svg': {
-          fill: '$github',
-        },
+          fill: '$github'
+        }
       },
       instagram: {
         '&:hover': {
-          color: '$instagram',
+          color: '$instagram'
         },
         '& svg': {
-          fill: '$instagram',
-        },
-      },
-    },
-  },
+          fill: '$instagram'
+        }
+      }
+    }
+  }
 });
 
 export const Title = styled('span', {
   display: 'none',
-  '@bp2': { display: 'block' },
+  '@bp2': { display: 'block' }
 });

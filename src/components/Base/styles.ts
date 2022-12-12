@@ -7,7 +7,7 @@ export const GradientTitle = styled('h1', {
   MozBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   MozTextFillColor: 'transparent',
-  WebkitBoxDecorationBreak: 'clone',
+  WebkitBoxDecorationBreak: 'clone'
 });
 
 export const Wrapper = styled('div', {
@@ -15,5 +15,5 @@ export const Wrapper = styled('div', {
   flexDirection: 'column',
   minHeight: '100vh',
   position: 'relative',
-  zIndex: 0,
+  zIndex: 0
 });

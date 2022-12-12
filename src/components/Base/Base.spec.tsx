@@ -6,8 +6,8 @@ import { Base } from '.';
 vi.mock('next/router', () => {
   return {
     useRouter: () => ({
-      asPath: '/',
-    }),
+      asPath: '/'
+    })
   };
 });
 
@@ -15,9 +15,9 @@ vi.mock('kbar', () => {
   return {
     useKBar: () => ({
       query: {
-        toggle: () => {},
-      },
-    }),
+        toggle: () => {}
+      }
+    })
   };
 });
 
@@ -26,7 +26,7 @@ const baseProps = {
   secondaryColor: '',
   tagline: '',
   title: '',
-  children: <span>mock</span>,
+  children: <span>mock</span>
 };
 
 describe('<Base />', () => {

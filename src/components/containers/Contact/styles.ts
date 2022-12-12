@@ -3,20 +3,20 @@ import { styled } from '../../../../stitches.config';
 export const Form = styled('form', {
   display: 'flex',
   flexDirection: 'column',
-  maxWidth: '400px',
+  maxWidth: '400px'
 });
 
 export const FormGroup = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  marginBottom: '0.625rem',
+  marginBottom: '0.625rem'
 });
 
 export const Label = styled('label', {
   color: '$secondary',
   textTransform: 'uppercase',
   fontSize: '0.75rem',
-  fontWeight: '500',
+  fontWeight: '500'
 });
 
 export const Input = styled('input', {
@@ -27,7 +27,7 @@ export const Input = styled('input', {
   padding: '0.625rem',
   height: '2rem',
   fontSize: '0.95rem',
-  '&:focus': { outline: 'none', borderColor: '$purple' },
+  '&:focus': { outline: 'none', borderColor: '$purple' }
 });
 
 export const Textarea = styled('textarea', {
@@ -37,7 +37,7 @@ export const Textarea = styled('textarea', {
   borderRadius: '$borderRadius',
   padding: '0.625rem',
   fontSize: '0.95rem',
-  '&:focus': { outline: 'none', borderColor: '$purple' },
+  '&:focus': { outline: 'none', borderColor: '$purple' }
 });
 
 export const Button = styled('button', {
@@ -52,12 +52,12 @@ export const Button = styled('button', {
   '&:hover': {
     background: 'transparent',
     borderColor: '$purple',
-    color: '$purple',
+    color: '$purple'
   },
   '&:focus': {
     background: 'transparent',
     borderColor: '$purple',
     color: '$purple',
-    outline: 'none',
-  },
+    outline: 'none'
+  }
 });

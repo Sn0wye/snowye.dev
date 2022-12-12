@@ -19,19 +19,13 @@ interface FeaturedProjectProps {
 export function FeaturedProject({
   project,
   onHover,
-  isHovered,
+  isHovered
 }: FeaturedProjectProps) {
-  const {
-    title,
-    url,
-    description,
-    iconName,
-    stats
-  } = project;
-  
-  const icon = require(`../../../public/static/icons/${iconName}.json`)
+  const { title, url, description, iconName, stats } = project;
+
+  const icon = require(`../../../public/static/icons/${iconName}.json`);
   const iconRef = useRef<LottieRefCurrentProps | null>(null);
-  
+
   return (
     <StyledProject
       href={url}
@@ -48,7 +42,7 @@ export function FeaturedProject({
         animationData={icon}
         loop={false}
         autoplay={false}
-        />
+      />
       <Body>
         <Title>{title}</Title>
         <Description>{description}</Description>
