@@ -23,6 +23,7 @@ specifiers:
   next: 12.2.2
   next-international: ^0.3.6
   nodemailer: ^6.7.8
+  prettier: ^2.8.1
   react: 18.2.0
   react-dom: 18.2.0
   react-hook-form: ^7.34.2
@@ -63,6 +64,7 @@ devDependencies:
   eslint: 8.20.0
   eslint-config-next: 12.2.2_he2ccbldppg44uulnyq4rwocfa
   jsdom: 20.0.3
+  prettier: 2.8.1
   typescript: 4.7.4
   vitest: 0.22.1_jsdom@20.0.3
 
@@ -3251,6 +3253,12 @@ packages:
   /prelude-ls/1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
+    dev: true
+
+  /prettier/2.8.1:
+    resolution: {integrity: sha512-lqGoSJBQNJidqCHE80vqZJHWHRFoNYsSpP9AjFhlhi9ODCJA541svILes/+/1GM3VaL/abZi7cpFzOpdR9UPKg==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
     dev: true
 
   /pretty-format/27.5.1:
