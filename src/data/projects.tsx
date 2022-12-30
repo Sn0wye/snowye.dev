@@ -43,6 +43,12 @@ export const projects: Projects = [
       {
         title: 'Coffee Delivery',
         url: 'https://coffee-delivery-pied.vercel.app/'
+      },
+      {
+        title: 'Snowye UI (WIP)',
+        url: 'https://snowye-ui.snowye.dev/',
+        description: 'React Powered, accessible Component UI.',
+        iconName: 'snowye-ui'
       }
     ]
   }

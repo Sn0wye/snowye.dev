@@ -71,7 +71,8 @@ export default function Projects({
           'Portfólio Pessoal',
           'Spaces',
           'iFinance',
-          'duque.dev'
+          'duque.dev',
+          'Snowye UI (WIP)'
         ]}
       />
 
