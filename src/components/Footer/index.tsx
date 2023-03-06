@@ -28,7 +28,7 @@ const links: Link[] = [
   },
   {
     title: 'LinkedIn',
-    url: 'https://linkedin.com/in/gabriel-trzimajewski',
+    url: 'https://linkedin.com/in/snowyedotdev',
     icon: <BsLinkedin />,
     variant: 'linkedin'
   },
