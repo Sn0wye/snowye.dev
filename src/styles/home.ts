@@ -21,7 +21,7 @@ export const Content = styled('main', {
   fontSize: '1rem',
   lineHeight: '2rem',
   color: '$secondary',
-  background: '$background',
+  background: 'transparent',
   position: 'relative',
   zIndex: 1,
   height: '100%',
