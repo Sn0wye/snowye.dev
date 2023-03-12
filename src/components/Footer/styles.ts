@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { styled } from '../../../stitches.config';
 
 export const Container = styled('footer', {
-  background: '$background',
+  background: 'transparent',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
