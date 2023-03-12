@@ -51,21 +51,12 @@ export function Footer() {
 }
 
 const LinkComponent = ({ link, index }: { link: Link; index: number }) => {
-  if (link.url.startsWith('http')) {
-    return (
-      <Anchor key={index} href={link.url} target='_blank' type={link.variant}>
-        <Title>{link.title}</Title>
-        {link.icon}
-      </Anchor>
-    );
-  }
+  const target = link.url.startsWith('http') ? '_blank' : '_self';
 
   return (
-    <Link key={index} href={link.url} passHref>
-      <Anchor type={link.variant}>
-        <Title>{link.title}</Title>
-        {link.icon}
-      </Anchor>
-    </Link>
+    <Anchor type={link.variant} key={index} href={link.url} target={target}>
+      <Title>{link.title}</Title>
+      {link.icon}
+    </Anchor>
   );
 };

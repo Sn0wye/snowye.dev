@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { RiCommandLine } from 'react-icons/ri';
 import { styled } from '../../../stitches.config';
 
@@ -46,7 +47,7 @@ export const CmdIcon = styled(RiCommandLine, {
   height: '1.5rem'
 });
 
-export const LogoButton = styled('a', {
+export const LogoButton = styled(Link, {
   appearance: 'none',
   background: 'transparent',
   border: 'none',
@@ -81,7 +82,7 @@ export const Aside = styled('div', {
   marginLeft: 'auto'
 });
 
-export const Anchor = styled('a', {
+export const Anchor = styled(Link, {
   border: 0,
   position: 'relative',
   '&:hover, &:focus': { opacity: 1 }

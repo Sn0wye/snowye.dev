@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { styled } from '../../../stitches.config';
 
 export const Container = styled('footer', {
@@ -8,7 +9,7 @@ export const Container = styled('footer', {
   padding: '1.25rem 0'
 });
 
-export const Anchor = styled('a', {
+export const Anchor = styled(Link, {
   color: '$secondary',
   display: 'flex',
   alignItems: 'center',

@@ -1,6 +1,5 @@
 import { useKBar } from 'kbar';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useI18n } from '../../locales';
@@ -28,16 +27,14 @@ export function Navbar() {
 
   return (
     <Header>
-      <Link href='/' passHref>
-        <LogoButton>
-          <Image
-            src='/favicon.svg'
-            alt='Snowflake (Snowye Icon)'
-            height={32}
-            width={32}
-          />
-        </LogoButton>
-      </Link>
+      <LogoButton href='/'>
+        <Image
+          src='/favicon.svg'
+          alt='Snowflake (Snowye Icon)'
+          height={32}
+          width={32}
+        />
+      </LogoButton>
       <Nav>
         <List>
           {pages.map(page => {
@@ -46,32 +43,30 @@ export function Navbar() {
 
             return (
               <li key={page}>
-                <Link href={path} passHref>
-                  <Anchor>
-                    <NavContainer
-                      onHoverStart={() => setHovered(page)}
-                      onHoverEnd={() => setHovered('')}
-                      css={
-                        asPath === path
-                          ? {
-                              color: '$primary',
-                              '&::after': { opacity: 1 }
-                            }
-                          : {}
-                      }
-                    >
-                      {isHovered && (
-                        <Hover
-                          layoutId='nav'
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                        />
-                      )}
-                      {t(page)}
-                    </NavContainer>
-                  </Anchor>
-                </Link>
+                <Anchor href={path}>
+                  <NavContainer
+                    onHoverStart={() => setHovered(page)}
+                    onHoverEnd={() => setHovered('')}
+                    css={
+                      asPath === path
+                        ? {
+                            color: '$primary',
+                            '&::after': { opacity: 1 }
+                          }
+                        : {}
+                    }
+                  >
+                    {isHovered && (
+                      <Hover
+                        layoutId='nav'
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                      />
+                    )}
+                    {t(page)}
+                  </NavContainer>
+                </Anchor>
               </li>
             );
           })}
