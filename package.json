@@ -12,12 +12,15 @@
   "dependencies": {
     "@hookform/resolvers": "^2.9.7",
     "@radix-ui/react-toast": "^0.1.1",
+    "@react-three/drei": "^9.57.2",
+    "@react-three/fiber": "^8.12.0",
     "@stitches/react": "^1.2.8",
     "axios": "^0.27.2",
     "date-fns": "^2.29.1",
     "framer-motion": "^6.5.1",
     "kbar": "^0.1.0-beta.36",
     "lottie-react": "^2.3.1",
+    "maath": "^0.5.2",
     "next": "13.2.4",
     "next-international": "^0.3.6",
     "nodemailer": "^6.7.8",
@@ -25,6 +28,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.34.2",
     "react-icons": "^4.4.0",
+    "three": "^0.150.1",
     "typewriter-effect": "^2.19.0",
     "zod": "^3.18.0"
   },

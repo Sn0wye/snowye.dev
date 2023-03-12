@@ -5,7 +5,8 @@ const nextConfig = {
   i18n: {
     locales: ['en', 'pt'],
     defaultLocale: 'en'
-  }
+  },
+  transpilePackages: ['three']
 };
 
 module.exports = nextConfig;
