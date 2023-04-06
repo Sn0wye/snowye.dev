@@ -2,8 +2,8 @@ lockfileVersion: '6.0'
 
 dependencies:
   '@hookform/resolvers':
-    specifier: ^2.9.7
-    version: 2.9.10(react-hook-form@7.39.6)
+    specifier: ^3.0.0
+    version: 3.0.0(react-hook-form@7.39.6)
   '@radix-ui/react-toast':
     specifier: ^0.1.1
     version: 0.1.1(react-dom@18.2.0)(react@18.2.0)
@@ -166,8 +166,8 @@ packages:
       - supports-color
     dev: true
 
-  /@hookform/resolvers@2.9.10(react-hook-form@7.39.6):
-    resolution: {integrity: sha512-JIL1DgJIlH9yuxcNGtyhsWX/PgNltz+5Gr6+8SX9fhXc/hPbEIk6wPI82nhgvp3uUb6ZfAM5mqg/x7KR7NAb+A==}
+  /@hookform/resolvers@3.0.0(react-hook-form@7.39.6):
+    resolution: {integrity: sha512-SQPefakODpyq25b/phHXDKCdRrEfPcCXV7B4nAa139wE1DxufYbbNAjeo0T04ZXBokRxZ+wD8iA1kkVMa3QwjQ==}
     peerDependencies:
       react-hook-form: ^7.0.0
     dependencies:
