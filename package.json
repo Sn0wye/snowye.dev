@@ -15,7 +15,7 @@
     "@react-three/drei": "^9.57.2",
     "@react-three/fiber": "^8.12.0",
     "@stitches/react": "^1.2.8",
-    "axios": "^0.27.2",
+    "axios": "^1.0.0",
     "date-fns": "^2.29.1",
     "framer-motion": "^6.5.1",
     "kbar": "^0.1.0-beta.36",
