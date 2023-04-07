@@ -10,7 +10,7 @@
     "format": "prettier --write --plugin-search-dir=. **/*.{cjs,mjs,ts,tsx}"
   },
   "dependencies": {
-    "@hookform/resolvers": "^2.9.7",
+    "@hookform/resolvers": "^3.0.0",
     "@radix-ui/react-toast": "^0.1.1",
     "@react-three/drei": "^9.57.2",
     "@react-three/fiber": "^8.12.0",
