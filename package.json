@@ -29,7 +29,7 @@
     "react-hook-form": "^7.34.2",
     "react-icons": "^4.4.0",
     "sharp": "^0.32.0",
-    "three": "^0.150.1",
+    "three": "^0.151.0",
     "typewriter-effect": "^2.19.0",
     "zod": "^3.18.0"
   },
@@ -38,7 +38,7 @@
     "@types/nodemailer": "^6.4.5",
     "@types/react": "18.0.33",
     "@types/react-dom": "18.0.11",
-    "@types/three": "^0.149.0",
+    "@types/three": "^0.150.0",
     "eslint": "8.37.0",
     "eslint-config-next": "13.3.0",
     "prettier": "^2.8.1",
