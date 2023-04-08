@@ -2,7 +2,7 @@ import { useRef, Suspense, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial, Preload } from '@react-three/drei';
 import { inSphere } from 'maath/random';
-import { Points as TPoints } from 'three';
+import { type Points as TPoints } from 'three';
 import { CanvasContainer } from './styles';
 
 export const StarCanvas = () => {
@@ -20,7 +20,7 @@ export const StarCanvas = () => {
 };
 
 const Stars = () => {
-  const ref = useRef<TPoints>(null!);
+  const ref = useRef<TPoints>(null);
   const [sphere] = useState(() =>
     inSphere(new Float32Array(5000), {
       radius: 1.2
@@ -28,12 +28,15 @@ const Stars = () => {
   );
 
   useFrame((state, delta) => {
-    ref.current.rotation.x -= delta / 10;
-    ref.current.rotation.y -= delta / 15;
+    if (ref.current) {
+      ref.current.rotation.x -= delta / 10;
+      ref.current.rotation.y -= delta / 15;
+    }
   });
 
   return (
     <group rotation={[0, 0, Math.PI / 4]}>
+      {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
       {/* @ts-ignore */}
       <Points ref={ref} positions={sphere} stride={3} frustumCulled>
         <PointMaterial

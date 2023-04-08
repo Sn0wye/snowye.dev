@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 import { Footer } from '../Footer';
 import { Navbar } from '../Navbar';
 import { StarCanvas } from '../Stars';

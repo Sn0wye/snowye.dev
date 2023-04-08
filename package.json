@@ -10,7 +10,8 @@
     "lint:fix": "next lint --fix",
     "format": "prettier --write --plugin-search-dir=. **/*.{cjs,mjs,ts,tsx}",
     "format:check": "prettier --check *.{cjs,md,json} --ignore-unknown --no-error-on-unmatched-pattern",
-    "check": "pnpm lint && pnpm format:check"
+    "type-check": "tsc --noEmit",
+    "check": "pnpm lint && pnpm format:check && pnpm type-check"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.0.0",
@@ -42,8 +43,12 @@
     "@types/react": "18.0.33",
     "@types/react-dom": "18.0.11",
     "@types/three": "^0.150.0",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.1",
     "typescript": "5.0.4"
   }

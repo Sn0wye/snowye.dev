@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { zodResolver } from '@hookform/resolvers/zod';
 import Head from 'next/head';
 import { useState } from 'react';
@@ -14,7 +15,7 @@ import {
 import { Toast } from '../../components/Toast';
 import { api } from '../../lib/api';
 import { getLocaleProps, useI18n } from '../../locales';
-import { emailSchema, IEmailInputs } from '../../schemas/Email';
+import { emailSchema, type IEmailInputs } from '../../schemas/Email';
 import { stripHtml } from '../../utils/stripHtml';
 
 interface ContactProps {
@@ -41,7 +42,7 @@ export default function Contact({
     resolver: zodResolver(emailSchema)
   });
 
-  async function onSubmit(data: IEmailInputs) {
+  const onSubmit = async (data: IEmailInputs) => {
     try {
       await api.post('/email', data);
       setIsEmailSent(true);
@@ -52,7 +53,7 @@ export default function Contact({
       setIsEmailSent(false);
       setShowToast(true);
     }
-  }
+  };
 
   return (
     <Base

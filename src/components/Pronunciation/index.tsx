@@ -16,7 +16,7 @@ export function Pronunciation() {
       pronunciationAudio.current?.pause();
     } else {
       setIsPlaying(true);
-      pronunciationAudio.current?.play();
+      void pronunciationAudio.current?.play();
     }
   };
 
