@@ -11,7 +11,9 @@
     "format": "prettier --write --plugin-search-dir=. **/*.{cjs,mjs,ts,tsx}",
     "format:check": "prettier --check *.{cjs,md,json} --ignore-unknown --no-error-on-unmatched-pattern",
     "type-check": "tsc --noEmit",
-    "check": "pnpm lint && pnpm format:check && pnpm type-check"
+    "check": "pnpm lint && pnpm format:check && pnpm type-check",
+    "test": "playwright test",
+    "report": "playwright show-report"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.0.0",
@@ -38,6 +40,7 @@
     "zod": "^3.18.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.32.2",
     "@types/node": "18.15.11",
     "@types/nodemailer": "^6.4.5",
     "@types/react": "18.0.33",
@@ -49,6 +52,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
+    "playwright": "^1.32.2",
     "prettier": "^2.8.1",
     "typescript": "5.0.4"
   }
