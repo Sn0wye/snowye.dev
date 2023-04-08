@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write --plugin-search-dir=. **/*.{cjs,mjs,ts,tsx}"
+    "lint:fix": "next lint --fix",
+    "format": "prettier --write --plugin-search-dir=. **/*.{cjs,mjs,ts,tsx}",
+    "format:check": "prettier --check *.{cjs,md,json} --ignore-unknown --no-error-on-unmatched-pattern",
+    "check": "pnpm lint && pnpm format:check"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.0.0",
