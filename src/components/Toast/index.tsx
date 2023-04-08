@@ -1,6 +1,6 @@
 import * as ToastPrimitive from '@radix-ui/react-toast';
-import { ReactNode } from 'react';
-import { IconBaseProps } from 'react-icons';
+import { type ReactNode } from 'react';
+import { type IconBaseProps } from 'react-icons';
 import { RiCheckboxCircleFill, RiErrorWarningFill } from 'react-icons/ri';
 import {
   Close,

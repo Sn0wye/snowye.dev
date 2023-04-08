@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
-import { IEmailInputs } from '../../schemas/Email';
+import { type IEmailInputs } from '../../schemas/Email';
 
 export default async function SendMail(
   req: NextApiRequest,
@@ -32,6 +32,7 @@ export default async function SendMail(
 
       await mailTransporter.sendMail(mailDetails);
       return res.status(200).json({ message: 'Email sent' });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       res
         .status(500)

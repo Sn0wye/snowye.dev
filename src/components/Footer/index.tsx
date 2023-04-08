@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import type Link from 'next/link';
 import { BsGithub, BsLinkedin } from 'react-icons/bs';
 import { FaInstagram } from 'react-icons/fa';
 import { RiMailLine } from 'react-icons/ri';

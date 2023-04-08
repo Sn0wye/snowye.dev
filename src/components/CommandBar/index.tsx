@@ -1,15 +1,15 @@
-import type { Action } from 'kbar';
+import type { ActionImpl } from 'kbar';
 import { KBarPortal, KBarProvider, KBarResults, useMatches } from 'kbar';
 import Lottie, {
-  LottieComponentProps,
-  LottieRefCurrentProps
+  type LottieComponentProps,
+  type LottieRefCurrentProps
 } from 'lottie-react';
 import { useRouter } from 'next/router';
 import {
   forwardRef,
-  PropsWithChildren,
-  ReactElement,
-  Ref,
+  type PropsWithChildren,
+  type ReactElement,
+  type Ref,
   useRef,
   useState
 } from 'react';
@@ -50,13 +50,23 @@ export default function CommandBar({ children }: PropsWithChildren) {
   const t = scopedT('common.kbar');
 
   const copyUrl = () => {
-    navigator.clipboard.writeText(window.location.href);
+    void navigator.clipboard.writeText(window.location.href);
     setShowToast(true);
   };
 
   const iconStyle = { width: 24, height: 24 };
 
-  const actions = [
+  type ActionType = {
+    id: string;
+    name: string;
+    shortcut: string[];
+    keywords: string;
+    section: string;
+    perform: () => void;
+    icon: ReactElement<LottieComponentProps> | ReactElement;
+  };
+
+  const actions: ActionType[] = [
     {
       id: 'copy',
       name: t('actions.copy'),
@@ -80,7 +90,7 @@ export default function CommandBar({ children }: PropsWithChildren) {
       shortcut: ['e'],
       keywords: 'send-email',
       section: t('sections.general'),
-      perform: () => router.push('/contact'),
+      perform: () => void router.push('/contact'),
       icon: (
         <Lottie
           lottieRef={emailRef}
@@ -115,7 +125,7 @@ export default function CommandBar({ children }: PropsWithChildren) {
       shortcut: ['g', 'h'],
       keywords: 'go-home',
       section: t('sections.goto'),
-      perform: () => router.push('/'),
+      perform: () => void router.push('/'),
       icon: (
         <Lottie
           lottieRef={homeRef}
@@ -132,7 +142,7 @@ export default function CommandBar({ children }: PropsWithChildren) {
       shortcut: ['g', 'a'],
       keywords: 'go-about',
       section: t('sections.goto'),
-      perform: () => router.push('/about'),
+      perform: () => void router.push('/about'),
       icon: (
         <Lottie
           lottieRef={aboutRef}
@@ -149,7 +159,7 @@ export default function CommandBar({ children }: PropsWithChildren) {
       shortcut: ['g', 'p'],
       keywords: 'go-projects',
       section: t('sections.goto'),
-      perform: () => router.push('/projects'),
+      perform: () => void router.push('/projects'),
       icon: (
         <Lottie
           lottieRef={projectsRef}
@@ -222,10 +232,13 @@ function RenderResults() {
   return (
     <KBarResults
       items={results}
-      onRender={({ item, active }: any) =>
+      onRender={({ item, active }) =>
         typeof item === 'string' ? (
           <GroupName>{item}</GroupName>
         ) : (
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          //@ts-ignore
+          //FIXME
           <ResultItem action={item} active={active} />
         )
       }
@@ -233,7 +246,7 @@ function RenderResults() {
   );
 }
 
-interface TAction extends Action {
+interface TAction extends ActionImpl {
   icon: ReactElement<LottieComponentProps>;
 }
 

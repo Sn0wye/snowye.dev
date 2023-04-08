@@ -1,4 +1,4 @@
-import { Projects } from '../data/projects';
+import { type Projects } from '../data/projects';
 
 export const getTotalProjects = (projects: Projects) => {
   let total = 0;

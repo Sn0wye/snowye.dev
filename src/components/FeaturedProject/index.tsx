@@ -1,5 +1,5 @@
-import Lottie, { LottieRefCurrentProps } from 'lottie-react';
-import { Dispatch, SetStateAction, useRef } from 'react';
+import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
+import { type Dispatch, type SetStateAction, useRef } from 'react';
 import type { Project } from '../../data/projects';
 import {
   Body,
@@ -23,6 +23,7 @@ export function FeaturedProject({
 }: FeaturedProjectProps) {
   const { title, url, description, iconName, stats } = project;
 
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const icon = require(`../../../public/static/icons/${iconName}.json`);
   const iconRef = useRef<LottieRefCurrentProps | null>(null);
 
