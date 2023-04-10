@@ -69,6 +69,9 @@ dependencies:
     version: 3.19.1
 
 devDependencies:
+  '@next/eslint-plugin-next':
+    specifier: ^13.3.0
+    version: 13.3.0
   '@types/node':
     specifier: 18.15.11
     version: 18.15.11

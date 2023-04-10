@@ -38,6 +38,7 @@
     "zod": "^3.18.0"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^13.3.0",
     "@types/node": "18.15.11",
     "@types/nodemailer": "^6.4.5",
     "@types/react": "18.0.33",
