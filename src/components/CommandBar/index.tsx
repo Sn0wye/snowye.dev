@@ -68,6 +68,57 @@ export default function CommandBar({ children }: PropsWithChildren) {
 
   const actions: ActionType[] = [
     {
+      id: 'home',
+      name: t('actions.home'),
+      shortcut: ['g', 'h'],
+      keywords: 'go-home',
+      section: t('sections.goto'),
+      perform: () => void router.push('/'),
+      icon: (
+        <Lottie
+          lottieRef={homeRef}
+          style={iconStyle}
+          animationData={homeIcon}
+          loop={false}
+          autoplay={false}
+        />
+      )
+    },
+    {
+      id: 'about',
+      name: t('actions.about'),
+      shortcut: ['g', 'a'],
+      keywords: 'go-about',
+      section: t('sections.goto'),
+      perform: () => void router.push('/about'),
+      icon: (
+        <Lottie
+          lottieRef={aboutRef}
+          style={iconStyle}
+          animationData={aboutIcon}
+          loop={false}
+          autoplay={false}
+        />
+      )
+    },
+    {
+      id: 'projects',
+      name: t('actions.projects'),
+      shortcut: ['g', 'p'],
+      keywords: 'go-projects',
+      section: t('sections.goto'),
+      perform: () => void router.push('/projects'),
+      icon: (
+        <Lottie
+          lottieRef={projectsRef}
+          style={iconStyle}
+          animationData={projectsIcon}
+          loop={false}
+          autoplay={false}
+        />
+      )
+    },
+    {
       id: 'copy',
       name: t('actions.copy'),
       shortcut: ['u'],
@@ -114,57 +165,6 @@ export default function CommandBar({ children }: PropsWithChildren) {
           lottieRef={sourceRef}
           style={iconStyle}
           animationData={sourceIcon}
-          loop={false}
-          autoplay={false}
-        />
-      )
-    },
-    {
-      id: 'home',
-      name: t('actions.home'),
-      shortcut: ['g', 'h'],
-      keywords: 'go-home',
-      section: t('sections.goto'),
-      perform: () => void router.push('/'),
-      icon: (
-        <Lottie
-          lottieRef={homeRef}
-          style={iconStyle}
-          animationData={homeIcon}
-          loop={false}
-          autoplay={false}
-        />
-      )
-    },
-    {
-      id: 'about',
-      name: t('actions.about'),
-      shortcut: ['g', 'a'],
-      keywords: 'go-about',
-      section: t('sections.goto'),
-      perform: () => void router.push('/about'),
-      icon: (
-        <Lottie
-          lottieRef={aboutRef}
-          style={iconStyle}
-          animationData={aboutIcon}
-          loop={false}
-          autoplay={false}
-        />
-      )
-    },
-    {
-      id: 'projects',
-      name: t('actions.projects'),
-      shortcut: ['g', 'p'],
-      keywords: 'go-projects',
-      section: t('sections.goto'),
-      perform: () => void router.push('/projects'),
-      icon: (
-        <Lottie
-          lottieRef={projectsRef}
-          style={iconStyle}
-          animationData={projectsIcon}
           loop={false}
           autoplay={false}
         />
