@@ -1,13 +1,12 @@
 import { useKBar } from 'kbar';
 import { useEffect, useState } from 'react';
-import { useI18n } from '../../locales';
+import { useScopedI18n } from '../../locales';
 import { Button } from '../styled/Button';
 
 export function OpenCommandPalette() {
   const { query } = useKBar();
   const [mounted, setMounted] = useState(false);
-  const { scopedT } = useI18n();
-  const t = scopedT('common.kbar.start');
+  const t = useScopedI18n('common.kbar.start');
 
   // This is a hack to make sure the command palette is mounted on render.
   useEffect(() => {

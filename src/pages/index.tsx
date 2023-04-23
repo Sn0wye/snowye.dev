@@ -2,12 +2,11 @@ import Head from 'next/head';
 import Typewriter from 'typewriter-effect';
 import { Layout } from '../components/Layout';
 import { OpenCommandPalette } from '../components/OpenCommandPalette';
-import { getLocaleProps, useI18n } from '../locales';
+import { getLocaleProps, useScopedI18n } from '../locales';
 import { Container, Content, Title } from '../styles/home';
 
 export default function Home() {
-  const { scopedT } = useI18n();
-  const t = scopedT('pages.home');
+  const t = useScopedI18n('pages.home');
 
   return (
     <Layout>

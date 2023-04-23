@@ -2,7 +2,7 @@ import { useKBar } from 'kbar';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useI18n } from '../../locales';
+import { useScopedI18n } from '../../locales';
 import {
   Anchor,
   Aside,
@@ -22,8 +22,7 @@ export function Navbar() {
   const { asPath } = useRouter();
   const [hovered, setHovered] = useState('');
   const { query } = useKBar();
-  const { scopedT } = useI18n();
-  const t = scopedT('common.navbar');
+  const t = useScopedI18n('common.navbar');
 
   return (
     <Header>

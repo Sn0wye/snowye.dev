@@ -1,11 +1,10 @@
 import Image from 'next/image';
-import { useI18n } from '../../../locales';
+import { useScopedI18n } from '../../../locales';
 import { Pronunciation } from '../../Pronunciation';
 import { Container, Paragraph, Section } from './styles';
 
 export const Intro = () => {
-  const { scopedT } = useI18n();
-  const t = scopedT('pages.about.intro');
+  const t = useScopedI18n('pages.about.intro');
 
   return (
     <Container>

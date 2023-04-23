@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { Base } from '../../components/Base';
 import { Career } from '../../components/containers/About/Career';
 import { Intro } from '../../components/containers/About/Intro';
-import { getLocaleProps, useI18n } from '../../locales';
+import { getLocaleProps, useScopedI18n } from '../../locales';
 import { stripHtml } from '../../utils/stripHtml';
 
 interface AboutProps {
@@ -16,8 +16,7 @@ export default function About({
   primaryColor,
   secondaryColor
 }: AboutProps) {
-  const { scopedT } = useI18n();
-  const t = scopedT('pages.about');
+  const t = useScopedI18n('pages.about');
   return (
     <Base
       tagline={t('tagline')}

@@ -38,8 +38,8 @@ dependencies:
     specifier: 13.3.1
     version: 13.3.1(react-dom@18.2.0)(react@18.2.0)
   next-international:
-    specifier: ^0.3.6
-    version: 0.3.6(next@13.3.1)(react@18.2.0)
+    specifier: ^0.4.1
+    version: 0.4.1(next@13.3.1)(react@18.2.0)
   nodemailer:
     specifier: ^6.7.8
     version: 6.8.0
@@ -2055,8 +2055,8 @@ packages:
       side-channel: 1.0.4
     dev: true
 
-  /international-types@0.3.6:
-    resolution: {integrity: sha512-gTBCQBNq0L2qGA4VRWZR3mJaHlfhgG/htdSEu/o0hzR6belYGBlPR7OfayoV+47ApmxUdxkIqlT4MdfaNQ971Q==}
+  /international-types@0.4.1:
+    resolution: {integrity: sha512-cbinjNnspU14gsYXwPylEGbSETGS6zAfkYBFAoG+LGBP0tfIs7AZiTkKEQf/LdvzZsVY+VJ+PUa3UNlC6iVpOQ==}
     dev: false
 
   /is-arrayish@0.3.2:
@@ -2411,13 +2411,13 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /next-international@0.3.6(next@13.3.1)(react@18.2.0):
-    resolution: {integrity: sha512-W9WM3Zz0ZaiLNCKWs+OYQ06dwA7yUcujhMVlgZtVzUjGLJT6kvnUjiMMQNMmwbjbjsoLyMEUa+Zzoi3a8D/82A==}
+  /next-international@0.4.1(next@13.3.1)(react@18.2.0):
+    resolution: {integrity: sha512-K9A7R34zbGMzTaEc4XUsy4W9oZQr7usBHdF/Omwrf/VrXLeJrgwzoi/BiBIe5nPNuGoyMHb2/Rpx7cOV61oyvA==}
     peerDependencies:
-      next: ^12.0.0 || ^11.0.0
+      next: ^13.0.0 || ^12.0.0 || ^11.0.0
       react: ^18.0.0 || ^17.0.0
     dependencies:
-      international-types: 0.3.6
+      international-types: 0.4.1
       next: 13.3.1(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
     dev: false
