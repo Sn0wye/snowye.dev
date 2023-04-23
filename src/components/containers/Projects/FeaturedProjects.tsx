@@ -49,7 +49,7 @@ export const FeaturedProjects = ({ featured }: FeaturedProjectsProps) => {
         {
           title: 'duque.dev',
           url: 'https://duque.dev',
-          description: t('duquedev.description'),
+          description: t('duquedotdev.description'),
           iconName: 'bolt'
         },
         {
