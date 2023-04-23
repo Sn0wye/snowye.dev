@@ -93,7 +93,7 @@ export default function Contact({
             {errors.message && <p>{errors.message.message}</p>}
           </FormGroup>
           <FormGroup>
-            <Button type='submit'>Send</Button>
+            <Button type='submit'>{t('send')}</Button>
           </FormGroup>
         </Form>
 
