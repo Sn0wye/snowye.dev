@@ -26,7 +26,7 @@
     "lottie-react": "^2.3.1",
     "maath": "^0.5.2",
     "next": "13.3.1",
-    "next-international": "^0.3.6",
+    "next-international": "^0.4.0",
     "nodemailer": "^6.7.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
