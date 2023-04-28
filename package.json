@@ -43,7 +43,7 @@
     "@types/nodemailer": "^6.4.5",
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.1",
-    "@types/three": "^0.150.0",
+    "@types/three": "^0.151.0",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.1",
