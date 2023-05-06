@@ -24,4 +24,8 @@ Copyright (c) 2023 Gabriel Trzimajewski
 
 ## Contributing
 
-I ♥️ contributors! Feel free to contribute to this project but **please read the [Contributing Guidelines](CONTRIBUTING.md) before opening an issue or PR** so you understand the branching strategy and local development environment.
+I ♥️ contributors! Feel free to contribute to this project but **please read the [Contributing Guidelines](./.github/CONTRIBUTING.md) before opening an issue or PR** so you understand the branching strategy and local development environment.
+
+## License
+
+[MIT](./.github/LICENSE)
