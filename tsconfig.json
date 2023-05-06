@@ -20,7 +20,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".eslintrc.cjs",
-    "next.config.mjs"
+    "next.config.mjs",
+    "./src/env.mjs"
   ],
   "exclude": ["node_modules"]
 }
