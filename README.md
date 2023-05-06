@@ -16,10 +16,6 @@ You can get in touch following me on socials, or me an email at **gabrielsnowye@
 [LinkedIn](https://linkedin.com/in/gabriel-trzimajewski)
 [GitHub](https://github.com/Sn0wye)
 
-## Getting Started
-
-If your portfolio website requires any setup or installation instructions, provide a brief guide on how to get started with your website. This can include instructions for setting up a development environment, running the website locally, or any other necessary steps.
-
 ## License
 
 MIT License
