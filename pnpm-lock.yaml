@@ -35,8 +35,8 @@ dependencies:
     specifier: ^2.3.1
     version: 2.3.1(react-dom@18.2.0)(react@18.2.0)
   maath:
-    specifier: ^0.5.2
-    version: 0.5.2(@types/three@0.152.0)(three@0.152.2)
+    specifier: ^0.6.0
+    version: 0.6.0(@types/three@0.152.0)(three@0.152.2)
   next:
     specifier: 13.4.3
     version: 13.4.3(react-dom@18.2.0)(react@18.2.0)
@@ -2358,6 +2358,16 @@ packages:
 
   /maath@0.5.2(@types/three@0.152.0)(three@0.152.2):
     resolution: {integrity: sha512-MFjfnXF5CzZaVnBuKc9y1FJh/BiPGqf19NH8Jm4o/jKTxuQ3RyPkcSIpuwdDhXrWROVKAxi3KjmHFUNMuIndbg==}
+    peerDependencies:
+      '@types/three': '>=0.144.0'
+      three: '>=0.144.0'
+    dependencies:
+      '@types/three': 0.152.0
+      three: 0.152.2
+    dev: false
+
+  /maath@0.6.0(@types/three@0.152.0)(three@0.152.2):
+    resolution: {integrity: sha512-dSb2xQuP7vDnaYqfoKzlApeRcR2xtN8/f7WV/TMAkBC8552TwTLtOO0JTcSygkYMjNDPoo6V01jTw/aPi4JrMw==}
     peerDependencies:
       '@types/three': '>=0.144.0'
       three: '>=0.144.0'
