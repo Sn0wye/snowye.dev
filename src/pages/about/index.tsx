@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { Base } from '../../components/Base';
-import { Career } from '../../components/containers/About/Career';
 import { Intro } from '../../components/containers/About/Intro';
 import { getLocaleProps, useI18n } from '../../locales';
 import { stripHtml } from '../../utils/stripHtml';
@@ -42,7 +41,7 @@ export default function About({
       </blockquote>
 
       <h2>{t('career')}</h2>
-      <Career />
+      {/* <Career /> */}
     </Base>
   );
 }
