@@ -35,34 +35,34 @@ export const FeaturedProjects = ({ featured }: FeaturedProjectsProps) => {
           description: t('portfolio.description'),
           iconName: 'book'
         },
-        {
-          title: 'iFinance',
-          url: 'https://ifinance.snowye.dev',
-          description: t('ifinance.description'),
-          iconName: 'savings'
-        },
+        // {
+        //   title: 'iFinance',
+        //   url: 'https://ifinance.snowye.dev',
+        //   description: t('ifinance.description'),
+        //   iconName: 'savings'
+        // },
         {
           title: 'Spaces',
           url: 'https://spaces.snowye.dev/',
           description: t('spaces.description'),
           iconName: 'assignment'
         },
-        {
-          title: 'duque.dev',
-          url: 'https://duque.dev',
-          description: t('duquedev.description'),
-          iconName: 'bolt'
-        },
+        // {
+        //   title: 'duque.dev',
+        //   url: 'https://duque.dev',
+        //   description: t('duquedev.description'),
+        //   iconName: 'bolt'
+        // },
         {
           title: 'Coffee Delivery',
           url: 'https://coffee-delivery-pied.vercel.app/'
-        },
-        {
-          title: 'Snowye UI (WIP)',
-          url: 'https://snowye-ui.snowye.dev/',
-          description: 'React Powered, accessible Component UI.',
-          iconName: 'snowye-ui'
         }
+        // {
+        //   title: 'Snowye UI (WIP)',
+        //   url: 'https://snowye-ui.snowye.dev/',
+        //   description: 'React Powered, accessible Component UI.',
+        //   iconName: 'snowye-ui'
+        // }
       ]
     }
   ];

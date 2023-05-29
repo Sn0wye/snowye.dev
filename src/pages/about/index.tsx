@@ -40,7 +40,7 @@ export default function About({
         <p>{t('description')}</p>
       </blockquote>
 
-      <h2>{t('career')}</h2>
+      {/* <h2>{t('career')}</h2> */}
       {/* <Career /> */}
     </Base>
   );
