@@ -4,7 +4,6 @@ import { type IEmailInputs } from '../../schemas/Email';
 
 import { Ratelimit } from '@upstash/ratelimit';
 import { kv } from '@vercel/kv';
-import { NextResponse } from 'next/server';
 
 const ratelimit = new Ratelimit({
   redis: kv,
