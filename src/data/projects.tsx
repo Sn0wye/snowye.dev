@@ -21,12 +21,12 @@ export const projects: Projects = [
         description: "This portfolio. It's open souce!",
         iconName: 'book'
       },
-      // {
-      //   title: 'iFinance',
-      //   url: 'https://ifinance.snowye.dev',
-      //   description: 'Finances app to keep track of your gains and dispenses',
-      //   iconName: 'savings'
-      // },
+      {
+        title: 'iFinance',
+        url: 'https://ifinance.snowye.dev',
+        description: 'Finances app to keep track of your gains and dispenses',
+        iconName: 'savings'
+      },
       {
         title: 'Spaces',
         url: 'https://spaces.snowye.dev/',

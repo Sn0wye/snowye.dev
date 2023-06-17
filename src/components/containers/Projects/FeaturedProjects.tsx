@@ -35,12 +35,12 @@ export const FeaturedProjects = ({ featured }: FeaturedProjectsProps) => {
           description: t('portfolio.description'),
           iconName: 'book'
         },
-        // {
-        //   title: 'iFinance',
-        //   url: 'https://ifinance.snowye.dev',
-        //   description: t('ifinance.description'),
-        //   iconName: 'savings'
-        // },
+        {
+          title: 'iFinance',
+          url: 'https://ifinance.snowye.dev',
+          description: t('ifinance.description'),
+          iconName: 'savings'
+        },
         {
           title: 'Spaces',
           url: 'https://spaces.snowye.dev/',
