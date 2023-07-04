@@ -34,22 +34,23 @@ export const projects: Projects = [
           'A simple and straightforward todo app to get your tasks done best.',
         iconName: 'assignment'
       },
-      {
-        title: 'duque.dev',
-        url: 'https://duque.dev',
-        description: 'Portfolio developed for Felipe Duque.',
-        iconName: 'bolt'
-      },
+      // {
+      //   title: 'duque.dev',
+      //   url: 'https://duque.dev',
+      //   description: 'Portfolio developed for Felipe Duque.',
+      //   iconName: 'bolt'
+      // },
       {
         title: 'Coffee Delivery',
-        url: 'https://coffee-delivery-pied.vercel.app/'
-      },
-      {
-        title: 'Snowye UI (WIP)',
-        url: 'https://snowye-ui.snowye.dev/',
-        description: 'React Powered, accessible Component UI.',
-        iconName: 'snowye-ui'
+        url: 'https://coffee-delivery-pied.vercel.app/',
+        description: "One of the first applications I've done."
       }
+      // {
+      //   title: 'Snowye UI (WIP)',
+      //   url: 'https://snowye-ui.snowye.dev/',
+      //   description: 'React Powered, accessible Component UI.',
+      //   iconName: 'snowye-ui'
+      // }
     ]
   }
 ];

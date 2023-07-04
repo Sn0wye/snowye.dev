@@ -12,8 +12,12 @@ export const Intro = () => {
         <Image
           alt='Gabriel Trzimajewski'
           src='/static/images/snowye-bw.jpg'
-          width='336'
-          height='336'
+          width={336}
+          height={336}
+          style={{
+            width: 'auto',
+            height: 'auto'
+          }}
           placeholder='blur'
           blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAP0lEQVQImQE0AMv/AFBQUJKSkqmpqaOjowCurq7v7+/Jycm5ubkA////jIyMn5+fg4ODADAwMD09PWlpaQAAAApRGnEHblMWAAAAAElFTkSuQmCC'
           priority

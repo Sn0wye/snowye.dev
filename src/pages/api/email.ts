@@ -2,12 +2,38 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
 import { type IEmailInputs } from '../../schemas/Email';
 
+import { Ratelimit } from '@upstash/ratelimit';
+import { kv } from '@vercel/kv';
+
+const ratelimit = new Ratelimit({
+  redis: kv,
+  limiter: Ratelimit.slidingWindow(1, '30 s')
+});
+
 export default async function SendMail(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
     try {
+      const ip = req.headers['x-forwarded-for'] as string;
+      const { success, reset } = await ratelimit.limit(ip ?? 'anonymous');
+
+      if (!success) {
+        const now = Date.now();
+        const retryAfter = Math.floor((reset - now) / 1000);
+        return new Response(
+          JSON.stringify({
+            message: `Rate limit exceeded. Try again in ${reset} seconds.`
+          }),
+          {
+            headers: {
+              'retry-after': `${retryAfter}`
+            }
+          }
+        );
+      }
+
       const data: IEmailInputs = req.body;
 
       const mailTransporter = nodemailer.createTransport({
