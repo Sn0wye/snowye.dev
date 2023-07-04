@@ -1,4 +1,5 @@
 import { createI18n } from 'next-international';
+import { type BaseTranslation } from './en';
 
 export const {
   useI18n,
@@ -11,8 +12,6 @@ export const {
   en: () => import('./en'),
   pt: () => import('./pt')
 });
-
-import { type BaseTranslation } from './base';
 
 type LocaleKeys<T> = keyof {
   [P in keyof T as T[P] extends string

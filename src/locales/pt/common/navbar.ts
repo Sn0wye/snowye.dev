@@ -1,7 +1,5 @@
-import { type BaseTranslation } from '../../en';
-
-export const navbar: BaseTranslation['common']['navbar'] = {
+export const navbar = {
   about: 'Sobre',
   projects: 'Projetos',
   contact: 'Contato'
-};
+} as const;

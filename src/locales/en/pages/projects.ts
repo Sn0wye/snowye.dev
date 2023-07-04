@@ -22,4 +22,4 @@ export const projects = {
   duquedotdev: {
     description: 'Portfolio developed for Felipe Duque.'
   }
-};
+} as const;

@@ -27,4 +27,4 @@ export const contact = {
   },
 
   send: 'Send'
-};
+} as const;

@@ -5,7 +5,7 @@ import { defineLocale } from '..';
 const translation = {
   common,
   pages
-};
+} as const;
 
 export type BaseTranslation = typeof translation;
 
