@@ -51,8 +51,8 @@ dependencies:
     specifier: 13.4.6
     version: 13.4.6(react-dom@18.2.0)(react@18.2.0)
   next-international:
-    specifier: ^0.3.6
-    version: 0.3.6(next@13.4.6)(react@18.2.0)
+    specifier: ^0.5.1
+    version: 0.5.1(next@13.4.6)(react@18.2.0)
   nodemailer:
     specifier: ^6.9.3
     version: 6.9.3
@@ -2315,8 +2315,8 @@ packages:
       side-channel: 1.0.4
     dev: true
 
-  /international-types@0.3.6:
-    resolution: {integrity: sha512-gTBCQBNq0L2qGA4VRWZR3mJaHlfhgG/htdSEu/o0hzR6belYGBlPR7OfayoV+47ApmxUdxkIqlT4MdfaNQ971Q==}
+  /international-types@0.5.1:
+    resolution: {integrity: sha512-Mjj2fa02bDFEpsdGJYuQF0TEZK/dSlOUCefIWix1MCCwNC3Tn2lumMabz4LWUqleqXFyIEKDWrzs5XE8SMXcPg==}
     dev: false
 
   /is-array-buffer@3.0.2:
@@ -2738,15 +2738,17 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /next-international@0.3.6(next@13.4.6)(react@18.2.0):
-    resolution: {integrity: sha512-W9WM3Zz0ZaiLNCKWs+OYQ06dwA7yUcujhMVlgZtVzUjGLJT6kvnUjiMMQNMmwbjbjsoLyMEUa+Zzoi3a8D/82A==}
+  /next-international@0.5.1(next@13.4.6)(react@18.2.0):
+    resolution: {integrity: sha512-d1tpZH74JPnitG2jxwTz3MQYHvdtjIb+kgcBsXgoysqtJlHEZoMukyFJs+gjPh5ungFbZUihnFUBJDLwYc5AcA==}
     peerDependencies:
-      next: ^12.0.0 || ^11.0.0
+      next: ^13.0.0 || ^12.0.0 || ^11.0.0
       react: ^18.0.0 || ^17.0.0
     dependencies:
-      international-types: 0.3.6
+      client-only: 0.0.1
+      international-types: 0.5.1
       next: 13.4.6(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
+      server-only: 0.0.1
     dev: false
 
   /next@13.4.6(react-dom@18.2.0)(react@18.2.0):
@@ -3294,6 +3296,10 @@ packages:
     hasBin: true
     dependencies:
       lru-cache: 6.0.0
+
+  /server-only@0.0.1:
+    resolution: {integrity: sha512-qepMx2JxAa5jjfzxG79yPPq+8BuFToHd1hm7kI+Z4zAq1ftQiP7HcxMhDDItrbtwVeLg/cY2JnKnrcFkmiswNA==}
+    dev: false
 
   /sharp@0.32.1:
     resolution: {integrity: sha512-kQTFtj7ldpUqSe8kDxoGLZc1rnMFU0AO2pqbX6pLy3b7Oj8ivJIdoKNwxHVQG2HN6XpHPJqCSM2nsma2gOXvOg==}
