@@ -19,7 +19,7 @@
     "@react-three/drei": "^9.78.0",
     "@react-three/fiber": "^8.13.4",
     "@stitches/react": "^1.2.8",
-    "@t3-oss/env-nextjs": "^0.4.1",
+    "@t3-oss/env-nextjs": "^0.6.0",
     "@upstash/ratelimit": "^0.4.3",
     "@vercel/kv": "^0.2.2",
     "axios": "^1.4.0",
