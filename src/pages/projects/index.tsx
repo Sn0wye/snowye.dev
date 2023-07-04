@@ -3,7 +3,7 @@ import { Base } from '../../components/Base';
 import { AllProjects } from '../../components/containers/Projects/AllProjects';
 import { FeaturedProjects } from '../../components/containers/Projects/FeaturedProjects';
 import { projects } from '../../data/projects';
-import { getLocaleProps, useI18n } from '../../locales';
+import { getLocaleProps, useScopedI18n } from '../../locales';
 import { getTotalProjects } from '../../utils/getTotalProjects';
 import { stripHtml } from '../../utils/stripHtml';
 
@@ -30,8 +30,7 @@ export default function Projects({
 }: ProjectsProps) {
   const totalProjects = getTotalProjects(projects);
 
-  const { scopedT } = useI18n();
-  const t = scopedT('pages.projects');
+  const t = useScopedI18n('pages.projects');
 
   return (
     <Base

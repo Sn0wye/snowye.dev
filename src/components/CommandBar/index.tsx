@@ -33,7 +33,7 @@ import emailIcon from '../../../public/static/icons/email.json';
 import homeIcon from '../../../public/static/icons/home.json';
 import projectsIcon from '../../../public/static/icons/projects.json';
 import sourceIcon from '../../../public/static/icons/source.json';
-import { useI18n } from '../../locales';
+import { useScopedI18n } from '../../locales';
 
 export default function CommandBar({ children }: PropsWithChildren) {
   const copyLinkRef = useRef<LottieRefCurrentProps>(null);
@@ -46,8 +46,7 @@ export default function CommandBar({ children }: PropsWithChildren) {
   const router = useRouter();
   const [showToast, setShowToast] = useState(false);
 
-  const { scopedT } = useI18n();
-  const t = scopedT('common.kbar');
+  const t = useScopedI18n('common.kbar');
 
   const copyUrl = () => {
     void navigator.clipboard.writeText(window.location.href);

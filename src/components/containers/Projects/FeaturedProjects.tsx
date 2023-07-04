@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useI18n } from '../../../locales';
+import { useScopedI18n } from '../../../locales';
 import { FeaturedProject } from '../../FeaturedProject';
 import { StyledFeaturedProjects } from './styles';
 
@@ -22,8 +22,7 @@ interface FeaturedProjectsProps {
 
 export const FeaturedProjects = ({ featured }: FeaturedProjectsProps) => {
   const [isHovered, setIsHovered] = useState('');
-  const { scopedT } = useI18n();
-  const t = scopedT('pages.projects');
+  const t = useScopedI18n('pages.projects');
 
   const projects: Projects = [
     {

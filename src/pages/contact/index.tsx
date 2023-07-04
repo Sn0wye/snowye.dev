@@ -14,7 +14,7 @@ import {
 } from '../../components/containers/Contact/styles';
 import { Toast } from '../../components/Toast';
 import { api } from '../../lib/api';
-import { getLocaleProps, useI18n } from '../../locales';
+import { getLocaleProps, useScopedI18n } from '../../locales';
 import { emailSchema, type IEmailInputs } from '../../schemas/Email';
 import { stripHtml } from '../../utils/stripHtml';
 
@@ -27,8 +27,7 @@ export default function Contact({
   primaryColor,
   secondaryColor
 }: ContactProps) {
-  const { scopedT } = useI18n();
-  const t = scopedT('pages.contact');
+  const t = useScopedI18n('pages.contact');
 
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [showToast, setShowToast] = useState(false);
@@ -94,7 +93,7 @@ export default function Contact({
             {errors.message && <p>{errors.message.message}</p>}
           </FormGroup>
           <FormGroup>
-            <Button type='submit'>Send</Button>
+            <Button type='submit'>{t('send')}</Button>
           </FormGroup>
         </Form>
 
