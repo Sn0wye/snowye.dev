@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useScopedI18n } from '../../../locales';
 import { FeaturedProject } from '../../FeaturedProject';
 import { StyledFeaturedProjects } from './styles';
 
@@ -22,28 +21,28 @@ interface FeaturedProjectsProps {
 
 export const FeaturedProjects = ({ featured }: FeaturedProjectsProps) => {
   const [isHovered, setIsHovered] = useState('');
-  const t = useScopedI18n('pages.projects');
 
   const projects: Projects = [
     {
       year: '2022',
       projects: [
         {
-          title: t('portfolio.title'),
+          title: 'Personal Portfolio',
           url: 'https://github.com/Sn0wye/snowye.dev',
-          description: t('portfolio.description'),
+          description: "This portfolio. It's open source!",
           iconName: 'book'
         },
         {
           title: 'iFinance',
           url: 'https://ifinance.snowye.dev',
-          description: t('ifinance.description'),
+          description: 'Finances app to keep track of your gains and expenses',
           iconName: 'savings'
         },
         {
           title: 'Spaces',
           url: 'https://spaces.snowye.dev/',
-          description: t('spaces.description'),
+          description:
+            'A simple and straightforward todo app to get your tasks done best.',
           iconName: 'assignment'
         },
         // {

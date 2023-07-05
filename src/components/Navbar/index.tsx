@@ -2,7 +2,6 @@ import { useKBar } from 'kbar';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useScopedI18n } from '../../locales';
 import {
   Anchor,
   Aside,
@@ -22,7 +21,6 @@ export function Navbar() {
   const { asPath } = useRouter();
   const [hovered, setHovered] = useState('');
   const { query } = useKBar();
-  const t = useScopedI18n('common.navbar');
 
   return (
     <Header>
@@ -63,7 +61,7 @@ export function Navbar() {
                         exit={{ opacity: 0 }}
                       />
                     )}
-                    {t(page)}
+                    {page}
                   </NavContainer>
                 </Anchor>
               </li>

@@ -2,29 +2,27 @@ import Head from 'next/head';
 import Typewriter from 'typewriter-effect';
 import { Layout } from '../components/Layout';
 import { OpenCommandPalette } from '../components/OpenCommandPalette';
-import { getLocaleProps, useScopedI18n } from '../locales';
 import { Container, Content, Title } from '../styles/home';
+import { home } from '../locales/en/pages/home';
 
 export default function Home() {
-  const t = useScopedI18n('pages.home');
-
   return (
     <Layout>
       <Head>
-        <title>{t('title')}</title>
-        <meta content={t('title')} property='og:title' />
-        <meta content={t('description')} name='description' />
-        <meta content={t('description')} property='og:description' />
+        <title>{home.title}</title>
+        <meta content={home.title} property='og:title' />
+        <meta content={home.description} name='description' />
+        <meta content={home.description} property='og:description' />
       </Head>
       <Container>
         <Content>
           <div>
-            <Title>{t('title')}</Title>
+            <Title>{home.title}</Title>
             <div>
-              <strong>{t('meta')}</strong>
+              <strong>{home.meta}</strong>
               <Typewriter
                 options={{
-                  strings: t('description'),
+                  strings: home.description,
                   autoStart: true,
                   deleteSpeed: 80,
                   delay: 60
@@ -38,5 +36,3 @@ export default function Home() {
     </Layout>
   );
 }
-
-export const getStaticProps = getLocaleProps();

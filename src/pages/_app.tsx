@@ -1,14 +1,11 @@
 import type { AppProps } from 'next/app';
-import CommandBar from '../components/CommandBar';
-import { I18nProvider } from '../locales';
+import { CommandBar } from '../components/CommandBar';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <I18nProvider locale={pageProps.locale}>
-      <CommandBar>
-        <Component {...pageProps} />
-      </CommandBar>
-    </I18nProvider>
+    <CommandBar>
+      <Component {...pageProps} />
+    </CommandBar>
   );
 }
 

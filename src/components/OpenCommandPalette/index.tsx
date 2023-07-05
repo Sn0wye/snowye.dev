@@ -1,12 +1,10 @@
 import { useKBar } from 'kbar';
 import { useEffect, useState } from 'react';
-import { useScopedI18n } from '../../locales';
 import { Button } from '../styled/Button';
 
 export function OpenCommandPalette() {
   const { query } = useKBar();
   const [mounted, setMounted] = useState(false);
-  const t = useScopedI18n('common.kbar.start');
 
   // This is a hack to make sure the command palette is mounted on render.
   useEffect(() => {
@@ -20,20 +18,14 @@ export function OpenCommandPalette() {
     if (isMobile) {
       return (
         <Button type='button' onClick={query.toggle}>
-          {t('mobile')}
+          Tap to start →
         </Button>
       );
     }
     if (isMac) {
       return (
         <Button type='button' onClick={query.toggle}>
-          {t('mac', {
-            keys: (
-              <>
-                <kbd>⌘</kbd> <kbd>K</kbd>
-              </>
-            )
-          })}
+          Press <kbd>⌘</kbd> <kbd>K</kbd> to start →
         </Button>
       );
     }
@@ -41,13 +33,7 @@ export function OpenCommandPalette() {
     //Common cases (Windows, Linux)
     return (
       <Button type='button' onClick={query.toggle}>
-        {t('pc', {
-          keys: (
-            <>
-              <kbd>ctrl</kbd> <kbd>K</kbd>
-            </>
-          )
-        })}
+        Press <kbd>ctrl</kbd> <kbd>K</kbd> to start →
       </Button>
     );
   }
