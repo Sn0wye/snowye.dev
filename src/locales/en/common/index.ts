@@ -4,4 +4,4 @@ import { kbar } from './kbar';
 export const common = {
   kbar,
   navbar
-} as const;
+};
