@@ -11,7 +11,7 @@
     "format": "prettier --write --plugin-search-dir=. **/*.{cjs,mjs,ts,tsx}",
     "format:check": "prettier --check *.{cjs,md,json} --ignore-unknown --no-error-on-unmatched-pattern",
     "typecheck": "tsc --noEmit",
-    "check": "pnpm lint && pnpm format:check && pnpm type-check"
+    "check": "pnpm lint && pnpm format:check && pnpm typecheck"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.0.0",
