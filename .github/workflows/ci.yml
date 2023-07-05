@@ -40,6 +40,6 @@ jobs:
         run: pnpm install
 
       - name: Lint and type-check
-        run: pnpm lint && pnpm type-check
+        run: pnpm check
         env:
           SKIP_ENV_VALIDATION: true
