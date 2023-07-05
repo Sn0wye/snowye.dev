@@ -1,11 +1,8 @@
 import Image from 'next/image';
-import { useScopedI18n } from '../../../locales';
 import { Pronunciation } from '../../Pronunciation';
 import { Container, Paragraph, Section } from './styles';
 
 export const Intro = () => {
-  const t = useScopedI18n('pages.about.intro');
-
   return (
     <Container>
       <Section>
@@ -30,24 +27,37 @@ export const Intro = () => {
             '@bp2': { marginTop: '-0.375rem' }
           }}
         >
-          <strong>{t('1')}</strong>
-          {t('2', {
-            pronunciation: <Pronunciation />,
-            link: (
-              <strong>
-                <a
-                  href='https://rocketseat.com.br'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  Rocketseat
-                </a>
-              </strong>
-            )
-          })}
+          <strong>Hey, I'm Gabriel Trzimajewski!</strong>
+          <Pronunciation /> I started simply browsing in the internet and
+          randomly discovered Javascript at{' '}
+          <strong>
+            <a
+              href='https://rocketseat.com.br'
+              target='_blank'
+              rel='noreferrer'
+            >
+              Rocketseat
+            </a>
+          </strong>{' '}
+          back on start of 2022.
         </Paragraph>
-        <Paragraph dangerouslySetInnerHTML={{ __html: t('3') }} />
-        <Paragraph dangerouslySetInnerHTML={{ __html: t('4') }} />
+        <Paragraph>
+          I'm currently working on myself and trying to improve my hard and soft
+          skills aswell. I'm from Brazil and a big fan of{' '}
+          <strong>twenty one pilots</strong>.
+        </Paragraph>
+        <Paragraph>
+          I believe the beauty of the world stand on the{' '}
+          <strong>little things</strong>. When I'm not working, I like going to
+          the gym, hanging out with my friends on Discord, and of course, coding
+          side projects and helping the <strong>open source</strong> community,
+          such as{' '}
+          <strong>
+            <a href='https://create.t3.gg'>Create T3 App</a>
+          </strong>
+          , in which I was part of the documentation translation team into
+          Brazilian Portuguese.
+        </Paragraph>
       </Section>
     </Container>
   );

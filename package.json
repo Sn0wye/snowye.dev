@@ -10,7 +10,7 @@
     "lint:fix": "next lint --fix",
     "format": "prettier --write --plugin-search-dir=. **/*.{cjs,mjs,ts,tsx}",
     "format:check": "prettier --check *.{cjs,md,json} --ignore-unknown --no-error-on-unmatched-pattern",
-    "type-check": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "check": "pnpm lint && pnpm format:check && pnpm type-check"
   },
   "dependencies": {
@@ -19,6 +19,9 @@
     "@react-three/drei": "^9.57.2",
     "@react-three/fiber": "^8.12.0",
     "@stitches/react": "^1.2.8",
+    "@t3-oss/env-nextjs": "^0.6.0",
+    "@upstash/ratelimit": "^0.4.3",
+    "@vercel/kv": "^0.2.2",
     "axios": "^1.0.0",
     "date-fns": "^2.29.1",
     "framer-motion": "^10.0.0",
@@ -26,7 +29,6 @@
     "lottie-react": "^2.3.1",
     "maath": "^0.5.2",
     "next": "13.3.1",
-    "next-international": "^0.4.1",
     "nodemailer": "^6.7.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",

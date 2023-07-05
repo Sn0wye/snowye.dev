@@ -4,10 +4,10 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  i18n: {
-    locales: ['en', 'pt'],
-    defaultLocale: 'en'
-  },
+  // i18n: {
+  //   locales: ['en', 'pt'],
+  //   defaultLocale: 'en'
+  // },
   eslint: { ignoreDuringBuilds: !!process.env.CI },
   typescript: { ignoreBuildErrors: !!process.env.CI }
 };

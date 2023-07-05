@@ -1,6 +1,4 @@
-import { type BaseTranslation } from '../../en';
-
-export const home: BaseTranslation['pages']['home'] = {
+export const home = {
   title: 'Gabriel Trzimajewski',
   meta: 'Engenheiro FrontEnd por conta própria.',
   description:

@@ -1,6 +1,4 @@
-import { type BaseTranslation } from '../../en';
-
-export const kbar: BaseTranslation['common']['kbar'] = {
+export const kbar = {
   start: {
     mobile: 'Toque para começar →',
     mac: 'Pressione {keys} para começar →',
