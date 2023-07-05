@@ -8,4 +8,4 @@ export const pages = {
   about,
   projects,
   contact
-} as const;
+};

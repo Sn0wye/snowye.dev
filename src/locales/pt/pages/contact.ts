@@ -1,4 +1,6 @@
-export const contact = {
+import { type BaseTranslation } from '../../en';
+
+export const contact: BaseTranslation['pages']['contact'] = {
   title: 'Contato | Gabriel Trzimajewski',
   tagline: 'Manda um email. Como nos velhos tempos.',
   description:
@@ -24,4 +26,4 @@ export const contact = {
     message: 'Sua mensagem aqui :P'
   },
   send: 'Enviar'
-} as const;
+};
