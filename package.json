@@ -27,7 +27,6 @@
     "framer-motion": "^10.12.18",
     "kbar": "0.1.0-beta.40",
     "lottie-react": "^2.4.0",
-    "maath": "^0.5.3",
     "next": "13.3.1",
     "nodemailer": "^6.9.3",
     "react": "18.2.0",
