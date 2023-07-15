@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { useKBar } from 'kbar';
 import { Button } from '../styled/Button';
