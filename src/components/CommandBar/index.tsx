@@ -1,3 +1,5 @@
+'use client';
+
 import {
   forwardRef,
   useRef,
@@ -6,7 +8,6 @@ import {
   type ReactElement,
   type Ref
 } from 'react';
-import { useRouter } from 'next/router';
 import type { ActionImpl } from 'kbar';
 import { KBarPortal, KBarProvider, KBarResults, useMatches } from 'kbar';
 import Lottie, {
@@ -42,7 +43,7 @@ export function CommandBar({ children }: PropsWithChildren) {
   const aboutRef = useRef<LottieRefCurrentProps>(null);
   const projectsRef = useRef<LottieRefCurrentProps>(null);
 
-  const router = useRouter();
+  // const router = useRouter();
   const [showToast, setShowToast] = useState(false);
 
   const copyUrl = () => {
@@ -69,7 +70,9 @@ export function CommandBar({ children }: PropsWithChildren) {
       shortcut: ['g', 'h'],
       keywords: 'go-home',
       section: kbar.sections.goto,
-      perform: () => void router.push('/'),
+      perform: () => {
+        // router.push('/');
+      },
       icon: (
         <Lottie
           lottieRef={homeRef}
@@ -86,7 +89,10 @@ export function CommandBar({ children }: PropsWithChildren) {
       shortcut: ['g', 'a'],
       keywords: 'go-about',
       section: kbar.sections.goto,
-      perform: () => void router.push('/about'),
+      perform: () => {
+        // void router.push('/about')
+        return null;
+      },
       icon: (
         <Lottie
           lottieRef={aboutRef}
@@ -103,7 +109,10 @@ export function CommandBar({ children }: PropsWithChildren) {
       shortcut: ['g', 'p'],
       keywords: 'go-projects',
       section: kbar.sections.goto,
-      perform: () => void router.push('/projects'),
+      perform: () => {
+        // void router.push('/projects')
+        return null;
+      },
       icon: (
         <Lottie
           lottieRef={projectsRef}
@@ -137,7 +146,10 @@ export function CommandBar({ children }: PropsWithChildren) {
       shortcut: ['e'],
       keywords: 'send-email',
       section: kbar.sections.general,
-      perform: () => void router.push('/contact'),
+      perform: () => {
+        // void router.push('/contact')
+        return null;
+      },
       icon: (
         <Lottie
           lottieRef={emailRef}
