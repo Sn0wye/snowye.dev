@@ -16,6 +16,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.1.1",
     "@radix-ui/react-toast": "^1.1.4",
+    "@react-email/components": "^0.0.7",
     "@react-three/drei": "^9.78.1",
     "@react-three/fiber": "^8.13.4",
     "@stitches/react": "^1.2.8",
