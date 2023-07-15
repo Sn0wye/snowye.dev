@@ -1,9 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
-import { type IEmailInputs } from '../../schemas/Email';
 
 import { Ratelimit } from '@upstash/ratelimit';
 import { kv } from '@vercel/kv';
+import { env } from '@/env.mjs';
+import { EmailTemplate } from '@/email/EmailTemplate';
+import { render } from '@react-email/components';
+import { emailSchema } from '@/schemas/emails';
 
 const ratelimit = new Ratelimit({
   redis: kv,
@@ -34,29 +37,38 @@ export default async function SendMail(
         );
       }
 
-      const data: IEmailInputs = req.body;
+      const parsedBody = emailSchema.safeParse(req.body);
+
+      if (!parsedBody.success) {
+        return res.status(400).json({
+          message: `Invalid request body - ${parsedBody.error.message}`
+        });
+      }
+      const { data } = parsedBody;
+      const emailHtml = render(
+        EmailTemplate({
+          message: data.message,
+          name: data.name
+        })
+      );
 
       const mailTransporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 465,
         service: 'gmail',
         auth: {
-          user: process.env.NODEMAILER_USER,
-          pass: process.env.NODEMAILER_PASSWORD
+          user: env.NODEMAILER_USER,
+          pass: env.NODEMAILER_PASSWORD
         }
       });
 
-      const mailDetails = {
+      const smh = await mailTransporter.sendMail({
         from: data.name,
-        to: String(process.env.NODEMAILER_USER),
+        to: env.NODEMAILER_USER,
         subject: `${data.name} - via snowye.dev`,
-        text: `
-        Name: ${data.name}
-        Email: ${data.email}
-        ${data.message}`
-      };
+        html: emailHtml
+      });
 
-      await mailTransporter.sendMail(mailDetails);
       return res.status(200).json({ message: 'Email sent' });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
