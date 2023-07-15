@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import { useKBar } from 'kbar';
+import { Command, Snowflake } from 'lucide-react';
 import {
   Anchor,
   Aside,
   CmdButton,
-  CmdIcon,
   Header,
   Hover,
   List,
@@ -18,18 +17,17 @@ import {
 export const pages = ['about', 'projects', 'contact'] as const;
 
 export function Navbar() {
-  const { asPath } = useRouter();
+  const pathname = usePathname();
   const [hovered, setHovered] = useState('');
   const { query } = useKBar();
 
   return (
     <Header>
       <LogoButton href="/">
-        <Image
-          src="/favicon.svg"
-          alt="Snowflake (Snowye Icon)"
-          height={32}
-          width={32}
+        <Snowflake
+          aria-label="Snowflake (Snowye Icon)"
+          width={24}
+          height={24}
         />
       </LogoButton>
       <Nav>
@@ -45,7 +43,7 @@ export function Navbar() {
                     onHoverStart={() => setHovered(page)}
                     onHoverEnd={() => setHovered('')}
                     css={
-                      asPath === path
+                      pathname === path
                         ? {
                             color: '$primary',
                             '&::after': { opacity: 1 }
@@ -70,8 +68,12 @@ export function Navbar() {
         </List>
       </Nav>
       <Aside>
-        <CmdButton type="button" aria-label="Command" onClick={query.toggle}>
-          <CmdIcon />
+        <CmdButton
+          type="button"
+          aria-label="Open Command Palette"
+          onClick={query.toggle}
+        >
+          <Command width={24} height={24} />
         </CmdButton>
       </Aside>
     </Header>

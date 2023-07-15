@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { RiCommandLine } from 'react-icons/ri';
 import { styled } from '../../../stitches.config';
 
 export const Header = styled('header', {
@@ -37,14 +36,9 @@ export const CmdButton = styled('button', {
   border: 'none',
   borderRadius: '$borderRadius',
   cursor: 'pointer',
-  padding: '0.35rem',
+  padding: '0.5rem',
   transition: 'background $duration ease-in-out',
   '&:hover': { background: '$hover' }
-});
-
-export const CmdIcon = styled(RiCommandLine, {
-  width: '1.5rem',
-  height: '1.5rem'
 });
 
 export const LogoButton = styled(Link, {
@@ -54,7 +48,7 @@ export const LogoButton = styled(Link, {
   borderRadius: '$borderRadius',
   color: 'white',
   cursor: 'pointer',
-  padding: '0.25rem 0.625rem',
+  padding: '0.5rem',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -78,7 +72,7 @@ export const Nav = styled('nav', {
 export const Aside = styled('div', {
   display: 'flex',
   alignItems: 'center',
-  paddingRight: '0.75rem',
+  marginRight: '0.75rem',
   marginLeft: 'auto'
 });
 
