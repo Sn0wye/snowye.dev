@@ -9,7 +9,10 @@ const nextConfig = {
   //   defaultLocale: 'en'
   // },
   eslint: { ignoreDuringBuilds: !!process.env.CI },
-  typescript: { ignoreBuildErrors: !!process.env.CI }
+  typescript: { ignoreBuildErrors: !!process.env.CI },
+  experimental: {
+    appDir: true
+  }
 };
 
 export default nextConfig;
