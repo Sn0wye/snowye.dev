@@ -16,7 +16,7 @@ interface EmailProps {
 export function EmailTemplate({ name = 'Sujeito', message = '' }: EmailProps) {
   return (
     <Html>
-      <Head title='teste' />
+      <Head title="teste" />
       <Preview>{name} - via snowye.dev</Preview>
       <Body
         style={{

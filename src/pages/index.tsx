@@ -2,17 +2,17 @@ import Head from 'next/head';
 import Typewriter from 'typewriter-effect';
 import { Layout } from '../components/Layout';
 import { OpenCommandPalette } from '../components/OpenCommandPalette';
-import { Container, Content, Title } from '../styles/home';
 import { home } from '../locales/en/pages/home';
+import { Container, Content, Title } from '../styles/home';
 
 export default function Home() {
   return (
     <Layout>
       <Head>
         <title>{home.title}</title>
-        <meta content={home.title} property='og:title' />
-        <meta content={home.description} name='description' />
-        <meta content={home.description} property='og:description' />
+        <meta content={home.title} property="og:title" />
+        <meta content={home.description} name="description" />
+        <meta content={home.description} property="og:description" />
       </Head>
       <Container>
         <Content>

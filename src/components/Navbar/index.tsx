@@ -1,7 +1,7 @@
-import { useKBar } from 'kbar';
+import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useKBar } from 'kbar';
 import {
   Anchor,
   Aside,
@@ -24,10 +24,10 @@ export function Navbar() {
 
   return (
     <Header>
-      <LogoButton href='/'>
+      <LogoButton href="/">
         <Image
-          src='/favicon.svg'
-          alt='Snowflake (Snowye Icon)'
+          src="/favicon.svg"
+          alt="Snowflake (Snowye Icon)"
           height={32}
           width={32}
         />
@@ -55,7 +55,7 @@ export function Navbar() {
                   >
                     {isHovered && (
                       <Hover
-                        layoutId='nav'
+                        layoutId="nav"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -70,7 +70,7 @@ export function Navbar() {
         </List>
       </Nav>
       <Aside>
-        <CmdButton type='button' aria-label='Command' onClick={query.toggle}>
+        <CmdButton type="button" aria-label="Command" onClick={query.toggle}>
           <CmdIcon />
         </CmdButton>
       </Aside>

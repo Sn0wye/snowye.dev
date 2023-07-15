@@ -1,6 +1,8 @@
 import Lottie from 'lottie-react';
 import lottieAnimation from '../../public/static/icons/404.json';
+import { styled } from '../../stitches.config';
 import { Layout } from '../components/Layout';
+import { ShortcutError } from '../components/ShortcutError';
 
 const Box = styled('div', { boxSizing: 'border-box' });
 
@@ -39,6 +41,3 @@ const NotFound = () => {
 };
 
 export default NotFound;
-
-import { styled } from '../../stitches.config';
-import { ShortcutError } from '../components/ShortcutError';

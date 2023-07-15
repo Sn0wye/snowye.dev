@@ -1,19 +1,26 @@
+import {
+  forwardRef,
+  useRef,
+  useState,
+  type PropsWithChildren,
+  type ReactElement,
+  type Ref
+} from 'react';
+import { useRouter } from 'next/router';
 import type { ActionImpl } from 'kbar';
 import { KBarPortal, KBarProvider, KBarResults, useMatches } from 'kbar';
 import Lottie, {
   type LottieComponentProps,
   type LottieRefCurrentProps
 } from 'lottie-react';
-import { useRouter } from 'next/router';
-import {
-  forwardRef,
-  type PropsWithChildren,
-  type ReactElement,
-  type Ref,
-  useRef,
-  useState
-} from 'react';
 import { RiGithubLine, RiInstagramLine, RiLinkedinLine } from 'react-icons/ri';
+import aboutIcon from '../../../public/static/icons/about.json';
+import copyLinkIcon from '../../../public/static/icons/copy-link.json';
+import emailIcon from '../../../public/static/icons/email.json';
+import homeIcon from '../../../public/static/icons/home.json';
+import projectsIcon from '../../../public/static/icons/projects.json';
+import sourceIcon from '../../../public/static/icons/source.json';
+import { kbar } from '../../locales/en/common/kbar';
 import { Toast } from '../Toast';
 import {
   ActionRow,
@@ -26,14 +33,6 @@ import {
   Shortcut,
   StyledAction
 } from './styles';
-
-import aboutIcon from '../../../public/static/icons/about.json';
-import copyLinkIcon from '../../../public/static/icons/copy-link.json';
-import emailIcon from '../../../public/static/icons/email.json';
-import homeIcon from '../../../public/static/icons/home.json';
-import projectsIcon from '../../../public/static/icons/projects.json';
-import sourceIcon from '../../../public/static/icons/source.json';
-import { kbar } from '../../locales/en/common/kbar';
 
 export function CommandBar({ children }: PropsWithChildren) {
   const copyLinkRef = useRef<LottieRefCurrentProps>(null);
@@ -204,7 +203,7 @@ export function CommandBar({ children }: PropsWithChildren) {
         <KBarPortal>
           <Positioner>
             <Animator>
-              <Search placeholder='Type a command or search…' />
+              <Search placeholder="Type a command or search…" />
               <RenderResults />
             </Animator>
           </Positioner>

@@ -1,11 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import nodemailer from 'nodemailer';
-
+import { render } from '@react-email/components';
 import { Ratelimit } from '@upstash/ratelimit';
 import { kv } from '@vercel/kv';
-import { env } from '@/env.mjs';
+import nodemailer from 'nodemailer';
 import { EmailTemplate } from '@/email/EmailTemplate';
-import { render } from '@react-email/components';
+import { env } from '@/env.mjs';
 import { emailSchema } from '@/schemas/emails';
 
 const ratelimit = new Ratelimit({
@@ -62,7 +61,7 @@ export default async function SendMail(
         }
       });
 
-      const smh = await mailTransporter.sendMail({
+      await mailTransporter.sendMail({
         from: data.name,
         to: env.NODEMAILER_USER,
         subject: `${data.name} - via snowye.dev`,

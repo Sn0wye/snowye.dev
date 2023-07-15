@@ -22,13 +22,13 @@ export function Pronunciation() {
 
   return (
     <Button
-      role='button'
-      aria-label='How to pronounce my name'
+      role="button"
+      aria-label="How to pronounce my name"
       onClick={togglePronunciation}
     >
       {isPlaying ? <RiPauseCircleFill /> : <RiPlayCircleFill />}
       <audio
-        src='/static/audio/pronunciation.mp3'
+        src="/static/audio/pronunciation.mp3"
         ref={pronunciationAudio}
         onEnded={() => setIsPlaying(false)}
       />

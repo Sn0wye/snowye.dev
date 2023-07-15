@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
+import { PointMaterial, Points, Preload } from '@react-three/drei';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Points, PointMaterial, Preload } from '@react-three/drei';
 import { type Points as TPoints } from 'three';
 import { CanvasContainer } from './styles';
 
@@ -52,7 +52,7 @@ const Stars = () => {
       <Points ref={ref} positions={sphere} stride={3} frustumCulled>
         <PointMaterial
           transparent
-          color='#f272c8'
+          color="#f272c8"
           size={0.002}
           sizeAttenuation
           depthWrite={false}

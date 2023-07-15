@@ -1,5 +1,5 @@
-import * as ToastPrimitive from '@radix-ui/react-toast';
 import { type ReactNode } from 'react';
+import * as ToastPrimitive from '@radix-ui/react-toast';
 import { type IconBaseProps } from 'react-icons';
 import { RiCheckboxCircleFill, RiErrorWarningFill } from 'react-icons/ri';
 import {
@@ -48,7 +48,7 @@ export function Toast({
           <Title>{title}</Title>
           <Description>{description}</Description>
         </div>
-        <Close aria-label='Close'>
+        <Close aria-label="Close">
           <span aria-hidden>×</span>
         </Close>
       </Root>

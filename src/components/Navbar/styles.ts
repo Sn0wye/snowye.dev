@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { RiCommandLine } from 'react-icons/ri';
 import { styled } from '../../../stitches.config';
 

@@ -22,7 +22,7 @@ export const Career = () => {
           <article style={{ marginBottom: 40 }} key={index}>
             <h3>{jobTitle}</h3>
             <p style={{ margin: 0 }}>
-              <a href={companyUrl} target='_blank' rel='noreferrer'>
+              <a href={companyUrl} target="_blank" rel="noreferrer">
                 {company}
               </a>
               <span> • {location}</span>

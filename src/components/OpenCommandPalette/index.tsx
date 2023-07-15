@@ -1,5 +1,5 @@
-import { useKBar } from 'kbar';
 import { useEffect, useState } from 'react';
+import { useKBar } from 'kbar';
 import { Button } from '../styled/Button';
 
 export function OpenCommandPalette() {
@@ -17,14 +17,14 @@ export function OpenCommandPalette() {
 
     if (isMobile) {
       return (
-        <Button type='button' onClick={query.toggle}>
+        <Button type="button" onClick={query.toggle}>
           Tap to start →
         </Button>
       );
     }
     if (isMac) {
       return (
-        <Button type='button' onClick={query.toggle}>
+        <Button type="button" onClick={query.toggle}>
           Press <kbd>⌘</kbd> <kbd>K</kbd> to start →
         </Button>
       );
@@ -32,7 +32,7 @@ export function OpenCommandPalette() {
 
     //Common cases (Windows, Linux)
     return (
-      <Button type='button' onClick={query.toggle}>
+      <Button type="button" onClick={query.toggle}>
         Press <kbd>ctrl</kbd> <kbd>K</kbd> to start →
       </Button>
     );

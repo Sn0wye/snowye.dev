@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { Base } from '../../components/Base';
 import { Intro } from '../../components/containers/About/Intro';
-import { stripHtml } from '../../utils/stripHtml';
 import { about } from '../../locales/en/pages/about';
+import { stripHtml } from '../../utils/stripHtml';
 
 interface AboutProps {
   imagePath: string;
@@ -24,14 +24,14 @@ export default function About({
     >
       <Head>
         <title>{about.title}</title>
-        <meta content={about.title} property='og:title' />
-        <meta content={stripHtml(about.description)} name='description' />
+        <meta content={about.title} property="og:title" />
+        <meta content={stripHtml(about.description)} name="description" />
         <meta
           content={stripHtml(about.description)}
-          property='og:description'
+          property="og:description"
         />
-        <meta content='https://snowye.dev/about' property='og:url' />
-        <meta content={`https://snowye.dev${imagePath}`} property='og:image' />
+        <meta content="https://snowye.dev/about" property="og:url" />
+        <meta content={`https://snowye.dev${imagePath}`} property="og:image" />
       </Head>
 
       <Intro />

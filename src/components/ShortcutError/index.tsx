@@ -13,14 +13,14 @@ export const ShortcutError = () => {
 
     if (isMobile) {
       return (
-        <Button as='a' href='/'>
+        <Button as="a" href="/">
           Tap to go home →
         </Button>
       );
     }
 
     return (
-      <Button as='a' href='/'>
+      <Button as="a" href="/">
         Press <kbd>G</kbd> <kbd>H</kbd> to go home →
       </Button>
     );

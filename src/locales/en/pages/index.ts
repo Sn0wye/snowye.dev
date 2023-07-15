@@ -1,7 +1,7 @@
-import { home } from './home';
 import { about } from './about';
-import { projects } from './projects';
 import { contact } from './contact';
+import { home } from './home';
+import { projects } from './projects';
 
 export const pages = {
   home,

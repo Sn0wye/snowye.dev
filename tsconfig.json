@@ -25,6 +25,7 @@
     "**/*.tsx",
     ".eslintrc.cjs",
     "next.config.mjs",
+    "prettier.config.cjs",
     "./src/env.mjs"
   ],
   "exclude": ["node_modules"]

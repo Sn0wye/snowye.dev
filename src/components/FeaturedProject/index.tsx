@@ -1,12 +1,12 @@
+import { useRef, type Dispatch, type SetStateAction } from 'react';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
-import { type Dispatch, type SetStateAction, useRef } from 'react';
 import type { Project } from '../../data/projects';
 import {
   Body,
   Description,
   Hover,
-  Project as StyledProject,
   Stats,
+  Project as StyledProject,
   Title
 } from './styles';
 
@@ -30,10 +30,10 @@ export function FeaturedProject({
   return (
     <StyledProject
       href={url}
-      target='_blank'
+      target="_blank"
       onHoverStart={() => onHover(title)}
       onHoverEnd={() => onHover('')}
-      data-testid='featuredProject'
+      data-testid="featuredProject"
       onMouseEnter={() => iconRef.current?.play()}
       onMouseLeave={() => iconRef.current?.stop()}
     >
@@ -51,7 +51,7 @@ export function FeaturedProject({
       </Body>
       {isHovered && (
         <Hover
-          layoutId='projects'
+          layoutId="projects"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

@@ -9,7 +9,7 @@ export const AllProjects = () => {
           <ul>
             {item.projects.map((project, index) => (
               <li key={index}>
-                <a href={project.url} target='_blank' rel='noreferrer'>
+                <a href={project.url} target="_blank" rel="noreferrer">
                   {project.title}
                 </a>
               </li>
