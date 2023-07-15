@@ -6,7 +6,7 @@ export const emailSchema = z.object({
   message: z.string()
 });
 
-export interface IEmailInputs {
+export interface EmailSchema {
   name: string;
   email: string;
   message: string;

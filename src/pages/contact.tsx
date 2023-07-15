@@ -14,7 +14,7 @@ import {
 } from '../components/containers/Contact/styles';
 import { Toast } from '../components/Toast';
 import { api } from '../lib/api';
-import { emailSchema, type IEmailInputs } from '../schemas/Email';
+import { emailSchema, type EmailSchema } from '../schemas/emails';
 import { stripHtml } from '../utils/stripHtml';
 import { contact } from '../locales/en/pages/contact';
 
@@ -35,11 +35,11 @@ export default function Contact({
     handleSubmit,
     reset,
     formState: { errors }
-  } = useForm<IEmailInputs>({
+  } = useForm<EmailSchema>({
     resolver: zodResolver(emailSchema)
   });
 
-  const onSubmit = async (data: IEmailInputs) => {
+  const onSubmit = async (data: EmailSchema) => {
     try {
       await api.post('/email', data);
       setIsEmailSent(true);
