@@ -91,11 +91,6 @@ const globalStyles = globalCss({
     fontFamily: '$code',
     fontSize: '0.875rem'
   },
-  svg: {
-    width: '2rem',
-    height: '2rem',
-    fill: 'white'
-  },
   figure: {
     margin: 0
   },
