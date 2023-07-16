@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { FeaturedProject } from '../../FeaturedProject';
 import { StyledFeaturedProjects } from './styles';
