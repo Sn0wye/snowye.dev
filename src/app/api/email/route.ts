@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from 'next/server';
 import { render } from '@react-email/components';
 import { Ratelimit } from '@upstash/ratelimit';
 import { kv } from '@vercel/kv';
@@ -12,22 +12,19 @@ const ratelimit = new Ratelimit({
   limiter: Ratelimit.slidingWindow(1, '30 s')
 });
 
-export default async function SendMail(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export const POST = async (req: Request) => {
   if (req.method === 'POST') {
     try {
-      const ip = req.headers['x-forwarded-for'] as string;
+      const ip = req.headers.get('x-forwarded-for') as string;
       const { success, reset } = await ratelimit.limit(ip ?? 'anonymous');
 
       if (!success) {
         const now = Date.now();
         const retryAfter = Math.floor((reset - now) / 1000);
-        return new Response(
-          JSON.stringify({
+        return NextResponse.json(
+          {
             message: `Rate limit exceeded. Try again in ${reset} seconds.`
-          }),
+          },
           {
             headers: {
               'retry-after': `${retryAfter}`
@@ -36,12 +33,18 @@ export default async function SendMail(
         );
       }
 
-      const parsedBody = emailSchema.safeParse(req.body);
+      const body = await req.json();
+      const parsedBody = emailSchema.safeParse(body);
 
       if (!parsedBody.success) {
-        return res.status(400).json({
-          message: `Invalid request body - ${parsedBody.error.message}`
-        });
+        return NextResponse.json(
+          {
+            message: `Invalid request body - ${parsedBody.error.message}`
+          },
+          {
+            status: 400
+          }
+        );
       }
       const { data } = parsedBody;
       const emailHtml = render(
@@ -68,13 +71,18 @@ export default async function SendMail(
         html: emailHtml
       });
 
-      return res.status(200).json({ message: 'Email sent' });
+      return NextResponse.json({ message: 'Email sent' }, { status: 200 });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      res
-        .status(500)
-        .json({ message: `Email not sent - Error: ${err.message}` });
+      NextResponse.json(
+        {
+          message: `Email not sent - Error: ${err.message}`
+        },
+        {
+          status: 500
+        }
+      );
     }
   }
-  return res.status(405).json({ message: 'Method not allowed' });
-}
+  return NextResponse.json({ message: 'Method not allowed' }, { status: 405 });
+};
