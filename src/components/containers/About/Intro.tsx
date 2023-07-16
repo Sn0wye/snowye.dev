@@ -1,5 +1,6 @@
+'use client';
+
 import Image from 'next/image';
-import { Pronunciation } from '../../Pronunciation';
 import { Container, Paragraph, Section } from './styles';
 
 export const Intro = () => {
@@ -27,9 +28,9 @@ export const Intro = () => {
             '@bp2': { marginTop: '-0.375rem' }
           }}
         >
-          <strong>Hey, I&aposm Gabriel Trzimajewski!</strong>
-          <Pronunciation /> I started simply browsing in the internet and
-          randomly discovered Javascript at{' '}
+          <strong>Hey, I&apos;m Gabriel Trzimajewski!</strong>
+          {/* <Pronunciation /> */} I started by simply browsing in the internet
+          and randomly discovered Javascript at{' '}
           <strong>
             <a
               href="https://rocketseat.com.br"
