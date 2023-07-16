@@ -1,8 +1,24 @@
-import Head from 'next/head';
+import { type Metadata } from 'next';
 import { Base } from '@/components/Base';
 import { Intro } from '@/components/containers/About/Intro';
 import { stripHtml } from '@/utils/stripHtml';
 import { about } from '@/locales/en/pages/about';
+
+export const metadata = {
+  title: about.title,
+  description: stripHtml(about.description),
+  openGraph: {
+    description: stripHtml(about.description),
+    url: 'https://snowye.dev/about',
+    images: [
+      {
+        url: 'https://snowye.dev/static/imagePaths/snowye-bw.jpg',
+        width: 336,
+        height: 336
+      }
+    ]
+  }
+} satisfies Metadata;
 
 export default function About() {
   const meta = {
@@ -18,21 +34,6 @@ export default function About() {
       primaryColor={meta.primaryColor}
       secondaryColor={meta.secondaryColor}
     >
-      <Head>
-        <title>{about.title}</title>
-        <meta content={about.title} property="og:title" />
-        <meta content={stripHtml(about.description)} name="description" />
-        <meta
-          content={stripHtml(about.description)}
-          property="og:description"
-        />
-        <meta content="https://snowye.dev/about" property="og:url" />
-        <meta
-          content={`https://snowye.dev${meta.imagePath}`}
-          property="og:image"
-        />
-      </Head>
-
       <Intro />
 
       <h2>{about.bio}</h2>
