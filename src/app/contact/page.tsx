@@ -1,8 +1,17 @@
-import Head from 'next/head';
+import { type Metadata } from 'next';
 import { Base } from '@/components/Base';
 import { stripHtml } from '@/utils/stripHtml';
 import { contact } from '@/locales/en/pages/contact';
 import { ContactForm } from './contact-form';
+
+export const metadata = {
+  title: contact.title,
+  description: stripHtml(contact.description),
+  openGraph: {
+    description: stripHtml(contact.description),
+    url: 'https://github.dev/contact'
+  }
+} satisfies Metadata;
 
 export default function Contact() {
   const meta = {
@@ -26,17 +35,6 @@ export default function Contact() {
       title={contact.title}
       tagline={contact.tagline}
     >
-      <Head>
-        <title>{contact.title}</title>
-        <meta content={contact.title} property="og:title" />
-        <meta content={stripHtml(String(description))} name="description" />
-        <meta
-          content={stripHtml(String(description))}
-          property="og:description"
-        />
-        <meta content="https://github.dev/contact" property="og:url" />
-      </Head>
-
       <div>
         {description}
         <h2>{contact.email}</h2>
