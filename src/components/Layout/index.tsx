@@ -3,7 +3,6 @@
 import { type PropsWithChildren } from 'react';
 import { Footer } from '../Footer';
 import { Navbar } from '../Navbar';
-import { StarCanvas } from '../Stars';
 import { Wrapper } from './style';
 
 export const Layout = ({ children }: PropsWithChildren) => {
@@ -12,7 +11,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
       <Navbar />
       {children}
       <Footer />
-      <StarCanvas />
+      {/* <StarCanvas /> */}
     </Wrapper>
   );
 };

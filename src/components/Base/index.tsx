@@ -2,7 +2,6 @@
 
 import { Footer } from '../Footer';
 import { Navbar } from '../Navbar';
-import { StarCanvas } from '../Stars';
 import { PostContainer, PostContent, PostMain } from '../styled/Post';
 import { GradientTitle, Wrapper } from './styles';
 
@@ -51,7 +50,7 @@ export function Base({
         </PostContent>
       </PostMain>
       <Footer />
-      <StarCanvas />
+      {/* <StarCanvas /> */}
     </Wrapper>
   );
 }
