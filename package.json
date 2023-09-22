@@ -49,7 +49,7 @@
     "@types/react-dom": "18.2.7",
     "@types/three": "^0.156.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "eslint": "8.49.0",
+    "eslint": "8.50.0",
     "eslint-config-next": "13.5.2",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.27.5",
