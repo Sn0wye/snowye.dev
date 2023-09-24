@@ -2,17 +2,22 @@ import { type Metadata } from 'next';
 import { Base } from '@/components/Base';
 import { Intro } from '@/components/containers/About/Intro';
 import { stripHtml } from '@/utils/stripHtml';
+import { env } from '@/env.mjs';
 import { about } from '@/locales/en/pages/about';
 
 export const metadata = {
+  metadataBase:
+    env.NODE_ENV === 'production'
+      ? new URL('https://snowye.dev')
+      : new URL('http://localhost:3000'),
   title: about.title,
   description: stripHtml(about.description),
   openGraph: {
     description: stripHtml(about.description),
-    url: 'https://snowye.dev/about',
+    url: '/about',
     images: [
       {
-        url: 'https://snowye.dev/static/imagePaths/snowye-bw.jpg',
+        url: '/static/imagePaths/snowye-bw.jpg',
         width: 336,
         height: 336
       }
@@ -25,7 +30,7 @@ export default function About() {
     imagePath: '/static/imagePaths/snowye-bw.jpg',
     primaryColor: 'pink',
     secondaryColor: 'purple'
-  };
+  } as const;
 
   return (
     <Base

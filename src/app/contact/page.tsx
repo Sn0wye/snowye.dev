@@ -17,7 +17,7 @@ export default function Contact() {
   const meta = {
     primaryColor: 'purple',
     secondaryColor: 'cyan'
-  };
+  } as const;
 
   const description = (
     <p>
