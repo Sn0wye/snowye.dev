@@ -29,7 +29,7 @@ export function Navbar() {
         />
       </Link>
       <nav className="order-3 flex-1 basis-full overflow-x-auto overflow-y-hidden text-center md:order-2 md:basis-[initial]">
-        <ul className="relative top-[5px] inline-flex justify-around">
+        <ul className="relative top-[5px] inline-flex list-none justify-around">
           {pages.map(page => {
             const path = `/${page.toLowerCase()}`;
             const isHovered = hovered === page;

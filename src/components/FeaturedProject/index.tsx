@@ -1,14 +1,7 @@
 import { useRef, type Dispatch, type SetStateAction } from 'react';
+import { motion } from 'framer-motion';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 import type { Project } from '../../data/projects';
-import {
-  Body,
-  Description,
-  Hover,
-  Stats,
-  Project as StyledProject,
-  Title
-} from './styles';
 
 interface FeaturedProjectProps {
   project: Project;
@@ -28,12 +21,12 @@ export function FeaturedProject({
   const iconRef = useRef<LottieRefCurrentProps | null>(null);
 
   return (
-    <StyledProject
+    <motion.a
+      className="relative flex min-w-[200px] flex-col rounded-lg border-0 p-5 no-underline transition-opacity duration-200 ease-in-out hover:opacity-100 md:w-[180px] md:max-w-[8.75rem]"
       href={url}
       target="_blank"
       onHoverStart={() => onHover(title)}
       onHoverEnd={() => onHover('')}
-      data-testid="featuredProject"
       onMouseEnter={() => iconRef.current?.play()}
       onMouseLeave={() => iconRef.current?.stop()}
     >
@@ -44,19 +37,24 @@ export function FeaturedProject({
         loop={false}
         autoplay={false}
       />
-      <Body>
-        <Title>{title}</Title>
-        <Description>{description}</Description>
-        {stats && <Stats>{stats}</Stats>}
-      </Body>
+      <div className="flex-[1_1_auto]">
+        <h3 className="m-0 mb-1 p-0 text-lg text-primary">{title}</h3>
+        <p className="m-0 leading-6">{description}</p>
+        {stats && (
+          <span className="mt-1 inline-block text-xs font-medium uppercase tracking-wider text-primary">
+            {stats}
+          </span>
+        )}
+      </div>
       {isHovered && (
-        <Hover
+        <motion.span
+          className="absolute inset-0 -z-10 rounded-lg bg-hover"
           layoutId="projects"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         />
       )}
-    </StyledProject>
+    </motion.a>
   );
 }

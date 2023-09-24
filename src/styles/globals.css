@@ -46,7 +46,11 @@
 
   h3,
   h3 a {
-    @apply mt-5 text-lg text-primary;
+    @apply mt-5 text-lg font-bold text-primary;
+  }
+
+  ul {
+    @apply list-inside list-disc;
   }
 
   img {

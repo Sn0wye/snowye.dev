@@ -31,7 +31,7 @@ export default function Projects() {
     tagline: 'Apps. Libs. Open Source.',
     primaryColor: 'cyan',
     secondaryColor: 'green'
-  };
+  } as const;
 
   return (
     <Base
