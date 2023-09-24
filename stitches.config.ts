@@ -202,4 +202,4 @@ const globalStyles = globalCss({
   ]
 });
 
-globalStyles();
+// globalStyles();
