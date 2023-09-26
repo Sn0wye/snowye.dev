@@ -45,7 +45,7 @@
     "@sn0wye/eslint-config": "^3.0.0",
     "@types/node": "18.18.0",
     "@types/nodemailer": "^6.4.8",
-    "@types/react": "18.2.22",
+    "@types/react": "18.2.23",
     "@types/react-dom": "18.2.7",
     "@types/three": "^0.156.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
