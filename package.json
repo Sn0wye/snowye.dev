@@ -35,7 +35,7 @@
     "react-hook-form": "^7.45.1",
     "react-icons": "^4.10.1",
     "sharp": "^0.32.1",
-    "three": "^0.156.0",
+    "three": "^0.157.0",
     "typewriter-effect": "^2.20.1",
     "zod": "^3.21.4"
   },
