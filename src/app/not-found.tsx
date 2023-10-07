@@ -3,43 +3,26 @@
 import Lottie from 'lottie-react';
 import { CommandBar } from '@/components/CommandBar';
 import lottieAnimation from '../../public/static/icons/404.json';
-import { styled } from '../../stitches.config';
 import { Layout } from '../components/Layout';
 import { ShortcutError } from '../components/ShortcutError';
-
-const Box = styled('div', { boxSizing: 'border-box' });
 
 export default function NotFound() {
   return (
     <CommandBar>
       <Layout>
-        <Box
-          css={{
-            padding: '$navHeightMobile 1.25rem',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flex: 1
-          }}
-        >
+        <div className="flex flex-1 flex-col items-center justify-center px-5 py-navHeightMobile">
           <h1>four oh four</h1>
-          <Box
-            css={{
-              display: 'flex',
-              justifyContent: 'center'
-            }}
-          >
+          <div className="flex justify-center">
             <Lottie
               animationData={lottieAnimation}
               loop={true}
               autoPlay={true}
               style={{ width: '60%' }}
             />
-          </Box>
+          </div>
           <p>This page doesn&apos;t exist</p>
           <ShortcutError />
-        </Box>
+        </div>
       </Layout>
     </CommandBar>
   );

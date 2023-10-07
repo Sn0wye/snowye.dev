@@ -93,12 +93,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en-US">
-      <head>
-        {/* <style
-          id="stitches"
-          dangerouslySetInnerHTML={{ __html: getCssText() }}
-        /> */}
-      </head>
       <body
         className={cn(
           fontSans.variable,
