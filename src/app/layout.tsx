@@ -5,6 +5,7 @@ import localFont from 'next/font/local';
 import { CommandBar } from '@/components/CommandBar';
 import { cn } from '@/lib/cn';
 import '../styles/globals.css';
+import { Toaster } from '@/components/Toast';
 
 const fontSans = localFont({
   src: [
@@ -106,6 +107,7 @@ export default function RootLayout({
         )}
       >
         <CommandBar>{children}</CommandBar>
+        <Toaster />
       </body>
     </html>
   );

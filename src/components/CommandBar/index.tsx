@@ -224,13 +224,13 @@ export function CommandBar({ children }: PropsWithChildren) {
         {children}
       </KBarProvider>
 
-      <Toast
+      {/* <Toast
         title={kbar.toast.title}
         description={kbar.toast.description}
         isSuccess
         showToast={showToast}
         setShowToast={setShowToast}
-      />
+      /> */}
     </>
   );
 }

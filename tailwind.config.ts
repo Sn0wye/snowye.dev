@@ -1,18 +1,17 @@
 import type { Config } from 'tailwindcss';
 import { fontFamily } from 'tailwindcss/defaultTheme';
 
-const safeColors = [
+const safeGeistColors = [
   'yellow',
   'pink',
   'purple',
   'red',
   'orange',
   'green',
-  'cyan',
-  'primary',
-  'secondary',
-  'background'
+  'cyan'
 ];
+
+const safeColors = ['primary', 'secondary', 'background'];
 
 export default {
   darkMode: 'class',
@@ -23,18 +22,26 @@ export default {
       `from-${color}`,
       `to-${color}`,
       `selection:bg-${color}`
+    ]),
+    ...safeGeistColors.flatMap(color => [
+      `bg-geist-${color}`,
+      `from-geist-${color}`,
+      `to-geist-${color}`,
+      `selection:bg-geist-${color}`
     ])
   ],
   theme: {
     extend: {
       colors: {
-        yellow: '#ffff80',
-        pink: '#ff80bf',
-        purple: '#9580ff',
-        red: '#ff9580',
-        orange: '#ffca80',
-        green: '#8aff80',
-        cyan: '#80ffea',
+        geist: {
+          yellow: '#ffff80',
+          pink: '#ff80bf',
+          purple: '#9580ff',
+          red: '#ff9580',
+          orange: '#ffca80',
+          green: '#8aff80',
+          cyan: '#80ffea'
+        },
         primary: '#f2f2f2',
         secondary: '#8f9ba8',
         background: '#08070b',
@@ -68,5 +75,5 @@ export default {
       }
     }
   },
-  plugins: []
+  plugins: [require('tailwindcss-animate')]
 } satisfies Config;
