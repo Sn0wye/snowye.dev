@@ -4,7 +4,6 @@ import { useRef, useState } from 'react';
 import { PointMaterial, Points, Preload } from '@react-three/drei';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { type Points as TPoints } from 'three';
-import { CanvasContainer } from './styles';
 
 function generateInSphere(count: number, radius: number): Float32Array {
   const positions = new Float32Array(count * 3);
@@ -28,13 +27,13 @@ function generateInSphere(count: number, radius: number): Float32Array {
 
 export const StarCanvas = () => {
   return (
-    <CanvasContainer>
+    <div className="absolute inset-0 -z-10 h-auto w-full">
       <Canvas camera={{ position: [0, 0, 1] }}>
         <Stars />
 
         <Preload all />
       </Canvas>
-    </CanvasContainer>
+    </div>
   );
 };
 

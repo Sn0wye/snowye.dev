@@ -2,26 +2,22 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { Button } from '@/components/button';
 import {
-  Button,
   Form,
-  FormGroup,
-  Input,
-  Label,
-  Textarea
-} from '@/components/containers/Contact/styles';
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from '@/components/form';
+import { Input } from '@/components/input';
+import { Textarea } from '@/components/textarea';
 import { useToast } from '@/components/Toast';
-import { api } from '@/lib/api';
 import { contact } from '@/locales/en/pages/contact';
 import { emailSchema, type EmailSchema } from '@/schemas/emails';
 
 export const ContactForm = () => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors }
-  } = useForm<EmailSchema>({
+  const form = useForm<EmailSchema>({
     resolver: zodResolver(emailSchema)
   });
 
@@ -29,13 +25,16 @@ export const ContactForm = () => {
 
   const onSubmit = async (data: EmailSchema) => {
     try {
-      await api.post('/email', data);
+      await fetch('/email', {
+        body: JSON.stringify(data),
+        method: 'POST'
+      });
 
       toast({
         title: contact.toast.success.title,
         description: contact.toast.success.description
       });
-      reset();
+      form.reset();
     } catch (e) {
       console.error(e);
 
@@ -48,29 +47,51 @@ export const ContactForm = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <FormGroup>
-        <Label htmlFor="name">{contact.labels.name}</Label>
-        <Input placeholder="John Doe" {...register('name')} />
-        {errors.name && <p>{errors.name.message}</p>}
-      </FormGroup>
-      <FormGroup>
-        <Label htmlFor="email">{contact.labels.email}</Label>
-        <Input placeholder="john@doe.com" {...register('email')} />
-        {errors.email && <p>{errors.email.message}</p>}
-      </FormGroup>
-      <FormGroup>
-        <Label htmlFor="message">{contact.labels.message}</Label>
-        <Textarea
-          placeholder={contact.placeholders.message}
-          rows={4}
-          {...register('message')}
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="max-w-[400px] space-y-2"
+      >
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{contact.labels.name}</FormLabel>
+              <Input placeholder="John Doe" {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
         />
-        {errors.message && <p>{errors.message.message}</p>}
-      </FormGroup>
-      <FormGroup>
-        <Button type="submit">{contact.send}</Button>
-      </FormGroup>
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{contact.labels.email}</FormLabel>
+              <Input placeholder="john@doe.com" {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="message"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{contact.labels.message}</FormLabel>
+              <Textarea placeholder="john@doe.com" {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button
+          className="!mt-5 w-full border transition-colors hover:border-white hover:bg-transparent hover:text-white"
+          type="submit"
+        >
+          {contact.send}
+        </Button>
+      </form>
     </Form>
   );
 };
