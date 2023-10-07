@@ -9,17 +9,16 @@ interface Link {
   title: string;
   url: string;
   Icon: IconType;
-  variant: Variants;
+  variant?: Variant;
 }
 
-type Variants = 'instagram' | 'email' | 'github' | 'linkedin';
+type Variant = 'instagram' | 'github' | 'linkedin';
 
 const links: Link[] = [
   {
     title: 'Email',
     url: '/contact',
-    Icon: RiMailLine,
-    variant: 'email'
+    Icon: RiMailLine
   },
   {
     title: 'GitHub',
@@ -52,25 +51,28 @@ export function Footer() {
 }
 
 const linkVariants = cva({
-  base: 'group mb-1 ml-5 flex items-center gap-1 border-0 text-secondary transition-colors duration-200 ease-in-out hover:text-primary hover:opacity-100 focus:text-primary focus:opacity-100',
+  base: 'group mb-1 ml-5 flex items-center gap-1 border-0 text-secondary transition-colors duration-200 ease-in-out hover:opacity-100 focus:text-primary focus:opacity-100',
   variants: {
     variant: {
+      default: 'hover:text-primary',
       linkedin: 'hover:text-linkedin',
       github: 'hover:text-github',
-      instagram: 'hover:text-instagram',
-      email: 'hover:text-primary'
+      instagram: 'hover:text-instagram'
     }
+  },
+  defaultVariants: {
+    variant: 'default'
   }
 });
 
 const iconVariants = cva({
-  base: 'h-4 w-4 fill-primary font-bold opacity-100 transition-opacity duration-200 ease-in-out hover:opacity-100 group-hover:opacity-100 md:opacity-0',
+  base: 'h-4 w-4 font-bold opacity-100 transition-opacity duration-200 ease-in-out hover:opacity-100 group-hover:opacity-100 md:opacity-0',
   variants: {
     variant: {
+      default: 'fill-primary',
       linkedin: 'fill-linkedin',
       github: 'fill-github',
-      instagram: 'fill-instagram',
-      email: 'fill-primary'
+      instagram: 'fill-instagram'
     }
   }
 });
