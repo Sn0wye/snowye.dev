@@ -58,7 +58,7 @@ const ToastAction = React.forwardRef<
   <ToastPrimitives.Action
     ref={ref}
     className={cn(
-      'group-[.destructive]:hover:border-red-900/30 group-[.destructive]:hover:bg-red-900 group-[.destructive]:focus:ring-red-900 inline-flex h-8 shrink-0 items-center justify-center rounded-md border border-zinc-800 bg-transparent px-3 text-sm font-medium transition-colors hover:bg-zinc-800 focus:outline-none focus:ring-1 focus:ring-zinc-300  disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-zinc-800/40 group-[.destructive]:hover:text-zinc-50',
+      'inline-flex h-8 shrink-0 items-center justify-center rounded-md border border-zinc-800 bg-transparent px-3 text-sm font-medium transition-colors hover:bg-zinc-800 focus:outline-none focus:ring-1 focus:ring-zinc-300 disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-zinc-800/40  group-[.destructive]:hover:border-red-900/30 group-[.destructive]:hover:bg-red-900 group-[.destructive]:hover:text-zinc-50 group-[.destructive]:focus:ring-red-900',
       className
     )}
     {...props}
@@ -73,7 +73,7 @@ const ToastClose = React.forwardRef<
   <ToastPrimitives.Close
     ref={ref}
     className={cn(
-      'group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600 absolute right-1 top-1 rounded-md p-1  text-zinc-50/50 opacity-0 transition-opacity hover:text-zinc-50 focus:opacity-100 focus:outline-none focus:ring-1 group-hover:opacity-100',
+      'absolute right-1 top-1 rounded-md p-1 text-zinc-50/50 opacity-0 transition-opacity hover:text-zinc-50  focus:opacity-100 focus:outline-none focus:ring-1 group-hover:opacity-100 group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600',
       className
     )}
     toast-close=""
