@@ -1,6 +1,8 @@
+'use client';
+
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { FeaturedProject } from '../../FeaturedProject';
-import { StyledFeaturedProjects } from './styles';
 
 type Projects = {
   year: string;
@@ -66,15 +68,11 @@ export const FeaturedProjects = ({ featured }: FeaturedProjectsProps) => {
   ];
 
   return (
-    <StyledFeaturedProjects>
+    <motion.div className="-mb-5 mt-2.5 flex flex-col flex-wrap md:flex-row">
       {projects
-        .map(item => {
-          return item.projects.filter(project =>
-            featured.includes(project.title)
-          );
-        })
-        .filter(item => item.length > 0 && item)
-        .flat()
+        .flatMap(item =>
+          item.projects.filter(project => featured.includes(project.title))
+        )
         .map((item, index) => (
           <FeaturedProject
             key={index}
@@ -83,6 +81,6 @@ export const FeaturedProjects = ({ featured }: FeaturedProjectsProps) => {
             isHovered={item.title === isHovered}
           />
         ))}
-    </StyledFeaturedProjects>
+    </motion.div>
   );
 };

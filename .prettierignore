@@ -1,3 +1,6 @@
 .next
 .vercel
 node_modules
+
+# bugged fsr
+tsconfig.json

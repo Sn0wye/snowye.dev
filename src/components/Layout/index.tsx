@@ -1,15 +1,16 @@
+'use client';
+
 import { type PropsWithChildren } from 'react';
 import { Footer } from '../Footer';
 import { Navbar } from '../Navbar';
-import { Wrapper } from './style';
 
 export const Layout = ({ children }: PropsWithChildren) => {
   return (
-    <Wrapper>
+    <div className="relative z-0 flex min-h-screen flex-col">
       <Navbar />
       {children}
       <Footer />
       {/* <StarCanvas /> */}
-    </Wrapper>
+    </div>
   );
 };

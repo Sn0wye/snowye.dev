@@ -1,41 +1,59 @@
+'use client';
+
 import { useEffect, useState } from 'react';
-import { useKBar } from 'kbar';
-import { Button } from '../styled/Button';
+import { useCommandPalette } from '../command-palette';
+import { Kbd } from '../kbd';
 
 export function OpenCommandPalette() {
-  const { query } = useKBar();
-  const [mounted, setMounted] = useState(false);
+  const { toggle } = useCommandPalette();
+  const [isMounted, setIsMounted] = useState(false);
 
-  // This is a hack to make sure the command palette is mounted on render.
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (mounted) {
-    const isMac = /(Mac)/i.test(navigator.userAgent);
-    const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
-
-    if (isMobile) {
-      return (
-        <Button type="button" onClick={query.toggle}>
-          Tap to start →
-        </Button>
-      );
+    if (!isMounted) {
+      setIsMounted(true);
+      return;
     }
+  }, [isMounted]);
+
+  const isMac = isMounted ? /(Mac)/i.test(navigator.userAgent) : false;
+  const isMobile = isMounted
+    ? /iPhone|iPad|Android/i.test(navigator.userAgent)
+    : false;
+
+  const getContent = () => {
+    if (isMobile) {
+      return 'Tap to start';
+    }
+
     if (isMac) {
       return (
-        <Button type="button" onClick={query.toggle}>
-          Press <kbd>⌘</kbd> <kbd>K</kbd> to start →
-        </Button>
+        <>
+          Press <Kbd size="sm">⌘</Kbd> <Kbd size="sm">K</Kbd> to start
+        </>
       );
     }
 
     //Common cases (Windows, Linux)
     return (
-      <Button type="button" onClick={query.toggle}>
-        Press <kbd>ctrl</kbd> <kbd>K</kbd> to start →
-      </Button>
+      <>
+        Press <Kbd size="sm">ctrl</Kbd> <Kbd size="sm">K</Kbd> to start
+      </>
     );
+  };
+
+  const content = getContent();
+
+  if (!isMounted) {
+    return null;
   }
-  return null;
+
+  return (
+    <button
+      className="flex cursor-pointer items-center justify-center gap-1.5 rounded-lg bg-transparent px-3 py-2 font-semibold leading-6 text-primary transition-colors ease-in-out hover:bg-hover"
+      type="button"
+      onClick={toggle}
+    >
+      {content}
+    </button>
+  );
 }

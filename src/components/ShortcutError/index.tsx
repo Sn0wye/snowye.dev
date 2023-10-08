@@ -1,30 +1,46 @@
+'use client';
+
 import { useEffect, useState } from 'react';
-import { Button } from '../styled/Button';
+import { Kbd } from '../kbd';
 
 export const ShortcutError = () => {
-  const [mounted, setMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (mounted) {
-    const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
-
-    if (isMobile) {
-      return (
-        <Button as="a" href="/">
-          Tap to go home →
-        </Button>
-      );
+    if (!isMounted) {
+      setIsMounted(true);
+      return;
     }
+  }, [isMounted]);
 
+  const isMobile = isMounted
+    ? /iPhone|iPad|Android/i.test(navigator.userAgent)
+    : false;
+
+  if (isMobile) {
     return (
-      <Button as="a" href="/">
-        Press <kbd>G</kbd> <kbd>H</kbd> to go home →
-      </Button>
+      <a
+        className="cursor-pointer rounded-lg border-0 bg-transparent px-3 py-2 font-semibold leading-6 text-primary transition-colors ease-in-out hover:bg-hover"
+        href="/"
+      >
+        Tap to go home →
+      </a>
     );
   }
 
-  return null;
+  return (
+    <a
+      className="flex cursor-pointer items-center justify-center rounded-lg border-0 bg-transparent px-3 py-2 font-semibold leading-6 text-primary transition-colors ease-in-out hover:bg-hover"
+      href="/"
+    >
+      Press{' '}
+      <Kbd size="sm" className="mx-1">
+        G
+      </Kbd>{' '}
+      <Kbd size="sm" className="mr-1">
+        H
+      </Kbd>{' '}
+      to go home →
+    </a>
+  );
 };
