@@ -1,13 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 'use client';
 
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  type ReactElement,
-  type ReactNode
-} from 'react';
+import React, { useEffect, useRef, useState, type ReactElement } from 'react';
 import { useRouter } from 'next/navigation';
 import { Command } from 'cmdk';
 import Lottie, {
@@ -305,12 +299,14 @@ function Item({
   onSelect = () => {}
 }: {
   children: React.ReactNode;
-  shortcut?: string | ReactNode;
+  shortcut?: string;
   onSelect?: (value: string) => void;
   icon: ReactElement<LottieComponentProps> | ReactElement;
 }) {
   const itemRef = useRef<HTMLDivElement | null>(null);
   const [selected, setSelected] = useState<boolean>(false);
+
+  console.log('item rendered');
 
   useEffect(() => {
     if (!itemRef?.current) return;
@@ -336,7 +332,7 @@ function Item({
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [shortcut, onSelect]);
 
   useEffect(() => {
     if (selected) {
