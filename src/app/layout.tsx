@@ -2,9 +2,9 @@ import { type Metadata } from 'next';
 // eslint-disable-next-line camelcase
 import { Fira_Code } from 'next/font/google';
 import localFont from 'next/font/local';
-import { CommandBar } from '@/components/CommandBar';
 import { cn } from '@/lib/cn';
 import '../styles/globals.css';
+import { CommandPalette } from '@/components/command-palette';
 import { Toaster } from '@/components/Toast';
 
 const fontSans = localFont({
@@ -38,7 +38,7 @@ const fontMono = Fira_Code({
   subsets: ['latin'],
   variable: '--font-mono',
   display: 'swap',
-  weight: '500' // TODO: maybe change to variable, we'll see
+  weight: '500'
 });
 
 const fontHeading = localFont({
@@ -100,7 +100,9 @@ export default function RootLayout({
           fontHeading.variable
         )}
       >
-        <CommandBar>{children}</CommandBar>
+        {children}
+        {/* <CommandBar>{children}</CommandBar> */}
+        <CommandPalette />
         <Toaster />
       </body>
     </html>

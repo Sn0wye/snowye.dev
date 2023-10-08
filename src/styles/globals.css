@@ -24,10 +24,6 @@
     @apply rounded-lg border-8 border-solid border-primary bg-primary;
   }
 
-  kbd {
-    @apply rounded bg-secondary px-1.5 py-px text-background transition-[background] duration-200 ease-in-out;
-  }
-
   code {
     @apply rounded-lg bg-[#151417] font-mono text-[15px] text-primary;
   }

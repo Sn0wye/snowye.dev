@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { useKBar } from 'kbar';
+// import { useKBar } from 'kbar';
 import { Command, Snowflake } from 'lucide-react';
 import { cn } from '@/lib/cn';
 
@@ -13,7 +13,7 @@ export const pages = ['about', 'projects', 'contact'] as const;
 export function Navbar() {
   const pathname = usePathname();
   const [hovered, setHovered] = useState('');
-  const { query } = useKBar();
+  // const { query } = useKBar();
 
   return (
     <header className="absolute top-0 z-30 mt-3 flex min-h-[3.75rem] w-full flex-wrap items-center text-xs text-white md:mt-0">
@@ -71,7 +71,7 @@ export function Navbar() {
           type="button"
           aria-label="Open Command Palette"
           className="flex cursor-pointer items-center justify-center rounded-lg bg-transparent p-2 transition-colors duration-200 ease-in-out hover:bg-hover"
-          onClick={query.toggle}
+          // onClick={query.toggle}
         >
           <Command className="h-6 w-6" />
         </button>
