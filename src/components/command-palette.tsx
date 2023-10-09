@@ -38,6 +38,7 @@ export const useCommandPalette = create<CommandPaletteState>(set => ({
   toggle: () => set(state => ({ isOpen: !state.isOpen }))
 }));
 
+// TODO: add global listener for shortcuts
 export function CommandPalette() {
   const ref = React.useRef<HTMLDivElement | null>(null);
   const [inputValue, setInputValue] = React.useState('');
