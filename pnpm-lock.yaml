@@ -28,7 +28,7 @@ dependencies:
     version: 0.0.7
   '@react-three/drei':
     specifier: ^9.78.1
-    version: 9.78.1(@react-three/fiber@8.13.4)(@types/three@0.156.0)(react-dom@18.2.0)(react@18.2.0)(three@0.157.0)
+    version: 9.78.1(@react-three/fiber@8.13.4)(@types/three@0.157.0)(react-dom@18.2.0)(react@18.2.0)(three@0.157.0)
   '@react-three/fiber':
     specifier: ^8.13.4
     version: 8.13.4(react-dom@18.2.0)(react@18.2.0)(three@0.157.0)
@@ -125,8 +125,8 @@ devDependencies:
     specifier: 18.2.12
     version: 18.2.12
   '@types/three':
-    specifier: ^0.156.0
-    version: 0.156.0
+    specifier: ^0.157.0
+    version: 0.157.0
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.0.0
     version: 6.0.0(@typescript-eslint/parser@6.0.0)(eslint@8.51.0)(typescript@5.2.2)
@@ -1477,7 +1477,7 @@ packages:
     resolution: {integrity: sha512-POu8Mk0hIU3lRXB3bGIGe4VHIwwDsQyoD1F394OK7STTiX9w4dG3cTLljjYswkQN+hDSHRrj4O36kuVa7KPU8Q==}
     dev: false
 
-  /@react-three/drei@9.78.1(@react-three/fiber@8.13.4)(@types/three@0.156.0)(react-dom@18.2.0)(react@18.2.0)(three@0.157.0):
+  /@react-three/drei@9.78.1(@react-three/fiber@8.13.4)(@types/three@0.157.0)(react-dom@18.2.0)(react@18.2.0)(three@0.157.0):
     resolution: {integrity: sha512-Q7BYEt5G5pLxdNbI14Zv/nfxEAS8sYuQvIa+xDvspMQB1x6/+ULZavLoOQ5OtpJ4+n/yxoIk3XZ5l3j0gvB0cg==}
     peerDependencies:
       '@react-three/fiber': '>=8.0'
@@ -1499,7 +1499,7 @@ packages:
       lodash.clamp: 4.0.3
       lodash.omit: 4.5.0
       lodash.pick: 4.4.0
-      maath: 0.6.0(@types/three@0.156.0)(three@0.157.0)
+      maath: 0.6.0(@types/three@0.157.0)(three@0.157.0)
       meshline: 3.1.6(three@0.157.0)
       react: 18.2.0
       react-composer: 5.0.3(react@18.2.0)
@@ -1676,8 +1676,8 @@ packages:
   /@types/stats.js@0.17.0:
     resolution: {integrity: sha512-9w+a7bR8PeB0dCT/HBULU2fMqf6BAzvKbxFboYhmDtDkKPiyXYbjoe2auwsXlEFI7CFNMF1dCv3dFH5Poy9R1w==}
 
-  /@types/three@0.156.0:
-    resolution: {integrity: sha512-733bXDSRdlrxqOmQuOmfC1UBRuJ2pREPk8sWnx9MtIJEVDQMx8U0NQO5MVVaOrjzDPyLI+cFPim2X/ss9v0+LQ==}
+  /@types/three@0.157.0:
+    resolution: {integrity: sha512-+BG+wqEyH506w23tKpwXnCTJb/MeyeQ/wcFlSFQ26Z9hS5Qde2vc7o+aqd+z98b38PVGuHa5GYxg/3CY7qrxFw==}
     dependencies:
       '@types/stats.js': 0.17.0
       '@types/webxr': 0.5.2
@@ -4060,13 +4060,13 @@ packages:
       react: 18.2.0
     dev: false
 
-  /maath@0.6.0(@types/three@0.156.0)(three@0.157.0):
+  /maath@0.6.0(@types/three@0.157.0)(three@0.157.0):
     resolution: {integrity: sha512-dSb2xQuP7vDnaYqfoKzlApeRcR2xtN8/f7WV/TMAkBC8552TwTLtOO0JTcSygkYMjNDPoo6V01jTw/aPi4JrMw==}
     peerDependencies:
       '@types/three': '>=0.144.0'
       three: '>=0.144.0'
     dependencies:
-      '@types/three': 0.156.0
+      '@types/three': 0.157.0
       three: 0.157.0
     dev: false
 
