@@ -1,6 +1,6 @@
 import { format, parseISO } from 'date-fns';
-import { jobs } from '../../../data/career';
-import { getDurationString } from '../../../utils/getDurationString';
+import { getDurationString } from '@/utils/getDurationString';
+import { jobs } from '@/data/career';
 
 export interface Job {
   jobTitle: string;

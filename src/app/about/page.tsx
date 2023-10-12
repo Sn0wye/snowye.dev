@@ -1,9 +1,9 @@
 import { type Metadata } from 'next';
 import { Base } from '@/components/Base';
-import { Intro } from '@/components/containers/About/Intro';
 import { stripHtml } from '@/utils/stripHtml';
 import { env } from '@/env.mjs';
 import { about } from '@/locales/en/pages/about';
+import { Intro } from './intro';
 
 export const metadata = {
   metadataBase:
