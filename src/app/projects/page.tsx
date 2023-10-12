@@ -1,11 +1,11 @@
 import { type Metadata } from 'next';
-import { Base } from '@/components/Base';
+import { Base } from '@/components/base';
 import { getTotalProjects } from '@/utils/getTotalProjects';
 import { stripHtml } from '@/utils/stripHtml';
-import { AllProjects } from '@/app/projects/all-projects';
-import { FeaturedProjects } from '@/app/projects/featured-projects';
 import { projects as projectsData } from '@/data/projects';
 import { projects } from '@/locales/en/pages/projects';
+import { AllProjects } from './all-projects';
+import { FeaturedProjects } from './featured-projects';
 
 const totalProjects = getTotalProjects(projectsData);
 const description = (

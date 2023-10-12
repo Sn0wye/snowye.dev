@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Kbd } from '../kbd';
+import { Kbd } from './kbd';
 
 export const ShortcutError = () => {
   const [isMounted, setIsMounted] = useState(false);

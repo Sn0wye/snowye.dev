@@ -12,7 +12,7 @@ import {
 } from '@/components/form';
 import { Input } from '@/components/input';
 import { Textarea } from '@/components/textarea';
-import { useToast } from '@/components/Toast';
+import { useToast } from '@/components/use-toast';
 import { contact } from '@/locales/en/pages/contact';
 import { emailSchema, type EmailSchema } from '@/schemas/emails';
 

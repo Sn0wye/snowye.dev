@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useCommandPalette } from '../command-palette';
-import { Kbd } from '../kbd';
+import { useCommandPalette } from './command-palette';
+import { Kbd } from './kbd';
 
 export function OpenCommandPalette() {
   const { toggle } = useCommandPalette();

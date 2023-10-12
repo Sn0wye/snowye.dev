@@ -24,7 +24,7 @@ import {
   Command as CommandRoot
 } from './command';
 import { Dialog, DialogContent } from './dialog';
-import { toast } from './Toast';
+import { toast } from './use-toast';
 
 type CommandPaletteState = {
   isOpen: boolean;

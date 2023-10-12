@@ -1,7 +1,7 @@
 'use client';
 
-import { Footer } from '../Footer';
-import { Navbar } from '../Navbar';
+import { Footer } from './footer';
+import { Navbar } from './navbar';
 
 type Color = 'purple' | 'cyan' | 'yellow' | 'pink' | 'red' | 'orange' | 'green';
 

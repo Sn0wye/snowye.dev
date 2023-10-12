@@ -1,9 +1,9 @@
 'use client';
 
 import Lottie from 'lottie-react';
-import { ShortcutError } from '@/components/ShortcutError';
+import { ShortcutError } from '@/components/shortcut-error';
 import lottieAnimation from '../../public/static/icons/404.json';
-import { Layout } from '../components/Layout';
+import { Layout } from '../components/layout';
 
 export default function NotFound() {
   return (

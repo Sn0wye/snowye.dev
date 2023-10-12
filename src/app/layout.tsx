@@ -5,7 +5,7 @@ import localFont from 'next/font/local';
 import { cn } from '@/lib/cn';
 import '../styles/globals.css';
 import { CommandPalette } from '@/components/command-palette';
-import { Toaster } from '@/components/Toast';
+import { Toaster } from '@/components/toaster';
 
 const fontSans = localFont({
   src: [

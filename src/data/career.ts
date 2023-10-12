@@ -1,4 +1,11 @@
-import type { Job } from '../components/containers/About/Career';
+export interface Job {
+  jobTitle: string;
+  company: string;
+  companyUrl: string;
+  startDate: string;
+  endDate?: string;
+  location: string;
+}
 
 export const jobs: Job[] = [
   // {

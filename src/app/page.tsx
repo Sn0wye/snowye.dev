@@ -1,6 +1,6 @@
 import { type Metadata } from 'next';
-import { Layout } from '@/components/Layout';
-import { OpenCommandPalette } from '@/components/OpenCommandPalette';
+import { Layout } from '@/components/layout';
+import { OpenCommandPalette } from '@/components/open-command-palette';
 import { home } from '@/locales/en/pages/home';
 import { Typewriter } from './typewriter';
 

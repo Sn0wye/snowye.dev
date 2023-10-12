@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Command, Snowflake } from 'lucide-react';
 import { cn } from '@/lib/cn';
-import { useCommandPalette } from '../command-palette';
+import { useCommandPalette } from './command-palette';
 
 export const pages = ['about', 'projects', 'contact'] as const;
 

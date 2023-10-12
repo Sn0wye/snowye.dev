@@ -2,15 +2,6 @@ import { format, parseISO } from 'date-fns';
 import { getDurationString } from '@/utils/getDurationString';
 import { jobs } from '@/data/career';
 
-export interface Job {
-  jobTitle: string;
-  company: string;
-  companyUrl: string;
-  startDate: string;
-  endDate?: string;
-  location: string;
-}
-
 export const Career = () => {
   return (
     <>

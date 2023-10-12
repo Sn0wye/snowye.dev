@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FeaturedProject } from '@/components/FeaturedProject';
+import { FeaturedProject } from '@/components/featured-project';
 
 type Projects = {
   year: string;
