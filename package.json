@@ -20,7 +20,7 @@
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.4",
-    "@react-email/components": "^0.0.7",
+    "@react-email/components": "^0.0.9",
     "@react-three/drei": "^9.78.1",
     "@react-three/fiber": "^8.13.4",
     "@t3-oss/env-nextjs": "^0.7.0",
