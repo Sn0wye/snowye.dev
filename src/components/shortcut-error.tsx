@@ -1,21 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { Kbd } from './kbd';
 
-export const ShortcutError = () => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    if (!isMounted) {
-      setIsMounted(true);
-      return;
-    }
-  }, [isMounted]);
-
-  const isMobile = isMounted
-    ? /iPhone|iPad|Android/i.test(navigator.userAgent)
-    : false;
+export default function ShortcutError () {
+  const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
 
   if (isMobile) {
     return (

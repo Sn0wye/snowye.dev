@@ -1,24 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useCommandPalette } from './command-palette';
 import { Kbd } from './kbd';
 
-export function OpenCommandPalette() {
+export default function OpenCommandPalette() {
   const { toggle } = useCommandPalette();
-  const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => {
-    if (!isMounted) {
-      setIsMounted(true);
-      return;
-    }
-  }, [isMounted]);
-
-  const isMac = isMounted ? /(Mac)/i.test(navigator.userAgent) : false;
-  const isMobile = isMounted
-    ? /iPhone|iPad|Android/i.test(navigator.userAgent)
-    : false;
+  const isMac =  /(Mac)/i.test(navigator.userAgent);
+  const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
 
   const getContent = () => {
     if (isMobile) {
@@ -42,10 +31,6 @@ export function OpenCommandPalette() {
   };
 
   const content = getContent();
-
-  if (!isMounted) {
-    return null;
-  }
 
   return (
     <button
