@@ -42,7 +42,7 @@
     "react-icons": "^4.10.1",
     "sharp": "^0.33.0",
     "tailwind-merge": "^1.14.0",
-    "three": "^0.159.0",
+    "three": "^0.160.0",
     "typewriter-effect": "^2.20.1",
     "zod": "^3.21.4",
     "zustand": "^4.4.3"
