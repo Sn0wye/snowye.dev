@@ -36,8 +36,8 @@ dependencies:
     specifier: ^0.7.0
     version: 0.7.0(typescript@5.3.3)(zod@3.21.4)
   '@upstash/ratelimit':
-    specifier: ^0.4.3
-    version: 0.4.3
+    specifier: ^1.0.0
+    version: 1.0.0
   '@vercel/kv':
     specifier: ^0.2.2
     version: 0.2.2
@@ -2069,8 +2069,8 @@ packages:
       - encoding
     dev: false
 
-  /@upstash/ratelimit@0.4.3:
-    resolution: {integrity: sha512-Dsp9Mw09Flg28JRklKgFiCXqr3bqv8bbG0kgpUYoHjcgPPolFFyaYOj/I2HExvYLZiogl77NUavBoNvMOK0zUQ==}
+  /@upstash/ratelimit@1.0.0:
+    resolution: {integrity: sha512-IUlc+UKuHJQqXGQi7E3UKV0CKfRZ0g6qeNnbSve940k3xLoM+X3H45MrSwDaH7meMWemztLs0Q4yjkd3ItddCw==}
     dependencies:
       '@upstash/core-analytics': 0.0.6
     transitivePeerDependencies:
