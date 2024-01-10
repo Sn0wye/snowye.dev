@@ -81,8 +81,8 @@ dependencies:
     specifier: ^7.45.1
     version: 7.45.1(react@18.2.0)
   react-icons:
-    specifier: ^4.10.1
-    version: 4.10.1(react@18.2.0)
+    specifier: ^5.0.0
+    version: 5.0.0(react@18.2.0)
   sharp:
     specifier: ^0.33.0
     version: 0.33.0
@@ -4763,8 +4763,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-icons@4.10.1(react@18.2.0):
-    resolution: {integrity: sha512-/ngzDP/77tlCfqthiiGNZeYFACw85fUjZtLbedmJ5DTlNDIwETxhwBzdOJ21zj4iJdvc0J3y7yOsX3PpxAJzrw==}
+  /react-icons@5.0.0(react@18.2.0):
+    resolution: {integrity: sha512-8gBBjYRrO14BU9RuMEVptG5aB1gwNPAAgsKOuPggx2hg332pTky/r8FidEJW95cL6IG2mYCEHaYuAxw74wLefw==}
     peerDependencies:
       react: '*'
     dependencies:
