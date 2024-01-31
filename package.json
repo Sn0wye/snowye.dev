@@ -41,7 +41,7 @@
     "react-hook-form": "^7.45.1",
     "sharp": "^0.33.0",
     "tailwind-merge": "^2.0.0",
-    "three": "^0.160.0",
+    "three": "^0.161.0",
     "typewriter-effect": "^2.20.1",
     "zod": "^3.21.4",
     "zustand": "^4.4.3"
