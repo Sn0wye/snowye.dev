@@ -2,7 +2,7 @@
 
 import { Kbd } from './kbd';
 
-export default function ShortcutError () {
+export default function ShortcutError() {
   const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
 
   if (isMobile) {
@@ -31,4 +31,4 @@ export default function ShortcutError () {
       to go home →
     </a>
   );
-};
+}

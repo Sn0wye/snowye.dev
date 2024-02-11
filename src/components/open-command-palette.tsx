@@ -6,7 +6,7 @@ import { Kbd } from './kbd';
 export default function OpenCommandPalette() {
   const { toggle } = useCommandPalette();
 
-  const isMac =  /(Mac)/i.test(navigator.userAgent);
+  const isMac = /(Mac)/i.test(navigator.userAgent);
   const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
 
   const getContent = () => {

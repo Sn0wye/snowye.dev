@@ -1,14 +1,13 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import Lottie from 'lottie-react';
 import lottieAnimation from '../../public/static/icons/404.json';
 import { Layout } from '../components/layout';
-import dynamic from 'next/dynamic';
 
-const ShortcutError = dynamic(
-  () => import('@/components/shortcut-error'),
-  { ssr: false }
-);
+const ShortcutError = dynamic(() => import('@/components/shortcut-error'), {
+  ssr: false
+});
 
 export default function NotFound() {
   return (

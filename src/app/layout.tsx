@@ -1,12 +1,13 @@
-import { type Viewport, type Metadata } from 'next';
+import { type Metadata, type Viewport } from 'next';
 // eslint-disable-next-line camelcase
 import { Fira_Code } from 'next/font/google';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/cn';
 import '../styles/globals.css';
 import { CommandPalette } from '@/components/command-palette';
-import { Toaster } from '@/components/toaster';
 import { SparklesCore } from '@/components/sparkles';
+import { Toaster } from '@/components/toaster';
+import { env } from '@/env.mjs';
 
 const fontSans = localFont({
   src: [
@@ -83,7 +84,7 @@ export const metadata = {
 
 export const viewport = {
   themeColor: '#08070b',
-  colorScheme: 'dark',
+  colorScheme: 'dark'
 } satisfies Viewport;
 
 export default function RootLayout({
@@ -92,25 +93,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-US">
+    <html lang="en">
       <body
+        suppressHydrationWarning
         className={cn(
           fontSans.variable,
           fontMono.variable,
           fontHeading.variable
         )}
       >
-        <div className="w-full absolute inset-0 h-screen">
-          <SparklesCore
-            id="tsparticlesfullpage"
-            background="transparent"
-            minSize={0.6}
-            maxSize={1.4}
-            particleDensity={100}
-            className="w-full h-full"
-            particleColor="#FFFFFF"
-          />
-        </div>
+        {/* {env.NODE_ENV === 'production' && (
+          <div className="w-full absolute inset-0 h-screen">
+            <SparklesCore
+              id="tsparticlesfullpage"
+              background="transparent"
+              minSize={0.6}
+              maxSize={1.4}
+              particleDensity={100}
+              className="w-full h-full"
+              particleColor="#FFFFFF"
+            />
+          </div>
+        )} */}
         {children}
         <CommandPalette />
         <Toaster />
