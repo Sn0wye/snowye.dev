@@ -102,19 +102,19 @@ export default function RootLayout({
           fontHeading.variable
         )}
       >
-        {/* {env.NODE_ENV === 'production' && (
-          <div className="w-full absolute inset-0 h-screen">
+        {env.NODE_ENV === 'production' && (
+          <div className="absolute inset-0 h-screen w-full">
             <SparklesCore
               id="tsparticlesfullpage"
               background="transparent"
               minSize={0.6}
               maxSize={1.4}
               particleDensity={100}
-              className="w-full h-full"
+              className="h-full w-full"
               particleColor="#FFFFFF"
             />
           </div>
-        )} */}
+        )}
         {children}
         <CommandPalette />
         <Toaster />
