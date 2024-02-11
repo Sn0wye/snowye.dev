@@ -13,7 +13,7 @@ export const Typewriter = ({ strings }: TypewriterProps) => {
         strings,
         autoStart: true,
         deleteSpeed: 80,
-        delay: 60
+        delay: 40
       }}
     />
   );

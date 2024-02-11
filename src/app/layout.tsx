@@ -1,4 +1,4 @@
-import { type Metadata } from 'next';
+import { type Viewport, type Metadata } from 'next';
 // eslint-disable-next-line camelcase
 import { Fira_Code } from 'next/font/google';
 import localFont from 'next/font/local';
@@ -6,6 +6,7 @@ import { cn } from '@/lib/cn';
 import '../styles/globals.css';
 import { CommandPalette } from '@/components/command-palette';
 import { Toaster } from '@/components/toaster';
+import { SparklesCore } from '@/components/sparkles';
 
 const fontSans = localFont({
   src: [
@@ -55,6 +56,7 @@ const fontHeading = localFont({
 });
 
 export const metadata = {
+  metadataBase: new URL('https://snowye.dev'),
   title: 'Gabriel Trzimajewski',
   creator: 'Gabriel Trzimajewski',
   alternates: {
@@ -64,20 +66,13 @@ export const metadata = {
       // 'pt': 'https://snowye.dev/pt'
     }
   },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@snowyedev',
-    creator: '@snowyedev'
-  },
   authors: [
     {
       name: 'Gabriel Trzimajewski',
       url: 'https://snowye.dev'
     }
   ],
-  themeColor: '#08070b',
-  colorScheme: 'dark',
-  keywords: ['Gabriel Trzimajewski', 'Snowye', 'snowyedotdev', 'snowye.dev'],
+  keywords: ['Gabriel', 'Trzimajewski', 'Snowye', 'snowyedotdev', 'snowye.dev'],
   openGraph: {
     type: 'website',
     title: 'Gabriel Trzimajewski',
@@ -85,6 +80,11 @@ export const metadata = {
     url: 'https://snowye.dev'
   }
 } satisfies Metadata;
+
+export const viewport = {
+  themeColor: '#08070b',
+  colorScheme: 'dark',
+} satisfies Viewport;
 
 export default function RootLayout({
   children
@@ -100,8 +100,18 @@ export default function RootLayout({
           fontHeading.variable
         )}
       >
+        <div className="w-full absolute inset-0 h-screen">
+          <SparklesCore
+            id="tsparticlesfullpage"
+            background="transparent"
+            minSize={0.6}
+            maxSize={1.4}
+            particleDensity={100}
+            className="w-full h-full"
+            particleColor="#FFFFFF"
+          />
+        </div>
         {children}
-        {/* <CommandBar>{children}</CommandBar> */}
         <CommandPalette />
         <Toaster />
       </body>
