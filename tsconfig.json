@@ -36,7 +36,7 @@
     "**/*.tsx",
     ".eslintrc.cjs",
     "next.config.mjs",
-    "prettier.config.cjs",
+    "prettier.config.mjs",
     "./src/env.mjs",
     ".next/types/**/*.ts",
     "tailwind.config.ts"

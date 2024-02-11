@@ -1,13 +1,13 @@
 import { type Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { Layout } from '@/components/layout';
 import { home } from '@/locales/en/pages/home';
 import { Typewriter } from './typewriter';
-import dynamic from 'next/dynamic';
 
 const OpenCommandPalette = dynamic(
   () => import('@/components/open-command-palette'),
   { ssr: false }
-)
+);
 
 export const metadata = {
   title: home.title,

@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unknown-property */
 'use client';
 
 import React, { useEffect, useRef, useState, type ReactElement } from 'react';
@@ -8,7 +7,7 @@ import Lottie, {
   type LottieComponentProps,
   type LottieRefCurrentProps
 } from 'lottie-react';
-import { Github, Instagram, Linkedin } from 'lucide-react';
+import { useHotkeys } from 'react-hotkeys-hook';
 import { create } from 'zustand';
 import aboutIcon from '../../public/static/icons/about.json';
 import copyLinkIcon from '../../public/static/icons/copy-link.json';
@@ -24,6 +23,7 @@ import {
   Command as CommandRoot
 } from './command';
 import { Dialog, DialogContent } from './dialog';
+import { SocialIcon } from './social-icons';
 import { toast } from './use-toast';
 
 type CommandPaletteState = {
@@ -38,7 +38,6 @@ export const useCommandPalette = create<CommandPaletteState>(set => ({
   toggle: () => set(state => ({ isOpen: !state.isOpen }))
 }));
 
-// TODO: add global listener for shortcuts
 export function CommandPalette() {
   const ref = React.useRef<HTMLDivElement | null>(null);
   const [inputValue, setInputValue] = React.useState('');
@@ -48,17 +47,80 @@ export function CommandPalette() {
   const activePage = pages[pages.length - 1];
   const isHome = activePage === 'home';
 
-  React.useEffect(() => {
-    const globalKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault();
-        toggle();
-      }
-    };
+  const { push } = useRouter();
+  const navigate = (to: string) => {
+    if (window.location.pathname === to) {
+      return;
+    }
 
-    document.addEventListener('keydown', globalKeyDown);
-    return () => document.removeEventListener('keydown', globalKeyDown);
-  }, [toggle]);
+    push(to);
+    setIsOpen(false);
+  };
+
+  useHotkeys('mod+k', () => toggle());
+
+  // shortcut listeners
+  useHotkeys('g+h', () => navigate('/'), {
+    preventDefault: true
+  });
+  useHotkeys('g+a', () => navigate('/about'), {
+    preventDefault: true
+  });
+  useHotkeys('g+p', () => navigate('/projects'), {
+    preventDefault: true
+  });
+  useHotkeys(
+    'u',
+    async () => {
+      await navigator.clipboard.writeText(window.location.href);
+      toast({
+        title: 'Copied :D',
+        description: 'You can now share it with anyone.'
+      });
+    },
+    {
+      preventDefault: true
+    }
+  );
+  useHotkeys('e', () => navigate('/contact'), {
+    preventDefault: true
+  });
+  useHotkeys(
+    's',
+    () => {
+      window.open('https://github.com/Sn0wye/snowye.dev', '_blank');
+    },
+    {
+      preventDefault: true
+    }
+  );
+  useHotkeys(
+    'f+g',
+    () => {
+      window.open('https://github.com/Sn0wye/snowye.dev', '_blank');
+    },
+    {
+      preventDefault: true
+    }
+  );
+  useHotkeys(
+    'f+l',
+    () => {
+      window.open('https://linkedin.com/in/snowyedotdev', '_blank');
+    },
+    {
+      preventDefault: true
+    }
+  );
+  useHotkeys(
+    'f+i',
+    () => {
+      window.open('https://www.instagram.com/gabtrzimajewski', '_blank');
+    },
+    {
+      preventDefault: true
+    }
+  );
 
   const popPage = React.useCallback(() => {
     setPages(pages => {
@@ -259,7 +321,7 @@ function Home() {
       </CommandGroup>
       <CommandGroup heading="Follow">
         <Item
-          icon={<Github />}
+          icon={<SocialIcon.Github className="text-white" />}
           shortcut="F G"
           onSelect={() => {
             setIsOpen(false);
@@ -269,7 +331,7 @@ function Home() {
           Github
         </Item>
         <Item
-          icon={<Linkedin />}
+          icon={<SocialIcon.Linkedin className="text-white" />}
           shortcut="F L"
           onSelect={() => {
             setIsOpen(false);
@@ -279,7 +341,7 @@ function Home() {
           LinkedIn
         </Item>
         <Item
-          icon={<Instagram />}
+          icon={<SocialIcon.Instagram className="text-white" />}
           shortcut="F I"
           onSelect={() => {
             setIsOpen(false);
@@ -306,8 +368,6 @@ function Item({
 }) {
   const itemRef = useRef<HTMLDivElement | null>(null);
   const [selected, setSelected] = useState<boolean>(false);
-
-  console.log('item rendered');
 
   useEffect(() => {
     if (!itemRef?.current) return;
