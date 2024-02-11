@@ -1,8 +1,10 @@
 //@ts-check
 import { createEnv } from '@t3-oss/env-nextjs';
+import { vercel } from '@t3-oss/env-nextjs/presets';
 import { z } from 'zod';
 
 export const env = createEnv({
+  extends: [vercel],
   server: {
     NODE_ENV: z.enum(['development', 'test', 'production']),
     NODEMAILER_USER: z.string().min(1),
@@ -21,5 +23,6 @@ export const env = createEnv({
     KV_REST_API_TOKEN: process.env.KV_REST_API_TOKEN,
     KV_REST_API_URL: process.env.KV_REST_API_URL,
     KV_URL: process.env.KV_URL
-  }
+  },
+  skipValidation: !!process.env.CI
 });

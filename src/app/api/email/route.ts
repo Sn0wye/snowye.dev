@@ -4,7 +4,7 @@ import { Ratelimit } from '@upstash/ratelimit';
 import { kv } from '@vercel/kv';
 import nodemailer from 'nodemailer';
 import { EmailTemplate } from '@/email/EmailTemplate';
-import { env } from '@/env.mjs';
+import { env } from '@/env';
 import { emailSchema } from '@/schemas/emails';
 
 const ratelimit = new Ratelimit({

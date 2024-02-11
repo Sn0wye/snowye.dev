@@ -7,7 +7,7 @@ import '../styles/globals.css';
 import { CommandPalette } from '@/components/command-palette';
 import { SparklesCore } from '@/components/sparkles';
 import { Toaster } from '@/components/toaster';
-import { env } from '@/env.mjs';
+import { env } from '@/env';
 
 const fontSans = localFont({
   src: [

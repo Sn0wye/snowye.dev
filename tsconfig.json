@@ -13,7 +13,7 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -37,7 +37,7 @@
     ".eslintrc.cjs",
     "next.config.mjs",
     "prettier.config.mjs",
-    "./src/env.mjs",
+    "src/env.ts",
     ".next/types/**/*.ts",
     "tailwind.config.ts"
   ],

@@ -1,7 +1,7 @@
 import { type Metadata } from 'next';
 import { Base } from '@/components/base';
 import { stripHtml } from '@/utils/stripHtml';
-import { env } from '@/env.mjs';
+import { env } from '@/env';
 import { about } from '@/locales/en/pages/about';
 import { Intro } from './intro';
 

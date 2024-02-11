@@ -1,4 +1,8 @@
-!process.env.SKIP_ENV_VALIDATION && (await import('./src/env.mjs'));
+import createJiti from 'jiti';
+
+const jiti = createJiti(new URL(import.meta.url).pathname);
+
+jiti('./src/env.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
