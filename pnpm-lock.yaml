@@ -116,8 +116,8 @@ devDependencies:
     specifier: ^3.0.0
     version: 3.0.0(eslint@8.56.0)(typescript@5.3.3)
   '@types/node':
-    specifier: 20.11.18
-    version: 20.11.18
+    specifier: 20.11.19
+    version: 20.11.19
   '@types/nodemailer':
     specifier: ^6.4.14
     version: 6.4.14
@@ -1943,8 +1943,8 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
-  /@types/node@20.11.18:
-    resolution: {integrity: sha512-ABT5VWnnYneSBcNWYSCuR05M826RoMyMSGiFivXGx6ZUIsXb9vn4643IEwkg2zbEOSgAiSogtapN2fgc4mAPlw==}
+  /@types/node@20.11.19:
+    resolution: {integrity: sha512-7xMnVEcZFu0DikYjWOlRq7NTPETrm7teqUT2WkQjrTIkEgUyyGdWsj/Zg8bEJt5TNklzbPD1X3fqfsHw3SpapQ==}
     dependencies:
       undici-types: 5.26.5
     dev: true
@@ -1952,7 +1952,7 @@ packages:
   /@types/nodemailer@6.4.14:
     resolution: {integrity: sha512-fUWthHO9k9DSdPCSPRqcu6TWhYyxTBg382vlNIttSe9M7XfsT06y0f24KHXtbnijPGGRIcVvdKHTNikOI6qiHA==}
     dependencies:
-      '@types/node': 20.11.18
+      '@types/node': 20.11.19
     dev: true
 
   /@types/prop-types@15.7.11:
