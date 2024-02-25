@@ -37,7 +37,7 @@ dependencies:
     version: 3.0.0(@tsparticles/engine@3.2.2)(react-dom@18.2.0)(react@18.2.0)
   '@tsparticles/slim':
     specifier: ^3.2.1
-    version: 3.2.1
+    version: 3.2.2
   '@upstash/ratelimit':
     specifier: ^1.0.1
     version: 1.0.1
@@ -2402,17 +2402,16 @@ packages:
       zod: 3.22.4
     dev: false
 
-  /@tsparticles/basic@3.2.1:
-    resolution: {integrity: sha512-Hg7qg8bnIjgA+M5+eW49hmm6J2njXW0PfiefO91quujzbY6gKgysuO44j+VKs5lZubUS4m3WybyXuG2qvc0blg==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/basic@3.2.2:
+    resolution: {integrity: sha512-KhvW6JGpFlrjJeGPShutmUxXqHBZ/rAsxGchtt/DyDEcALt+5xom6WjGvPf3HTnOU8c9+z3HKGe23MtAgDgevg==}
     dependencies:
       '@tsparticles/engine': 3.2.2
-      '@tsparticles/move-base': 3.2.1
-      '@tsparticles/shape-circle': 3.2.1
-      '@tsparticles/updater-color': 3.2.1
-      '@tsparticles/updater-opacity': 3.2.1
-      '@tsparticles/updater-out-modes': 3.2.1
-      '@tsparticles/updater-size': 3.2.1
+      '@tsparticles/move-base': 3.2.2
+      '@tsparticles/shape-circle': 3.2.2
+      '@tsparticles/updater-color': 3.2.2
+      '@tsparticles/updater-opacity': 3.2.2
+      '@tsparticles/updater-out-modes': 3.2.2
+      '@tsparticles/updater-size': 3.2.2
     dev: false
 
   /@tsparticles/engine@3.2.2:
@@ -2420,114 +2419,98 @@ packages:
     requiresBuild: true
     dev: false
 
-  /@tsparticles/interaction-external-attract@3.2.1:
-    resolution: {integrity: sha512-u3Nc8ZRqaZeV6aOG44lrbjLyyGsDmL/k5YUHpynf8B1h2P7Rh4CUlz1FfFkbyFEe/bxoopTMl3IAGPfH+ZpzYA==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/interaction-external-attract@3.2.2:
+    resolution: {integrity: sha512-7avlCM6p8lWrgunF2NMJJf0W47zD4N5dHJfTlWhOCYdYZ/kge399kYucfo9ikztifugY0eLrYgqrHA3A8TpMYA==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/interaction-external-bounce@3.2.1:
-    resolution: {integrity: sha512-quDVwQpaLcVYFHdPYSM3vEAqRrHPMDsfjpzvtLhAuXVvGX0FW4HLBFF1uuIQg6UTDKaVZSPcw6Y8A8zbUItRmw==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/interaction-external-bounce@3.2.2:
+    resolution: {integrity: sha512-VR9X/Yg8DKVzfgN8UNuzaPJjreqG4wFnIOd1F7DTcDYDvBd4nQTcN2KqeWXt/ZiAHLf2/BYsj8CGmJ4gOE/GTA==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/interaction-external-bubble@3.2.1:
-    resolution: {integrity: sha512-Z5/clQcfQF8ldk1QjXl6cRi/5fH92uL6Ev/W6zskY6L1RG3Y8jisHLU44tWFwXleONu/NB+IDFn39Ei6uNjmzQ==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/interaction-external-bubble@3.2.2:
+    resolution: {integrity: sha512-eOLNavMk9kV2eqvTfmudIQ+cHOIpAto9X0LqdPnKi5EFlRImRVcmU0OvW1nJAV/VX6w7JImkENr0T2CP4cXiAA==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/interaction-external-connect@3.2.1:
-    resolution: {integrity: sha512-tY//lUEcu3ZbKFvDc1bUhS9r2LdiwN4jsBU0o4JuGKBWPH/Cd0P9sUVIthEsoxf1lY/6xCV5AgBP8SA+o3Cj2Q==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/interaction-external-connect@3.2.2:
+    resolution: {integrity: sha512-FdCtJsp9CbWYZlSaPAzPKz8E6NMnYQ830Gpiq+PuMZmeECfeObqy61IpBrmlociGLxiDc/mAMUUtdUAf9289Qg==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/interaction-external-grab@3.2.1:
-    resolution: {integrity: sha512-mau9wixUqy+mOiYGMofBUiQ9gsSk7pMkyHKtOZVrE6Lvi0JvJrIAjSndjsUKNt5GmB+kKJPTlPCaN5mpBY/iUQ==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/interaction-external-grab@3.2.2:
+    resolution: {integrity: sha512-xWDnbab9Bb4IPiuZaEKxZCelnNwKlDHWrKgpiVm7Y7XBcP94LUP8EdTSVYzB5RCHtvNxa31welaX/7kNRMUjOw==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/interaction-external-pause@3.2.1:
-    resolution: {integrity: sha512-vV5sAls6JyjueheYqeZsESVKhAQCl0Yz5h9yqFIBSllJ8sppVXqtMx/XcGyJValp2R0ptiI0jULAqTBtHqcQBg==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/interaction-external-pause@3.2.2:
+    resolution: {integrity: sha512-gmLoh+dliTZjh4DZL6FSCcMtQPCg6VRJNnpUNdWEdyrPLPOqeIZ+WrTjDq6vwGpQM6FXGWXmEimw00qloND9yg==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/interaction-external-push@3.2.1:
-    resolution: {integrity: sha512-BchfXv/ltD2oec9xz8mg3H8k7N/oYxNb2gTy8zqkdcnXLZzBlST8ApUx+PMvBh2pZ8LaqcGqVw1GK6/2PjL3zA==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/interaction-external-push@3.2.2:
+    resolution: {integrity: sha512-MK0HMAM3VVWcis/e9aSXNkOzc+X++840BWWmNP7CTEJZQUwg+4nq/k4IFX1Uil7AYdb4k49wNyfuyCE/Hqy4gA==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/interaction-external-remove@3.2.1:
-    resolution: {integrity: sha512-NGKPhshUdh5ttatM448k8PxbdgWbAM2sVqpnMyEJQSXoYfDrheuKPg27l5+G+IqmmTnTqorWXmc6cxN+1Es2hg==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/interaction-external-remove@3.2.2:
+    resolution: {integrity: sha512-zYp4aLeoL+Xi24TpVtQUuFfpLXkrHpAvBVAT86YNgaTd7/ei8XlvHcdAkvDaOZc1xrdU10qpNsMnowdJ2/wjTg==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/interaction-external-repulse@3.2.1:
-    resolution: {integrity: sha512-HxGzjQuFpfTykHG0w5JPY3jpFNSr9wW4i8d9XHLjzlY/LHpDoRYfarAtpXtwUq0DyLFogZVkhbzo8+euP11PUA==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/interaction-external-repulse@3.2.2:
+    resolution: {integrity: sha512-5UD6JrwR0GIVd2u9PMtYw4vwiaXD+E7NkaIwfQA6NtZq3ZHlgNvzydjRwDaPNnacSkvWmVF3ZWktgw+H6u76YQ==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/interaction-external-slow@3.2.1:
-    resolution: {integrity: sha512-Fq3EyozDqwKfRZnnVixO81kxKHlR+N8HtBD2Ga2lJt4ZfncnUTRlyMjX49pL6Cj293o1RAboH1xfR9kyNDWTOQ==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/interaction-external-slow@3.2.2:
+    resolution: {integrity: sha512-IqHcDtn9iaOIn8j3rtewlLi6PYDVLKQx81RPQiR00rTqPAkB81IFD/WI+gF9W/GdzLol+tWPbOa7qw5RripqXA==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/interaction-particles-attract@3.2.1:
-    resolution: {integrity: sha512-jbBI1RilgJbG/XkV73wmRwBfFWo86NtWqcbIcIwVku7+QtsllYVTpi1ty59JGqklLUWRYiz6i/4i8R31cZDCoA==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/interaction-particles-attract@3.2.2:
+    resolution: {integrity: sha512-wwRHReaA+Jfb8K3RFsr1UJWm6KO1Wk3KTbyoaZ9aqkHu7KcJKm1Z+cfg4ZsCMmaIzyxzNEVUWeWNbEZI2FSQUw==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/interaction-particles-collisions@3.2.1:
-    resolution: {integrity: sha512-30YxBuIOD1XUOpjo5evv0j/5+/K6VP29lAlmxmGDx7EWaInG9UwldJo+lh+1A0xvEVr1hjNMaBOjD5Rbs1iN7A==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/interaction-particles-collisions@3.2.2:
+    resolution: {integrity: sha512-UNZrq7M5sGvpqq8BJQNgLJca3zcJKCqBbdL2v5C858/TFmmgI7icmKm63U136MaBO8T5iqlJMmqrA0EdcZQ+1w==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/interaction-particles-links@3.2.1:
-    resolution: {integrity: sha512-Py4BLQZbcipVyJ1PrIEPbYzzLDBy/jKIdnaGYRBCgZyf4zuTK5UvACPLS5zeiXXzCh4kx3LBM1z96zMOmJdNsw==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/interaction-particles-links@3.2.2:
+    resolution: {integrity: sha512-bg1e9/BfJH8sWkKNi1ieeHL4DKAhho2u9aMqcNAbIAOYF1wm0scAhP+IzK3AQwrd/Xu0cI4YIhUkD1ECQ6ADFA==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/move-base@3.2.1:
-    resolution: {integrity: sha512-R+ALCs7eJTehoNDNJ6kcGESaLY3kNYmj1OkYwe7XIHSYCpRAq93jRj5NEVqrVTxk1ZIPt8pYdkerDlBuSphDEg==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/move-base@3.2.2:
+    resolution: {integrity: sha512-ApyjsCyM9gU+EXXmSCaQXosec20HdiBC2WmQaSwO9EK8ZowUH23NZyQZ4m2hMTwCjMCXzdaIw6JCibedxwlv3A==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/move-parallax@3.2.1:
-    resolution: {integrity: sha512-q7ipu/avG2TzPauQpLUVjpLRJeFha8k7IdnpRns1Q286eWgHT0X/6A+qgroV+JLhUkTT9kdGVQGdOntHaOvgkQ==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/move-parallax@3.2.2:
+    resolution: {integrity: sha512-/GPafWBTqLhXwRW5PbnN1mcfxsW6BJRuKviBSLKfetCkiv53jrGCVza4CycbFtc91M7bREQamVwoAgKOCSHOfA==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/plugin-easing-quad@3.2.1:
-    resolution: {integrity: sha512-l9NPrOh+6PI7v2GGq5GDliimhH+sFg9EUfH0jmsS3ZBMl/jWsD97RdTzutARMelH+PEZKGCtURKj2F0rzQtYtQ==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/plugin-easing-quad@3.2.2:
+    resolution: {integrity: sha512-QC6p788o1nw7mPDjNFL+mJ58vWMPqKyt3dzk9rotoSd06np1+qxKEEMUEA0UPET3ja8Ph0DpbneX6Zn45Q/z4Q==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
@@ -2544,132 +2527,117 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@tsparticles/shape-circle@3.2.1:
-    resolution: {integrity: sha512-DgO21XrwZ5nX/BfO9ItXV3AEhZmTXX0yHf+ogvKiwkkhd9qqCL9yDSAwwUqOPlU5St6AoAWKp8QCByFE7icl6g==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/shape-circle@3.2.2:
+    resolution: {integrity: sha512-mWSQpb6cYM/Db+xBSaJP8khkQ3Ctxx3cKhiqI6WBlLKwIL5liGwUT6RWypcfoFqRacNpX8OTZo65Tet0J5uAUw==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/shape-emoji@3.2.1:
-    resolution: {integrity: sha512-55q5eCQQvEZpk3WO8aMhqGmkca1BRd9az3itZDWJRhi74n+2sln4JYpWgqpEbsWHCP95z/IaVpkLiZalq2Wepw==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/shape-emoji@3.2.2:
+    resolution: {integrity: sha512-rX1emadd59BkLP2G3l2Fkoahd53ug2zbnD2sO/SG4xtEoPo/F5kou6bdxQfHgMRPMvSD7RV9ymVk7swXjCyGcQ==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/shape-image@3.2.1:
-    resolution: {integrity: sha512-mWBVikRQTIlhHKFlNE5WPOPGwUGdyDKPxAEC1XFJnx7juPADaaLiGaQtc8bgbCRpe7GLALaWwyvn1KmGxBnFlw==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/shape-image@3.2.2:
+    resolution: {integrity: sha512-IepdD414+QhMuzM4lg/JL5o/2wVJeB/ho/7fqt/9GX2YK+iskRFai91Mn6aGVGUOUMrt2xar3VDunoUZ4Gu4lw==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/shape-line@3.2.1:
-    resolution: {integrity: sha512-q1UWB3OT/MDi7vklEiYFWFyjHAQpkLx/lPCU2yzAxU8ikv6XhrbFMNL1/41ozrKoBIAEA50ADn9s7D8W4ZGq/Q==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/shape-line@3.2.2:
+    resolution: {integrity: sha512-MGDEiuMMtnjqFn3lcq/MXRtckxNz+rpXazcCFH4Gee694XktSkYh8djQTOT0RLNBKpzVWpRJKFHDRnqxx9oevA==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/shape-polygon@3.2.1:
-    resolution: {integrity: sha512-j8dNbnP03Q8iRde4YiegKP1a6tIZ86m6pqqIFqSJk+Lz2V0EN4Wv2pJMUklyP60VMll4SwBAJO1aLlIdqedSAQ==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/shape-polygon@3.2.2:
+    resolution: {integrity: sha512-elGxSKd0buX0b45BJyOn2We0TZZs7n/eKk5mj3O0/aVSCqQCdU3pFm7J+F3RyzaPk8RRXvR9LT46Cge2PI2agQ==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/shape-square@3.2.1:
-    resolution: {integrity: sha512-b6QDajcALbOAUsiKipZLrp6rzl5dbDmwWRjkU7dzrnxfWtkQQShxEGVtn0jOGJQnTQOwB/voce1UgAVjvyNDkQ==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/shape-square@3.2.2:
+    resolution: {integrity: sha512-JPItLvWCrPPYD90g+jTR3CZdFVIeyfpQ+7uDAwQCYbqGF5zTo7E5jMx/Bqoa0ZUU8GqncpQmlB4NeYtmOSsguw==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/shape-star@3.2.1:
-    resolution: {integrity: sha512-iqVsZiQFTLyc3wiU46P8l4k3zl8hJc57WROgQiHCcJxbps8DmlPZhLzaLPE03WgvPSfUQfc8QVtojdNaQh406g==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/shape-star@3.2.2:
+    resolution: {integrity: sha512-KvYpaM52cwtRLNGFHCC2IPSOBtF4EFH2aHXRq1ffS6ZGy32oGSC7TFPBY2yUgS9kRTeqAB3MjIByGRxy/yj0Ug==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/slim@3.2.1:
-    resolution: {integrity: sha512-XChPCNOybUFRp7SSbHICnlxGfG0ay0iFBH3kKn5hJ4Wsp8SOGg5vaJlLoArLvL7A555J4kEc5uFdpSRsJDdwKg==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/slim@3.2.2:
+    resolution: {integrity: sha512-BsgybMVvsItpmki8+PiREVbR2m1R3L0Lj3+Nw5B9xxigoBWXi5pUsHMItsyJZVXWqv6gC89AwaxYZKmTWlR89A==}
     dependencies:
-      '@tsparticles/basic': 3.2.1
+      '@tsparticles/basic': 3.2.2
       '@tsparticles/engine': 3.2.2
-      '@tsparticles/interaction-external-attract': 3.2.1
-      '@tsparticles/interaction-external-bounce': 3.2.1
-      '@tsparticles/interaction-external-bubble': 3.2.1
-      '@tsparticles/interaction-external-connect': 3.2.1
-      '@tsparticles/interaction-external-grab': 3.2.1
-      '@tsparticles/interaction-external-pause': 3.2.1
-      '@tsparticles/interaction-external-push': 3.2.1
-      '@tsparticles/interaction-external-remove': 3.2.1
-      '@tsparticles/interaction-external-repulse': 3.2.1
-      '@tsparticles/interaction-external-slow': 3.2.1
-      '@tsparticles/interaction-particles-attract': 3.2.1
-      '@tsparticles/interaction-particles-collisions': 3.2.1
-      '@tsparticles/interaction-particles-links': 3.2.1
-      '@tsparticles/move-parallax': 3.2.1
-      '@tsparticles/plugin-easing-quad': 3.2.1
-      '@tsparticles/shape-emoji': 3.2.1
-      '@tsparticles/shape-image': 3.2.1
-      '@tsparticles/shape-line': 3.2.1
-      '@tsparticles/shape-polygon': 3.2.1
-      '@tsparticles/shape-square': 3.2.1
-      '@tsparticles/shape-star': 3.2.1
-      '@tsparticles/updater-life': 3.2.1
-      '@tsparticles/updater-rotate': 3.2.1
-      '@tsparticles/updater-stroke-color': 3.2.1
+      '@tsparticles/interaction-external-attract': 3.2.2
+      '@tsparticles/interaction-external-bounce': 3.2.2
+      '@tsparticles/interaction-external-bubble': 3.2.2
+      '@tsparticles/interaction-external-connect': 3.2.2
+      '@tsparticles/interaction-external-grab': 3.2.2
+      '@tsparticles/interaction-external-pause': 3.2.2
+      '@tsparticles/interaction-external-push': 3.2.2
+      '@tsparticles/interaction-external-remove': 3.2.2
+      '@tsparticles/interaction-external-repulse': 3.2.2
+      '@tsparticles/interaction-external-slow': 3.2.2
+      '@tsparticles/interaction-particles-attract': 3.2.2
+      '@tsparticles/interaction-particles-collisions': 3.2.2
+      '@tsparticles/interaction-particles-links': 3.2.2
+      '@tsparticles/move-parallax': 3.2.2
+      '@tsparticles/plugin-easing-quad': 3.2.2
+      '@tsparticles/shape-emoji': 3.2.2
+      '@tsparticles/shape-image': 3.2.2
+      '@tsparticles/shape-line': 3.2.2
+      '@tsparticles/shape-polygon': 3.2.2
+      '@tsparticles/shape-square': 3.2.2
+      '@tsparticles/shape-star': 3.2.2
+      '@tsparticles/updater-life': 3.2.2
+      '@tsparticles/updater-rotate': 3.2.2
+      '@tsparticles/updater-stroke-color': 3.2.2
     dev: false
 
-  /@tsparticles/updater-color@3.2.1:
-    resolution: {integrity: sha512-IVUMmCR4amASTkZ/Fhs2Zu6VywRjkC54lJNpZ86jNONhzdHC4bGAmporMfEsNoa2stsPRZpMHvQCSD5dYoSbZg==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/updater-color@3.2.2:
+    resolution: {integrity: sha512-hwzuDcyVm2bkUaTBEye5H/+I9RYCSqDwa74ilmHrM0f0hKNiuvg5bGYIDRt0ZDUzWCro7jncvMGmbv8/JjHYsA==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/updater-life@3.2.1:
-    resolution: {integrity: sha512-FvdFDvt8zFpel7LgtiVbZil7kkPtom9BVtnIw5r1lGwluSLTkzamwhtvp7KCudSBRZ6PziX4QUWaVk/NI4njxQ==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/updater-life@3.2.2:
+    resolution: {integrity: sha512-x8KuBRoOOFuXP5mOxCFht7KlcBHWBeyV12sFWM4h6W34+gMiqxOw43jBt1M7pSbx4S94NlG0IXBgw9WY36Ky2A==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/updater-opacity@3.2.1:
-    resolution: {integrity: sha512-cvwx21T4bn8s5TArQq3Gq0Zy/WDjqT/S/9jsZcLKC5xgYcpTKptTtWeNaOxSbLR7WRrmIKSx9gUhz6SwHvTePw==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/updater-opacity@3.2.2:
+    resolution: {integrity: sha512-x8j4V/o7abMqd7GxMr2PlYWAnK7SX1XzA7CdIU1Vx7rAZ8XlzRQymYuCQ2QXuDmTtXorESm/E/CrRsJ4cxmhPw==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/updater-out-modes@3.2.1:
-    resolution: {integrity: sha512-y1+K05ao6z/oRvl6dBVrXLVQ33Rt9dpPDVJfMeGI9EyafZAzbX28ohBPm+K7pXbXDeoUnSPrKC160KOPPRsGgA==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/updater-out-modes@3.2.2:
+    resolution: {integrity: sha512-0IYu3Y0Ywp90Uh59vFxGOLUmhTIVDKmjEV/WrGAncODWdGIQNSuxmqlCv9Ys2oQ1wvt1AWnwI5LYZA8CoEKWlA==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/updater-rotate@3.2.1:
-    resolution: {integrity: sha512-oVHe6kLFTJz6mfuVBImYVxhqFYeres5d3KyptLIzVguSPG5NNN5ZSBULD/CjjSlFeRCaZNdhLGLCvquxaD1/7A==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/updater-rotate@3.2.2:
+    resolution: {integrity: sha512-CJtYHfHQTRUXu8BqRhgA/ZEwXDGpxaPEr700jsYumwyaX8msPuJWQwo7Q2cujQMne7nAtuCeZQGAIbxA5sHI+A==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/updater-size@3.2.1:
-    resolution: {integrity: sha512-GqkNEjGttjQBdFSteZ6WdhciJqKDTniha2B1vHZrEd+XDoSFwb8JwVw+kdMwHshNfsL4cuM3zQypGMVoQOcldg==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/updater-size@3.2.2:
+    resolution: {integrity: sha512-FfQSF8uolH8+wtEx5oAltmVUP6eSg7eUH7XyU/yXj++45Lh5+gosdCdbQMT6j3VacG6zYMYlznZkKp1NsBfhAQ==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
 
-  /@tsparticles/updater-stroke-color@3.2.1:
-    resolution: {integrity: sha512-niG2IVlh8O0xCHnTDtfOXxbMWKESCiXTjRouuJfTch1qDEuIMVOwDpynHAemQcVKLiHLAzfJf2b8A6K74+3N+A==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/updater-stroke-color@3.2.2:
+    resolution: {integrity: sha512-3osyzA4eHEiZogmyyrZov9aqIcUJTz9uX4U5oPYFItyMov5KB61gKseJnrd5vKWUieqmHm4WLkDcokoEA51fXA==}
     dependencies:
       '@tsparticles/engine': 3.2.2
     dev: false
