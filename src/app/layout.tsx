@@ -4,6 +4,7 @@ import { Fira_Code } from 'next/font/google';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/cn';
 import '../styles/globals.css';
+import { Analytics } from '@vercel/analytics/react';
 import { CommandPalette } from '@/components/command-palette';
 import { SparklesCore } from '@/components/sparkles';
 import { Toaster } from '@/components/toaster';
@@ -118,6 +119,7 @@ export default function RootLayout({
         {children}
         <CommandPalette />
         <Toaster />
+        <Analytics />
       </body>
     </html>
   );
