@@ -66,7 +66,7 @@
     "@sn0wye/eslint-config": "^3.0.0",
     "@types/node": "20.12.5",
     "@types/nodemailer": "^6.4.14",
-    "@types/react": "18.2.74",
+    "@types/react": "18.2.75",
     "@types/react-dom": "18.2.24",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "autoprefixer": "^10.4.17",
