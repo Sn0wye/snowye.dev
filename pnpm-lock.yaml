@@ -121,8 +121,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0(eslint@9.1.1)(typescript@5.4.5)
       '@types/node':
-        specifier: 20.12.7
-        version: 20.12.7
+        specifier: 20.12.8
+        version: 20.12.8
       '@types/nodemailer':
         specifier: ^6.4.14
         version: 6.4.14
@@ -1048,8 +1048,8 @@ packages:
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
 
-  '@types/node@20.12.7':
-    resolution: {integrity: sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==}
+  '@types/node@20.12.8':
+    resolution: {integrity: sha512-NU0rJLJnshZWdE/097cdCBbyW1h4hEg0xpovcoAQYHl8dnEyp/NAOiE45pvc+Bd1Dt+2r94v2eGFpQJ4R7g+2w==}
 
   '@types/nodemailer@6.4.14':
     resolution: {integrity: sha512-fUWthHO9k9DSdPCSPRqcu6TWhYyxTBg382vlNIttSe9M7XfsT06y0f24KHXtbnijPGGRIcVvdKHTNikOI6qiHA==}
@@ -3783,13 +3783,13 @@ snapshots:
 
   '@types/json5@0.0.29': {}
 
-  '@types/node@20.12.7':
+  '@types/node@20.12.8':
     dependencies:
       undici-types: 5.26.5
 
   '@types/nodemailer@6.4.14':
     dependencies:
-      '@types/node': 20.12.7
+      '@types/node': 20.12.8
 
   '@types/prop-types@15.7.11': {}
 
