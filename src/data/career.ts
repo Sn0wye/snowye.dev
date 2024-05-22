@@ -1,4 +1,5 @@
 export interface Job {
+  key: string;
   jobTitle: string;
   company: string;
   companyUrl: string;

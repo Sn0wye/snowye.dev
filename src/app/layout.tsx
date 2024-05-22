@@ -1,14 +1,16 @@
-import { type Metadata, type Viewport } from 'next';
+import { cn } from '@/lib/cn';
+import type { Metadata, Viewport } from 'next';
 // eslint-disable-next-line camelcase
 import { Fira_Code } from 'next/font/google';
 import localFont from 'next/font/local';
-import { cn } from '@/lib/cn';
 import '../styles/globals.css';
-import { Analytics } from '@vercel/analytics/react';
 import { CommandPalette } from '@/components/command-palette';
+import { Footer } from '@/components/footer';
+import { Navbar } from '@/components/navbar';
 import { SparklesCore } from '@/components/sparkles';
 import { Toaster } from '@/components/toaster';
 import { env } from '@/env';
+import { Analytics } from '@vercel/analytics/react';
 
 const fontSans = localFont({
   src: [
@@ -64,7 +66,7 @@ export const metadata = {
   alternates: {
     canonical: 'https://snowye.dev',
     languages: {
-      'en': 'https://snowye.dev'
+      en: 'https://snowye.dev'
       // 'pt': 'https://snowye.dev/pt'
     }
   },
@@ -116,7 +118,11 @@ export default function RootLayout({
             />
           </div>
         )}
-        {children}
+        <div className="relative z-0 flex min-h-screen flex-col">
+          <Navbar />
+          {children}
+          <Footer />
+        </div>
         <CommandPalette />
         <Toaster />
         <Analytics />

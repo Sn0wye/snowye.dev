@@ -1,9 +1,9 @@
 'use client';
 
+import { cn } from '@/lib/cn';
+import { Command as CommandPrimitive } from 'cmdk';
 /* eslint-disable react/no-unknown-property */
 import * as React from 'react';
-import { Command as CommandPrimitive } from 'cmdk';
-import { cn } from '@/lib/cn';
 
 const Command = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,

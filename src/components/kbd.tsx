@@ -1,5 +1,5 @@
+import { type VariantProps, cva } from 'cva';
 import * as React from 'react';
-import { cva, type VariantProps } from 'cva';
 
 export type KbdProps = React.ComponentProps<'kbd'> &
   VariantProps<typeof kbdStyles> & {
@@ -56,7 +56,9 @@ const Kbd = React.forwardRef<HTMLDivElement, KbdProps>(
       }
 
       if (typeof children === 'string') {
-        children.split(' ').forEach(key => childrenArray.push(key));
+        for (const key of children) {
+          childrenArray.push(key);
+        }
       }
 
       return childrenArray;
@@ -70,7 +72,12 @@ const Kbd = React.forwardRef<HTMLDivElement, KbdProps>(
     return (
       <kbd className={kbdStyles({ className, size })} ref={ref} {...props}>
         {getChildren().map((key, index) => (
-          <span key={index}>{key}</span>
+          <span
+            // biome-ignore lint/suspicious/noArrayIndexKey: key is unique
+            key={`${key}-${index}`}
+          >
+            {key}
+          </span>
         ))}
       </kbd>
     );

@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { FeaturedProject } from '@/components/featured-project';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 type Projects = {
   year: string;
@@ -10,6 +10,7 @@ type Projects = {
 }[];
 
 interface Project {
+  id: string;
   title: string;
   url: string;
   description?: string;
@@ -29,18 +30,21 @@ export const FeaturedProjects = ({ featured }: FeaturedProjectsProps) => {
       year: '2022',
       projects: [
         {
+          id: 'e442eb5a-a376-46f8-89c8-ed791c47eaa7',
           title: 'Personal Portfolio',
           url: 'https://github.com/Sn0wye/snowye.dev',
           description: "This portfolio. It's open source!",
           iconName: 'book'
         },
         {
+          id: '1bbcdd1b-a515-466d-9500-0ea6b771abad',
           title: 'iFinance',
           url: 'https://ifinance.snowye.dev',
           description: 'Finances app to keep track of your gains and expenses',
           iconName: 'savings'
         },
         {
+          id: 'aa72b287-91b8-42f0-b8e0-92d2dc883331',
           title: 'Spaces',
           url: 'https://spaces.snowye.dev/',
           description:
@@ -54,6 +58,7 @@ export const FeaturedProjects = ({ featured }: FeaturedProjectsProps) => {
         //   iconName: 'bolt'
         // },
         {
+          id: '3a002f5f-68b7-4497-86b3-ed3fff399010',
           title: 'Coffee Delivery',
           url: 'https://coffee-delivery-pied.vercel.app/'
         }
@@ -73,9 +78,9 @@ export const FeaturedProjects = ({ featured }: FeaturedProjectsProps) => {
         .flatMap(item =>
           item.projects.filter(project => featured.includes(project.title))
         )
-        .map((item, index) => (
+        .map(item => (
           <FeaturedProject
-            key={index}
+            key={item.id}
             project={item}
             onHover={setIsHovered}
             isHovered={item.title === isHovered}

@@ -1,11 +1,13 @@
-import { type ReactElement } from 'react';
-import { type LucideProps } from 'lucide-react';
+import type { LucideProps } from 'lucide-react';
+import type { ReactElement } from 'react';
 
 type Icon = (props: LucideProps) => ReactElement;
 
 export const SocialIcon: Record<string, Icon> = {
   Instagram: (props: LucideProps) => (
     <svg
+      role="img"
+      aria-label="Instagram Icon"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"
@@ -16,6 +18,8 @@ export const SocialIcon: Record<string, Icon> = {
   ),
   Github: (props: LucideProps) => (
     <svg
+      role="img"
+      aria-label="Github Icon"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"
@@ -26,6 +30,8 @@ export const SocialIcon: Record<string, Icon> = {
   ),
   Linkedin: (props: LucideProps) => (
     <svg
+      role="img"
+      aria-label="Linkedin Icon"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"
@@ -36,7 +42,8 @@ export const SocialIcon: Record<string, Icon> = {
   ),
   Mail: (props: LucideProps) => (
     <svg
-      {...props}
+      role="img"
+      aria-label="Mail Icon"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="none"
@@ -44,6 +51,7 @@ export const SocialIcon: Record<string, Icon> = {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      {...props}
     >
       <rect width="20" height="16" x="2" y="4" rx="2" />
       <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />

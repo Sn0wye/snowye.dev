@@ -1,6 +1,6 @@
-import { useRef, type Dispatch, type SetStateAction } from 'react';
 import { motion } from 'framer-motion';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
+import { type Dispatch, type SetStateAction, useRef } from 'react';
 import type { Project } from '../data/projects';
 
 interface FeaturedProjectProps {
@@ -29,6 +29,7 @@ export function FeaturedProject({
       onHoverEnd={() => onHover('')}
       onMouseEnter={() => iconRef.current?.play()}
       onMouseLeave={() => iconRef.current?.stop()}
+      rel="noreferrer"
     >
       <Lottie
         lottieRef={iconRef}

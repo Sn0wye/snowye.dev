@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { cva } from 'cva';
-import { type LucideProps } from 'lucide-react';
+import type { LucideProps } from 'lucide-react';
+import NextLink from 'next/link';
 import { SocialIcon } from './social-icons';
 
 interface Link {
@@ -42,7 +42,7 @@ export function Footer() {
   return (
     <footer className="flex items-center justify-center bg-transparent py-5">
       {links.map((link, index) => (
-        <LinkComponent key={index} link={link} index={index} />
+        <LinkComponent key={link.url} link={link} index={index} />
       ))}
     </footer>
   );
@@ -79,7 +79,7 @@ const LinkComponent = ({ link, index }: { link: Link; index: number }) => {
   const target = link.url.startsWith('http') ? '_blank' : '_self';
 
   return (
-    <Link
+    <NextLink
       key={index}
       href={link.url}
       target={target}
@@ -87,6 +87,6 @@ const LinkComponent = ({ link, index }: { link: Link; index: number }) => {
     >
       <span className="hidden md:block">{link.title}</span>
       <link.Icon className={iconVariants({ variant: link.variant })} />
-    </Link>
+    </NextLink>
   );
 };

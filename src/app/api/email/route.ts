@@ -1,11 +1,11 @@
-import { NextResponse } from 'next/server';
-import { render } from '@react-email/components';
-import { Ratelimit } from '@upstash/ratelimit';
-import { kv } from '@vercel/kv';
-import nodemailer from 'nodemailer';
 import { EmailTemplate } from '@/email/EmailTemplate';
 import { env } from '@/env';
 import { emailSchema } from '@/schemas/emails';
+import { render } from '@react-email/components';
+import { Ratelimit } from '@upstash/ratelimit';
+import { kv } from '@vercel/kv';
+import { NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
 
 const ratelimit = new Ratelimit({
   redis: kv,
@@ -72,16 +72,17 @@ export const POST = async (req: Request) => {
       });
 
       return NextResponse.json({ message: 'Email sent' }, { status: 200 });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      NextResponse.json(
-        {
-          message: `Email not sent - Error: ${err.message}`
-        },
-        {
-          status: 500
-        }
-      );
+    } catch (err) {
+      if (err instanceof Error) {
+        NextResponse.json(
+          {
+            message: `Email not sent - Error: ${err?.message}`
+          },
+          {
+            status: 500
+          }
+        );
+      }
     }
   }
   return NextResponse.json({ message: 'Method not allowed' }, { status: 405 });

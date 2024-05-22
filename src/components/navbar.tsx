@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/cn';
 import { motion } from 'framer-motion';
 import { Command, Snowflake } from 'lucide-react';
-import { cn } from '@/lib/cn';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 import { useCommandPalette } from './command-palette';
 
 export const pages = ['about', 'projects', 'contact'] as const;

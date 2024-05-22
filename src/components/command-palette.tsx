@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useEffect, useRef, useState, type ReactElement } from 'react';
-import { useRouter } from 'next/navigation';
 import { Command } from 'cmdk';
 import Lottie, {
   type LottieComponentProps,
   type LottieRefCurrentProps
 } from 'lottie-react';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useRef, useState, type ReactElement } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { create } from 'zustand';
 import aboutIcon from '../../public/static/icons/about.json';
@@ -393,7 +393,7 @@ function Item({
     return () => {
       observer.disconnect();
     };
-  }, [shortcut, onSelect]);
+  }, []);
 
   useEffect(() => {
     if (selected) {

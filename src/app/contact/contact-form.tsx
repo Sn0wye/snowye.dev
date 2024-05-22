@@ -1,7 +1,5 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
 import { Button } from '@/components/button';
 import {
   Form,
@@ -14,7 +12,9 @@ import { Input } from '@/components/input';
 import { Textarea } from '@/components/textarea';
 import { useToast } from '@/components/use-toast';
 import { contact } from '@/locales/en/pages/contact';
-import { emailSchema, type EmailSchema } from '@/schemas/emails';
+import { type EmailSchema, emailSchema } from '@/schemas/emails';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 
 export const ContactForm = () => {
   const form = useForm<EmailSchema>({

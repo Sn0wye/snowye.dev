@@ -1,8 +1,8 @@
-import { type Metadata } from 'next';
 import { Base } from '@/components/base';
-import { stripHtml } from '@/utils/stripHtml';
 import { env } from '@/env';
 import { about } from '@/locales/en/pages/about';
+import { stripHtml } from '@/utils/stripHtml';
+import type { Metadata } from 'next';
 import { Intro } from './intro';
 
 export const metadata = {

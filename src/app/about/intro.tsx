@@ -1,7 +1,7 @@
 'use client';
 
-import Image from 'next/image';
 import { Pronunciation } from '@/components/pronunciation';
+import Image from 'next/image';
 
 export const Intro = () => {
   return (

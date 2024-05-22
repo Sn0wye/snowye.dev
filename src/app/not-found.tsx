@@ -1,7 +1,7 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import Lottie from 'lottie-react';
+import dynamic from 'next/dynamic';
 import lottieAnimation from '../../public/static/icons/404.json';
 import { Layout } from '../components/layout';
 
