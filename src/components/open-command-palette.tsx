@@ -17,7 +17,7 @@ export default function OpenCommandPalette() {
     if (isMac) {
       return (
         <>
-          Press <Kbd size="sm">⌘</Kbd> <Kbd size="sm">K</Kbd> to start
+          Press <Kbd size="sm" meta /> <Kbd size="sm">K</Kbd> to start
         </>
       );
     }
@@ -25,7 +25,7 @@ export default function OpenCommandPalette() {
     //Common cases (Windows, Linux)
     return (
       <>
-        Press <Kbd size="sm">ctrl</Kbd> <Kbd size="sm">K</Kbd> to start
+        Press <Kbd size="sm" ctrl /> <Kbd size="sm">K</Kbd> to start
       </>
     );
   };
@@ -34,7 +34,7 @@ export default function OpenCommandPalette() {
 
   return (
     <button
-      className="flex cursor-pointer items-center justify-center gap-1.5 rounded-lg bg-transparent px-3 py-2 font-semibold leading-6 text-primary transition-colors ease-in-out hover:bg-hover"
+      className="-ml-3 flex cursor-pointer items-center justify-center gap-1.5 rounded-lg bg-transparent px-3 py-2 font-semibold leading-6 text-primary transition-colors ease-in-out hover:bg-hover"
       type="button"
       onClick={toggle}
     >

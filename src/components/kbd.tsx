@@ -10,11 +10,11 @@ export type KbdProps = React.ComponentProps<'kbd'> &
   };
 
 const kbdStyles = cva({
-  base: 'text-zinc-100 bg-zinc-950 inline-flex items-center justify-center shadow-[0_0_0_1px_hsla(0,0%,100%,.14)] text-center rounded space-x-2',
+  base: 'aspect-square inline-flex justify-center items-center border font-mono leading-none rounded-[4px] bg-black border-zinc-800 text-white',
   variants: {
     size: {
-      sm: 'text-xs leading-6 min-w-[20px] h-[20px] p-0',
-      md: 'text-sm leading-8 min-w-[24px] h-[24px] px-2 py-0 '
+      sm: 'text-xs leading-6 min-h-[20px] min-w-[20px]',
+      md: 'text-sm leading-8 min-w-[24px] h-[24px] [&>svg]:size-4'
     }
   },
   defaultVariants: {
@@ -37,22 +37,22 @@ const Kbd = React.forwardRef<HTMLDivElement, KbdProps>(
     ref
   ) => {
     const getChildren = () => {
-      const childrenArray: string[] = [];
+      const childrenArray: React.ReactNode[] = [];
 
       if (meta) {
-        childrenArray.push('⌘');
+        childrenArray.push(<Command />);
       }
 
       if (shift) {
-        childrenArray.push('⇧');
+        childrenArray.push(<Shift />);
       }
 
       if (alt) {
-        childrenArray.push('⌥');
+        childrenArray.push(<Option />);
       }
 
       if (ctrl) {
-        childrenArray.push('⌃');
+        childrenArray.push(<Control />);
       }
 
       if (typeof children === 'string') {
@@ -64,21 +64,9 @@ const Kbd = React.forwardRef<HTMLDivElement, KbdProps>(
       return childrenArray;
     };
 
-    // meta = ⌘
-    // shift = ⇧
-    // alt = ⌥
-    // ctrl = ⌃
-
     return (
       <kbd className={kbdStyles({ className, size })} ref={ref} {...props}>
-        {getChildren().map((key, index) => (
-          <span
-            // biome-ignore lint/suspicious/noArrayIndexKey: key is unique
-            key={`${key}-${index}`}
-          >
-            {key}
-          </span>
-        ))}
+        {getChildren()}
       </kbd>
     );
   }
@@ -86,3 +74,88 @@ const Kbd = React.forwardRef<HTMLDivElement, KbdProps>(
 Kbd.displayName = 'Kbd';
 
 export { Kbd };
+
+const Command = (props: React.ComponentProps<'svg'>) => {
+  return (
+    <svg
+      className="size-3"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      {...props}
+    >
+      <title>Command key Icon</title>
+      <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
+    </svg>
+  );
+};
+
+const Option = (props: React.ComponentProps<'svg'>) => {
+  return (
+    <svg
+      className="size-3"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      {...props}
+    >
+      <title>Option key Icon</title>
+      <path d="M3 3h6l6 18h6" />
+      <path d="M14 3h7" />
+    </svg>
+  );
+};
+
+const Shift = (props: React.ComponentProps<'svg'>) => {
+  return (
+    <svg
+      className="size-3"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      {...props}
+    >
+      <title>Shift key Icon</title>
+      <path d="M9 18v-6H5l7-7 7 7h-4v6H9z" />
+    </svg>
+  );
+};
+
+const Control = (props: React.ComponentProps<'svg'>) => {
+  return (
+    <svg
+      className="size-3"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      {...props}
+    >
+      <title>Control key Icon</title>
+      <path d="m18 15-6-6-6 6" />
+    </svg>
+  );
+};
