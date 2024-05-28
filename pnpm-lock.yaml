@@ -12,8 +12,8 @@ importers:
         specifier: ^3.3.4
         version: 3.4.2(react-hook-form@7.51.5(react@18.3.1))
       '@million/lint':
-        specifier: 1.0.0-rc.12
-        version: 1.0.0-rc.12(react@18.3.1)
+        specifier: 1.0.0-rc.13
+        version: 1.0.0-rc.13(react@18.3.1)
       '@radix-ui/react-dialog':
         specifier: ^1.0.5
         version: 1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -788,8 +788,8 @@ packages:
     resolution: {integrity: sha512-7IJvKpWoTgKFdT57/T2fPnBcqaVpBNGtvrlbSOZ2y/76N2GA9tVRmG0dccOC4glbO5MKqUJrtBWtvbtIINFiaw==}
     hasBin: true
 
-  '@million/lint@1.0.0-rc.12':
-    resolution: {integrity: sha512-kX1OggpTquLWoz63TG0zlOzDDIcTC1OGfdXycnK4NynkWjEKtB5P7rDtznx0w1gAOZZdLsQbM/8/FcbLua4ZoQ==}
+  '@million/lint@1.0.0-rc.13':
+    resolution: {integrity: sha512-HoVOi54o73LrwXQvThWPQVSfUfbTE4fH8r8opEFsNI5wEYKrLR13Z0yxt/epWZjMvPR1+wSU4Xk/C1+zvTsD4w==}
     hasBin: true
 
   '@next/env@14.2.3':
@@ -4140,7 +4140,7 @@ snapshots:
       - debug
       - supports-color
 
-  '@million/lint@1.0.0-rc.12(react@18.3.1)':
+  '@million/lint@1.0.0-rc.13(react@18.3.1)':
     dependencies:
       '@axiomhq/js': 1.0.0-rc.3
       '@babel/core': 7.24.6
