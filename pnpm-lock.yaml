@@ -12,8 +12,8 @@ importers:
         specifier: ^3.3.4
         version: 3.4.2(react-hook-form@7.51.5(react@18.3.1))
       '@million/lint':
-        specifier: 1.0.0-rc.13
-        version: 1.0.0-rc.13(react@18.3.1)
+        specifier: 1.0.0-rc.18
+        version: 1.0.0-rc.18(react@18.3.1)
       '@radix-ui/react-dialog':
         specifier: ^1.0.5
         version: 1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -784,12 +784,12 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@million/install@0.0.2':
-    resolution: {integrity: sha512-7IJvKpWoTgKFdT57/T2fPnBcqaVpBNGtvrlbSOZ2y/76N2GA9tVRmG0dccOC4glbO5MKqUJrtBWtvbtIINFiaw==}
+  '@million/install@0.0.8':
+    resolution: {integrity: sha512-eISzjTfghxSgasyPUyLVEJaRbJz3vMi1EFvFbtGa9R/NyRfBStwb9ESYsprsb4J5xYjrTbjrAmR34QE/11sigw==}
     hasBin: true
 
-  '@million/lint@1.0.0-rc.13':
-    resolution: {integrity: sha512-HoVOi54o73LrwXQvThWPQVSfUfbTE4fH8r8opEFsNI5wEYKrLR13Z0yxt/epWZjMvPR1+wSU4Xk/C1+zvTsD4w==}
+  '@million/lint@1.0.0-rc.18':
+    resolution: {integrity: sha512-PH1hhsHNnE/AwcO9Hg278Hxu/IUq8id1myr2cyWon9eE8sdJlyH5ME6b0I+DOIHA0VfP9yXsqDTpsPyvyXmTiA==}
     hasBin: true
 
   '@next/env@14.2.3':
@@ -1725,8 +1725,8 @@ packages:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
 
-  cli-high@0.4.1:
-    resolution: {integrity: sha512-fPbkILfCVG6mfxbsJbJZQsKE5JmfgJNlfBxap52XHXjLwPDhs/OMFVFrNR7bqiavZt2r5A80+wiRHzJyzWqwEQ==}
+  cli-high@0.4.2:
+    resolution: {integrity: sha512-q/CIxOggmzAw/67QYS4j1bMo72IpC+dAlswZl8xHxp8XvmWS97x3Q30pWNXq8mg0pZLSJwIFWZpUWTfcF119wA==}
     hasBin: true
 
   client-only@0.0.1:
@@ -2686,6 +2686,11 @@ packages:
   nanoid@3.3.7:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
+    hasBin: true
+
+  nanoid@5.0.7:
+    resolution: {integrity: sha512-oLxFY2gd2IqnjcYyOXD8XGCftpGtZP2AbHbOkthDkvRywH5ayNtPVy9YlOPcHckXzbLTCHpkb7FB+yuxKV13pQ==}
+    engines: {node: ^18 || >=20}
     hasBin: true
 
   natural-compare@1.4.0:
@@ -4125,28 +4130,29 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  '@million/install@0.0.2':
+  '@million/install@0.0.8':
     dependencies:
       '@antfu/ni': 0.21.12
       '@axiomhq/js': 1.0.0-rc.3
       '@babel/core': 7.24.6
       '@babel/types': 7.24.6
       '@clack/prompts': 0.7.0
-      cli-high: 0.4.1
+      cli-high: 0.4.2
       diff: 5.2.0
+      nanoid: 5.0.7
       posthog-node: 3.6.3
       xycolors: 0.1.1
     transitivePeerDependencies:
       - debug
       - supports-color
 
-  '@million/lint@1.0.0-rc.13(react@18.3.1)':
+  '@million/lint@1.0.0-rc.18(react@18.3.1)':
     dependencies:
       '@axiomhq/js': 1.0.0-rc.3
       '@babel/core': 7.24.6
       '@babel/types': 7.24.6
       '@hono/node-server': 1.11.1
-      '@million/install': 0.0.2
+      '@million/install': 0.0.8
       '@rollup/pluginutils': 5.1.0
       babel-plugin-syntax-hermes-parser: 0.21.1
       esbuild: 0.20.2
@@ -5211,7 +5217,7 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  cli-high@0.4.1:
+  cli-high@0.4.2:
     dependencies:
       '@clack/prompts': 0.7.0
       sugar-high: 0.6.1
@@ -6329,6 +6335,8 @@ snapshots:
       thenify-all: 1.6.0
 
   nanoid@3.3.7: {}
+
+  nanoid@5.0.7: {}
 
   natural-compare@1.4.0: {}
 
