@@ -12,8 +12,8 @@ importers:
         specifier: ^3.3.4
         version: 3.4.2(react-hook-form@7.51.5(react@18.3.1))
       '@million/lint':
-        specifier: 1.0.0-rc.20
-        version: 1.0.0-rc.20(react@18.3.1)
+        specifier: 1.0.0-rc.21
+        version: 1.0.0-rc.21(react@18.3.1)
       '@radix-ui/react-dialog':
         specifier: ^1.0.5
         version: 1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -789,12 +789,12 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@million/install@0.0.10':
-    resolution: {integrity: sha512-7XCb7xJJ1yZgcOVDhAE60dUKL+BsoC7lpBwN1VEs9M6LDMm1uGGPS6hmpkbirmUp8sjXu28Cb2m45iKHEy2pkw==}
+  '@million/install@0.0.14':
+    resolution: {integrity: sha512-tzttKRbN7AYrtqeB3HJovgV9bJwTrzcqYiTPZDAZRWHkx2cfUoRb/INvjGlJlDyfaQBCCTRTpMDmr29//LcXJA==}
     hasBin: true
 
-  '@million/lint@1.0.0-rc.20':
-    resolution: {integrity: sha512-g9nTS8kpuyuv4PTwyH2zrhs8qrSjUCdP/Fu1tx94V+H0r/M80rr64dh5fOlW7SX/yYUugi9zyt4J95yeSGxRnQ==}
+  '@million/lint@1.0.0-rc.21':
+    resolution: {integrity: sha512-NaxnJH5YZ4/Fx7KYYRQOlPBv9fiOWdkEjRae0kqnt54wKdf+UpjYjRG97/dyaqMvy+zq+MRGVJdwEwBklwXQ1w==}
     hasBin: true
 
   '@next/env@14.2.3':
@@ -3741,7 +3741,7 @@ snapshots:
 
   '@babel/helper-module-imports@7.22.15':
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.6
 
   '@babel/helper-module-imports@7.24.6':
     dependencies:
@@ -3767,7 +3767,7 @@ snapshots:
 
   '@babel/helper-simple-access@7.22.5':
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.6
 
   '@babel/helper-simple-access@7.24.6':
     dependencies:
@@ -4183,7 +4183,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  '@million/install@0.0.10':
+  '@million/install@0.0.14':
     dependencies:
       '@antfu/ni': 0.21.12
       '@axiomhq/js': 1.0.0-rc.3
@@ -4197,13 +4197,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@million/lint@1.0.0-rc.20(react@18.3.1)':
+  '@million/lint@1.0.0-rc.21(react@18.3.1)':
     dependencies:
       '@axiomhq/js': 1.0.0-rc.3
       '@babel/core': 7.24.6
       '@babel/types': 7.24.6
       '@hono/node-server': 1.11.1
-      '@million/install': 0.0.10
+      '@million/install': 0.0.14
       '@rollup/pluginutils': 5.1.0
       babel-plugin-syntax-hermes-parser: 0.21.1
       esbuild: 0.20.2
@@ -4910,7 +4910,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/typescript-estree': 6.21.0(typescript@5.4.5)
       '@typescript-eslint/utils': 6.21.0(eslint@9.4.0)(typescript@5.4.5)
-      debug: 4.3.4
+      debug: 4.3.5
       eslint: 9.4.0
       ts-api-utils: 1.3.0(typescript@5.4.5)
     optionalDependencies:
@@ -4938,7 +4938,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 6.21.0
       '@typescript-eslint/visitor-keys': 6.21.0
-      debug: 4.3.4
+      debug: 4.3.5
       globby: 11.1.0
       is-glob: 4.0.3
       minimatch: 9.0.3
