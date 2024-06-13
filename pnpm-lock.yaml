@@ -51,8 +51,8 @@ importers:
         specifier: ^1.2.2
         version: 1.3.1(next@14.2.3(@babel/core@7.24.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@vercel/kv':
-        specifier: ^1.0.1
-        version: 1.0.1
+        specifier: ^2.0.0
+        version: 2.0.0
       clsx:
         specifier: ^2.1.0
         version: 2.1.1
@@ -1518,9 +1518,6 @@ packages:
   '@upstash/ratelimit@1.2.1':
     resolution: {integrity: sha512-o01lV1yFS5Fzj5KONZmNyVch/Qrlj785B2ob+kStUmxn8F6xXk7IHTQqVcHE+Ce3CmT/qQIwvMxDZftyJ5wYpQ==}
 
-  '@upstash/redis@1.25.1':
-    resolution: {integrity: sha512-ACj0GhJ4qrQyBshwFgPod6XufVEfKX2wcaihsEvSdLYnY+m+pa13kGt1RXm/yTHKf4TQi/Dy2A8z/y6WUEOmlg==}
-
   '@upstash/redis@1.31.5':
     resolution: {integrity: sha512-2MatqeqftroSJ9Q+pqbyGAIwXX6KEPtUTUna2c/fq09h12ffwvltDTgfppeF+NzJo/SyZfHY8e1RoflduMbz1A==}
 
@@ -1535,8 +1532,8 @@ packages:
       react:
         optional: true
 
-  '@vercel/kv@1.0.1':
-    resolution: {integrity: sha512-uTKddsqVYS2GRAM/QMNNXCTuw9N742mLoGRXoNDcyECaxEXvIHG0dEY+ZnYISV4Vz534VwJO+64fd9XeSggSKw==}
+  '@vercel/kv@2.0.0':
+    resolution: {integrity: sha512-zdVrhbzZBYo5d1Hfn4bKtqCeKf0FuzW8rSHauzQVMUgv1+1JOwof2mWcBuI+YMJy8s0G0oqAUfQ7HgUDzb8EbA==}
     engines: {node: '>=14.6'}
 
   abbrev@2.0.0:
@@ -5020,10 +5017,6 @@ snapshots:
     dependencies:
       '@upstash/core-analytics': 0.0.9
 
-  '@upstash/redis@1.25.1':
-    dependencies:
-      crypto-js: 4.2.0
-
   '@upstash/redis@1.31.5':
     dependencies:
       crypto-js: 4.2.0
@@ -5035,9 +5028,9 @@ snapshots:
       next: 14.2.3(@babel/core@7.24.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
 
-  '@vercel/kv@1.0.1':
+  '@vercel/kv@2.0.0':
     dependencies:
-      '@upstash/redis': 1.25.1
+      '@upstash/redis': 1.31.5
 
   abbrev@2.0.0: {}
 
