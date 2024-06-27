@@ -61,7 +61,7 @@
     "zustand": "^4.5.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.8.2",
+    "@biomejs/biome": "1.8.3",
     "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
     "@next/eslint-plugin-next": "^14.1.0",
     "@sn0wye/eslint-config": "^3.0.0",
