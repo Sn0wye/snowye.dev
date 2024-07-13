@@ -119,7 +119,7 @@ importers:
         version: 1.8.3
       '@ianvs/prettier-plugin-sort-imports':
         specifier: ^4.1.1
-        version: 4.3.1(prettier@3.3.2)
+        version: 4.3.1(prettier@3.3.3)
       '@next/eslint-plugin-next':
         specifier: ^14.1.0
         version: 14.2.4
@@ -158,16 +158,16 @@ importers:
         version: 2.29.1(@typescript-eslint/parser@6.21.0(eslint@9.7.0)(typescript@5.5.3))(eslint-import-resolver-typescript@3.6.1)(eslint@9.7.0)
       eslint-plugin-prettier:
         specifier: ^5.1.3
-        version: 5.1.3(eslint-config-prettier@9.1.0(eslint@9.7.0))(eslint@9.7.0)(prettier@3.3.2)
+        version: 5.1.3(eslint-config-prettier@9.1.0(eslint@9.7.0))(eslint@9.7.0)(prettier@3.3.3)
       postcss:
         specifier: ^8.4.35
         version: 8.4.39
       prettier:
         specifier: ^3.2.5
-        version: 3.3.2
+        version: 3.3.3
       prettier-plugin-tailwindcss:
         specifier: ^0.6.0
-        version: 0.6.5(@ianvs/prettier-plugin-sort-imports@4.3.1(prettier@3.3.2))(prettier@3.3.2)
+        version: 0.6.5(@ianvs/prettier-plugin-sort-imports@4.3.1(prettier@3.3.3))(prettier@3.3.3)
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.4
@@ -3130,8 +3130,8 @@ packages:
       prettier-plugin-svelte:
         optional: true
 
-  prettier@3.3.2:
-    resolution: {integrity: sha512-rAVeHYMcv8ATV5d508CFdn+8/pHPpXeIid1DdrPwXnaAdH7cqjVbpJaT5eq4yRAFU/lsbwYwSF/n5iNrdJHPQA==}
+  prettier@3.3.3:
+    resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -4140,14 +4140,14 @@ snapshots:
 
   '@humanwhocodes/retry@0.3.0': {}
 
-  '@ianvs/prettier-plugin-sort-imports@4.3.1(prettier@3.3.2)':
+  '@ianvs/prettier-plugin-sort-imports@4.3.1(prettier@3.3.3)':
     dependencies:
       '@babel/core': 7.24.8
       '@babel/generator': 7.24.8
       '@babel/parser': 7.24.8
       '@babel/traverse': 7.24.8
       '@babel/types': 7.24.8
-      prettier: 3.3.2
+      prettier: 3.3.3
       semver: 7.6.2
     transitivePeerDependencies:
       - supports-color
@@ -4257,8 +4257,8 @@ snapshots:
     dependencies:
       '@antfu/ni': 0.21.12
       '@axiomhq/js': 1.0.0-rc.3
-      '@babel/core': 7.24.8
-      '@babel/types': 7.24.8
+      '@babel/core': 7.24.6
+      '@babel/types': 7.24.6
       '@clack/prompts': 0.7.0
       cli-high: 0.4.2
       diff: 5.2.0
@@ -5993,10 +5993,10 @@ snapshots:
       object.entries: 1.1.8
       object.fromentries: 2.0.8
 
-  eslint-plugin-prettier@5.1.3(eslint-config-prettier@9.1.0(eslint@9.7.0))(eslint@9.7.0)(prettier@3.3.2):
+  eslint-plugin-prettier@5.1.3(eslint-config-prettier@9.1.0(eslint@9.7.0))(eslint@9.7.0)(prettier@3.3.3):
     dependencies:
       eslint: 9.7.0
-      prettier: 3.3.2
+      prettier: 3.3.3
       prettier-linter-helpers: 1.0.0
       synckit: 0.8.8
     optionalDependencies:
@@ -6867,13 +6867,13 @@ snapshots:
     dependencies:
       fast-diff: 1.3.0
 
-  prettier-plugin-tailwindcss@0.6.5(@ianvs/prettier-plugin-sort-imports@4.3.1(prettier@3.3.2))(prettier@3.3.2):
+  prettier-plugin-tailwindcss@0.6.5(@ianvs/prettier-plugin-sort-imports@4.3.1(prettier@3.3.3))(prettier@3.3.3):
     dependencies:
-      prettier: 3.3.2
+      prettier: 3.3.3
     optionalDependencies:
-      '@ianvs/prettier-plugin-sort-imports': 4.3.1(prettier@3.3.2)
+      '@ianvs/prettier-plugin-sort-imports': 4.3.1(prettier@3.3.3)
 
-  prettier@3.3.2: {}
+  prettier@3.3.3: {}
 
   pretty-ms@8.0.0:
     dependencies:
