@@ -45,8 +45,8 @@ importers:
         specifier: ^3.2.1
         version: 3.5.0
       '@upstash/ratelimit':
-        specifier: ^1.0.1
-        version: 1.2.1
+        specifier: ^2.0.0
+        version: 2.0.0
       '@vercel/analytics':
         specifier: ^1.2.2
         version: 1.3.1(next@14.2.4(@babel/core@7.24.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
@@ -1605,8 +1605,8 @@ packages:
     resolution: {integrity: sha512-9NXXxZ5y1/A/zqKLlVT7NsAWSggJfOjB0hG6Ffx29b4jbzHOiQVWB55h5+j2clT9Ib+mNPXn0iB5zN3aWLkICw==}
     engines: {node: '>=16.0.0'}
 
-  '@upstash/ratelimit@1.2.1':
-    resolution: {integrity: sha512-o01lV1yFS5Fzj5KONZmNyVch/Qrlj785B2ob+kStUmxn8F6xXk7IHTQqVcHE+Ce3CmT/qQIwvMxDZftyJ5wYpQ==}
+  '@upstash/ratelimit@2.0.0':
+    resolution: {integrity: sha512-UbOdDpC6CFsrQyevfwbpxr92OkDccKr+KpC9+idxOrmr3U6XbIQq/UIunSLIZ7kYwxoY5j3i7Ky5nwHZ3/DTvA==}
 
   '@upstash/redis@1.25.1':
     resolution: {integrity: sha512-ACj0GhJ4qrQyBshwFgPod6XufVEfKX2wcaihsEvSdLYnY+m+pa13kGt1RXm/yTHKf4TQi/Dy2A8z/y6WUEOmlg==}
@@ -4305,8 +4305,8 @@ snapshots:
     dependencies:
       '@antfu/ni': 0.21.12
       '@axiomhq/js': 1.0.0-rc.3
-      '@babel/core': 7.24.6
-      '@babel/types': 7.24.6
+      '@babel/core': 7.24.8
+      '@babel/types': 7.24.8
       '@clack/prompts': 0.7.0
       cli-high: 0.4.2
       diff: 5.2.0
@@ -5267,7 +5267,7 @@ snapshots:
     dependencies:
       '@upstash/redis': 1.31.5
 
-  '@upstash/ratelimit@1.2.1':
+  '@upstash/ratelimit@2.0.0':
     dependencies:
       '@upstash/core-analytics': 0.0.9
 
