@@ -22,7 +22,6 @@ export function Base({
 }: BaseProps) {
   return (
     <div className="relative z-0 flex min-h-screen flex-col">
-      <Navbar />
       <main
         className={`selection: flex-1 overflow-hidden py-navHeightMobile md:py-navHeightDesktop selection:bg-geist-${primaryColor} selection:text-black`}
       >
@@ -35,7 +34,6 @@ export function Base({
           {children}
         </div>
       </main>
-      <Footer />
       {/* <StarCanvas /> */}
     </div>
   );
