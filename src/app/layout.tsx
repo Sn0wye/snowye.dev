@@ -96,7 +96,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body
         suppressHydrationWarning
         className={cn(
@@ -105,20 +105,20 @@ export default function RootLayout({
           fontHeading.variable
         )}
       >
-        {env.NODE_ENV === 'production' && (
-          <div className="absolute inset-0 h-screen w-full">
-            <SparklesCore
-              id="tsparticlesfullpage"
-              background="transparent"
-              minSize={0.6}
-              maxSize={1.4}
-              particleDensity={100}
-              className="h-full w-full"
-              particleColor="#FFFFFF"
-            />
-          </div>
-        )}
-        <div className="relative z-0 flex min-h-screen flex-col">
+        <div className='relative z-0 flex min-h-screen flex-col'>
+          {env.NODE_ENV === 'production' && (
+            <div className='absolute inset-0 h-full w-full'>
+              <SparklesCore
+                id='tsparticlesfullpage'
+                background='transparent'
+                minSize={0.6}
+                maxSize={1.4}
+                particleDensity={100}
+                className='h-full w-full'
+                particleColor='#FFFFFF'
+              />
+            </div>
+          )}
           <Navbar />
           {children}
           <Footer />
