@@ -103,7 +103,7 @@ importers:
         version: 0.33.4
       tailwind-merge:
         specifier: ^2.2.1
-        version: 2.4.0
+        version: 2.5.0
       typewriter-effect:
         specifier: ^2.21.0
         version: 2.21.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3562,8 +3562,8 @@ packages:
     resolution: {integrity: sha512-7gr8p9TQP6RAHusBOSLs46F4564ZrjV8xFmw5zCmgmhGUcw2hxsShhJ6CEiHQMgPDwAQ1fWHPM0ypc4RMAig4A==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
-  tailwind-merge@2.4.0:
-    resolution: {integrity: sha512-49AwoOQNKdqKPd9CViyH5wJoSKsCDjUlzL8DxuGp3P1FsGY36NJDAa18jLZcaHAUUuTj+JB8IAo8zWgBNvBF7A==}
+  tailwind-merge@2.5.0:
+    resolution: {integrity: sha512-a6Q/isR5XAo9IR7Hjh80BQDkn8PG9ONJpSO/U3vGzdKyKG125lPHNXdiPfeQ5X0EOG0qKlS/0qnxdBYkLlD6tA==}
 
   tailwindcss-animate@1.0.7:
     resolution: {integrity: sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==}
@@ -4341,8 +4341,8 @@ snapshots:
     dependencies:
       '@antfu/ni': 0.21.12
       '@axiomhq/js': 1.0.0-rc.3
-      '@babel/core': 7.24.8
-      '@babel/types': 7.24.8
+      '@babel/core': 7.24.6
+      '@babel/types': 7.24.6
       '@clack/prompts': 0.7.0
       cli-high: 0.4.2
       diff: 5.2.0
@@ -7476,7 +7476,7 @@ snapshots:
       '@pkgr/core': 0.1.1
       tslib: 2.6.3
 
-  tailwind-merge@2.4.0: {}
+  tailwind-merge@2.5.0: {}
 
   tailwindcss-animate@1.0.7(tailwindcss@3.4.9):
     dependencies:
