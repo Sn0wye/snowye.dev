@@ -85,7 +85,7 @@ importers:
         version: 14.2.6(@babel/core@7.25.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       nodemailer:
         specifier: ^6.9.9
-        version: 6.9.15
+        version: 6.9.16
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -322,8 +322,8 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
 
-  '@babel/parser@7.26.0':
-    resolution: {integrity: sha512-aP8x5pIw3xvYr/sXT+SEUwyhrXT8rUJRZltK/qN3Db80dcKpTett8cJxHyjk+xYSVXvNnl2SfcJVjbwxpOSscA==}
+  '@babel/parser@7.26.1':
+    resolution: {integrity: sha512-reoQYNiAJreZNsJzyrDNzFQ+IQ5JFiIzAHJg9bn94S3l+4++J7RsIhNMoB+lgP/9tpmiAQqspv+xfdxTSzREOw==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
@@ -2984,8 +2984,8 @@ packages:
   node-releases@2.0.18:
     resolution: {integrity: sha512-d9VeXT4SJ7ZeOqGX6R5EM022wpL+eWPooLI+5UpWn2jCT1aosUQEhQP214x33Wkwx3JQMvIm+tIoVOdodFS40g==}
 
-  nodemailer@6.9.15:
-    resolution: {integrity: sha512-AHf04ySLC6CIfuRtRiEYtGEXgRfa6INgWGluDhnxTZhHSKvrBu7lc1VVchQ0d8nPc4cFaZoPq8vkyNoZr0TpGQ==}
+  nodemailer@6.9.16:
+    resolution: {integrity: sha512-psAuZdTIRN08HKVd/E8ObdV6NO7NTBY3KsC30F7M4H1OnmLCUNaS56FpYxyb26zWLSyYF9Ozch9KYHhHegsiOQ==}
     engines: {node: '>=6.0.0'}
 
   nopt@7.2.0:
@@ -3585,8 +3585,8 @@ packages:
     engines: {node: '>=16 || 14 >=14.17'}
     hasBin: true
 
-  sugar-high@0.7.1:
-    resolution: {integrity: sha512-hwEXr/gtUvi+jfgjgxbuiRD5EX5C1/eQrW/RoZ0Dm+993p46ECB5HBjMfc20FEbsXKQHtueHtYoe2ofb6V+83A==}
+  sugar-high@0.7.4:
+    resolution: {integrity: sha512-dG0B/JbpFVW3D7BiaNLUi1NTYN7+gzYMPBOJJDsfwDWbe2S9g+ftfKBmooeIdNCMb1O19YSqFeVUXl3ykuHKYA==}
 
   supports-color@5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}
@@ -4067,7 +4067,7 @@ snapshots:
     dependencies:
       '@babel/types': 7.25.8
 
-  '@babel/parser@7.26.0':
+  '@babel/parser@7.26.1':
     dependencies:
       '@babel/types': 7.26.0
 
@@ -4446,7 +4446,7 @@ snapshots:
     dependencies:
       '@antfu/ni': 0.21.12
       '@axiomhq/js': 1.0.0-rc.3
-      '@babel/parser': 7.26.0
+      '@babel/parser': 7.26.1
       '@babel/types': 7.25.2
       '@clack/prompts': 0.7.0
       ast-types: 0.14.2
@@ -5698,7 +5698,7 @@ snapshots:
   cli-high@0.4.3:
     dependencies:
       '@clack/prompts': 0.7.0
-      sugar-high: 0.7.1
+      sugar-high: 0.7.4
       xycolors: 0.1.2
       yargs: 17.7.2
 
@@ -6856,7 +6856,7 @@ snapshots:
 
   node-releases@2.0.18: {}
 
-  nodemailer@6.9.15: {}
+  nodemailer@6.9.16: {}
 
   nopt@7.2.0:
     dependencies:
@@ -7450,7 +7450,7 @@ snapshots:
       pirates: 4.0.6
       ts-interface-checker: 0.1.13
 
-  sugar-high@0.7.1: {}
+  sugar-high@0.7.4: {}
 
   supports-color@5.5.0:
     dependencies:
