@@ -9,7 +9,6 @@ import { Footer } from '@/components/footer';
 import { Navbar } from '@/components/navbar';
 import { SparklesCore } from '@/components/sparkles';
 import { Toaster } from '@/components/toaster';
-import { env } from '@/env';
 import { Analytics } from '@vercel/analytics/react';
 
 const fontSans = localFont({
@@ -106,19 +105,19 @@ export default function RootLayout({
         )}
       >
         <div className='relative z-0 flex min-h-screen flex-col'>
-          {env.NODE_ENV === 'production' && (
-            <div className='absolute inset-0 h-full w-full'>
-              <SparklesCore
-                id='tsparticlesfullpage'
-                background='transparent'
-                minSize={0.6}
-                maxSize={1.4}
-                particleDensity={100}
-                className='h-full w-full'
-                particleColor='#FFFFFF'
-              />
-            </div>
-          )}
+          {/* {env.NODE_ENV === 'production' && ( */}
+          <div className='absolute inset-0 h-full w-full'>
+            <SparklesCore
+              id='tsparticlesfullpage'
+              background='transparent'
+              minSize={0.6}
+              maxSize={1.4}
+              particleDensity={100}
+              className='h-full w-full'
+              particleColor='#FFFFFF'
+            />
+          </div>
+          {/* )} */}
           <Navbar />
           {children}
           <Footer />

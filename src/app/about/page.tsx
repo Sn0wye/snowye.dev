@@ -3,7 +3,9 @@ import { env } from '@/env';
 import { about } from '@/locales/en/pages/about';
 import { stripHtml } from '@/utils/stripHtml';
 import type { Metadata } from 'next';
-import { Intro } from './intro';
+import Image from 'next/image';
+import { Career } from './career';
+import { Pronunciation } from '@/components/pronunciation';
 
 export const metadata = {
   metadataBase:
@@ -17,7 +19,7 @@ export const metadata = {
     url: '/about',
     images: [
       {
-        url: '/static/imagePaths/snowye-bw.jpg',
+        url: '/static/imagePaths/me.jpeg',
         width: 336,
         height: 336
       }
@@ -27,7 +29,7 @@ export const metadata = {
 
 export default function About() {
   const meta = {
-    imagePath: '/static/imagePaths/snowye-bw.jpg',
+    imagePath: '/static/imagePaths/me.jpeg',
     primaryColor: 'pink',
     secondaryColor: 'purple'
   } as const;
@@ -39,15 +41,81 @@ export default function About() {
       primaryColor={meta.primaryColor}
       secondaryColor={meta.secondaryColor}
     >
-      <Intro />
+      <div className='flex flex-col justify-between md:flex-row'>
+        <section className='mt-0 w-auto md:w-[48%]'>
+          <Image
+            alt='Gabriel Trzimajewski'
+            src='/static/images/me.jpeg'
+            width={336}
+            height={336}
+            style={{
+              width: 'auto',
+              height: 'auto'
+            }}
+            placeholder='blur'
+            blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAP0lEQVQImQE0AMv/AFBQUJKSkqmpqaOjowCurq7v7+/Jycm5ubkA////jIyMn5+fg4ODADAwMD09PWlpaQAAAApRGnEHblMWAAAAAElFTkSuQmCC'
+            priority
+          />
+        </section>
+        <section className='mt-0 w-auto md:w-[48%]'>
+          <p className='mt-4 md:-mt-1.5'>
+            <strong>Hey, I&apos;m Gabriel Trzimajewski!</strong>
+            <Pronunciation /> I’m a self taught guy who lives, loves and learns,
+            listens to a lot of music, loves coding, traveling and playing
+            piano. I've always been interested in computers since I was a child,
+            and then I discovered the beauty of JavaScript at{' '}
+            <strong>
+              <a
+                href='https://rocketseat.com.br'
+                target='_blank'
+                rel='noreferrer'
+              >
+                Rocketseat
+              </a>
+            </strong>{' '}
+            back on start of 2020.
+          </p>
+          <p>
+            I&apos;m currently working at{' '}
+            <a href='https://mundoinvest.com.br'>Mundo Invest</a> as a{' '}
+            <strong>Backend Tech Lead</strong> and trying to improve my hard and
+            soft skills as well. I&apos;m from Brazil and a big fan of{' '}
+            <strong>twenty one pilots</strong>.
+          </p>
+        </section>
+      </div>
 
-      <h2>{about.bio}</h2>
-      <blockquote>
-        <p>{about.description}</p>
-      </blockquote>
+      <div className='flex flex-col justify-between md:flex-row'>
+        <section className='mt-0 w-auto md:w-[48%]'>
+          <p>
+            Throughout my career, I have demonstrated{' '}
+            <strong>strong problem-solving</strong> skills, a solid
+            understanding of best practices in software architecture, and a deep
+            commitment to delivering <strong>high-quality code</strong>. I have
+            experience with a broad range of technologies and fields, including{' '}
+            <strong>Front-End</strong>, <strong>Back-End</strong>, and{' '}
+            <strong>Cloud Services</strong>.
+          </p>
+        </section>
+        <section className='mt-0 w-auto md:w-[48%]'>
+          <Image
+            alt='Gabriel Trzimajewski'
+            src='/static/images/me2.jpeg'
+            width={336}
+            height={336}
+            style={{
+              width: 'auto',
+              height: 'auto'
+            }}
+            placeholder='blur'
+            blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAP0lEQVQImQE0AMv/AFBQUJKSkqmpqaOjowCurq7v7+/Jycm5ubkA////jIyMn5+fg4ODADAwMD09PWlpaQAAAApRGnEHblMWAAAAAElFTkSuQmCC'
+            priority
+          />
+        </section>
+      </div>
 
-      {/* <h2>{t('career')}</h2> */}
-      {/* <Career /> */}
+      <h2>{about.career}</h2>
+      <Career />
     </Base>
   );
 }
