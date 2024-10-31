@@ -127,8 +127,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.1(eslint@9.13.0(jiti@1.21.6))(typescript@5.6.3)
       '@types/node':
-        specifier: 22.8.4
-        version: 22.8.4
+        specifier: 22.8.5
+        version: 22.8.5
       '@types/nodemailer':
         specifier: ^6.4.14
         version: 6.4.16
@@ -1462,8 +1462,8 @@ packages:
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
 
-  '@types/node@22.8.4':
-    resolution: {integrity: sha512-SpNNxkftTJOPk0oN+y2bIqurEXHTA2AOZ3EJDDKeJ5VzkvvORSvmQXGQarcOzWV1ac7DCaPBEdMDxBsM+d8jWw==}
+  '@types/node@22.8.5':
+    resolution: {integrity: sha512-5iYk6AMPtsMbkZqCO1UGF9W5L38twq11S2pYWkybGHH2ogPUvXWNlQqJBzuEZWKj/WRH+QTeiv6ySWqJtvIEgA==}
 
   '@types/nodemailer@6.4.16':
     resolution: {integrity: sha512-uz6hN6Pp0upXMcilM61CoKyjT7sskBoOWpptkjjJp8jIMlTdc3xG01U7proKkXzruMS4hS0zqtHNkNPFB20rKQ==}
@@ -3874,7 +3874,7 @@ snapshots:
   '@babel/helper-module-imports@7.24.7':
     dependencies:
       '@babel/traverse': 7.25.6
-      '@babel/types': 7.24.8
+      '@babel/types': 7.26.0
     transitivePeerDependencies:
       - supports-color
 
@@ -3902,7 +3902,7 @@ snapshots:
   '@babel/helper-simple-access@7.24.7':
     dependencies:
       '@babel/traverse': 7.25.6
-      '@babel/types': 7.24.8
+      '@babel/types': 7.26.0
     transitivePeerDependencies:
       - supports-color
 
@@ -5018,13 +5018,13 @@ snapshots:
 
   '@types/json5@0.0.29': {}
 
-  '@types/node@22.8.4':
+  '@types/node@22.8.5':
     dependencies:
       undici-types: 6.19.8
 
   '@types/nodemailer@6.4.16':
     dependencies:
-      '@types/node': 22.8.4
+      '@types/node': 22.8.5
 
   '@types/prop-types@15.7.11': {}
 
