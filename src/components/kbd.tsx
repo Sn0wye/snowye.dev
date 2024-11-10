@@ -1,5 +1,5 @@
 import { type VariantProps, cva } from 'cva';
-import * as React from 'react';
+import type * as React from 'react';
 
 export type KbdProps = React.ComponentProps<'kbd'> &
   VariantProps<typeof kbdStyles> & {
@@ -22,56 +22,50 @@ const kbdStyles = cva({
   }
 });
 
-const Kbd = React.forwardRef<HTMLDivElement, KbdProps>(
-  (
-    {
-      className,
-      meta = false,
-      shift = false,
-      alt = false,
-      ctrl = false,
-      size,
-      children,
-      ...props
-    },
-    ref
-  ) => {
-    const getChildren = () => {
-      const childrenArray: React.ReactNode[] = [];
+const Kbd = ({
+  className,
+  meta = false,
+  shift = false,
+  alt = false,
+  ctrl = false,
+  size,
+  children,
+  ...props
+}: KbdProps) => {
+  const getChildren = () => {
+    const childrenArray: React.ReactNode[] = [];
 
-      if (meta) {
-        childrenArray.push(<Command />);
+    if (meta) {
+      childrenArray.push(<Command />);
+    }
+
+    if (shift) {
+      childrenArray.push(<Shift />);
+    }
+
+    if (alt) {
+      childrenArray.push(<Option />);
+    }
+
+    if (ctrl) {
+      childrenArray.push(<Control />);
+    }
+
+    if (typeof children === 'string') {
+      for (const key of children) {
+        childrenArray.push(key);
       }
+    }
 
-      if (shift) {
-        childrenArray.push(<Shift />);
-      }
+    return childrenArray;
+  };
 
-      if (alt) {
-        childrenArray.push(<Option />);
-      }
-
-      if (ctrl) {
-        childrenArray.push(<Control />);
-      }
-
-      if (typeof children === 'string') {
-        for (const key of children) {
-          childrenArray.push(key);
-        }
-      }
-
-      return childrenArray;
-    };
-
-    return (
-      <kbd className={kbdStyles({ className, size })} ref={ref} {...props}>
-        {getChildren()}
-      </kbd>
-    );
-  }
-);
-Kbd.displayName = 'Kbd';
+  return (
+    <kbd className={kbdStyles({ className, size })} {...props}>
+      {getChildren()}
+    </kbd>
+  );
+};
 
 export { Kbd };
 
@@ -85,9 +79,9 @@ const Command = (props: React.ComponentProps<'svg'>) => {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       {...props}
     >
       <title>Command key Icon</title>
@@ -106,9 +100,9 @@ const Option = (props: React.ComponentProps<'svg'>) => {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       {...props}
     >
       <title>Option key Icon</title>
@@ -128,9 +122,9 @@ const Shift = (props: React.ComponentProps<'svg'>) => {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       {...props}
     >
       <title>Shift key Icon</title>
@@ -149,9 +143,9 @@ const Control = (props: React.ComponentProps<'svg'>) => {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       {...props}
     >
       <title>Control key Icon</title>
