@@ -40,7 +40,7 @@ const links: Link[] = [
 
 export function Footer() {
   return (
-    <footer className="flex items-center justify-center bg-transparent py-5">
+    <footer className="z-20 flex items-center justify-center bg-transparent py-5 gap-5 mb-1">
       {links.map((link, index) => (
         <LinkComponent key={link.url} link={link} index={index} />
       ))}
@@ -49,7 +49,7 @@ export function Footer() {
 }
 
 const linkVariants = cva({
-  base: 'group mb-1 ml-5 flex items-center gap-1 border-0 text-secondary transition-colors duration-200 ease-in-out hover:opacity-100 focus:text-primary focus:opacity-100',
+  base: 'group flex items-center gap-1 border-0 text-secondary transition-colors duration-200 ease-in-out hover:opacity-100 focus:text-primary focus:opacity-100',
   variants: {
     variant: {
       default: 'hover:text-primary',

@@ -18,7 +18,7 @@
     "build": "SKIP_ENV_VALIDATION=1 next build",
     "start": "next start",
     "check": "biome check .",
-    "check:fix": "biome check . --apply",
+    "check:fix": "biome check . --write",
     "format": "prettier --write --plugin-search-dir=. **/*.{cjs,mjs,ts,tsx}",
     "format:check": "prettier --check *.{cjs,md,json} --ignore-unknown --no-error-on-unmatched-pattern",
     "typecheck": "tsc --noEmit"

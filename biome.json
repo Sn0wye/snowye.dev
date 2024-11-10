@@ -34,7 +34,7 @@
     "formatter": {
       "jsxQuoteStyle": "double",
       "quoteStyle": "single",
-      "trailingComma": "none",
+      "trailingCommas": "none",
       "arrowParentheses": "asNeeded",
       "bracketSpacing": true,
       "quoteProperties": "preserve"
