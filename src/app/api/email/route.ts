@@ -47,7 +47,7 @@ export const POST = async (req: Request) => {
         );
       }
       const { data } = parsedBody;
-      const emailHtml = render(
+      const emailHtml = await render(
         EmailTemplate({
           message: data.message,
           name: data.name
