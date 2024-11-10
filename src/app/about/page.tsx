@@ -1,11 +1,11 @@
 import { Base } from '@/components/base';
+import { Pronunciation } from '@/components/pronunciation';
 import { env } from '@/env';
 import { about } from '@/locales/en/pages/about';
 import { stripHtml } from '@/utils/stripHtml';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Career } from './career';
-import { Pronunciation } from '@/components/pronunciation';
 
 export const metadata = {
   metadataBase:
@@ -41,24 +41,24 @@ export default function About() {
       primaryColor={meta.primaryColor}
       secondaryColor={meta.secondaryColor}
     >
-      <div className='flex flex-col justify-between md:flex-row'>
-        <section className='mt-0 w-auto md:w-[48%]'>
+      <div className="flex flex-col justify-between md:flex-row">
+        <section className="mt-0 w-auto md:w-[48%]">
           <Image
-            alt='Gabriel Trzimajewski'
-            src='/static/images/me.jpeg'
+            alt="Gabriel Trzimajewski"
+            src="/static/images/me.jpeg"
             width={336}
             height={336}
             style={{
               width: 'auto',
               height: 'auto'
             }}
-            placeholder='blur'
-            blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAP0lEQVQImQE0AMv/AFBQUJKSkqmpqaOjowCurq7v7+/Jycm5ubkA////jIyMn5+fg4ODADAwMD09PWlpaQAAAApRGnEHblMWAAAAAElFTkSuQmCC'
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAP0lEQVQImQE0AMv/AFBQUJKSkqmpqaOjowCurq7v7+/Jycm5ubkA////jIyMn5+fg4ODADAwMD09PWlpaQAAAApRGnEHblMWAAAAAElFTkSuQmCC"
             priority
           />
         </section>
-        <section className='mt-0 w-auto md:w-[48%]'>
-          <p className='mt-4 md:-mt-1.5'>
+        <section className="mt-0 w-auto md:w-[48%]">
+          <p className="mt-4 md:-mt-1.5">
             <strong>Hey, I&apos;m Gabriel Trzimajewski!</strong>
             <Pronunciation /> I’m a self taught guy who lives, loves and learns,
             listens to a lot of music, loves coding, traveling and playing
@@ -66,9 +66,9 @@ export default function About() {
             and then I discovered the beauty of JavaScript at{' '}
             <strong>
               <a
-                href='https://rocketseat.com.br'
-                target='_blank'
-                rel='noreferrer'
+                href="https://rocketseat.com.br"
+                target="_blank"
+                rel="noreferrer"
               >
                 Rocketseat
               </a>
@@ -77,7 +77,7 @@ export default function About() {
           </p>
           <p>
             I&apos;m currently working at{' '}
-            <a href='https://mundoinvest.com.br'>Mundo Invest</a> as a{' '}
+            <a href="https://mundoinvest.com.br">Mundo Invest</a> as a{' '}
             <strong>Backend Tech Lead</strong> and trying to improve my hard and
             soft skills as well. I&apos;m from Brazil and a big fan of{' '}
             <strong>twenty one pilots</strong>.
@@ -85,8 +85,8 @@ export default function About() {
         </section>
       </div>
 
-      <div className='flex flex-col justify-between md:flex-row'>
-        <section className='mt-0 w-auto md:w-[48%]'>
+      <div className="flex flex-col justify-between md:flex-row">
+        <section className="mt-0 w-auto md:w-[48%]">
           <p>
             Throughout my career, I have demonstrated{' '}
             <strong>strong problem-solving</strong> skills, a solid
@@ -97,18 +97,18 @@ export default function About() {
             <strong>Cloud Services</strong>.
           </p>
         </section>
-        <section className='mt-0 w-auto md:w-[48%]'>
+        <section className="mt-0 w-auto md:w-[48%]">
           <Image
-            alt='Gabriel Trzimajewski'
-            src='/static/images/me2.jpeg'
+            alt="Gabriel Trzimajewski"
+            src="/static/images/me2.jpeg"
             width={336}
             height={336}
             style={{
               width: 'auto',
               height: 'auto'
             }}
-            placeholder='blur'
-            blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAP0lEQVQImQE0AMv/AFBQUJKSkqmpqaOjowCurq7v7+/Jycm5ubkA////jIyMn5+fg4ODADAwMD09PWlpaQAAAApRGnEHblMWAAAAAElFTkSuQmCC'
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAP0lEQVQImQE0AMv/AFBQUJKSkqmpqaOjowCurq7v7+/Jycm5ubkA////jIyMn5+fg4ODADAwMD09PWlpaQAAAApRGnEHblMWAAAAAElFTkSuQmCC"
             priority
           />
         </section>

@@ -19,11 +19,11 @@ export const Career = () => {
             <h3>{jobTitle}</h3>
             <p style={{ margin: 0 }}>
               {companyUrl ? (
-                <a href={companyUrl} target='_blank' rel='noreferrer'>
+                <a href={companyUrl} target="_blank" rel="noreferrer">
                   {company}
                 </a>
               ) : (
-                <span className='cursor-default border-b border-solid border-primary text-primary no-underline transition-opacity duration-200 ease-in-out'>
+                <span className="cursor-default border-b border-solid border-primary text-primary no-underline transition-opacity duration-200 ease-in-out">
                   {company}
                 </span>
               )}
