@@ -3,16 +3,30 @@
 import Lottie from 'lottie-react';
 import dynamic from 'next/dynamic';
 import lottieAnimation from '../../public/static/icons/404.json';
+import { usePlausible } from 'next-plausible';
+import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
 
 const ShortcutError = dynamic(() => import('@/components/shortcut-error'), {
   ssr: false
 });
 
 export default function NotFound() {
+  const pathname = usePathname();
+  const plausible = usePlausible();
+
+  useEffect(() => {
+    plausible('404', {
+      props: {
+        path: pathname
+      }
+    });
+  }, [plausible, pathname]);
+
   return (
-    <div className="flex flex-1 flex-col items-center justify-center px-5 py-navHeightMobile">
+    <div className='flex flex-1 flex-col items-center justify-center px-5 py-navHeightMobile'>
       <h1>four oh four</h1>
-      <div className="flex justify-center">
+      <div className='flex justify-center'>
         <Lottie
           animationData={lottieAnimation}
           loop={true}
