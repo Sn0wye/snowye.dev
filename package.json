@@ -37,7 +37,7 @@
     "@tsparticles/slim": "^3.2.1",
     "@upstash/ratelimit": "^1.0.1",
     "@vercel/analytics": "^1.2.2",
-    "@vercel/kv": "^1.0.1",
+    "@vercel/kv": "^3.0.0",
     "clsx": "^2.1.0",
     "cmdk": "^1.0.0",
     "cva": "1.0.0-beta.1",
