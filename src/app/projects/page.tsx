@@ -6,6 +6,7 @@ import { stripHtml } from '@/utils/stripHtml';
 import type { Metadata } from 'next';
 import { AllProjects } from './all-projects';
 import { FeaturedProjects } from './featured-projects';
+import { Crafts } from './crafts';
 
 const totalProjects = getTotalProjects(projectsData);
 const description = (
@@ -43,19 +44,18 @@ export default function Projects() {
       {description}
 
       <h2>{projects.featured}</h2>
-      <FeaturedProjects
-        featured={[
-          'Personal Portfolio',
-          'Portfólio Pessoal',
-          'Spaces',
-          'iFinance',
-          'duque.dev',
-          'Snowye UI (WIP)'
-        ]}
-      />
+      <FeaturedProjects />
 
-      <h2>{projects.all}</h2>
-      <AllProjects />
+      <div className='grid grid-cols-2'>
+        <div>
+          <h2>{projects.all}</h2>
+          <AllProjects />
+        </div>
+        <div>
+          <h2>{projects.crafts}</h2>
+          <Crafts />
+        </div>
+      </div>
     </Base>
   );
 }
