@@ -58,7 +58,7 @@
     "tailwind-merge": "^2.2.1",
     "typewriter-effect": "^2.21.0",
     "zod": "^3.22.4",
-    "zustand": "^4.5.0"
+    "zustand": "^5.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
