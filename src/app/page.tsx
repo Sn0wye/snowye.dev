@@ -23,8 +23,8 @@ export default function Home() {
         <h1 className="bg-gradient-to-r from-[#9442FE] to-[#3378FF] bg-clip-text text-transparent">
           {home.title}
         </h1>
-        <div>
-          {/* biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation> */}
+        <div className="flex flex-col">
+          {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Intended innerHTML */}
           <strong dangerouslySetInnerHTML={{ __html: home.meta }} />
           <Typewriter strings={home.description} />
         </div>

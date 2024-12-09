@@ -16,7 +16,7 @@ export const FeaturedProjects = () => {
     );
 
   return (
-    <motion.div className='-mb-5 mt-2.5 flex flex-col flex-wrap md:flex-row'>
+    <motion.div className="-mb-5 mt-2.5 flex flex-col flex-wrap md:flex-row">
       {featuredProjects.map(item => (
         <FeaturedProject
           key={item.id}

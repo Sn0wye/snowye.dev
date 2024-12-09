@@ -22,14 +22,14 @@ export function FeaturedProject({
 
   return (
     <motion.a
-      className='relative flex min-w-[200px] flex-col rounded-lg border-0 p-5 no-underline transition-opacity duration-200 ease-in-out hover:opacity-100 md:w-[180px] md:max-w-[8.75rem]'
+      className="relative flex min-w-[200px] flex-col rounded-lg border-0 p-5 no-underline transition-opacity duration-200 ease-in-out hover:opacity-100 md:w-[180px] md:max-w-[8.75rem]"
       href={url}
-      target='_blank'
+      target="_blank"
       onHoverStart={() => onHover(title)}
       onHoverEnd={() => onHover('')}
       onMouseEnter={() => iconRef.current?.play()}
       onMouseLeave={() => iconRef.current?.stop()}
-      rel='noreferrer'
+      rel="noreferrer"
     >
       <Lottie
         lottieRef={iconRef}
@@ -38,19 +38,19 @@ export function FeaturedProject({
         loop={false}
         autoplay={false}
       />
-      <div className='flex-[1_1_auto]'>
-        <h3 className='m-0 mb-1 p-0 text-lg text-primary'>{title}</h3>
-        <p className='m-0 leading-6'>{description}</p>
+      <div className="flex-[1_1_auto]">
+        <h3 className="m-0 mb-1 p-0 text-lg text-primary">{title}</h3>
+        <p className="m-0 leading-6">{description}</p>
         {stats && (
-          <span className='mt-1 inline-block text-xs font-medium uppercase tracking-wider text-primary'>
+          <span className="mt-1 inline-block text-xs font-medium uppercase tracking-wider text-primary">
             {stats}
           </span>
         )}
       </div>
       {isHovered && (
         <motion.span
-          className='absolute inset-0 -z-10 rounded-lg bg-hover'
-          layoutId='projects'
+          className="absolute inset-0 -z-10 rounded-lg bg-hover"
+          layoutId="projects"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

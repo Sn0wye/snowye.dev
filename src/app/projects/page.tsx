@@ -5,8 +5,8 @@ import { getTotalProjects } from '@/utils/getTotalProjects';
 import { stripHtml } from '@/utils/stripHtml';
 import type { Metadata } from 'next';
 import { AllProjects } from './all-projects';
-import { FeaturedProjects } from './featured-projects';
 import { Crafts } from './crafts';
+import { FeaturedProjects } from './featured-projects';
 
 const totalProjects = getTotalProjects(projectsData);
 const description = (
@@ -46,7 +46,7 @@ export default function Projects() {
       <h2>{projects.featured}</h2>
       <FeaturedProjects />
 
-      <div className='grid grid-cols-2'>
+      <div className="grid grid-cols-2">
         <div>
           <h2>{projects.all}</h2>
           <AllProjects />
