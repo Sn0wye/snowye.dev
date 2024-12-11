@@ -34,10 +34,10 @@ importers:
         version: 0.11.1(typescript@5.7.2)(zod@3.23.8)
       '@tsparticles/engine':
         specifier: ^3.2.1
-        version: 3.6.0
+        version: 3.7.1
       '@tsparticles/react':
         specifier: ^3.0.0
-        version: 3.0.0(@tsparticles/engine@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 3.0.0(@tsparticles/engine@3.7.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tsparticles/slim':
         specifier: ^3.2.1
         version: 3.6.0
@@ -1012,8 +1012,8 @@ packages:
   '@tsparticles/basic@3.6.0':
     resolution: {integrity: sha512-VWSOTCURUFumvSkxm0ol2ZZ5zCJjwppnHKwt1I6TYRQ2PFUBVJsCpiuEHDWvIAGl6/ZQxgrVBBi+J3+J+edMqQ==}
 
-  '@tsparticles/engine@3.6.0':
-    resolution: {integrity: sha512-iDBD0ZTTtoI5WwZkcjAgMVP2oCK2GkNgO7/Eipsfb8ZWKxtD/niGI14ynVQ31sBzp/weARwTxc4BTpbMeQHCGg==}
+  '@tsparticles/engine@3.7.1':
+    resolution: {integrity: sha512-GYzBgq/oOE9YJdOL1++MoawWmYg4AvVct6CIrJGx84ZRb3U2owYmLsRGabYl0qX1CWWOvUG569043RJmyp/vQA==}
 
   '@tsparticles/interaction-external-attract@3.6.0':
     resolution: {integrity: sha512-Dz3ekytC8yW8jm8vbFVGolOqf5nUmD+xU8Cj9SuiXwgvfvYOCEHguhnTlloHvw8Cxi/DDSskKvHU3xtSG3QacQ==}
@@ -3668,7 +3668,7 @@ snapshots:
 
   '@tsparticles/basic@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
       '@tsparticles/move-base': 3.6.0
       '@tsparticles/shape-circle': 3.6.0
       '@tsparticles/updater-color': 3.6.0
@@ -3676,110 +3676,110 @@ snapshots:
       '@tsparticles/updater-out-modes': 3.6.0
       '@tsparticles/updater-size': 3.6.0
 
-  '@tsparticles/engine@3.6.0': {}
+  '@tsparticles/engine@3.7.1': {}
 
   '@tsparticles/interaction-external-attract@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/interaction-external-bounce@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/interaction-external-bubble@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/interaction-external-connect@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/interaction-external-grab@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/interaction-external-pause@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/interaction-external-push@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/interaction-external-remove@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/interaction-external-repulse@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/interaction-external-slow@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/interaction-particles-attract@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/interaction-particles-collisions@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/interaction-particles-links@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/move-base@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/move-parallax@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/plugin-easing-quad@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
-  '@tsparticles/react@3.0.0(@tsparticles/engine@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@tsparticles/react@3.0.0(@tsparticles/engine@3.7.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
   '@tsparticles/shape-circle@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/shape-emoji@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/shape-image@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/shape-line@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/shape-polygon@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/shape-square@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/shape-star@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/slim@3.6.0':
     dependencies:
       '@tsparticles/basic': 3.6.0
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
       '@tsparticles/interaction-external-attract': 3.6.0
       '@tsparticles/interaction-external-bounce': 3.6.0
       '@tsparticles/interaction-external-bubble': 3.6.0
@@ -3807,31 +3807,31 @@ snapshots:
 
   '@tsparticles/updater-color@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/updater-life@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/updater-opacity@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/updater-out-modes@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/updater-rotate@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/updater-size@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@tsparticles/updater-stroke-color@3.6.0':
     dependencies:
-      '@tsparticles/engine': 3.6.0
+      '@tsparticles/engine': 3.7.1
 
   '@types/estree@1.0.6': {}
 
