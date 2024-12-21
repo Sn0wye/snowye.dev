@@ -122,7 +122,7 @@ importers:
         version: 4.4.0(prettier@3.4.2)
       '@next/eslint-plugin-next':
         specifier: ^14.1.0
-        version: 14.2.20
+        version: 14.2.21
       '@sn0wye/eslint-config':
         specifier: ^3.0.0
         version: 3.0.1(eslint@9.17.0(jiti@2.4.2))(typescript@5.7.2)
@@ -499,6 +499,9 @@ packages:
 
   '@next/eslint-plugin-next@14.2.20':
     resolution: {integrity: sha512-T0JRi706KLbvR1Uc46t56VtawbhR/igdBagzOrA7G+vv4rvjwnlu/Y4/Iq6X9TDVj5UZjyot4lUdkNd3V2kLhw==}
+
+  '@next/eslint-plugin-next@14.2.21':
+    resolution: {integrity: sha512-bxfiExnMkpwo4bBhCqnDhdgFyxSp6Xt6xu4Ne7En6MpgqwiER95Or+q1WDUDX4e888taeIAdPIAVaY+Wv0kiwQ==}
 
   '@next/swc-darwin-arm64@14.2.20':
     resolution: {integrity: sha512-WDfq7bmROa5cIlk6ZNonNdVhKmbCv38XteVFYsxea1vDJt3SnYGgxLGMTXQNfs5OkFvAhmfKKrwe7Y0Hs+rWOg==}
@@ -3282,6 +3285,10 @@ snapshots:
   '@next/env@14.2.20': {}
 
   '@next/eslint-plugin-next@14.2.20':
+    dependencies:
+      glob: 10.3.10
+
+  '@next/eslint-plugin-next@14.2.21':
     dependencies:
       glob: 10.3.10
 
