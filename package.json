@@ -83,7 +83,7 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "5.7.2"
   },
-  "packageManager": "pnpm@9.15.2",
+  "packageManager": "pnpm@9.15.3",
   "engines": {
     "node": "20.x"
   }
