@@ -1,12 +1,7 @@
+import ClientOpenCommandPalette from '@/components/client-open-command-palette';
 import { home } from '@/locales/en/pages/home';
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
 import { Typewriter } from './typewriter';
-
-const OpenCommandPalette = dynamic(
-  () => import('@/components/open-command-palette'),
-  { ssr: false }
-);
 
 export const metadata = {
   title: home.title,
@@ -28,7 +23,7 @@ export default function Home() {
           <strong dangerouslySetInnerHTML={{ __html: home.meta }} />
           <Typewriter strings={home.description} />
         </div>
-        <OpenCommandPalette />
+        <ClientOpenCommandPalette />
       </main>
     </div>
   );

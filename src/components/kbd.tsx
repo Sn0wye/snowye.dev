@@ -36,24 +36,27 @@ const Kbd = ({
     const childrenArray: React.ReactNode[] = [];
 
     if (meta) {
-      childrenArray.push(<Command />);
+      childrenArray.push(<Command key="meta" />);
     }
 
     if (shift) {
-      childrenArray.push(<Shift />);
+      childrenArray.push(<Shift key="shift" />);
     }
 
     if (alt) {
-      childrenArray.push(<Option />);
+      childrenArray.push(<Option key="alt" />);
     }
 
     if (ctrl) {
-      childrenArray.push(<Control />);
+      childrenArray.push(<Control key="ctrl" />);
     }
 
     if (typeof children === 'string') {
-      for (const key of children) {
-        childrenArray.push(key);
+      let charIndex = 0;
+      for (const char of children) {
+        childrenArray.push(
+          <span key={`char-${char}-${charIndex++}`}>{char}</span>
+        );
       }
     }
 
