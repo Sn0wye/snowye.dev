@@ -7,7 +7,7 @@ import '../styles/globals.css';
 import { CommandPalette } from '@/components/command-palette';
 import { Footer } from '@/components/footer';
 import { Navbar } from '@/components/navbar';
-import { SparklesCore } from '@/components/sparkles';
+import Particles from '@/components/particles';
 import { Toaster } from '@/components/toaster';
 import { Analytics } from '@vercel/analytics/react';
 import PlausibleProvider from 'next-plausible';
@@ -116,19 +116,18 @@ export default function RootLayout({
         )}
       >
         <div className="relative z-0 flex min-h-screen flex-col">
-          {/* {env.NODE_ENV === 'production' && ( */}
           <div className="absolute inset-0 h-full w-full">
-            <SparklesCore
-              id="tsparticlesfullpage"
-              background="transparent"
-              minSize={0.6}
-              maxSize={1.4}
-              particleDensity={100}
-              className="h-full w-full"
-              particleColor="#FFFFFF"
+            <Particles
+              particleColors={['#ffffff', '#ffffff']}
+              particleCount={200}
+              particleSpread={10}
+              speed={0.1}
+              particleBaseSize={100}
+              moveParticlesOnHover={true}
+              alphaParticles={false}
+              disableRotation={false}
             />
           </div>
-          {/* )} */}
           <Navbar />
           {children}
           <Footer />
