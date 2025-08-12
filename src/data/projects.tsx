@@ -147,11 +147,18 @@ type Craft = {
 
 export const crafts: {
   year: number;
-  crafs: Craft[];
+  crafts: Craft[];
 }[] = [
   {
     year: 2024,
-    crafs: [
+    crafts: [
+      {
+        id: '570ec5fb-60ef-48bb-b827-b173f0bd9353',
+        title: 'Investment Comparator',
+        url: 'https://investment-comparator.vercel.app',
+        description:
+          'A comparator for Brazilian fixed-income investments (CDB, LCI, LCA).'
+      },
       {
         id: '932d4363-ae5d-41c8-a2d6-3328e2afeaef',
         title: 'Onboarding',

@@ -7,7 +7,7 @@ export const Crafts = () => {
         <div key={item.year}>
           <h3>{item.year}</h3>
           <ul>
-            {item.crafs.map(project => (
+            {item.crafts.map(project => (
               <li key={project.id}>
                 <a href={project.url} target="_blank" rel="noreferrer">
                   {project.title}

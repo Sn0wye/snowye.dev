@@ -77,9 +77,9 @@ export default function About() {
           </p>
           <p>
             I&apos;m currently working at{' '}
-            <a href="https://mundoinvest.com.br">Mundo Invest</a> as a{' '}
-            <strong>Backend Tech Lead</strong> and trying to improve my hard and
-            soft skills as well. I&apos;m from Brazil and a big fan of{' '}
+            <a href="https://banco.bradesco">Bradesco</a> as a{' '}
+            <strong>Senior Software Engineer</strong> and trying to improve my
+            hard and soft skills as well. I&apos;m from Brazil and a big fan of{' '}
             <strong>twenty one pilots</strong>.
           </p>
         </section>
