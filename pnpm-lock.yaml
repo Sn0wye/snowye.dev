@@ -34,10 +34,10 @@ importers:
         version: 0.11.1(typescript@5.9.2)(zod@3.24.1)
       '@tsparticles/engine':
         specifier: ^3.2.1
-        version: 3.8.0
+        version: 3.9.1
       '@tsparticles/react':
         specifier: ^3.0.0
-        version: 3.0.0(@tsparticles/engine@3.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 3.0.0(@tsparticles/engine@3.9.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tsparticles/slim':
         specifier: ^3.2.1
         version: 3.8.0
@@ -1365,6 +1365,9 @@ packages:
 
   '@tsparticles/engine@3.8.0':
     resolution: {integrity: sha512-mqdSG4gkLbOUck/Wqk8rR4duc6NCnmtJfSPkIvVOUpo/jk2kAGaxRVSU9n0sySxZRx+CGbpAFVVdjdtB1N+70A==}
+
+  '@tsparticles/engine@3.9.1':
+    resolution: {integrity: sha512-DpdgAhWMZ3Eh2gyxik8FXS6BKZ8vyea+Eu5BC4epsahqTGY9V3JGGJcXC6lRJx6cPMAx1A0FaQAojPF3v6rkmQ==}
 
   '@tsparticles/interaction-external-attract@3.8.0':
     resolution: {integrity: sha512-zt79aCFELp/w2Ypo9w8hKv6x2YJZMu4VtSixNVIT7RJ13/vopdfHI5TjbnD6jCbYQDw35UdTWj2PwSx87KMjJQ==}
@@ -5058,6 +5061,8 @@ snapshots:
 
   '@tsparticles/engine@3.8.0': {}
 
+  '@tsparticles/engine@3.9.1': {}
+
   '@tsparticles/interaction-external-attract@3.8.0':
     dependencies:
       '@tsparticles/engine': 3.8.0
@@ -5134,9 +5139,9 @@ snapshots:
     dependencies:
       '@tsparticles/engine': 3.8.0
 
-  '@tsparticles/react@3.0.0(@tsparticles/engine@3.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@tsparticles/react@3.0.0(@tsparticles/engine@3.9.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@tsparticles/engine': 3.8.0
+      '@tsparticles/engine': 3.9.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
