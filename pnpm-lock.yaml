@@ -109,7 +109,7 @@ importers:
         version: 2.6.0
       typewriter-effect:
         specifier: ^2.21.0
-        version: 2.21.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 2.22.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       zod:
         specifier: ^3.22.4
         version: 3.24.1
@@ -3494,11 +3494,11 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  typewriter-effect@2.21.0:
-    resolution: {integrity: sha512-Y3VL1fuJpUBj0gS4OTXBLzy1gnYTYaBuVuuO99tGNyTkkub5CXi+b/hsV7Og9fp6HlhogOwWJwgq7iXI5sQlEg==}
+  typewriter-effect@2.22.0:
+    resolution: {integrity: sha512-01HCRYY462wT8Fxps/epwGCioZd/GMXY0aLKhFKrfJ5Xhgf54/SiDx7Oq7PoES5kGqOEAdW8FS8HYVM2WSvfhQ==}
     peerDependencies:
-      react: ^17.x || ^18.x
-      react-dom: ^17.x || ^18.x
+      react: '>=17.0.0'
+      react-dom: '>=17.0.0'
 
   unbox-primitive@1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}
@@ -7601,7 +7601,7 @@ snapshots:
 
   typescript@5.9.2: {}
 
-  typewriter-effect@2.21.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  typewriter-effect@2.22.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       prop-types: 15.8.1
       raf: 3.4.1
