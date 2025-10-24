@@ -15,6 +15,19 @@ export interface Project {
 
 export const projects: Projects = [
   {
+    year: 2025,
+    projects: [
+      {
+        id: 'af02f8ed-5c06-4993-a4e5-996db2d48472',
+        title: 'Bradesco',
+        url: 'https://banco.bradesco',
+        description: 'The bank with the most clients in Brazil.',
+        iconName: 'bank',
+        featured: true
+      }
+    ]
+  },
+  {
     year: 2024,
     projects: [
       {
@@ -24,7 +37,7 @@ export const projects: Projects = [
         description:
           'A platform that guides your investments and financial planning to achieve your goals.',
         iconName: 'coins',
-        featured: true
+        featured: false
       }
     ]
   },
