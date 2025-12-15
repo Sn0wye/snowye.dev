@@ -1,9 +1,9 @@
 'use client';
 
-import { cn } from '@/lib/cn';
 import { Camera, Geometry, Mesh, Program, Renderer } from 'ogl';
 import type React from 'react';
 import { useEffect, useRef } from 'react';
+import { cn } from '@/lib/cn';
 
 interface ParticlesProps {
   particleCount?: number;

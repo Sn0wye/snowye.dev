@@ -1,4 +1,4 @@
-import { type VariantProps, cva } from 'cva';
+import { cva, type VariantProps } from 'cva';
 import type * as React from 'react';
 
 export type KbdProps = React.ComponentProps<'kbd'> &

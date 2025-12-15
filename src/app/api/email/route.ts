@@ -1,11 +1,11 @@
-import { EmailTemplate } from '@/email/EmailTemplate';
-import { env } from '@/env';
-import { emailSchema } from '@/schemas/emails';
 import { render } from '@react-email/components';
 import { Ratelimit } from '@upstash/ratelimit';
 import { kv } from '@vercel/kv';
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { EmailTemplate } from '@/email/EmailTemplate';
+import { env } from '@/env';
+import { emailSchema } from '@/schemas/emails';
 
 const ratelimit = new Ratelimit({
   redis: kv,
