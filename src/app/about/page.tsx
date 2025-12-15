@@ -1,10 +1,10 @@
+import type { Metadata } from 'next';
+import Image from 'next/image';
 import { Base } from '@/components/base';
 import { Pronunciation } from '@/components/pronunciation';
 import { env } from '@/env';
 import { about } from '@/locales/en/pages/about';
 import { stripHtml } from '@/utils/stripHtml';
-import type { Metadata } from 'next';
-import Image from 'next/image';
 import { Career } from './career';
 
 export const metadata = {

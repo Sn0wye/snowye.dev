@@ -40,6 +40,15 @@
     @apply mt-14 font-heading text-2xl text-primary;
   }
 
+  a {
+    @apply border-b border-solid border-primary text-primary no-underline transition-opacity duration-200 ease-in-out;
+  }
+
+  a:hover,
+  a:focus {
+    @apply opacity-80;
+  }
+
   h3,
   h3 a {
     @apply mt-5 text-lg font-bold text-primary;
@@ -63,14 +72,5 @@
 
   blockquote {
     @apply border-l-4 border-solid border-hover pl-5 italic text-secondary;
-  }
-
-  a {
-    @apply border-b border-solid border-primary text-primary no-underline transition-opacity duration-200 ease-in-out;
-  }
-
-  a:hover,
-  a:focus {
-    @apply opacity-80;
   }
 }

@@ -1,6 +1,6 @@
+import type { Metadata } from 'next';
 import ClientOpenCommandPalette from '@/components/client-open-command-palette';
 import { home } from '@/locales/en/pages/home';
-import type { Metadata } from 'next';
 import { Typewriter } from './typewriter';
 
 export const metadata = {
@@ -19,7 +19,6 @@ export default function Home() {
           {home.title}
         </h1>
         <div className="flex flex-col">
-          {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Intended innerHTML */}
           <strong dangerouslySetInnerHTML={{ __html: home.meta }} />
           <Typewriter strings={home.description} />
         </div>

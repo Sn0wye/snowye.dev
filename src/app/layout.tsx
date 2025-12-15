@@ -1,16 +1,16 @@
-import { cn } from '@/lib/cn';
 import type { Metadata, Viewport } from 'next';
 // eslint-disable-next-line camelcase
 import { Fira_Code } from 'next/font/google';
 import localFont from 'next/font/local';
+import { cn } from '@/lib/cn';
 import '../styles/globals.css';
+import { Analytics } from '@vercel/analytics/react';
+import PlausibleProvider from 'next-plausible';
 import { CommandPalette } from '@/components/command-palette';
 import { Footer } from '@/components/footer';
 import { Navbar } from '@/components/navbar';
 import Particles from '@/components/particles';
 import { Toaster } from '@/components/toaster';
-import { Analytics } from '@vercel/analytics/react';
-import PlausibleProvider from 'next-plausible';
 
 const fontSans = localFont({
   src: [

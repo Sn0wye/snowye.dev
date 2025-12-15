@@ -6,7 +6,7 @@ import Lottie, {
   type LottieRefCurrentProps
 } from 'lottie-react';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useRef, useState, type ReactElement } from 'react';
+import React, { type ReactElement, useEffect, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { create } from 'zustand';
 import aboutIcon from '../../public/static/icons/about.json';

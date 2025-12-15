@@ -1,7 +1,7 @@
+import type { Metadata } from 'next';
 import { Base } from '@/components/base';
 import { contact } from '@/locales/en/pages/contact';
 import { stripHtml } from '@/utils/stripHtml';
-import type { Metadata } from 'next';
 import { ContactForm } from './contact-form';
 
 export const metadata = {

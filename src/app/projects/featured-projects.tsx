@@ -1,9 +1,9 @@
 'use client';
 
-import { FeaturedProject } from '@/components/featured-project';
-import { projects } from '@/data/projects';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { FeaturedProject } from '@/components/featured-project';
+import { projects } from '@/data/projects';
 
 export const FeaturedProjects = () => {
   const featuredOrder = ['Mundo Invest', 'Personal Portfolio'];

@@ -1,9 +1,9 @@
+import type { Metadata } from 'next';
 import { Base } from '@/components/base';
 import { projects as projectsData } from '@/data/projects';
 import { projects } from '@/locales/en/pages/projects';
 import { getTotalProjects } from '@/utils/getTotalProjects';
 import { stripHtml } from '@/utils/stripHtml';
-import type { Metadata } from 'next';
 import { AllProjects } from './all-projects';
 import { Crafts } from './crafts';
 import { FeaturedProjects } from './featured-projects';

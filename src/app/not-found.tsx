@@ -1,9 +1,9 @@
 'use client';
 
 import Lottie from 'lottie-react';
-import { usePlausible } from 'next-plausible';
 import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
+import { usePlausible } from 'next-plausible';
 import { useEffect } from 'react';
 import lottieAnimation from '../../public/static/icons/404.json';
 
