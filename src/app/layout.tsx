@@ -96,12 +96,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <head>
         <PlausibleProvider
           selfHosted
-          domain="snowye.dev"
-          customDomain="https://plausible.snowye.dev"
+          domain='snowye.dev'
+          customDomain='https://plausible.snowye.dev'
           taggedEvents
           trackLocalhost
           enabled={true}
@@ -115,16 +115,15 @@ export default function RootLayout({
           fontHeading.variable
         )}
       >
-        <div className="relative z-0 flex min-h-screen flex-col">
-          <div className="absolute inset-0 h-full w-full">
+        <div className='relative z-0 flex min-h-screen flex-col'>
+          <div className='absolute inset-0 h-full w-full'>
             <Particles
-              particleColors={['#ffffff', '#ffffff']}
-              particleCount={200}
-              particleSpread={10}
-              speed={0.1}
+              particleColors={['#ffffff']}
+              particleCount={150}
+              particleSpread={20}
+              speed={0.05}
               particleBaseSize={100}
-              moveParticlesOnHover={true}
-              alphaParticles={false}
+              alphaParticles
               disableRotation={false}
             />
           </div>
