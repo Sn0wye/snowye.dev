@@ -118,12 +118,10 @@ export default function RootLayout({
         <div className='relative z-0 flex min-h-screen flex-col'>
           <div className='absolute inset-0 h-full w-full'>
             <Particles
-              particleColors={['#ffffff']}
               particleCount={150}
               particleSpread={20}
               speed={0.05}
               particleBaseSize={100}
-              alphaParticles
               disableRotation={false}
             />
           </div>
