@@ -10,13 +10,18 @@ export const kbar = {
     source: 'Ver Código Fonte',
     home: 'Início',
     about: 'Sobre',
-    projects: 'Projetos'
+    projects: 'Projetos',
+    switchToEn: 'Mudar para Inglês',
+    switchToPt: 'Mudar para Português'
   },
   sections: {
     general: 'Geral',
     goto: 'Ir Para',
-    follow: 'Seguir'
+    follow: 'Seguir',
+    language: 'Idioma'
   },
+  placeholder: 'Do que você precisa?',
+  empty: 'Nenhum resultado encontrado.',
   toast: {
     title: 'Copiado :D',
     description: 'Agora você pode compartilhar com seus amigos.'

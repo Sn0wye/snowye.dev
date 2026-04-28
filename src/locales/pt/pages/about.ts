@@ -3,6 +3,14 @@ export const about = {
   description:
     'Sou um engenheiro backend autodidata que gosta de construir sistemas distribuídos confiáveis, quebrar coisas de propósito e ajudar as pessoas ao longo do caminho.',
   tagline: 'Codar. Dormir. Repetir.',
+  pronunciation: {
+    label: 'Como pronunciar Trzimajewski',
+    surname: 'Trzimajewski',
+    spell: 'tri ma jés ki',
+    ipa: 'tɾi maˈʒɛs.ki',
+    spellLabel: 'Mais ou menos',
+    ipaLabel: 'IPA'
+  },
   bio: {
     p1: 'Hey, eu sou o <strong>Gabriel Trzimajewski</strong>! Sou um cara autodidata que vive, ama e aprende, escuta muita música, ama programar, viajar e tocar piano. Sempre fui apaixonado por computadores desde criança, e descobri a beleza do JavaScript na <strong><a href="https://rocketseat.com.br" target="_blank" rel="noreferrer">Rocketseat</a></strong> no início de 2020.',
     p2: 'Atualmente sou <strong>Engenheiro de Software</strong> no <a href="https://banco.bradesco" target="_blank" rel="noreferrer">Bradesco</a>, trabalhando no time Open construindo uma plataforma interna de processamento de logs e observabilidade usada em <strong>escala bancária</strong> para investigação de incidentes e monitoramento de sistemas. Sou Brasileiro com muito orgulho e fã de carteirinha do <strong>twenty one pilots</strong>.',

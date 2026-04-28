@@ -12,6 +12,7 @@ import { Footer } from '@/components/footer';
 import { Navbar } from '@/components/navbar';
 import Particles from '@/components/particles';
 import { Toaster } from '@/components/toaster';
+import { TooltipProvider } from '@/components/tooltip';
 import { messages } from '@/i18n/messages';
 import { routing } from '@/i18n/routing';
 import { cn } from '@/lib/cn';
@@ -137,22 +138,24 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
           locale={locale}
           messages={messages[locale] as unknown as Record<string, unknown>}
         >
-          <div className="relative z-0 flex min-h-screen flex-col">
-            <div className="absolute inset-0 h-full w-full">
-              <Particles
-                particleCount={150}
-                particleSpread={20}
-                speed={0.05}
-                particleBaseSize={100}
-                disableRotation={false}
-              />
+          <TooltipProvider delayDuration={150}>
+            <div className="relative z-0 flex min-h-screen flex-col">
+              <div className="absolute inset-0 h-full w-full">
+                <Particles
+                  particleCount={150}
+                  particleSpread={20}
+                  speed={0.05}
+                  particleBaseSize={100}
+                  disableRotation={false}
+                />
+              </div>
+              <Navbar />
+              {children}
+              <Footer />
             </div>
-            <Navbar />
-            {children}
-            <Footer />
-          </div>
-          <CommandPalette />
-          <Toaster />
+            <CommandPalette />
+            <Toaster />
+          </TooltipProvider>
           <Analytics />
         </NextIntlClientProvider>
       </body>

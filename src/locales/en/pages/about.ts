@@ -3,6 +3,14 @@ export const about = {
   description:
     "I'm a self-taught backend engineer who likes building reliable distributed systems, breaking things on purpose, and helping people along the way.",
   tagline: 'Code. Sleep. Repeat.',
+  pronunciation: {
+    label: 'How to pronounce Trzimajewski',
+    surname: 'Trzimajewski',
+    spell: 'tree-mah-zhess-key',
+    ipa: 'tɾi maˈʒɛs.ki',
+    spellLabel: 'Roughly',
+    ipaLabel: 'IPA'
+  },
   bio: {
     p1: 'Hey, I\'m <strong>Gabriel Trzimajewski</strong>! I\'m a self-taught guy who lives, loves and learns, listens to a lot of music, loves coding, traveling and playing piano. I\'ve always been into computers since I was a kid, and then I discovered the beauty of JavaScript at <strong><a href="https://rocketseat.com.br" target="_blank" rel="noreferrer">Rocketseat</a></strong> back in early 2020.',
     p2: 'I\'m currently a <strong>Software Engineer</strong> at <a href="https://banco.bradesco" target="_blank" rel="noreferrer">Bradesco</a>, working on the Open Platform team building an internal log processing and observability platform used at <strong>banking scale</strong> for incident investigation and system monitoring. I\'m from Brazil and a big fan of <strong>twenty one pilots</strong>.',

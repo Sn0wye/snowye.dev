@@ -10,14 +10,20 @@ export const actions = {
   source: 'View Source',
   home: 'Home',
   about: 'About',
-  projects: 'Projects'
+  projects: 'Projects',
+  switchToEn: 'Switch to English',
+  switchToPt: 'Switch to Portuguese'
 };
 
 export const sections = {
   general: 'General',
   goto: 'Go To',
-  follow: 'Follow'
+  follow: 'Follow',
+  language: 'Language'
 };
+
+export const placeholder = 'What do you need?';
+export const empty = 'No results found.';
 
 export const toast = {
   title: 'Copied :D',
@@ -28,5 +34,7 @@ export const kbar = {
   start,
   actions,
   sections,
+  placeholder,
+  empty,
   toast
 };
