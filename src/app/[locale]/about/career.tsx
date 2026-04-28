@@ -1,8 +1,18 @@
+'use client';
+
 import { format, parseISO } from 'date-fns';
 import { jobs } from '@/data/career';
-import { getDurationString } from '@/utils/getDurationString';
+import { useAppLocale, useT } from '@/i18n/use-t';
+import {
+  dateFnsLocaleFor,
+  getDurationString
+} from '@/utils/getDurationString';
 
 export const Career = () => {
+  const t = useT();
+  const locale = useAppLocale();
+  const dfLocale = dateFnsLocaleFor(locale);
+
   return (
     <>
       {jobs.map(
@@ -30,13 +40,17 @@ export const Career = () => {
               {location && <span> • {location}</span>}
             </p>
             <p style={{ margin: 0 }}>
-              <span>{format(parseISO(startDate), 'LLL yyyy')}</span>
+              <span>
+                {format(parseISO(startDate), 'LLL yyyy', { locale: dfLocale })}
+              </span>
               <span> – </span>
               <span>
-                {endDate ? format(parseISO(endDate), 'LLL yyyy') : 'Present'}
+                {endDate
+                  ? format(parseISO(endDate), 'LLL yyyy', { locale: dfLocale })
+                  : t.pages.about.present}
               </span>
               <span> • </span>
-              <span>{getDurationString(startDate, endDate)}</span>
+              <span>{getDurationString(startDate, endDate, locale)}</span>
             </p>
           </article>
         )

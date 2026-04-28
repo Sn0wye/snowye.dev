@@ -14,10 +14,12 @@ import {
 import { Input } from '@/components/input';
 import { Textarea } from '@/components/textarea';
 import { useToast } from '@/components/use-toast';
-import { contact } from '@/locales/en/pages/contact';
+import { useT } from '@/i18n/use-t';
 import { type EmailSchema, emailSchema } from '@/schemas/emails';
 
 export const ContactForm = () => {
+  const t = useT();
+  const c = t.pages.contact;
   const form = useForm<EmailSchema>({
     resolver: zodResolver(emailSchema)
   });
@@ -41,8 +43,8 @@ export const ContactForm = () => {
       });
 
       toast({
-        title: contact.toast.success.title,
-        description: contact.toast.success.description
+        title: c.toast.success.title,
+        description: c.toast.success.description
       });
       form.reset();
     } catch (e) {
@@ -50,8 +52,8 @@ export const ContactForm = () => {
 
       toast({
         variant: 'destructive',
-        title: contact.toast.fail.title,
-        description: contact.toast.fail.description
+        title: c.toast.fail.title,
+        description: c.toast.fail.description
       });
     }
   };
@@ -67,7 +69,7 @@ export const ContactForm = () => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{contact.labels.name}</FormLabel>
+              <FormLabel>{c.labels.name}</FormLabel>
               <Input placeholder="John Doe" {...field} />
               <FormMessage />
             </FormItem>
@@ -78,7 +80,7 @@ export const ContactForm = () => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{contact.labels.email}</FormLabel>
+              <FormLabel>{c.labels.email}</FormLabel>
               <Input placeholder="john@doe.com" {...field} />
               <FormMessage />
             </FormItem>
@@ -89,8 +91,8 @@ export const ContactForm = () => {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{contact.labels.message}</FormLabel>
-              <Textarea placeholder="john@doe.com" {...field} />
+              <FormLabel>{c.labels.message}</FormLabel>
+              <Textarea placeholder={c.placeholders.message} {...field} />
               <FormMessage />
             </FormItem>
           )}
@@ -99,7 +101,7 @@ export const ContactForm = () => {
           className="!mt-5 w-full border transition-colors hover:border-white hover:bg-transparent hover:text-white"
           type="submit"
         >
-          {contact.send}
+          {c.send}
         </Button>
       </form>
     </Form>

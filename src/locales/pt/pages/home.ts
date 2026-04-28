@@ -1,6 +1,5 @@
 export const home = {
   title: 'Gabriel Trzimajewski',
-  meta: 'Engenheiro Fullstack por conta própria.',
-  description:
-    'Um cara que ama ajudar as pessoas e tornar o mundo um lugar melhor.'
+  meta: 'Engenheiro de Software no <a href="https://banco.bradesco" target="_blank" rel="noreferrer">Bradesco</a>.',
+  description: 'Construindo bons softwares para boas pessoas.'
 };

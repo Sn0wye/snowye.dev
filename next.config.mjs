@@ -1,18 +1,18 @@
 import createJiti from 'jiti';
 import { withPlausibleProxy } from 'next-plausible';
+import createNextIntlPlugin from 'next-intl/plugin';
 
 const jiti = createJiti(new URL(import.meta.url).pathname);
 
 jiti('./src/env.ts');
 
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  // i18n: {
-  //   locales: ['en', 'pt'],
-  //   defaultLocale: 'en'
-  // },
+  // App Router i18n is handled by next-intl middleware (see src/middleware.ts).
   eslint: { ignoreDuringBuilds: !!process.env.CI },
   typescript: { ignoreBuildErrors: !!process.env.CI }
 };
@@ -20,4 +20,4 @@ const nextConfig = {
 // export default MillionLint.next({ rsc: true })(nextConfig);
 export default withPlausibleProxy({
   customDomain: 'https://plausible.snowye.dev'
-})(nextConfig);
+})(withNextIntl(nextConfig));

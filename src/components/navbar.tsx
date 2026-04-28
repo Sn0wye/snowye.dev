@@ -2,15 +2,17 @@
 
 import { motion } from 'framer-motion';
 import { Command, Snowflake } from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { Link, usePathname } from '@/i18n/navigation';
+import { useT } from '@/i18n/use-t';
 import { cn } from '@/lib/cn';
 import { useCommandPalette } from './command-palette';
+import { LocaleSwitcher } from './locale-switcher';
 
 export const pages = ['about', 'projects', 'contact'] as const;
 
 export function Navbar() {
+  const t = useT();
   const pathname = usePathname();
   const [hovered, setHovered] = useState('');
   const { toggle } = useCommandPalette();
@@ -33,6 +35,7 @@ export function Navbar() {
           {pages.map(page => {
             const path = `/${page.toLowerCase()}`;
             const isHovered = hovered === page;
+            const label = t.common.navbar[page];
 
             return (
               <li key={page}>
@@ -58,7 +61,7 @@ export function Navbar() {
                         className="absolute left-0 right-0 top-[7px] -z-10 rounded-lg bg-hover p-5"
                       />
                     )}
-                    {page}
+                    {label}
                   </motion.span>
                 </Link>
               </li>
@@ -66,7 +69,8 @@ export function Navbar() {
           })}
         </ul>
       </nav>
-      <aside className="order-2 ml-auto mr-3 flex items-center">
+      <aside className="order-2 ml-auto mr-3 flex items-center gap-1">
+        <LocaleSwitcher />
         <button
           type="button"
           aria-label="Open Command Palette"
