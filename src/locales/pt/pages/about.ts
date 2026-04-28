@@ -2,7 +2,10 @@ export const about = {
   title: 'Sobre | Gabriel Trzimajewski',
   bio: 'Bio',
   description:
-    'Meu nome é Gabriel Trzimajewski. Mas pode me chamar de Snowye ✌️. Sou um Engenheiro Fullstack por conta própria. Sou um cara que ama ajudar as pessoas e tornar o mundo um lugar melhor.',
+    'Meu nome é Gabriel Trzimajewski. Mas pode me chamar de Snowye ✌️. Sou um engenheiro de backend autodidata que gosta de construir sistemas distribuídos confiáveis, quebrar as coisas de propósito e ajudar as pessoas no caminho.',
   tagline: 'Code. Sleep. Repeat.',
-  career: 'Carreira'
+  career: 'Carreira',
+  highlights: 'Destaques',
+  education: 'Educação',
+  languages: 'Idiomas'
 };
