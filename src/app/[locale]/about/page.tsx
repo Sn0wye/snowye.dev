@@ -81,13 +81,13 @@ export default async function About({ params }: PageProps) {
           />
         </section>
         <section className="mt-0 w-auto md:w-[48%]">
-          <p
-            className="mt-4 md:-mt-1.5"
-            // Bio paragraphs ship with markup (<strong>, <a>) — render via HTML.
-            dangerouslySetInnerHTML={{ __html: a.bio.p1 }}
-          />
-          <p className="text-sm text-secondary">
-            <NamePronunciation />
+          <p className="mt-4 md:-mt-1.5">
+            {a.bio.p1Before}
+            <strong>
+              {a.bio.p1FirstName} <NamePronunciation />
+            </strong>
+            {/* p1After ships with markup (<strong>, <a>) — render via HTML. */}
+            <span dangerouslySetInnerHTML={{ __html: a.bio.p1After }} />
           </p>
           <p dangerouslySetInnerHTML={{ __html: a.bio.p2 }} />
         </section>
