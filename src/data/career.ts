@@ -11,20 +11,20 @@ export interface Job {
 export const jobs: Job[] = [
   {
     key: 'bradesco',
-    jobTitle: 'Senior Software Engineer',
+    jobTitle: 'Software Engineer',
     company: 'Bradesco',
     companyUrl: 'https://banco.bradesco',
     startDate: '2025-04-01',
-    location: 'São Paulo, SP'
+    location: 'Remote, Brazil'
   },
   {
     key: 'mi',
-    jobTitle: 'Backend Technical Lead',
+    jobTitle: 'Software Engineer',
     company: 'Mundo Invest',
     companyUrl: 'https://mundoinvest.com.br',
     startDate: '2024-02-01',
     endDate: '2025-04-01',
-    location: 'São Paulo, SP'
+    location: 'Remote, Brazil'
   },
   {
     key: 'avaliemais',
@@ -32,13 +32,15 @@ export const jobs: Job[] = [
     companyUrl: '',
     jobTitle: 'Software Engineer',
     startDate: '2021-12-01',
-    endDate: '2024-03-01'
+    endDate: '2024-02-01',
+    location: 'Remote, Brazil'
   },
   {
     key: 'freelance',
     company: 'Freelance',
     jobTitle: 'Full Stack Engineer',
     startDate: '2021-07-01',
-    endDate: '2023-06-01'
+    endDate: '2023-06-01',
+    location: 'Remote, Brazil'
   }
 ];
