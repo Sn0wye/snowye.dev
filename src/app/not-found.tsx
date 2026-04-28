@@ -1,6 +1,6 @@
 // Catches any unmatched route outside the [locale] segment.
 // next-intl middleware normally rewrites unknown paths into a locale,
-// so this is a safety net for static/edge edge-cases.
+// so this is a safety net for static/edge cases.
 export default function GlobalNotFound() {
   return (
     <html lang="en">
