@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { setRequestLocale } from 'next-intl/server';
 import { Base } from '@/components/base';
-import { Pronunciation } from '@/components/pronunciation';
 import { env } from '@/env';
 import { routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
 import { stripHtml } from '@/utils/stripHtml';
 import { Career } from './career';
+import { NamePronunciation } from './name-pronunciation';
 
 export function generateStaticParams() {
   return routing.locales.map(locale => ({ locale }));
@@ -84,12 +84,11 @@ export default async function About({ params }: PageProps) {
           <p
             className="mt-4 md:-mt-1.5"
             // Bio paragraphs ship with markup (<strong>, <a>) — render via HTML.
-            // The Pronunciation button is rendered after p1 so we keep the layout.
             dangerouslySetInnerHTML={{ __html: a.bio.p1 }}
           />
-          <span className="inline-flex items-center">
-            <Pronunciation />
-          </span>
+          <p className="text-sm text-secondary">
+            <NamePronunciation />
+          </p>
           <p dangerouslySetInnerHTML={{ __html: a.bio.p2 }} />
         </section>
       </div>

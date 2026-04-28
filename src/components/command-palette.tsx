@@ -5,8 +5,14 @@ import Lottie, {
   type LottieComponentProps,
   type LottieRefCurrentProps
 } from 'lottie-react';
-import { useRouter } from 'next/navigation';
-import React, { type ReactElement, useEffect, useRef, useState } from 'react';
+import { useParams } from 'next/navigation';
+import React, {
+  type ReactElement,
+  useEffect,
+  useRef,
+  useState,
+  useTransition
+} from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { create } from 'zustand';
 import aboutIcon from '../../public/static/icons/about.json';
@@ -15,6 +21,9 @@ import emailIcon from '../../public/static/icons/email.json';
 import homeIcon from '../../public/static/icons/home.json';
 import projectsIcon from '../../public/static/icons/projects.json';
 import sourceIcon from '../../public/static/icons/source.json';
+import { usePathname, useRouter } from '@/i18n/navigation';
+import { type AppLocale } from '@/i18n/routing';
+import { useAppLocale, useT } from '@/i18n/use-t';
 import {
   CommandEmpty,
   CommandGroup,
@@ -42,85 +51,89 @@ export function CommandPalette() {
   const ref = React.useRef<HTMLDivElement | null>(null);
   const [inputValue, setInputValue] = React.useState('');
   const { isOpen, setIsOpen, toggle } = useCommandPalette();
+  const t = useT();
+  const k = t.common.kbar;
 
   const [pages, setPages] = React.useState<string[]>(['home']);
   const activePage = pages[pages.length - 1];
   const isHome = activePage === 'home';
 
-  const { push } = useRouter();
+  const router = useRouter();
+  const pathname = usePathname();
+  const params = useParams();
+  const currentLocale = useAppLocale();
+  const [, startTransition] = useTransition();
+
   const navigate = (to: string) => {
-    if (window.location.pathname === to) {
+    if (pathname === to) {
       return;
     }
-
-    push(to);
+    router.push(to);
     setIsOpen(false);
+  };
+
+  const switchLocale = (next: AppLocale) => {
+    setIsOpen(false);
+    if (next === currentLocale) return;
+    startTransition(() => {
+      router.replace(
+        // @ts-expect-error -- params has dynamic shape we re-pass through
+        { pathname, params },
+        { locale: next }
+      );
+    });
   };
 
   useHotkeys('mod+k', () => toggle());
 
   // shortcut listeners
-  useHotkeys('g+h', () => navigate('/'), {
-    preventDefault: true
-  });
-  useHotkeys('g+a', () => navigate('/about'), {
-    preventDefault: true
-  });
-  useHotkeys('g+p', () => navigate('/projects'), {
-    preventDefault: true
-  });
+  useHotkeys('g+h', () => navigate('/'), { preventDefault: true });
+  useHotkeys('g+a', () => navigate('/about'), { preventDefault: true });
+  useHotkeys('g+p', () => navigate('/projects'), { preventDefault: true });
   useHotkeys(
     'u',
     async () => {
       await navigator.clipboard.writeText(window.location.href);
       toast({
-        title: 'Copied :D',
-        description: 'You can now share it with anyone.'
+        title: k.toast.title,
+        description: k.toast.description
       });
     },
-    {
-      preventDefault: true
-    }
+    { preventDefault: true }
   );
-  useHotkeys('e', () => navigate('/contact'), {
-    preventDefault: true
-  });
+  useHotkeys('e', () => navigate('/contact'), { preventDefault: true });
   useHotkeys(
     's',
     () => {
       window.open('https://github.com/Sn0wye/snowye.dev', '_blank');
     },
-    {
-      preventDefault: true
-    }
+    { preventDefault: true }
   );
   useHotkeys(
     'f+g',
     () => {
       window.open('https://github.com/Sn0wye/snowye.dev', '_blank');
     },
-    {
-      preventDefault: true
-    }
+    { preventDefault: true }
   );
   useHotkeys(
     'f+l',
     () => {
       window.open('https://linkedin.com/in/snowyedotdev', '_blank');
     },
-    {
-      preventDefault: true
-    }
+    { preventDefault: true }
   );
   useHotkeys(
     'f+i',
     () => {
       window.open('https://www.instagram.com/gabtrzimajewski', '_blank');
     },
-    {
-      preventDefault: true
-    }
+    { preventDefault: true }
   );
+
+  // Locale shortcuts.
+  useHotkeys('l+e', () => switchLocale('en'), { preventDefault: true });
+  useHotkeys('l+p', () => switchLocale('pt'), { preventDefault: true });
 
   const popPage = React.useCallback(() => {
     setPages(pages => {
@@ -130,7 +143,6 @@ export function CommandPalette() {
     });
   }, []);
 
-  // command bar listeners
   const onKeyDown = React.useCallback(
     (e: React.KeyboardEvent) => {
       if (e.key === 'Enter') {
@@ -182,14 +194,21 @@ export function CommandPalette() {
           </div>
           <CommandInput
             autoFocus
-            placeholder="What do you need?"
+            placeholder={k.placeholder}
             onValueChange={value => {
               setInputValue(value);
             }}
           />
           <Command.List>
-            <CommandEmpty>No results found.</CommandEmpty>
-            {activePage === 'home' && <Home />}
+            <CommandEmpty>{k.empty}</CommandEmpty>
+            {activePage === 'home' && (
+              <Home
+                navigate={navigate}
+                switchLocale={switchLocale}
+                currentLocale={currentLocale}
+                onClose={() => setIsOpen(false)}
+              />
+            )}
           </Command.List>
         </CommandRoot>
       </DialogContent>
@@ -197,25 +216,23 @@ export function CommandPalette() {
   );
 }
 
-function Home() {
+type HomeProps = {
+  navigate: (to: string) => void;
+  switchLocale: (next: AppLocale) => void;
+  currentLocale: AppLocale;
+  onClose: () => void;
+};
+
+function Home({ navigate, switchLocale, currentLocale, onClose }: HomeProps) {
+  const t = useT();
+  const k = t.common.kbar;
+
   const copyLinkRef = useRef<LottieRefCurrentProps>(null);
   const emailRef = useRef<LottieRefCurrentProps>(null);
   const sourceRef = useRef<LottieRefCurrentProps>(null);
   const homeRef = useRef<LottieRefCurrentProps>(null);
   const aboutRef = useRef<LottieRefCurrentProps>(null);
   const projectsRef = useRef<LottieRefCurrentProps>(null);
-
-  const { setIsOpen } = useCommandPalette();
-  const { push } = useRouter();
-
-  const navigate = (to: string) => {
-    if (window.location.pathname === to) {
-      return;
-    }
-
-    push(to);
-    setIsOpen(false);
-  };
 
   const iconStyle = { width: 24, height: 24 };
   const baseIconProps = {
@@ -226,7 +243,7 @@ function Home() {
 
   return (
     <>
-      <CommandGroup heading="Go To">
+      <CommandGroup heading={k.sections.goto}>
         <Item
           icon={
             <Lottie
@@ -238,8 +255,7 @@ function Home() {
           shortcut="G H"
           onSelect={() => navigate('/')}
         >
-          {/* <HomeIcon /> */}
-          Home
+          {k.actions.home}
         </Item>
         <Item
           icon={
@@ -252,7 +268,7 @@ function Home() {
           shortcut="G A"
           onSelect={() => navigate('/about')}
         >
-          About
+          {k.actions.about}
         </Item>
         <Item
           icon={
@@ -265,10 +281,10 @@ function Home() {
           shortcut="G P"
           onSelect={() => navigate('/projects')}
         >
-          Projects
+          {k.actions.projects}
         </Item>
       </CommandGroup>
-      <CommandGroup heading="General">
+      <CommandGroup heading={k.sections.general}>
         <Item
           icon={
             <Lottie
@@ -280,14 +296,14 @@ function Home() {
           shortcut="U"
           onSelect={() => {
             void navigator.clipboard.writeText(window.location.href);
-            setIsOpen(false);
+            onClose();
             toast({
-              title: 'Copied :D',
-              description: 'You can now share it with anyone.'
+              title: k.toast.title,
+              description: k.toast.description
             });
           }}
         >
-          Copy URL
+          {k.actions.copy}
         </Item>
         <Item
           icon={
@@ -300,7 +316,7 @@ function Home() {
           shortcut="E"
           onSelect={() => navigate('/contact')}
         >
-          Send Email
+          {k.actions.email}
         </Item>
         <Item
           icon={
@@ -312,19 +328,35 @@ function Home() {
           }
           shortcut="S"
           onSelect={() => {
-            setIsOpen(false);
+            onClose();
             window.open('https://github.com/Sn0wye/snowye.dev', '_blank');
           }}
         >
-          View Source
+          {k.actions.source}
         </Item>
       </CommandGroup>
-      <CommandGroup heading="Follow">
+      <CommandGroup heading={k.sections.language}>
+        <Item
+          icon={<LocaleBadge code="EN" active={currentLocale === 'en'} />}
+          shortcut="L E"
+          onSelect={() => switchLocale('en')}
+        >
+          {k.actions.switchToEn}
+        </Item>
+        <Item
+          icon={<LocaleBadge code="PT" active={currentLocale === 'pt'} />}
+          shortcut="L P"
+          onSelect={() => switchLocale('pt')}
+        >
+          {k.actions.switchToPt}
+        </Item>
+      </CommandGroup>
+      <CommandGroup heading={k.sections.follow}>
         <Item
           icon={<SocialIcon.Github className="text-white" />}
           shortcut="F G"
           onSelect={() => {
-            setIsOpen(false);
+            onClose();
             window.open('https://github.com/Sn0wye/snowye.dev', '_blank');
           }}
         >
@@ -334,7 +366,7 @@ function Home() {
           icon={<SocialIcon.Linkedin className="text-white" />}
           shortcut="F L"
           onSelect={() => {
-            setIsOpen(false);
+            onClose();
             window.open('https://linkedin.com/in/snowyedotdev', '_blank');
           }}
         >
@@ -344,7 +376,7 @@ function Home() {
           icon={<SocialIcon.Instagram className="text-white" />}
           shortcut="F I"
           onSelect={() => {
-            setIsOpen(false);
+            onClose();
             window.open('https://www.instagram.com/gabtrzimajewski', '_blank');
           }}
         >
@@ -352,6 +384,19 @@ function Home() {
         </Item>
       </CommandGroup>
     </>
+  );
+}
+
+function LocaleBadge({ code, active }: { code: string; active: boolean }) {
+  return (
+    <div
+      aria-hidden
+      className={`flex h-6 w-6 items-center justify-center rounded text-[10px] font-bold uppercase tracking-wider ${
+        active ? 'bg-primary/20 text-primary' : 'bg-white/5 text-zinc-300'
+      }`}
+    >
+      {code}
+    </div>
   );
 }
 
@@ -372,7 +417,6 @@ function Item({
   useEffect(() => {
     if (!itemRef?.current) return;
 
-    // Create a new MutationObserver
     const observer = new MutationObserver(mutationsList => {
       for (const mutation of mutationsList) {
         if (
@@ -386,10 +430,8 @@ function Item({
       }
     });
 
-    // Start observing the 'data-selected' attribute on the element
     observer.observe(itemRef.current, { attributes: true });
 
-    // Clean up the observer when the component unmounts
     return () => {
       observer.disconnect();
     };
