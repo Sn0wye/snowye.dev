@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { Base } from '@/components/base';
 import { projects as projectsData } from '@/data/projects';
-import { routing } from '@/i18n/routing';
+import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
 import { getTotalProjects } from '@/utils/getTotalProjects';
 import { interpolate } from '@/utils/interpolate';
@@ -16,7 +16,7 @@ export function generateStaticParams() {
 }
 
 type PageProps = {
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: AppLocale }>;
 };
 
 export async function generateMetadata({

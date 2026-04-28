@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { Base } from '@/components/base';
-import { routing } from '@/i18n/routing';
+import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
 import { stripHtml } from '@/utils/stripHtml';
 import { ContactForm } from './contact-form';
@@ -11,7 +11,7 @@ export function generateStaticParams() {
 }
 
 type PageProps = {
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: AppLocale }>;
 };
 
 export async function generateMetadata({
