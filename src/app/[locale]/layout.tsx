@@ -1,6 +1,5 @@
 import { Analytics } from '@vercel/analytics/react';
 import type { Metadata, Viewport } from 'next';
-import dynamic from 'next/dynamic';
 // eslint-disable-next-line camelcase
 import { Fira_Code } from 'next/font/google';
 import localFont from 'next/font/local';
@@ -8,13 +7,7 @@ import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import PlausibleProvider from 'next-plausible';
-
-// kbar accesses `document` at import time, so we must skip SSR.
-const CommandPalette = dynamic(
-  () =>
-    import('@/components/command-palette').then(mod => mod.CommandPalette),
-  { ssr: false }
-);
+import { CommandPalette } from '@/components/command-palette-loader';
 import { Footer } from '@/components/footer';
 import { Navbar } from '@/components/navbar';
 import Particles from '@/components/particles';
