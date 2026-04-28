@@ -1,23 +1,22 @@
 import { intervalToDuration, parseISO } from 'date-fns';
 import { enUS, ptBR } from 'date-fns/locale';
-
-export type DurationLocale = 'en' | 'pt';
+import { type AppLocale, routing } from '@/i18n/routing';
 
 const labels: Record<
-  DurationLocale,
+  AppLocale,
   { yr: string; yrs: string; mo: string; mos: string; lt1mo: string }
 > = {
   en: { yr: 'yr', yrs: 'yrs', mo: 'mo', mos: 'mos', lt1mo: '< 1 mo' },
   pt: { yr: 'ano', yrs: 'anos', mo: 'mês', mos: 'meses', lt1mo: '< 1 mês' }
 };
 
-export const dateFnsLocaleFor = (locale: DurationLocale) =>
+export const dateFnsLocaleFor = (locale: AppLocale) =>
   locale === 'pt' ? ptBR : enUS;
 
 export const getDurationString = (
   startDate: string,
   endDate?: string,
-  locale: DurationLocale = 'en'
+  locale: AppLocale = routing.defaultLocale
 ) => {
   const interval = {
     start: parseISO(startDate),

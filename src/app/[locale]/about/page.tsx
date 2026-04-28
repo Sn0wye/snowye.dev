@@ -24,6 +24,9 @@ export async function generateMetadata({
   setRequestLocale(locale);
   const t = await getT();
 
+  // localePrefix: 'as-needed' — only non-default locales are prefixed.
+  const localePath = locale === routing.defaultLocale ? '' : `/${locale}`;
+
   return {
     metadataBase:
       env.NODE_ENV === 'production'
@@ -33,7 +36,7 @@ export async function generateMetadata({
     description: stripHtml(t.pages.about.description),
     openGraph: {
       description: stripHtml(t.pages.about.description),
-      url: '/about',
+      url: `${localePath}/about`,
       images: [
         {
           url: '/static/imagePaths/me.jpeg',
