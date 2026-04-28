@@ -30,12 +30,15 @@ export async function generateMetadata({
     interpolate(t.pages.projects.description, { totalProjects })
   );
 
+  // localePrefix: 'as-needed' — only non-default locales are prefixed.
+  const localePath = locale === routing.defaultLocale ? '' : `/${locale}`;
+
   return {
     title: t.pages.projects.title,
     description,
     openGraph: {
       description,
-      url: 'https://snowye.dev/projects'
+      url: `${localePath}/projects`
     }
   };
 }

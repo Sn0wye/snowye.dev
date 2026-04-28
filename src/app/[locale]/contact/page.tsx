@@ -21,12 +21,15 @@ export async function generateMetadata({
   setRequestLocale(locale);
   const t = await getT();
 
+  // localePrefix: 'as-needed' — only non-default locales are prefixed.
+  const localePath = locale === routing.defaultLocale ? '' : `/${locale}`;
+
   return {
     title: t.pages.contact.title,
     description: stripHtml(t.pages.contact.description),
     openGraph: {
       description: stripHtml(t.pages.contact.description),
-      url: 'https://snowye.dev/contact'
+      url: `${localePath}/contact`
     }
   };
 }
