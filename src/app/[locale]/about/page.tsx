@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { setRequestLocale } from 'next-intl/server';
 import { Base } from '@/components/base';
 import { env } from '@/env';
-import { routing } from '@/i18n/routing';
+import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
 import { stripHtml } from '@/utils/stripHtml';
 import { Career } from './career';
@@ -14,7 +14,7 @@ export function generateStaticParams() {
 }
 
 type PageProps = {
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: AppLocale }>;
 };
 
 export async function generateMetadata({

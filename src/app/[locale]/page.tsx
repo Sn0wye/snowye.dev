@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import ClientOpenCommandPalette from '@/components/client-open-command-palette';
-import { routing } from '@/i18n/routing';
+import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
 import { Typewriter } from './typewriter';
 
@@ -10,7 +10,7 @@ export function generateStaticParams() {
 }
 
 type PageProps = {
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: AppLocale }>;
 };
 
 export async function generateMetadata({
