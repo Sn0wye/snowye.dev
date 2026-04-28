@@ -1,27 +1,46 @@
 import { intervalToDuration, parseISO } from 'date-fns';
+import { enUS, ptBR } from 'date-fns/locale';
 
-export const getDurationString = (startDate: string, endDate?: string) => {
+export type DurationLocale = 'en' | 'pt';
+
+const labels: Record<
+  DurationLocale,
+  { yr: string; yrs: string; mo: string; mos: string; lt1mo: string }
+> = {
+  en: { yr: 'yr', yrs: 'yrs', mo: 'mo', mos: 'mos', lt1mo: '< 1 mo' },
+  pt: { yr: 'ano', yrs: 'anos', mo: 'mês', mos: 'meses', lt1mo: '< 1 mês' }
+};
+
+export const dateFnsLocaleFor = (locale: DurationLocale) =>
+  locale === 'pt' ? ptBR : enUS;
+
+export const getDurationString = (
+  startDate: string,
+  endDate?: string,
+  locale: DurationLocale = 'en'
+) => {
   const interval = {
     start: parseISO(startDate),
     end: endDate ? parseISO(endDate) : new Date()
   };
-  const durationObj = intervalToDuration(interval);
 
-  const { years, months } = durationObj;
+  const { years = 0, months = 0 } = intervalToDuration(interval);
+  const l = labels[locale];
 
-  let durationStr = '';
-
-  if (years !== undefined && months === undefined) {
-    throw new Error('Duration < 1 month');
+  // Less than a month elapsed.
+  if (years < 1 && months < 1) {
+    return l.lt1mo;
   }
 
-  if (years !== undefined && years >= 1) {
-    durationStr += `${years} yr${years > 1 ? 's' : ''} `;
+  const parts: string[] = [];
+
+  if (years >= 1) {
+    parts.push(`${years} ${years === 1 ? l.yr : l.yrs}`);
   }
 
-  if (months !== undefined && months >= 1) {
-    durationStr += `${months} mo${months > 1 ? 's' : ''}`;
+  if (months >= 1) {
+    parts.push(`${months} ${months === 1 ? l.mo : l.mos}`);
   }
 
-  return durationStr;
+  return parts.join(' ');
 };
