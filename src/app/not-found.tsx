@@ -1,32 +1,30 @@
+'use client';
+
+import Lottie from 'lottie-react';
+import dynamic from 'next/dynamic';
+import lottieAnimation from '../../public/static/icons/404.json';
+
+const ShortcutError = dynamic(() => import('@/components/shortcut-error'), {
+  ssr: false
+});
+
 // Catches any unmatched route outside the [locale] segment.
 // next-intl middleware normally rewrites unknown paths into a locale,
-// so this is a safety net for static/edge cases.
+// so this is a safety net for static/edge cases. Hardcoded to English.
 export default function GlobalNotFound() {
   return (
-    <html lang="en">
-      <body>
-        <div
-          style={{
-            minHeight: '100vh',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: '#08070b',
-            color: '#fafafa',
-            fontFamily: 'system-ui, sans-serif'
-          }}
-        >
-          <h1 style={{ fontSize: '2rem', margin: 0 }}>four oh four</h1>
-          <p>This page doesn&apos;t exist</p>
-          <a
-            href="/"
-            style={{ marginTop: 16, color: '#9442FE', textDecoration: 'none' }}
-          >
-            ← Go home
-          </a>
-        </div>
-      </body>
-    </html>
+    <div className='flex flex-1 flex-col items-center justify-center px-5 py-navHeightMobile'>
+      <h1>four oh four</h1>
+      <div className='flex justify-center'>
+        <Lottie
+          animationData={lottieAnimation}
+          loop={true}
+          autoPlay={true}
+          style={{ width: '60%' }}
+        />
+      </div>
+      <p>{"This page doesn't exist"}</p>
+      <ShortcutError />
+    </div>
   );
 }

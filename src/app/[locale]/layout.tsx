@@ -6,7 +6,6 @@ import localFont from 'next/font/local';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
-import PlausibleProvider from 'next-plausible';
 import { CommandPalette } from '@/components/command-palette-loader';
 import { Footer } from '@/components/footer';
 import { Navbar } from '@/components/navbar';
@@ -116,16 +115,6 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
 
   return (
     <html lang={locale}>
-      <head>
-        <PlausibleProvider
-          selfHosted
-          domain="snowye.dev"
-          customDomain="https://plausible.snowye.dev"
-          taggedEvents
-          trackLocalhost
-          enabled={true}
-        />
-      </head>
       <body
         suppressHydrationWarning
         className={cn(
@@ -139,8 +128,8 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
           messages={messages[locale] as unknown as Record<string, unknown>}
         >
           <TooltipProvider delayDuration={150}>
-            <div className="relative z-0 flex min-h-screen flex-col">
-              <div className="absolute inset-0 h-full w-full">
+            <div className='relative z-0 flex min-h-screen flex-col'>
+              <div className='absolute inset-0 h-full w-full'>
                 <Particles
                   particleCount={150}
                   particleSpread={20}

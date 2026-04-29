@@ -1,5 +1,4 @@
 import createJiti from 'jiti';
-import { withPlausibleProxy } from 'next-plausible';
 import createNextIntlPlugin from 'next-intl/plugin';
 
 const jiti = createJiti(new URL(import.meta.url).pathname);
@@ -18,6 +17,4 @@ const nextConfig = {
 };
 
 // export default MillionLint.next({ rsc: true })(nextConfig);
-export default withPlausibleProxy({
-  customDomain: 'https://plausible.snowye.dev'
-})(withNextIntl(nextConfig));
+export default withNextIntl(nextConfig);
