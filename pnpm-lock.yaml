@@ -133,8 +133,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       '@types/node':
-        specifier: 22.19.3
-        version: 22.19.3
+        specifier: 22.19.18
+        version: 22.19.18
       '@types/nodemailer':
         specifier: ^6.4.14
         version: 6.4.21
@@ -1775,8 +1775,8 @@ packages:
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
 
-  '@types/node@22.19.3':
-    resolution: {integrity: sha512-1N9SBnWYOJTrNZCdh/yJE+t910Y128BoyY+zBLWhL3r0TYzlTmFdXrPwHL9DyFZmlEXNQQolTZh3KHV31QDhyA==}
+  '@types/node@22.19.18':
+    resolution: {integrity: sha512-9v00a+dn2yWVsYDEunWC4g/TcRKVq3r8N5FuZp7u0SGrPvdN9c2yXI9bBuf5Fl0hNCb+QTIePTn5pJs2pwBOQQ==}
 
   '@types/nodemailer@6.4.21':
     resolution: {integrity: sha512-Eix+sb/Nj28MNnWvO2X1OLrk5vuD4C9SMnb2Vf4itWnxphYeSceqkFX7IdmxTzn+dvmnNz7paMbg4Uc60wSfJg==}
@@ -5751,14 +5751,14 @@ snapshots:
 
   '@types/json5@0.0.29': {}
 
-  '@types/node@22.19.3':
+  '@types/node@22.19.18':
     dependencies:
       undici-types: 6.21.0
 
   '@types/nodemailer@6.4.21':
     dependencies:
       '@aws-sdk/client-ses': 3.936.0
-      '@types/node': 22.19.3
+      '@types/node': 22.19.18
     transitivePeerDependencies:
       - aws-crt
 
