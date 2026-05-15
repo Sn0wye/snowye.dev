@@ -38,32 +38,31 @@ export function Navbar() {
             const label = t.common.navbar[page];
 
             return (
-              <li key={page}>
-                <Link
-                  href={path}
-                  className="border-0 hover:opacity-100 focus:opacity-100"
+              <li key={page} className="relative">
+                <span
+                  onMouseEnter={() => setHovered(page)}
+                  onMouseLeave={() => setHovered('')}
                 >
-                  <motion.span
+                  {isHovered && (
+                    <motion.span
+                      layoutId="nav"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="absolute -z-10 rounded-lg bg-hover top-1/2 left-0 right-0 -translate-y-1/2 p-5"
+                    />
+                  )}
+                  <Link
+                    href={path}
                     className={cn(
-                      'relative inline-block cursor-pointer p-5 text-xs font-medium uppercase tracking-[0.075em] text-secondary transition-colors duration-200 ease-in-out hover:text-primary',
+                      'relative inline-block cursor-pointer border-0 px-5 py-3 text-xs font-medium uppercase tracking-[0.075em] text-secondary transition-all duration-300 ease-in-out hover:text-primary hover:opacity-100 focus:opacity-100',
+                      "after:absolute after:bottom-[0.375rem] after:left-1/2 after:block after:h-px after:w-5 after:-translate-x-1/2 after:bg-white after:opacity-0 after:transition-all after:duration-300 after:ease-in-out after:content-['']",
                       pathname === path && 'text-primary after:opacity-100',
-                      "after:absolute after:left-0 after:right-0 after:top-[1.125rem] after:mx-auto after:h-px after:w-5 after:bg-white after:opacity-0 after:transition-opacity after:duration-200 after:ease-in-out after:content-['']"
                     )}
-                    onHoverStart={() => setHovered(page)}
-                    onHoverEnd={() => setHovered('')}
                   >
-                    {isHovered && (
-                      <motion.span
-                        layoutId="nav"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="absolute left-0 right-0 top-[7px] -z-10 rounded-lg bg-hover p-5"
-                      />
-                    )}
                     {label}
-                  </motion.span>
-                </Link>
+                  </Link>
+                </span>
               </li>
             );
           })}
