@@ -438,12 +438,13 @@ function Item({
   }, []);
 
   useEffect(() => {
+    const lottieRef = (icon.props as { lottieRef?: { current: { play: () => void; stop: () => void } } }).lottieRef;
     if (selected) {
-      icon.props.lottieRef?.current?.play();
+      lottieRef?.current?.play();
     } else {
-      icon.props.lottieRef?.current?.stop();
+      lottieRef?.current?.stop();
     }
-  }, [icon.props.lottieRef, selected]);
+  }, [selected]);
 
   return (
     <CommandItem onSelect={onSelect} ref={itemRef}>
