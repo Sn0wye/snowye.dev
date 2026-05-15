@@ -55,9 +55,7 @@ export function Navbar() {
                     {isHovered && (
                       <motion.span
                         layoutId="nav"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
+                        transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
                         className="absolute left-0 right-0 top-[7px] -z-10 rounded-lg bg-hover p-5"
                       />
                     )}

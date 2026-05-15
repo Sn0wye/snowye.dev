@@ -51,9 +51,7 @@ export function FeaturedProject({
         <motion.span
           className="absolute inset-0 -z-10 rounded-lg bg-hover"
           layoutId="projects"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
         />
       )}
     </motion.a>
