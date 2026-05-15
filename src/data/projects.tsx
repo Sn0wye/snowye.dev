@@ -15,6 +15,20 @@ export interface Project {
 
 export const projects: Projects = [
   {
+    year: 2026,
+    projects: [
+      {
+        id: 'd927829b-514e-40d5-a732-3bbcea05b5a4',
+        title: 'CloudCertify',
+        url: 'https://cloudcertify.snowye.dev',
+        description:
+          'A platform to help you prepare for cloud certifications with practice exams, and progress tracking.',
+        iconName: 'cloud',
+        featured: true
+      }
+    ]
+  },
+  {
     year: 2025,
     projects: [
       {
