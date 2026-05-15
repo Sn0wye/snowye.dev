@@ -2,11 +2,12 @@ import { cva } from 'cva';
 import type { LucideProps } from 'lucide-react';
 import NextLink from 'next/link';
 import { SocialIcon } from './social-icons';
+import type React from 'react';
 
 interface Link {
   title: string;
   url: string;
-  Icon: (props: LucideProps) => JSX.Element;
+  Icon: (props: LucideProps) => React.ReactElement;
   variant?: Variant;
 }
 
