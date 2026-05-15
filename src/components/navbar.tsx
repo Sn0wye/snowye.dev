@@ -39,30 +39,25 @@ export function Navbar() {
 
             return (
               <li key={page} className="relative">
-                <span
+                <Link
+                  href={path}
                   onMouseEnter={() => setHovered(page)}
                   onMouseLeave={() => setHovered('')}
+                  className={cn(
+                    'relative inline-block cursor-pointer border-0 p-5 text-xs font-medium uppercase tracking-[0.075em] text-secondary transition-colors duration-200 ease-in-out hover:text-primary hover:opacity-100 focus:opacity-100',
+                    "after:absolute after:left-0 after:right-0 after:top-[1.125rem] after:mx-auto after:h-px after:w-5 after:bg-white after:opacity-0 after:transition-opacity after:duration-200 after:ease-in-out after:content-['']",
+                    pathname === path && 'text-primary after:opacity-100',
+                  )}
                 >
                   {isHovered && (
                     <motion.span
                       layoutId="nav"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="absolute -z-10 rounded-lg bg-hover top-1/2 left-0 right-0 -translate-y-1/2 p-5"
+                      transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
+                      className="absolute inset-0 -z-10 rounded-lg bg-hover"
                     />
                   )}
-                  <Link
-                    href={path}
-                    className={cn(
-                      'relative inline-block cursor-pointer border-0 px-5 py-3 text-xs font-medium uppercase tracking-[0.075em] text-secondary transition-all duration-300 ease-in-out hover:text-primary hover:opacity-100 focus:opacity-100',
-                      "after:absolute after:bottom-[0.375rem] after:left-1/2 after:block after:h-px after:w-5 after:-translate-x-1/2 after:bg-white after:opacity-0 after:transition-all after:duration-300 after:ease-in-out after:content-['']",
-                      pathname === path && 'text-primary after:opacity-100',
-                    )}
-                  >
-                    {label}
-                  </Link>
-                </span>
+                  {label}
+                </Link>
               </li>
             );
           })}
