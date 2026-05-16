@@ -14,9 +14,9 @@ const ShortcutError = dynamic(() => import('@/components/shortcut-error'), {
 // so this is a safety net for static/edge cases. Hardcoded to English.
 export default function GlobalNotFound() {
   return (
-    <div className='flex flex-1 flex-col items-center justify-center px-5 py-navHeightMobile'>
+    <div className="flex flex-1 flex-col items-center justify-center px-5 py-navHeightMobile">
       <h1>four oh four</h1>
-      <div className='flex justify-center'>
+      <div className="flex justify-center">
         <Lottie
           animationData={lottieAnimation}
           loop={true}

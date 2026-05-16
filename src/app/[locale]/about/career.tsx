@@ -3,10 +3,7 @@
 import { format, parseISO } from 'date-fns';
 import { jobs } from '@/data/career';
 import { useAppLocale, useT } from '@/i18n/use-t';
-import {
-  dateFnsLocaleFor,
-  getDurationString
-} from '@/utils/getDurationString';
+import { dateFnsLocaleFor, getDurationString } from '@/utils/getDurationString';
 
 export const Career = () => {
   const t = useT();

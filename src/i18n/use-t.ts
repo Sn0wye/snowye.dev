@@ -1,8 +1,8 @@
 'use client';
 
 import { useLocale } from 'next-intl';
-import { type AppLocale } from './routing';
 import { getMessages, type Messages } from './messages';
+import type { AppLocale } from './routing';
 
 /**
  * Type-safe access to the full message bundle on the client.

@@ -52,33 +52,33 @@ export const ContactForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='max-w-[400px] space-y-2'
+        className="max-w-[400px] space-y-2"
       >
         <FormField
           control={form.control}
-          name='name'
+          name="name"
           render={({ field }) => (
             <FormItem>
               <FormLabel>{c.labels.name}</FormLabel>
-              <Input placeholder='John Doe' {...field} />
+              <Input placeholder="John Doe" {...field} />
               <FormMessage />
             </FormItem>
           )}
         />
         <FormField
           control={form.control}
-          name='email'
+          name="email"
           render={({ field }) => (
             <FormItem>
               <FormLabel>{c.labels.email}</FormLabel>
-              <Input placeholder='john@doe.com' {...field} />
+              <Input placeholder="john@doe.com" {...field} />
               <FormMessage />
             </FormItem>
           )}
         />
         <FormField
           control={form.control}
-          name='message'
+          name="message"
           render={({ field }) => (
             <FormItem>
               <FormLabel>{c.labels.message}</FormLabel>
@@ -88,8 +88,8 @@ export const ContactForm = () => {
           )}
         />
         <Button
-          className='!mt-5 w-full border transition-colors hover:border-white hover:bg-transparent hover:text-white'
-          type='submit'
+          className="!mt-5 w-full border transition-colors hover:border-white hover:bg-transparent hover:text-white"
+          type="submit"
         >
           {c.send}
         </Button>

@@ -1,8 +1,8 @@
 import { cva } from 'cva';
 import type { LucideProps } from 'lucide-react';
 import NextLink from 'next/link';
-import { SocialIcon } from './social-icons';
 import type React from 'react';
+import { SocialIcon } from './social-icons';
 
 interface Link {
   title: string;

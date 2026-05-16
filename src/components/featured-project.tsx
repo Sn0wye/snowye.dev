@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import { type Dispatch, type SetStateAction, useRef } from 'react';
 
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
+
 import type { LottieRefCurrentProps } from 'lottie-react';
 import type { Project } from '../data/projects';
 

@@ -7,5 +7,3 @@ declare module 'next-intl' {
     Messages: Messages;
   }
 }
-
-export {};
