@@ -5,12 +5,11 @@ export const emailSchema = z.object({
     message: 'Please enter your name!'
   }),
   email: z
-    .string()
-    .min(1, {
-      message: 'Please enter your email!'
-    })
     .email({
       message: 'Please enter a valid email!'
+    })
+    .min(1, {
+      message: 'Please enter your email!'
     }),
   message: z.string().min(1, {
     message: 'Why send an empty message?'
