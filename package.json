@@ -33,7 +33,7 @@
     "@radix-ui/react-tooltip": "^1.2.8",
     "@react-email/components": "^1.0.0",
     "@t3-oss/env-nextjs": "^0.13.0",
-    "@tsparticles/engine": "^3.2.1",
+    "@tsparticles/engine": "^4.0.0",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.2.1",
     "@upstash/ratelimit": "^2.0.0",
