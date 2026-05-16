@@ -1,6 +1,51 @@
 @import 'tailwindcss';
 
-@config "../../tailwind.config.ts";
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #f2f2f2;
+  --color-secondary: #8f9ba8;
+  --color-background: #08070b;
+  --color-hover: #212024;
+  --color-command: rgba(255, 255, 255, 0.05);
+  --color-linkedin: #0077b5;
+  --color-instagram: #e1306c;
+  --color-github: #777777;
+  --color-geist-yellow: #ffff80;
+  --color-geist-pink: #ff80bf;
+  --color-geist-purple: #9580ff;
+  --color-geist-red: #ff9580;
+  --color-geist-orange: #ffca80;
+  --color-geist-green: #8aff80;
+  --color-geist-cyan: #80ffea;
+
+  --font-sans: var(--font-sans), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-mono), monospace;
+  --font-heading: var(--font-heading), monospace;
+
+  --spacing-nav-height-desktop: 3.75rem;
+  --spacing-nav-height-mobile: 6.875rem;
+
+  --padding-nav-height-desktop: 3.75rem;
+  --padding-nav-height-mobile: 6.875rem;
+
+  --transition-duration-default: 0.2s;
+
+  --radius-default: 0.5rem;
+}
+
+@source inline(
+  bg-primary from-primary to-primary selection:bg-primary
+  bg-secondary from-secondary to-secondary selection:bg-secondary
+  bg-background from-background to-background selection:bg-background
+  bg-geist-yellow from-geist-yellow to-geist-yellow selection:bg-geist-yellow
+  bg-geist-pink from-geist-pink to-geist-pink selection:bg-geist-pink
+  bg-geist-purple from-geist-purple to-geist-purple selection:bg-geist-purple
+  bg-geist-red from-geist-red to-geist-red selection:bg-geist-red
+  bg-geist-orange from-geist-orange to-geist-orange selection:bg-geist-orange
+  bg-geist-green from-geist-green to-geist-green selection:bg-geist-green
+  bg-geist-cyan from-geist-cyan to-geist-cyan selection:bg-geist-cyan
+);
 
 @layer base {
   * {
