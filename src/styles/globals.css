@@ -1,7 +1,5 @@
 @import 'tailwindcss';
 
-@import "tailwindcss";
-
 @theme {
   --color-primary: #f2f2f2;
   --color-secondary: #8f9ba8;
@@ -33,19 +31,6 @@
 
   --radius-default: 0.5rem;
 }
-
-@source inline(
-  bg-primary from-primary to-primary selection:bg-primary
-  bg-secondary from-secondary to-secondary selection:bg-secondary
-  bg-background from-background to-background selection:bg-background
-  bg-geist-yellow from-geist-yellow to-geist-yellow selection:bg-geist-yellow
-  bg-geist-pink from-geist-pink to-geist-pink selection:bg-geist-pink
-  bg-geist-purple from-geist-purple to-geist-purple selection:bg-geist-purple
-  bg-geist-red from-geist-red to-geist-red selection:bg-geist-red
-  bg-geist-orange from-geist-orange to-geist-orange selection:bg-geist-orange
-  bg-geist-green from-geist-green to-geist-green selection:bg-geist-green
-  bg-geist-cyan from-geist-cyan to-geist-cyan selection:bg-geist-cyan
-);
 
 @layer base {
   * {
