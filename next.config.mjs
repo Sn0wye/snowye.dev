@@ -1,9 +1,5 @@
-import createJiti from 'jiti';
 import createNextIntlPlugin from 'next-intl/plugin';
-
-const jiti = createJiti(new URL(import.meta.url).pathname);
-
-jiti('./src/env.ts');
+import './src/env.ts';
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 

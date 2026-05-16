@@ -59,9 +59,6 @@ importers:
       framer-motion:
         specifier: ^12.0.0
         version: 12.38.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      jiti:
-        specifier: ^2.0.0
-        version: 2.7.0
       lottie-react:
         specifier: ^2.4.0
         version: 2.4.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -1476,10 +1473,6 @@ packages:
 
   jiti@1.21.7:
     resolution: {integrity: sha512-/imKNG4EbWNrVjoNC/1H5/9GFy+tqjGBHCaSsN+P2RnPqjsLmv6UD3Ej+Kj8nBWaRAwyk7kK5ZUc+OEatnTR3A==}
-    hasBin: true
-
-  jiti@2.7.0:
-    resolution: {integrity: sha512-AC/7JofJvZGrrneWNaEnJeOLUx+JlGt7tNa0wZiRPT4MY1wmfKjt2+6O2p2uz2+skll8OZZmJMNqeke7kKbNgQ==}
     hasBin: true
 
   js-tokens@4.0.0:
@@ -2949,8 +2942,6 @@ snapshots:
   is-number@7.0.0: {}
 
   jiti@1.21.7: {}
-
-  jiti@2.7.0: {}
 
   js-tokens@4.0.0: {}
 

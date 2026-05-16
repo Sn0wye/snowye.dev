@@ -15,7 +15,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
-    "build": "SKIP_ENV_VALIDATION=1 next build",
+    "build": "next build",
     "start": "next start",
     "check": "biome check .",
     "check:fix": "biome check . --write",
@@ -41,7 +41,6 @@
     "cva": "1.0.0-beta.4",
     "date-fns": "^4.0.0",
     "framer-motion": "^12.0.0",
-    "jiti": "^2.0.0",
     "lottie-react": "^2.4.0",
     "lucide-react": "^1.0.0",
     "next": "16.2.6",

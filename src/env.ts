@@ -11,8 +11,8 @@ export const env = createEnv({
     NODEMAILER_PASSWORD: z.string().min(1),
     KV_REST_API_READ_ONLY_TOKEN: z.string().min(1),
     KV_REST_API_TOKEN: z.string().min(1),
-    KV_REST_API_URL: z.string().url().min(1),
-    KV_URL: z.string().url().min(1)
+    KV_REST_API_URL: z.url().min(1),
+    KV_URL: z.url().min(1)
   },
   client: {},
   runtimeEnv: {
