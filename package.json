@@ -35,7 +35,7 @@
     "@t3-oss/env-nextjs": "^0.13.0",
     "@tsparticles/engine": "^3.2.1",
     "@tsparticles/react": "^3.0.0",
-    "@tsparticles/slim": "^3.2.1",
+    "@tsparticles/slim": "^4.0.0",
     "@upstash/ratelimit": "^2.0.0",
     "@vercel/analytics": "^1.2.2",
     "@vercel/kv": "^3.0.0",
