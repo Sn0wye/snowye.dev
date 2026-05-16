@@ -14,5 +14,4 @@ const nextConfig = {
   typescript: { ignoreBuildErrors: !!process.env.CI }
 };
 
-// export default MillionLint.next({ rsc: true })(nextConfig);
 export default withNextIntl(nextConfig);

@@ -1,10 +1,6 @@
 'use client';
 
 import { Command } from 'cmdk';
-import Lottie, {
-  type LottieComponentProps,
-  type LottieRefCurrentProps
-} from 'lottie-react';
 import { useParams } from 'next/navigation';
 import React, {
   type ReactElement,
@@ -13,6 +9,10 @@ import React, {
   useState,
   useTransition
 } from 'react';
+import dynamic from 'next/dynamic';
+
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
+import type { LottieComponentProps, LottieRefCurrentProps } from 'lottie-react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { create } from 'zustand';
 import aboutIcon from '../../public/static/icons/about.json';
