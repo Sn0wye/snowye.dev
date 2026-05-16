@@ -18,7 +18,7 @@ export function Navbar() {
   const { toggle } = useCommandPalette();
 
   return (
-    <header className="absolute top-0 z-30 mt-3 flex min-h-[3.75rem] w-full flex-wrap items-center text-xs text-white md:mt-0">
+    <header className="absolute top-0 z-30 mt-3 flex min-h-15 w-full flex-wrap items-center text-xs text-white md:mt-0">
       <Link
         href="/"
         className="order-1 ml-3 flex cursor-pointer appearance-none items-center justify-center rounded-lg border-none bg-transparent p-2 font-heading font-bold text-white transition-colors duration-200 ease-in-out hover:bg-hover"
@@ -47,7 +47,7 @@ export function Navbar() {
                     className={cn(
                       'relative inline-block cursor-pointer p-5 text-xs font-medium uppercase tracking-[0.075em] text-secondary transition-colors duration-200 ease-in-out hover:text-primary',
                       pathname === path && 'text-primary after:opacity-100',
-                      "after:absolute after:left-0 after:right-0 after:top-[1.125rem] after:mx-auto after:h-px after:w-5 after:bg-white after:opacity-0 after:transition-opacity after:duration-200 after:ease-in-out after:content-['']"
+                      "after:absolute after:left-0 after:right-0 after:top-4.5 after:mx-auto after:h-px after:w-5 after:bg-white after:opacity-0 after:transition-opacity after:duration-200 after:ease-in-out after:content-['']"
                     )}
                     onHoverStart={() => setHovered(page)}
                     onHoverEnd={() => setHovered('')}

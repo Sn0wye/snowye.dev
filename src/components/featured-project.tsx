@@ -26,7 +26,7 @@ export function FeaturedProject({
 
   return (
     <motion.a
-      className="relative flex min-w-[200px] flex-col rounded-lg border-0 p-5 no-underline transition-opacity duration-200 ease-in-out hover:opacity-100 md:w-[180px] md:max-w-[8.75rem]"
+      className="relative flex min-w-[200px] flex-col rounded-lg border-0 p-5 no-underline transition-opacity duration-200 ease-in-out hover:opacity-100 md:w-[180px] md:max-w-35"
       href={url}
       target="_blank"
       onHoverStart={() => onHover(title)}
