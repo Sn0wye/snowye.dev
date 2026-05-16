@@ -24,7 +24,7 @@ export function Base({
       >
         <div className="relative z-10 mx-auto h-full max-w-3xl bg-transparent px-5 py-5 text-base leading-8 text-secondary">
           <h1
-            className={`bg-gradient-to-br decoration-clone bg-clip-text text-transparent from-geist-${primaryColor} to-geist-${secondaryColor}`}
+            className={`bg-linear-to-br box-decoration-clone bg-clip-text text-transparent from-geist-${primaryColor} to-geist-${secondaryColor}`}
           >
             {tagline ? tagline : title}
           </h1>

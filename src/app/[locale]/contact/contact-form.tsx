@@ -88,7 +88,7 @@ export const ContactForm = () => {
           )}
         />
         <Button
-          className="!mt-5 w-full border transition-colors hover:border-white hover:bg-transparent hover:text-white"
+          className="mt-5! w-full border transition-colors hover:border-white hover:bg-transparent hover:text-white"
           type="submit"
         >
           {c.send}

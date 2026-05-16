@@ -11,7 +11,7 @@ const Command = ({
 }: React.ComponentProps<typeof CommandPrimitive>) => (
   <CommandPrimitive
     className={cn(
-      'w-full min-w-[640px] overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 p-2 shadow-[var(--cmdk-shadow)] duration-100 ease-in-out  [&_:not([hidden])_+_[cmdk-group]]:mt-2 [&_[cmdk-group-heading]]:px-2',
+      'w-full min-w-[640px] overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 p-2 shadow-(--cmdk-shadow) duration-100 ease-in-out  [&_:not([hidden])+[cmdk-group]]:mt-2 **:[[cmdk-group-heading]]:px-2',
       className
     )}
     {...props}
@@ -63,7 +63,7 @@ const CommandGroup = ({
 }: React.ComponentProps<typeof CommandPrimitive.Group>) => (
   <CommandPrimitive.Group
     className={cn(
-      '[&_[cmdk-group-heading]]:mb-2 [&_[cmdk-group-heading]]:flex [&_[cmdk-group-heading]]:select-none [&_[cmdk-group-heading]]:items-center [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:text-zinc-400',
+      '**:[[cmdk-group-heading]]:mb-2 **:[[cmdk-group-heading]]:flex **:[[cmdk-group-heading]]:select-none **:[[cmdk-group-heading]]:items-center **:[[cmdk-group-heading]]:px-2 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:text-zinc-400',
       className
     )}
     {...props}
