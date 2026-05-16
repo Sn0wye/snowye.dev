@@ -1,9 +1,10 @@
 'use client';
 
-import Lottie from 'lottie-react';
 import dynamic from 'next/dynamic';
 import { useT } from '@/i18n/use-t';
 import lottieAnimation from '../../../public/static/icons/404.json';
+
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 
 const ShortcutError = dynamic(() => import('@/components/shortcut-error'), {
   ssr: false
