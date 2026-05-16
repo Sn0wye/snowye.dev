@@ -2,8 +2,8 @@
 
 import { useParams } from 'next/navigation';
 import { useTransition } from 'react';
-import { type AppLocale, routing } from '@/i18n/routing';
 import { usePathname, useRouter } from '@/i18n/navigation';
+import { type AppLocale, routing } from '@/i18n/routing';
 import { useAppLocale, useT } from '@/i18n/use-t';
 import { cn } from '@/lib/cn';
 
@@ -27,11 +27,8 @@ export function LocaleSwitcher() {
   };
 
   return (
-    <div
-      role="group"
-      aria-label={t.common.localeSwitcher.label}
-      className="ml-1 flex items-center gap-0.5 rounded-lg bg-transparent p-1 text-xs font-medium uppercase tracking-[0.075em]"
-    >
+    <fieldset className="ml-1 flex items-center gap-0.5 rounded-lg bg-transparent p-1 text-xs font-medium uppercase tracking-[0.075em]">
+      <legend className="sr-only">{t.common.localeSwitcher.label}</legend>
       {routing.locales.map(locale => {
         const isActive = locale === current;
         return (
@@ -52,6 +49,6 @@ export function LocaleSwitcher() {
           </button>
         );
       })}
-    </div>
+    </fieldset>
   );
 }

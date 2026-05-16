@@ -1,6 +1,6 @@
 import { getLocale } from 'next-intl/server';
-import { type AppLocale } from './routing';
 import { getMessages, type Messages } from './messages';
+import type { AppLocale } from './routing';
 
 /**
  * Type-safe access to the full message bundle from a Server Component.

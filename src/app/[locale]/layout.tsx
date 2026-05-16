@@ -128,8 +128,8 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
           messages={messages[locale] as unknown as Record<string, unknown>}
         >
           <TooltipProvider delayDuration={150}>
-            <div className='relative z-0 flex min-h-screen flex-col'>
-              <div className='absolute inset-0 h-full w-full'>
+            <div className="relative z-0 flex min-h-screen flex-col">
+              <div className="absolute inset-0 h-full w-full">
                 <Particles
                   particleCount={150}
                   particleSpread={20}

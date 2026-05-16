@@ -1,11 +1,7 @@
 'use client';
 
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/tooltip';
 import { useT } from '@/i18n/use-t';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger
-} from '@/components/tooltip';
 
 export function NamePronunciation() {
   const t = useT();

@@ -1,6 +1,5 @@
 allowBuilds:
   '@parcel/watcher': true
   '@swc/core': true
-  '@tsparticles/engine': true
   sharp: true
   unrs-resolver: true

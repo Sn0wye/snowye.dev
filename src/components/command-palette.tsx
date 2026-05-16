@@ -1,6 +1,7 @@
 'use client';
 
 import { Command } from 'cmdk';
+import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
 import React, {
   type ReactElement,
@@ -9,21 +10,21 @@ import React, {
   useState,
   useTransition
 } from 'react';
-import dynamic from 'next/dynamic';
 
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
+
 import type { LottieComponentProps, LottieRefCurrentProps } from 'lottie-react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { create } from 'zustand';
+import { usePathname, useRouter } from '@/i18n/navigation';
+import type { AppLocale } from '@/i18n/routing';
+import { useAppLocale, useT } from '@/i18n/use-t';
 import aboutIcon from '../../public/static/icons/about.json';
 import copyLinkIcon from '../../public/static/icons/copy-link.json';
 import emailIcon from '../../public/static/icons/email.json';
 import homeIcon from '../../public/static/icons/home.json';
 import projectsIcon from '../../public/static/icons/projects.json';
 import sourceIcon from '../../public/static/icons/source.json';
-import { usePathname, useRouter } from '@/i18n/navigation';
-import { type AppLocale } from '@/i18n/routing';
-import { useAppLocale, useT } from '@/i18n/use-t';
 import {
   CommandEmpty,
   CommandGroup,
@@ -438,7 +439,11 @@ function Item({
   }, []);
 
   useEffect(() => {
-    const lottieRef = (icon.props as { lottieRef?: { current: { play: () => void; stop: () => void } } }).lottieRef;
+    const lottieRef = (
+      icon.props as {
+        lottieRef?: { current: { play: () => void; stop: () => void } };
+      }
+    ).lottieRef;
     if (selected) {
       lottieRef?.current?.play();
     } else {
