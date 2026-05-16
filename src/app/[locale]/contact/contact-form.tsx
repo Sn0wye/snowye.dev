@@ -27,10 +27,22 @@ export const ContactForm = () => {
 
   const onSubmit = async (data: EmailSchema) => {
     try {
-      await fetch('/email', {
+      const response = await fetch('/api/email', {
         body: JSON.stringify(data),
-        method: 'POST'
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
       });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        toast({
+          variant: 'destructive',
+          title: result.error || c.toast.fail.title,
+          description: result.message || c.toast.fail.description
+        });
+        return;
+      }
 
       toast({
         title: c.toast.success.title,
