@@ -34,7 +34,7 @@
     "@react-email/components": "^1.0.0",
     "@t3-oss/env-nextjs": "^0.13.0",
     "@upstash/ratelimit": "^2.0.0",
-    "@vercel/analytics": "^1.2.2",
+    "@vercel/analytics": "^2.0.0",
     "@vercel/kv": "^3.0.0",
     "clsx": "^2.1.0",
     "cmdk": "^1.0.0",
