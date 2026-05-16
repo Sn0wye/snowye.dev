@@ -6,17 +6,20 @@ import {
   Html,
   Preview,
   Text
-} from '@react-email/components';
+} from 'react-email';
 
 interface EmailProps {
   name: string;
   message: string;
 }
 
-export function EmailTemplate({ name = 'Sujeito', message = '' }: EmailProps) {
+export default function EmailTemplate({
+  name = 'Sujeito',
+  message = 'Aute nisi qui elit esse ipsum eu et veniam aute fugiat sunt incididunt elit. Magna nulla ad non amet. Esse officia in adipisicing ipsum occaecat anim anim minim Lorem cupidatat eu aliquip cupidatat elit enim. Duis commodo aute officia qui. Labore consectetur et irure nisi cillum duis cillum ad ut non anim nulla. Et pariatur amet et dolore sit deserunt reprehenderit officia nisi fugiat labore nulla. Fugiat duis ad aliqua amet consequat mollit consectetur aliqua culpa do. Incididunt aliqua cupidatat cupidatat anim occaecat irure eu irure.'
+}: EmailProps) {
   return (
     <Html>
-      <Head title="teste" />
+      <Head title='teste' />
       <Preview>{name} - via snowye.dev</Preview>
       <Body
         style={{
