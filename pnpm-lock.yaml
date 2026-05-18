@@ -49,7 +49,7 @@ importers:
         version: 1.0.0-beta.4(typescript@6.0.3)
       date-fns:
         specifier: ^4.0.0
-        version: 4.1.0
+        version: 4.2.1
       framer-motion:
         specifier: ^12.0.0
         version: 12.38.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -1436,8 +1436,8 @@ packages:
       typescript:
         optional: true
 
-  date-fns@4.1.0:
-    resolution: {integrity: sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg==}
+  date-fns@4.2.1:
+    resolution: {integrity: sha512-37RhSdxaG1suen6VDCza6rNrQfooyQh57HFVPwQGEq2QWliVLzPQZ8Oa017weOu+HZCnzI7N3Pf/wyoBKfEqrA==}
 
   debounce-fn@6.0.0:
     resolution: {integrity: sha512-rBMW+F2TXryBwB54Q0d8drNEI+TfoS9JpNTAoVpukbWEhjXQq4rySFYLaqXMFXwdv61Zb2OHtj5bviSoimqxRQ==}
@@ -3109,7 +3109,7 @@ snapshots:
     optionalDependencies:
       typescript: 6.0.3
 
-  date-fns@4.1.0: {}
+  date-fns@4.2.1: {}
 
   debounce-fn@6.0.0:
     dependencies:
