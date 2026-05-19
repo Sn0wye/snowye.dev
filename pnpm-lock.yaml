@@ -52,7 +52,7 @@ importers:
         version: 4.1.0
       framer-motion:
         specifier: ^12.0.0
-        version: 12.39.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 12.38.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       lottie-react:
         specifier: ^2.4.0
         version: 2.4.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -79,7 +79,7 @@ importers:
         version: 19.2.6(react@19.2.6)
       react-email:
         specifier: ^6.1.4
-        version: 6.1.4(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 6.1.5(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       react-hook-form:
         specifier: ^7.76.0
         version: 7.76.0(react@19.2.6)
@@ -106,8 +106,8 @@ importers:
         specifier: 2.4.15
         version: 2.4.15
       '@react-email/ui':
-        specifier: 6.1.4
-        version: 6.1.4(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        specifier: 6.1.5
+        version: 6.1.5(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@types/node':
         specifier: 24.12.4
         version: 24.12.4
@@ -1057,8 +1057,8 @@ packages:
       react: ^18.0 || ^19.0 || ^19.0.0-rc
       react-dom: ^18.0 || ^19.0 || ^19.0.0-rc
 
-  '@react-email/ui@6.1.4':
-    resolution: {integrity: sha512-FyMCx7uNV0ugZY9ZWNAnWFTrXnYOhRQm97ybbZapJCQLu6uhZHmluXv2HcsSZ0RaMAzuLJgw0ziLQjq4uYEiNg==}
+  '@react-email/ui@6.1.5':
+    resolution: {integrity: sha512-IJYZFEk3+VjM0hoPXXIiarps1MNOopQgycKMYzhG1iRHut32JKFMt9J0KFu7qmif5wpbGGxv6MhurdW3MG0WEA==}
 
   '@schummar/icu-type-parser@1.21.5':
     resolution: {integrity: sha512-bXHSaW5jRTmke9Vd0h5P7BtWZG9Znqb8gSDxZnxaGSJnGwPLDPfS+3g0BKzeWqzgZPsIVZkM7m2tbo18cm5HBw==}
@@ -1515,8 +1515,8 @@ packages:
   fast-uri@3.1.2:
     resolution: {integrity: sha512-rVjf7ArG3LTk+FS6Yw81V1DLuZl1bRbNrev6Tmd/9RaroeeRRJhAt7jg/6YFxbvAQXUCavSoZhPPj6oOx+5KjQ==}
 
-  framer-motion@12.39.0:
-    resolution: {integrity: sha512-+vnLfzrv0MzjLzNl+nvNvR7jdg3q4cxxjz/YvzfifHl0TREtL00cs1RoMTxs+1PzLiEqZGV6gYsBY0oEAYZ24w==}
+  framer-motion@12.38.0:
+    resolution: {integrity: sha512-rFYkY/pigbcswl1XQSb7q424kSTQ8q6eAC+YUsSKooHQYuLdzdHjrt6uxUC+PRAO++q5IS7+TamgIw1AphxR+g==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
@@ -1886,8 +1886,8 @@ packages:
     peerDependencies:
       react: ^19.2.6
 
-  react-email@6.1.4:
-    resolution: {integrity: sha512-UKCfry4W7zkAWoJX1ngaWgPrUazOebxI8IYrO8TBEqgFmmz97VqZ84ell2x36Fdvtzd/UI5e4ZOywlsXeydwgQ==}
+  react-email@6.1.5:
+    resolution: {integrity: sha512-f4I7Y+9kEMjALvcL5dn1TAsDJG7VgksrcR4x9PMQiaCCud4iUefJMBQAcOhvoBpk1k75lGhR/p75d7WMF24PfA==}
     engines: {node: '>=20.0.0'}
     hasBin: true
     peerDependencies:
@@ -2817,7 +2817,7 @@ snapshots:
       react: 19.2.6
       react-dom: 19.2.6(react@19.2.6)
 
-  '@react-email/ui@6.1.4(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@react-email/ui@6.1.5(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
     dependencies:
       esbuild: 0.28.0
       next: 16.2.6(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -3210,7 +3210,7 @@ snapshots:
 
   fast-uri@3.1.2: {}
 
-  framer-motion@12.39.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6):
+  framer-motion@12.38.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6):
     dependencies:
       motion-dom: 12.39.0
       motion-utils: 12.39.0
@@ -3516,7 +3516,7 @@ snapshots:
       react: 19.2.6
       scheduler: 0.27.0
 
-  react-email@6.1.4(react-dom@19.2.6(react@19.2.6))(react@19.2.6):
+  react-email@6.1.5(react-dom@19.2.6(react@19.2.6))(react@19.2.6):
     dependencies:
       '@babel/parser': 7.27.0
       '@babel/traverse': 7.27.0
