@@ -41,7 +41,7 @@
     "framer-motion": "^12.0.0",
     "lottie-react": "^2.4.0",
     "lucide-react": "^1.0.0",
-    "next": "16.2.7",
+    "next": "16.2.9",
     "next-intl": "^4.9.2",
     "nodemailer": "^8.0.0",
     "ogl": "^1.0.11",
