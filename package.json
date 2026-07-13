@@ -59,7 +59,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.5.3",
     "@react-email/ui": "6.6.4",
-    "@types/node": "24.13.2",
+    "@types/node": "24.13.3",
     "@types/nodemailer": "^8.0.0",
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
