@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import dynamic from 'next/dynamic';
 import { type Dispatch, type SetStateAction, useRef } from 'react';
 
