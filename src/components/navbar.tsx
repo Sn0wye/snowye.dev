@@ -1,7 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Command, Snowflake } from 'lucide-react';
+import { motion } from 'motion/react';
 import { useState } from 'react';
 import { Link, usePathname } from '@/i18n/navigation';
 import { useT } from '@/i18n/use-t';
