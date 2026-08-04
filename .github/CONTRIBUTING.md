@@ -28,28 +28,28 @@ then, clone it to your local machine:
 gh repo clone <your-github-name>/snowye.dev
 ```
 
-This project uses [pnpm](https://pnpm.io) as its package manager. Install it if you haven't already:
+This project uses [Bun](https://bun.com) as its package manager. Install it if you haven't already:
 
 ```bash
-npm install -g pnpm
+curl -fsSL https://bun.com/install | bash
 ```
 
 Then, install the project's dependencies:
 
 ```bash
-pnpm install
+bun install
 ```
 
 Here are some useful scripts for when you are developing:
 
-| Command         | Description                                 |
-| --------------- | ------------------------------------------- |
-| `pnpm dev`      | Builds and starts the project in watch-mode |
-| `pnpm build`    | Builds the project                          |
-| `pnpm teste`    | Run project test cases                      |
-| `pnpm format`   | Formats the code                            |
-| `pnpm lint`     | Lints the code                              |
-| `pnpm lint:fix` | Lints the code and fixes any errors         |
+| Command               | Description                                 |
+| --------------------- | ------------------------------------------- |
+| `bun run dev`         | Builds and starts the project in watch-mode |
+| `bun run build`       | Builds the project                          |
+| `bun run typecheck`   | Type checks the project                     |
+| `bun run format`      | Formats the code                            |
+| `bun run check`       | Lints and formats the code                  |
+| `bun run check:fix`   | Lints the code and fixes any errors         |
 
 When making commits, make sure to follow the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) guidelines, i.e. prepending the message with `feat:`, `fix:`, `chore:`, `docs:`, etc... You can use `git status` to double check which files have not yet been staged for commit:
 
@@ -62,7 +62,7 @@ git add <file> && git commit -m "feat/fix/chore/docs: commit message"
 Check that your code follows the project's style guidelines by running:
 
 ```bash
-pnpm check
+bun run check
 ```
 
 Please also make a manual, functional test of your changes.
