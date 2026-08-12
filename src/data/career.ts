@@ -15,6 +15,7 @@ export const jobs: Job[] = [
     company: 'Bradesco',
     companyUrl: 'https://banco.bradesco',
     startDate: '2025-04-01',
+    endDate: '2026-06-30',
     location: 'Remote, Brazil'
   },
   {
