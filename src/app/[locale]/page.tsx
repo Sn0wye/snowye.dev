@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import ClientOpenCommandPalette from '@/components/client-open-command-palette';
+import { WebPageJsonLd } from '@/components/web-page-json-ld';
 import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
 import { Typewriter } from './typewriter';
@@ -22,9 +23,9 @@ export async function generateMetadata({
 
   return {
     title: t.pages.home.title,
-    description: t.pages.home.description,
+    description: t.pages.home.metaDescription,
     openGraph: {
-      description: t.pages.home.description
+      description: t.pages.home.metaDescription
     }
   };
 }
@@ -36,6 +37,13 @@ export default async function Home({ params }: PageProps) {
 
   return (
     <div className="mx-auto flex max-w-3xl flex-1 items-center overflow-hidden px-5 py-nav-height-mobile md:w-[800px] md:px-0 md:py-nav-height-desktop">
+      <WebPageJsonLd
+        locale={locale}
+        path="/"
+        type="ProfilePage"
+        name={t.pages.home.title}
+        description={t.pages.home.metaDescription}
+      />
       <main className="relative z-10 h-full bg-transparent px-5 leading-8 text-secondary">
         <h1 className="bg-linear-to-r from-[#9442FE] to-[#3378FF] bg-clip-text text-transparent">
           {t.pages.home.title}

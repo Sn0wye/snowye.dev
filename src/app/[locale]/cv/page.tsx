@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { Base } from '@/components/base';
-import { PersonJsonLd } from '@/components/person-json-ld';
+import { WebPageJsonLd } from '@/components/web-page-json-ld';
 import { getResume } from '@/data/resume';
 import {
   getSignatureSkills,
@@ -66,7 +66,13 @@ export default async function CV({ params }: PageProps) {
       primaryColor="cyan"
       secondaryColor="purple"
     >
-      <PersonJsonLd locale={locale} />
+      <WebPageJsonLd
+        locale={locale}
+        path="/cv"
+        type="ProfilePage"
+        name={c.title}
+        description={c.description}
+      />
 
       <p>
         <strong>{resume.basics.name}</strong> — {resume.basics.label},{' '}

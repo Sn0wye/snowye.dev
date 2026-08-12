@@ -10,6 +10,8 @@ import { CommandPalette } from '@/components/command-palette-loader';
 import { Footer } from '@/components/footer';
 import { Navbar } from '@/components/navbar';
 import Particles from '@/components/particles';
+import { PersonJsonLd } from '@/components/person-json-ld';
+import { SiteJsonLd } from '@/components/site-json-ld';
 import { Toaster } from '@/components/toaster';
 import { TooltipProvider } from '@/components/tooltip';
 import { messages } from '@/i18n/messages';
@@ -125,6 +127,10 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
 
   return (
     <html lang={locale}>
+      <head>
+        <SiteJsonLd locale={locale} />
+        <PersonJsonLd locale={locale} />
+      </head>
       <body
         suppressHydrationWarning
         className={cn(

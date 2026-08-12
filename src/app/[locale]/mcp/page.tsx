@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { Base } from '@/components/base';
+import { WebPageJsonLd } from '@/components/web-page-json-ld';
 import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
 import { MCP_ENDPOINT } from '@/mcp/manifest';
@@ -66,6 +67,12 @@ export default async function Mcp({ params }: PageProps) {
       primaryColor="purple"
       secondaryColor="cyan"
     >
+      <WebPageJsonLd
+        locale={locale}
+        path="/mcp"
+        name={t.pages.mcp.title}
+        description={stripHtml(t.pages.mcp.description)}
+      />
       <p dangerouslySetInnerHTML={{ __html: t.pages.mcp.description }} />
 
       <h2>{t.pages.mcp.connect}</h2>

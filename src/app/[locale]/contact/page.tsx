@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { Base } from '@/components/base';
+import { WebPageJsonLd } from '@/components/web-page-json-ld';
 import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
 import { stripHtml } from '@/utils/stripHtml';
@@ -52,6 +53,13 @@ export default async function Contact({ params }: PageProps) {
       tagline={t.pages.contact.tagline}
     >
       <div>
+        <WebPageJsonLd
+          locale={locale}
+          path="/contact"
+          type="ContactPage"
+          name={t.pages.contact.title}
+          description={stripHtml(t.pages.contact.description)}
+        />
         <p dangerouslySetInnerHTML={{ __html: t.pages.contact.description }} />
         <h2>{t.pages.contact.email}</h2>
         <ContactForm />

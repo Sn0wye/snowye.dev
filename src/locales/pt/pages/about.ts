@@ -41,6 +41,35 @@ export const about = {
     focus:
       'Foco em Algoritmos, Estruturas de Dados, Bancos de Dados, Sistemas Distribuídos e Matemática Aplicada (Cálculo, Álgebra Linear, Probabilidade e Estatística), com exposição a IA e Computação em Nuvem.'
   },
+  faq: {
+    title: 'Perguntas frequentes',
+    items: [
+      {
+        question: 'Quem é Gabriel Trzimajewski?',
+        answer:
+          'Gabriel Trzimajewski é Engenheiro de Software Backend Sênior de Blumenau, Santa Catarina, Brasil, com mais de 5 anos construindo sistemas distribuídos, APIs e infraestrutura em nuvem. Mais recentemente atuou no Bradesco em uma plataforma interna de processamento de logs e observabilidade usada em escala bancária.'
+      },
+      {
+        question: 'Com quais tecnologias o Gabriel trabalha?',
+        answer:
+          'Principalmente Java e Spring Boot, Node.js e TypeScript, C#/.NET e React no frontend. Na infraestrutura: AWS, Terraform, Docker, Kafka, gRPC, PostgreSQL e Datadog para observabilidade e alertas baseados em SLO.'
+      },
+      {
+        question: 'Como se pronuncia Trzimajewski?',
+        answer: 'Aproximadamente "tri-ma-jés-ki" (IPA: tɾi maˈʒɛs.ki).'
+      },
+      {
+        question: 'O Gabriel está disponível para trabalhar?',
+        answer:
+          'Sim — está aberto a vagas sênior de backend e fullstack, remotas ou no Brasil. O contato mais rápido é a página snowye.dev/pt/contact ou o e-mail gabriel@snowye.dev.'
+      },
+      {
+        question: 'O que o Gabriel já entregou na prática?',
+        answer:
+          'Liderou uma integração com a B3 atendendo ~100 mil requisições/dia para ~10 mil usuários ativos mensais, reduziu custos de AWS em ~50% com uma migração entre regiões usando Terraform, levou uma query crítica de PostgreSQL de ~8s para menos de 200ms com pg_trgm e reduziu o tempo de deploy de 15 para 3 minutos com GitHub Actions.'
+      }
+    ]
+  },
   languages: 'Idiomas',
   languagesList: [
     { name: 'Português', level: 'nativo' },

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { Base } from '@/components/base';
+import { WebPageJsonLd } from '@/components/web-page-json-ld';
 import { projects as projectsData } from '@/data/projects';
 import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
@@ -66,6 +67,13 @@ export default async function Projects({ params }: PageProps) {
       primaryColor={meta.primaryColor}
       secondaryColor={meta.secondaryColor}
     >
+      <WebPageJsonLd
+        locale={locale}
+        path="/projects"
+        type="CollectionPage"
+        name={t.pages.projects.title}
+        description={stripHtml(descriptionHtml)}
+      />
       <p dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
 
       <h2>{t.pages.projects.featured}</h2>

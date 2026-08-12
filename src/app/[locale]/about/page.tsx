@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { setRequestLocale } from 'next-intl/server';
 import { Base } from '@/components/base';
+import { Faq } from '@/components/faq';
+import { WebPageJsonLd } from '@/components/web-page-json-ld';
 import { env } from '@/env';
 import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
@@ -67,6 +69,14 @@ export default async function About({ params }: PageProps) {
       primaryColor={meta.primaryColor}
       secondaryColor={meta.secondaryColor}
     >
+      <WebPageJsonLd
+        locale={locale}
+        path="/about"
+        type="ProfilePage"
+        name={a.title}
+        description={stripHtml(a.description)}
+      />
+
       <div className="flex flex-col justify-between md:flex-row">
         <section className="mt-0 w-auto md:w-[48%]">
           <Image
@@ -143,6 +153,8 @@ export default async function About({ params }: PageProps) {
         </p>
         <p>{a.educationItem.focus}</p>
       </article>
+
+      <Faq />
 
       <h2>{a.languages}</h2>
       <ul>
