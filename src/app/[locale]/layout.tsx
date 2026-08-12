@@ -139,7 +139,9 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
         >
           <TooltipProvider delayDuration={150}>
             <div className="relative z-0 flex min-h-screen flex-col">
-              <div className="absolute inset-0 h-full w-full">
+              {/* overflow-hidden: the WebGL canvas carries explicit pixel
+                  dimensions, so it must never be able to grow the document. */}
+              <div className="absolute inset-0 h-full w-full overflow-hidden">
                 <Particles
                   particleCount={150}
                   particleSpread={20}

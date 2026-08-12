@@ -131,6 +131,15 @@ const Particles: React.FC<ParticlesProps> = ({
       renderer.setSize(width, height);
       camera.perspective({ aspect: gl.canvas.width / gl.canvas.height });
     };
+    /**
+     * The canvas gets explicit pixel dimensions from `setSize`, and this
+     * component lives in the layout, so it never remounts between routes.
+     * Watching the container (not just the window) keeps the canvas in step
+     * when a route change alters the page height — otherwise a tall page like
+     * /cv leaves an oversized canvas behind that overflows the next page.
+     */
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(container);
     window.addEventListener('resize', resize, false);
     resize();
 
@@ -229,6 +238,7 @@ const Particles: React.FC<ParticlesProps> = ({
     animationFrameId = requestAnimationFrame(update);
 
     return () => {
+      resizeObserver.disconnect();
       window.removeEventListener('resize', resize);
       if (moveParticlesOnHover) {
         container.removeEventListener('mousemove', handleMouseMove);
