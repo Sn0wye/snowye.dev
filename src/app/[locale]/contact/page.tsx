@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { Base } from '@/components/base';
+import { Button } from '@/components/button';
 import { WebPageJsonLd } from '@/components/web-page-json-ld';
 import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
 import { stripHtml } from '@/utils/stripHtml';
-import { ContactForm } from './contact-form';
+
+const CAL_URL = 'https://cal.com/trzimajewski';
 
 export function generateStaticParams() {
   return routing.locales.map(locale => ({ locale }));
@@ -55,14 +57,21 @@ export default async function Contact({ params }: PageProps) {
       <div>
         <WebPageJsonLd
           locale={locale}
-          path="/contact"
-          type="ContactPage"
+          path='/contact'
+          type='ContactPage'
           name={t.pages.contact.title}
           description={stripHtml(t.pages.contact.description)}
         />
         <p dangerouslySetInnerHTML={{ __html: t.pages.contact.description }} />
-        <h2>{t.pages.contact.email}</h2>
-        <ContactForm />
+        <h2>{t.pages.contact.book}</h2>
+        <Button
+          asChild
+          className='mt-5! border transition-colors hover:border-white hover:bg-transparent hover:text-white'
+        >
+          <a href={CAL_URL} target='_blank' rel='noreferrer noopener'>
+            {t.pages.contact.cta}
+          </a>
+        </Button>
       </div>
     </Base>
   );

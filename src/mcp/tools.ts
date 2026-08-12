@@ -188,14 +188,14 @@ export const tools: Tool[] = [
   {
     name: 'get_contact',
     description:
-      'How to reach Gabriel: email, social profiles, and the contact form.',
+      'How to reach Gabriel: email, social profiles, and his booking link.',
     inputSchema: localeSchema,
     run: args => {
       const resume = getResume(localeArg(args));
       return {
         email: resume.basics.email,
         profiles: resume.basics.profiles,
-        contactForm: 'https://snowye.dev/contact',
+        bookingUrl: 'https://cal.com/trzimajewski',
         openToWork: isOpenToWork(resume)
       };
     }
