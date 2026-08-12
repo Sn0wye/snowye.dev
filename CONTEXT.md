@@ -22,7 +22,7 @@ Glossary for snowye.dev. Terms only — no implementation details, no specs.
 
 ## Identity claims
 
-**Résumé Source** — `documents/backend-{locale}.yml`. The single authoritative record of roles, dates, highlights, skills, and education. Any other CV-shaped file in the repo is a copy and is wrong by default. It is shared with other tooling outside this repo, so the website is a **read-only consumer**: its shape is fixed, and the site adapts to it. Anything the site needs but the file does not express must be *derived* from the existing content, never added to it.
+**Résumé Source** — `content/resume/backend-{locale}.yml`. The single authoritative record of roles, dates, highlights, skills, and education. Any other CV-shaped file in the repo is a copy and is wrong by default. It is shared with other tooling outside this repo, so the website is a **read-only consumer**: its shape is fixed, and the site adapts to it. Anything the site needs but the file does not express must be *derived* from the existing content, never added to it.
 
 **Signature Skills** — the ~15 terms the site presents to humans as what Gabriel is known for. The **Target Stack** is pinned to the front in its declared order; the remaining slots are earned by derived score — skill keywords ranked by how often they occur in the Résumé Source prose, weighted so recent roles and the summary count for more, ties breaking toward the more recent role.
 

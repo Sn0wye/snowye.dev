@@ -16,7 +16,7 @@ The site serves two audiences (see `CONTEXT.md`): a Searcher who wants voice and
 
 ## Decision
 
-`documents/backend-{locale}.yml` is the sole source of truth for **facts**: roles, companies, titles, dates, highlights, skills, education, languages.
+`content/resume/backend-{locale}.yml` is the sole source of truth for **facts**: roles, companies, titles, dates, highlights, skills, education, languages. It lives under `content/` rather than `docs/` because it is a build input the site reads, not documentation for people.
 
 The locale files under `src/locales/` retain only **voice**: bio prose, taglines, pronunciation, and navigation copy. They must not restate any fact the YAML owns.
 

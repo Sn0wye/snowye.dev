@@ -1,0 +1,295 @@
+meta:
+  locale: en-US
+  present_label: Present
+  section_titles:
+    summary: Professional Summary
+    work: Professional Experience
+    experience: Professional Experience
+    projects: Projects
+    education: Education
+    skills: Technical Skills
+    languages: Languages
+    certificates: Certifications
+    certifications: Certifications
+    awards: Awards
+    publications: Publications
+    volunteer: Volunteer
+    interests: Interests
+    references: References
+
+basics:
+  name: Gabriel Trzimajewski
+  label: Senior Backend Software Engineer
+  email: gabriel@snowye.dev
+  phone: '+55 (47) 98833-0284'
+  location:
+    city: Blumenau
+    region: Santa Catarina
+    countryCode: BR
+  summary: >-
+    Backend-focused Software Engineer with 5+ years building distributed systems, APIs,
+    and cloud infrastructure at scale. Most recently at K2 Partnering Solutions, allocated to
+    Bradesco on an internal observability and log-processing platform operating at banking
+    scale, with audited incident-based access workflows and legacy Java 8 modernization. Before that at Mundo
+    Invest, where he led a B3 stock exchange integration API handling ~100k requests/day for
+    ~10k monthly active users, cut AWS costs by ~50% through a Terraform region migration
+    and rightsizing, reduced incident investigation time by ~80% with Datadog SLO alerting,
+    and took PostgreSQL search queries from ~8s to under 200ms. Comfortable across Java and
+    Spring Boot, TypeScript and Node.js, Go, and C#/.NET with Entity Framework Core. Strong
+    on reliability engineering, observability, messaging with Kafka and gRPC, cost
+    optimization, database performance tuning, financial and banking-scale systems, legacy
+    modernization, and mainframe-to-web integration. Also working in applied AI at the
+    application and infrastructure layer with LangChain, the AI SDK, and Claude Code
+    including Skills and MCP servers. Remote only; available immediately. Self-taught,
+    systems-oriented, focused on reliability and performance.
+  profiles:
+    - network: LinkedIn
+      username: trzimajewski
+      url: https://www.linkedin.com/in/trzimajewski
+    - network: GitHub
+      username: Sn0wye
+      url: https://github.com/Sn0wye
+
+work:
+  - name: Bradesco
+    position: Senior Software Engineer
+    location: Remote, Brazil
+    url: https://banco.bradesco
+    startDate: '2025-04'
+    endDate: '2026-06'
+    summary: >-
+      Allocated to Bradesco via K2 Partnering Solutions as a backend engineer on the Open Platform team, working on an
+      existing internal log processing and observability platform used at banking scale for
+      incident investigation and system monitoring, where he shipped new features and led the
+      modernization of its legacy components.
+    highlights:
+      - Shipped new features into the existing log processing and observability platform used by Bradesco analysts to investigate incidents and monitor systems.
+      - Designed and implemented an audited, incident-based log access workflow in which analysts retrieve logs by providing a ticket ID, eliminating manual access approvals from managers.
+      - Reduced investigation time by more than 50% by removing the manual approval step from the log access path while keeping every query automatically audited.
+      - Ensured full traceability and regulatory compliance by automatically auditing every log query against its originating incident ticket.
+      - Led the modernization of a legacy Java 8 system through architectural refactoring, improving scalability and long-term maintainability.
+      - Removed accumulated technical debt from the legacy codebase, reducing maintenance cost and making the system safer to change.
+      - Redesigned the storage strategy for log data, optimizing resource usage and lowering infrastructure costs.
+      - Implemented integrations between mainframe systems and modern web services in Java, bridging legacy infrastructure with distributed services.
+      - Worked with Java and Spring Boot across the platform's ingestion, query, and access-control paths.
+      - Operated inside a regulated banking environment where audit, compliance, and traceability requirements shaped the architecture.
+
+  - name: Mundo Invest
+    position: Backend Software Engineer
+    location: Remote, Brazil
+    startDate: '2024-02'
+    endDate: '2025-03'
+    summary: >-
+      Distributed microservices for a Brazilian investment platform, including a B3 stock
+      exchange integration API, AWS infrastructure, and observability.
+    highlights:
+      - Led development of a B3 (Brazilian stock exchange) integration API handling ~100k requests/day for ~10k monthly active users, enabling real-time stock transaction tracking.
+      - Designed the B3 integration as a client-facing aggregation layer over internal services, a Backend for Frontend (BFF) exposing REST endpoints, webhooks, and Kafka consumers.
+      - Built and maintained microservices with NestJS and TypeScript in a multi-repo microservice environment.
+      - Designed and documented REST APIs extensively with OpenAPI/Swagger, giving client teams a contract they could build against without back-and-forth.
+      - Improved test coverage and observability with JUnit and Datadog, reducing incident investigation time by ~80% and lowering MTTR across a 5-engineer team.
+      - Migrated AWS infrastructure across regions using Terraform, reducing cloud costs by ~50% through workload analysis and rightsizing.
+      - Designed Datadog dashboards and SLO-based alerting, improving error budget tracking and production reliability.
+      - Automated CI/CD pipelines with GitHub Actions, Docker, ECS, and ECR, reducing deployment time from 15 minutes to 3 minutes.
+      - Replaced synchronous REST communication with gRPC on latency-sensitive paths, reducing inter-service latency and improving tail performance.
+      - Optimized PostgreSQL search queries using pg_trgm, reducing response times from ~8s to under 200ms under production load.
+      - Developed and maintained distributed microservices and AWS Lambdas in Java with Spring Boot, Node.js with TypeScript and Express, and Go.
+      - Engaged in architectural and communication design discussions with teams working on Kafka and gRPC integrations.
+      - Led refactorings that improved cohesion and reduced coupling across services, alongside code performance improvements.
+      - Worked with PostgreSQL and MongoDB as primary data stores across services.
+
+  - name: Avalie Mais
+    position: Full Stack Engineer
+    location: Remote, Brazil
+    startDate: '2021-12'
+    endDate: '2024-02'
+    summary: >-
+      Anonymous retail survey platform with strict data-anonymization and privacy-compliance
+      requirements.
+    highlights:
+      - Developed and managed an anonymous retail survey application that produced strategic insights, improving decision-making on store installations and organizational structure.
+      - Designed and implemented a secure architecture guaranteeing complete data anonymization and full compliance with privacy regulations.
+      - Built a highly optimized system that maintained zero performance issues despite continuously increasing user demand.
+      - Delivered backend services with PHP 7 and Laravel, covered by PHPUnit tests.
+      - Built the web frontend with React 17 and Tailwind CSS.
+      - Modeled and tuned the MySQL schema backing survey collection and reporting.
+
+  - name: Mercante
+    position: Full Stack Engineer
+    location: Remote, Brazil
+    url: https://mercante.com.py
+    startDate: '2021-07'
+    endDate: '2023-06'
+    summary: >-
+      Part-time contract engineering for Mercante, a Paraguay-based digital agency, overlapping
+      with the Avalie Mais role. E-commerce platforms and self-hosted infrastructure for SMBs
+      in Brazil and Paraguay, several of which are still in production today.
+    highlights:
+      - Designed and delivered e-commerce platforms for 10+ small and medium businesses across Brazil and Paraguay through Mercante, achieving an average 30% increase in client sales after launch.
+      - Shipped storefronts that are still live and serving customers in production years after delivery.
+      - Architected self-hosted VPS infrastructures, cutting operational costs versus SaaS alternatives while retaining full control over performance and deployments.
+      - Built storefronts with React, TypeScript, and Node.js, focusing on performance, SEO, and conversion.
+      - Delivered backend services using NestJS.
+      - 'Managed the full project lifecycle end to end: discovery, design, development, deployment, and post-launch support.'
+      - Worked directly with non-technical business owners to turn commercial goals into technical scope.
+
+education:
+  - institution: UNINTER
+    area: Computer Science
+    studyType: B.Sc. (in progress, expected Feb 2029)
+    startDate: '2025-02'
+    endDate: '2029-02'
+    score: 9.18/10
+    courses:
+      - Algorithms
+      - Data Structures
+      - Databases
+      - Distributed Systems
+      - Calculus
+      - Linear Algebra
+      - Probability and Statistics
+      - Artificial Intelligence
+      - Cloud Computing
+
+skills:
+  - name: Programming Languages
+    keywords:
+      - Java
+      - Java 8
+      - Java 17
+      - TypeScript
+      - JavaScript
+      - Go
+      - 'C#'
+      - PHP
+      - SQL
+      - Bash
+  - name: Backend and Frameworks
+    keywords:
+      - Spring Boot
+      - Node.js
+      - NestJS
+      - Express
+      - .NET
+      - Entity Framework Core
+      - Laravel
+      - REST
+      - gRPC
+      - protobuf
+      - Webhooks
+      - OpenAPI
+      - Swagger
+      - Backend for Frontend (BFF)
+      - JPA
+      - Hibernate
+      - Microservices
+      - Distributed Systems
+      - API Design
+      - Repository Pattern
+      - Domain-Driven Design
+  - name: Frontend
+    keywords:
+      - React
+      - Next.js
+      - Tailwind CSS
+      - HTML
+      - CSS
+      - SEO
+  - name: Data and Messaging
+    keywords:
+      - PostgreSQL
+      - pg_trgm
+      - MySQL
+      - Oracle
+      - MongoDB
+      - Redis
+      - Kafka
+      - RabbitMQ
+      - Query Optimization
+      - Database Performance Tuning
+      - Data Modeling
+      - Code-First Migrations
+  - name: Cloud and Infrastructure
+    keywords:
+      - AWS
+      - AWS Lambda
+      - Amazon ECS
+      - Amazon ECR
+      - Terraform
+      - Docker
+      - Kubernetes
+      - GitHub Actions
+      - CI/CD
+      - Infrastructure as Code
+      - VPS
+      - Self-Hosting
+      - Cloud Cost Optimization
+      - Rightsizing
+      - Region Migration
+  - name: Observability and Reliability
+    keywords:
+      - Datadog
+      - Observability
+      - Monitoring
+      - Logging
+      - SLI
+      - SLO
+      - Error Budgets
+      - Alerting
+      - Incident Investigation
+      - MTTR Reduction
+      - Site Reliability Engineering
+      - Performance Tuning
+      - Auditing
+      - Compliance
+  - name: Testing and Quality
+    keywords:
+      - JUnit
+      - Mockito
+      - Jest
+      - PHPUnit
+      - Unit Testing
+      - Integration Testing
+      - Test Coverage
+      - Code Review
+  - name: AI and LLM
+    keywords:
+      - LangChain
+      - AI SDK
+      - Claude Code
+      - Agent Skills
+      - MCP
+      - Model Context Protocol
+      - LLM Application Development
+      - Agentic Workflows
+      - Applied AI
+  - name: Domains
+    keywords:
+      - Financial Systems
+      - Banking-Scale Systems
+      - Stock Exchange Integration
+      - B3
+      - Open Finance
+      - E-commerce
+      - Observability Platforms
+      - Legacy Modernization
+      - Mainframe Integration
+      - Data Anonymization
+      - Privacy Compliance
+  - name: Ways of Working
+    keywords:
+      - Git
+      - Agile
+      - Scrum
+      - Technical Discussions
+      - Architecture Design
+      - Mentoring
+      - Knowledge Sharing
+      - Remote Collaboration
+      - A/B Testing
+
+languages:
+  - language: Portuguese
+    fluency: Native speaker
+  - language: English
+    fluency: Fluent (C1)

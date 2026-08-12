@@ -1,0 +1,297 @@
+meta:
+  locale: pt-BR
+  present_label: Atual
+  section_titles:
+    summary: Resumo Profissional
+    work: Experiência Profissional
+    experience: Experiência Profissional
+    projects: Projetos
+    education: Formação Acadêmica
+    skills: Competências Técnicas
+    languages: Idiomas
+    certificates: Certificações
+    certifications: Certificações
+    awards: Prêmios
+    publications: Publicações
+    volunteer: Trabalho Voluntário
+    interests: Interesses
+    references: Referências
+
+basics:
+  name: Gabriel Trzimajewski
+  label: Engenheiro de Software Sênior (Backend)
+  email: gabriel@snowye.dev
+  phone: '+55 (47) 98833-0284'
+  location:
+    city: Blumenau
+    region: Santa Catarina
+    countryCode: BR
+  summary: >-
+    Engenheiro de Software com foco em backend e mais de 5 anos construindo sistemas
+    distribuídos, APIs e infraestrutura em nuvem em escala. Mais recentemente na K2 Partnering
+    Solutions, alocado no Bradesco em uma plataforma interna de observabilidade e processamento
+    de logs em escala bancária, com fluxo auditado de acesso por incidente e modernização de
+    sistema legado em Java 8.
+    Anteriormente na Mundo Invest, onde liderou a API de integração com a B3 processando
+    ~100 mil requisições/dia para ~10 mil usuários ativos mensais, reduziu custos de nuvem em
+    ~50% com migração de região via Terraform e rightsizing, diminuiu o tempo de investigação
+    de incidentes em ~80% com alertas baseados em SLO no Datadog e levou consultas de busca
+    no PostgreSQL de ~8s para menos de 200ms. Atua com Java e Spring Boot, TypeScript e
+    Node.js, Go e C#/.NET com Entity Framework Core. Forte em engenharia de confiabilidade,
+    observabilidade, mensageria com Kafka e gRPC, otimização de custos, tuning de banco de
+    dados, sistemas financeiros e bancários, modernização de legado e integração
+    mainframe-web. Também atua em IA aplicada na camada de aplicação e infraestrutura com
+    LangChain, AI SDK e Claude Code, incluindo Skills e servidores MCP. Somente remoto;
+    disponibilidade imediata. Autodidata, orientado a sistemas, com foco em confiabilidade e
+    performance.
+  profiles:
+    - network: LinkedIn
+      username: trzimajewski
+      url: https://www.linkedin.com/in/trzimajewski
+    - network: GitHub
+      username: Sn0wye
+      url: https://github.com/Sn0wye
+
+work:
+  - name: Banco Bradesco
+    position: Engenheiro de Software Sênior
+    location: Remoto, Brasil
+    url: https://k2partnering.com
+    startDate: '2025-04'
+    endDate: '2026-06'
+    summary: >-
+      Alocado no Bradesco por meio da K2 Partnering Solutions como engenheiro backend no time Open Platform, atuando em uma
+      plataforma interna já existente de processamento de logs e observabilidade usada em
+      escala bancária para investigação de incidentes e monitoramento de sistemas, na qual
+      entregou novas funcionalidades e liderou a modernização de seus componentes legados.
+    highlights:
+      - Entregou novas funcionalidades na plataforma existente de processamento de logs e observabilidade usada pelos analistas do Bradesco para investigar incidentes e monitorar sistemas.
+      - Projetou e implementou um fluxo auditado de acesso a logs baseado em incidentes, no qual analistas recuperam logs informando o ID do chamado, eliminando aprovações manuais de gestores.
+      - Reduziu o tempo de investigação em mais de 50% ao remover a etapa de aprovação manual do caminho de acesso aos logs, mantendo toda consulta auditada automaticamente.
+      - Garantiu rastreabilidade completa e conformidade regulatória auditando automaticamente cada consulta de log contra o chamado de incidente que a originou.
+      - Liderou a modernização de um sistema legado em Java 8 por meio de refatoração arquitetural, melhorando escalabilidade e manutenibilidade de longo prazo.
+      - Removeu dívida técnica acumulada da base legada, reduzindo custo de manutenção e tornando o sistema mais seguro de evoluir.
+      - Redesenhou a estratégia de armazenamento dos dados de log, otimizando uso de recursos e reduzindo custos de infraestrutura.
+      - Implementou integrações entre sistemas mainframe e serviços web modernos em Java, conectando infraestrutura legada a serviços distribuídos.
+      - Trabalhou com Java e Spring Boot nos caminhos de ingestão, consulta e controle de acesso da plataforma.
+      - Atuou em ambiente bancário regulado, no qual requisitos de auditoria, conformidade e rastreabilidade moldaram a arquitetura.
+
+  - name: Mundo Invest
+    position: Engenheiro de Software Backend
+    location: Remoto, Brasil
+    startDate: '2024-02'
+    endDate: '2025-03'
+    summary: >-
+      Microsserviços distribuídos para uma plataforma de investimentos, incluindo a API de
+      integração com a B3, infraestrutura AWS e observabilidade.
+    highlights:
+      - Liderou o desenvolvimento da API de integração com a B3 processando ~100 mil requisições/dia para ~10 mil usuários ativos mensais, viabilizando o acompanhamento de transações de ações em tempo real.
+      - Projetou a integração com a B3 como camada de agregação voltada ao cliente sobre serviços internos, um Backend for Frontend (BFF) expondo endpoints REST, webhooks e consumidores Kafka.
+      - Construiu e manteve microsserviços com NestJS e TypeScript em um ambiente de microsserviços multi-repositório.
+      - Projetou e documentou APIs REST extensivamente com OpenAPI/Swagger, entregando aos times clientes um contrato claro para integração.
+      - Aumentou a cobertura de testes e a observabilidade com JUnit e Datadog, reduzindo o tempo de investigação de incidentes em ~80% e diminuindo o MTTR de um time de 5 engenheiros.
+      - Migrou a infraestrutura AWS entre regiões usando Terraform, reduzindo custos de nuvem em ~50% por meio de análise de carga e rightsizing.
+      - Projetou dashboards no Datadog e alertas baseados em SLO, melhorando o acompanhamento de error budget e a confiabilidade em produção.
+      - Automatizou pipelines de CI/CD com GitHub Actions, Docker, ECS e ECR, reduzindo o tempo de deploy de 15 minutos para 3 minutos.
+      - Substituiu comunicação síncrona REST por gRPC em caminhos sensíveis a latência, reduzindo a latência entre serviços e melhorando a performance de cauda.
+      - Otimizou consultas de busca no PostgreSQL usando pg_trgm, reduzindo o tempo de resposta de ~8s para menos de 200ms sob carga de produção.
+      - Desenvolveu e manteve microsserviços distribuídos e AWS Lambdas em Java com Spring Boot, Node.js com TypeScript e Express, e Go.
+      - Participou de discussões de arquitetura e design de comunicação com times que trabalhavam com Kafka e gRPC.
+      - Conduziu refatorações que aumentaram a coesão e reduziram o acoplamento entre serviços, além de melhorias de performance de código.
+      - Trabalhou com PostgreSQL e MongoDB como principais bancos de dados dos serviços.
+
+  - name: Avalie Mais
+    position: Engenheiro de Software Full Stack
+    location: Remoto, Brasil
+    startDate: '2021-12'
+    endDate: '2024-02'
+    summary: >-
+      Plataforma de pesquisas anônimas para o varejo, com requisitos rígidos de anonimização
+      de dados e conformidade com privacidade.
+    highlights:
+      - Desenvolveu e manteve um aplicativo de pesquisas anônimas para o varejo que gerou insights estratégicos, melhorando decisões sobre instalação de lojas e estrutura organizacional.
+      - Projetou e implementou uma arquitetura segura garantindo anonimização completa dos dados e conformidade total com regulamentações de privacidade.
+      - Construiu um sistema altamente otimizado que manteve zero problemas de performance apesar do aumento contínuo da demanda de usuários.
+      - Entregou serviços backend com PHP 7 e Laravel, cobertos por testes com PHPUnit.
+      - Construiu o frontend web com React 17 e Tailwind CSS.
+      - Modelou e otimizou o schema MySQL que sustentava a coleta e os relatórios das pesquisas.
+
+  - name: Mercante
+    position: Engenheiro de Software Full Stack
+    location: Remoto, Brasil
+    url: https://mercante.com.py
+    startDate: '2021-07'
+    endDate: '2023-06'
+    summary: >-
+      Atuação como contratado em meio período na Mercante, agência digital paraguaia, sobreposta
+      ao período na Avalie Mais. Plataformas de e-commerce e infraestrutura self-hosted para PMEs
+      no Brasil e no Paraguai, várias delas ainda em produção hoje.
+    highlights:
+      - Projetou e entregou plataformas de e-commerce para mais de 10 pequenas e médias empresas no Brasil e no Paraguai pela Mercante, com aumento médio de 30% nas vendas dos clientes após o lançamento.
+      - Entregou lojas virtuais que seguem no ar e atendendo clientes em produção anos após a entrega.
+      - Arquitetou infraestruturas self-hosted em VPS, reduzindo custos operacionais frente a alternativas SaaS e mantendo controle total sobre performance e deploys.
+      - Construiu lojas virtuais com React, TypeScript e Node.js, com foco em performance, SEO e conversão.
+      - Entregou serviços backend utilizando NestJS.
+      - 'Conduziu o ciclo completo dos projetos: descoberta, design, desenvolvimento, deploy e suporte pós-lançamento.'
+      - Trabalhou diretamente com donos de negócio não técnicos, traduzindo objetivos comerciais em escopo técnico.
+
+education:
+  - institution: UNINTER
+    area: Ciência da Computação
+    studyType: Bacharelado (em andamento, conclusão prevista fev/2029)
+    startDate: '2025-02'
+    endDate: '2029-02'
+    score: 9.18/10
+    courses:
+      - Algoritmos
+      - Estruturas de Dados
+      - Bancos de Dados
+      - Sistemas Distribuídos
+      - Cálculo
+      - Álgebra Linear
+      - Probabilidade e Estatística
+      - Inteligência Artificial
+      - Computação em Nuvem
+
+skills:
+  - name: Linguagens de Programação
+    keywords:
+      - Java
+      - Java 8
+      - Java 17
+      - TypeScript
+      - JavaScript
+      - Go
+      - 'C#'
+      - PHP
+      - SQL
+      - Bash
+  - name: Backend e Frameworks
+    keywords:
+      - Spring Boot
+      - Node.js
+      - NestJS
+      - Express
+      - .NET
+      - Entity Framework Core
+      - Laravel
+      - REST
+      - gRPC
+      - protobuf
+      - Webhooks
+      - OpenAPI
+      - Swagger
+      - Backend for Frontend (BFF)
+      - JPA
+      - Hibernate
+      - Microsserviços
+      - Sistemas Distribuídos
+      - Design de APIs
+      - Repository Pattern
+      - Domain-Driven Design
+  - name: Frontend
+    keywords:
+      - React
+      - Next.js
+      - Tailwind CSS
+      - HTML
+      - CSS
+      - SEO
+  - name: Dados e Mensageria
+    keywords:
+      - PostgreSQL
+      - pg_trgm
+      - MySQL
+      - Oracle
+      - MongoDB
+      - Redis
+      - Kafka
+      - RabbitMQ
+      - Otimização de Consultas
+      - Tuning de Banco de Dados
+      - Modelagem de Dados
+      - Migrations Code-First
+  - name: Cloud e Infraestrutura
+    keywords:
+      - AWS
+      - AWS Lambda
+      - Amazon ECS
+      - Amazon ECR
+      - Terraform
+      - Docker
+      - Kubernetes
+      - GitHub Actions
+      - CI/CD
+      - Infraestrutura como Código
+      - VPS
+      - Self-Hosting
+      - Otimização de Custos em Nuvem
+      - Rightsizing
+      - Migração de Região
+  - name: Observabilidade e Confiabilidade
+    keywords:
+      - Datadog
+      - Observabilidade
+      - Monitoramento
+      - Logging
+      - SLI
+      - SLO
+      - Error Budget
+      - Alertas
+      - Investigação de Incidentes
+      - Redução de MTTR
+      - Site Reliability Engineering
+      - Tuning de Performance
+      - Auditoria
+      - Conformidade
+  - name: Testes e Qualidade
+    keywords:
+      - JUnit
+      - Mockito
+      - Jest
+      - PHPUnit
+      - Testes Unitários
+      - Testes de Integração
+      - Cobertura de Testes
+      - Code Review
+  - name: IA e LLM
+    keywords:
+      - LangChain
+      - AI SDK
+      - Claude Code
+      - Agent Skills
+      - MCP
+      - Model Context Protocol
+      - Desenvolvimento de Aplicações com LLM
+      - Fluxos Agênticos
+      - IA Aplicada
+  - name: Domínios
+    keywords:
+      - Sistemas Financeiros
+      - Sistemas em Escala Bancária
+      - Integração com Bolsa de Valores
+      - B3
+      - Open Finance
+      - E-commerce
+      - Plataformas de Observabilidade
+      - Modernização de Legado
+      - Integração com Mainframe
+      - Anonimização de Dados
+      - Conformidade com Privacidade
+  - name: Formas de Trabalho
+    keywords:
+      - Git
+      - Métodos Ágeis
+      - Scrum
+      - Discussões Técnicas
+      - Design de Arquitetura
+      - Mentoria
+      - Compartilhamento de Conhecimento
+      - Colaboração Remota
+      - Testes A/B
+
+languages:
+  - language: Português
+    fluency: Nativo
+  - language: Inglês
+    fluency: Fluente (C1)

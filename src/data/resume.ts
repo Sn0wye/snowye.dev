@@ -5,9 +5,10 @@ import { z } from 'zod';
 import type { AppLocale } from '@/i18n/routing';
 
 /**
- * The résumé YAML under `documents/` is the single source of truth for facts
- * (ADR-0001). It is shared with tooling outside this repo, so this module is a
- * read-only consumer: the schema below describes the file, never dictates it.
+ * The résumé YAML under `content/resume/` is the single source of truth for
+ * facts (ADR-0001). It is shared with tooling outside this repo, so this module
+ * is a read-only consumer: the schema below describes the file, never dictates
+ * it.
  *
  * Anything the site needs that the file does not state must be *derived* here.
  */
@@ -90,7 +91,12 @@ export const getResume = (locale: AppLocale): Resume => {
   const cached = cache.get(locale);
   if (cached) return cached;
 
-  const path = join(process.cwd(), 'documents', SOURCE_BY_LOCALE[locale]);
+  const path = join(
+    process.cwd(),
+    'content',
+    'resume',
+    SOURCE_BY_LOCALE[locale]
+  );
   const result = resumeSchema.safeParse(parse(readFileSync(path, 'utf8')));
 
   if (!result.success) {
