@@ -1,5 +1,6 @@
 import { about } from './about';
 import { contact } from './contact';
+import { cv } from './cv';
 import { home } from './home';
 import { notFound } from './not-found';
 import { projects } from './projects';
@@ -7,6 +8,7 @@ import { projects } from './projects';
 export const pages = {
   home,
   about,
+  cv,
   projects,
   contact,
   notFound
