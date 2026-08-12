@@ -67,6 +67,8 @@ const fontHeading = localFont({
 export const metadata = {
   metadataBase: new URL('https://snowye.dev'),
   title: 'Gabriel Trzimajewski',
+  description:
+    'Gabriel Trzimajewski is a Senior Backend Software Engineer from Brazil, working with Java, Spring Boot, Node.js, React and C#/.NET across distributed systems, observability and cloud infrastructure.',
   creator: 'Gabriel Trzimajewski',
   alternates: {
     canonical: 'https://snowye.dev',
@@ -83,9 +85,17 @@ export const metadata = {
   ],
   keywords: ['Gabriel', 'Trzimajewski', 'Snowye', 'snowyedotdev', 'snowye.dev'],
   openGraph: {
-    type: 'website',
+    type: 'profile',
     title: 'Gabriel Trzimajewski',
-    url: 'https://snowye.dev'
+    description:
+      'Senior Backend Software Engineer — Java, Spring Boot, Node.js, React, C#/.NET.',
+    url: 'https://snowye.dev',
+    images: [{ url: '/static/images/me.jpeg', width: 336, height: 336 }]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Gabriel Trzimajewski',
+    images: ['/static/images/me.jpeg']
   }
 } satisfies Metadata;
 
