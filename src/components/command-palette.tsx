@@ -14,6 +14,7 @@ import React, {
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 
 import type { LottieComponentProps, LottieRefCurrentProps } from 'lottie-react';
+
 import { useHotkeys } from 'react-hotkeys-hook';
 import { create } from 'zustand';
 import { usePathname, useRouter } from '@/i18n/navigation';
@@ -23,6 +24,7 @@ import aboutIcon from '../../public/static/icons/about.json';
 import copyLinkIcon from '../../public/static/icons/copy-link.json';
 import emailIcon from '../../public/static/icons/email.json';
 import homeIcon from '../../public/static/icons/home.json';
+import mcpIcon from '../../public/static/icons/mcp.json';
 import projectsIcon from '../../public/static/icons/projects.json';
 import sourceIcon from '../../public/static/icons/source.json';
 import {
@@ -91,6 +93,7 @@ export function CommandPalette() {
   useHotkeys('g+h', () => navigate('/'), { preventDefault: true });
   useHotkeys('g+a', () => navigate('/about'), { preventDefault: true });
   useHotkeys('g+p', () => navigate('/projects'), { preventDefault: true });
+  useHotkeys('g+m', () => navigate('/mcp'), { preventDefault: true });
   useHotkeys(
     'u',
     async () => {
@@ -234,6 +237,7 @@ function Home({ navigate, switchLocale, currentLocale, onClose }: HomeProps) {
   const homeRef = useRef<LottieRefCurrentProps>(null);
   const aboutRef = useRef<LottieRefCurrentProps>(null);
   const projectsRef = useRef<LottieRefCurrentProps>(null);
+  const mcpRef = useRef<LottieRefCurrentProps>(null);
 
   const iconStyle = { width: 24, height: 24 };
   const baseIconProps = {
@@ -283,6 +287,19 @@ function Home({ navigate, switchLocale, currentLocale, onClose }: HomeProps) {
           onSelect={() => navigate('/projects')}
         >
           {k.actions.projects}
+        </Item>
+        <Item
+          icon={
+            <Lottie
+              lottieRef={mcpRef}
+              animationData={mcpIcon}
+              {...baseIconProps}
+            />
+          }
+          shortcut="G M"
+          onSelect={() => navigate('/mcp')}
+        >
+          {k.actions.mcp}
         </Item>
       </CommandGroup>
       <CommandGroup heading={k.sections.general}>

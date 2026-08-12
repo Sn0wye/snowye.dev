@@ -9,7 +9,7 @@ import { cn } from '@/lib/cn';
 import { useCommandPalette } from './command-palette';
 import { LocaleSwitcher } from './locale-switcher';
 
-export const pages = ['about', 'projects', 'contact'] as const;
+export const pages = ['about', 'projects', 'mcp', 'contact'] as const;
 
 export function Navbar() {
   const t = useT();

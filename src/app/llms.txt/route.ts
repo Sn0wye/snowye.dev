@@ -24,6 +24,14 @@ ${resume.basics.summary}
 - [About](https://snowye.dev/about): biography and background.
 - [Projects](https://snowye.dev/projects): side projects and open source.
 
+## MCP server
+
+Agents can query these facts directly over the Model Context Protocol
+(Streamable HTTP, no auth): https://snowye.dev/api/mcp
+
+Tools: get_profile, get_resume, get_experience, get_skills, get_projects, search_resume, get_contact.
+Discovery: https://snowye.dev/.well-known/mcp.json — docs: https://snowye.dev/mcp
+
 ## Elsewhere
 
 ${resume.basics.profiles.map(profile => `- [${profile.network}](${profile.url})`).join('\n')}

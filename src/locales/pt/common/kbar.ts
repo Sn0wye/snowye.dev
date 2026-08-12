@@ -11,6 +11,7 @@ export const kbar = {
     home: 'Início',
     about: 'Sobre',
     projects: 'Projetos',
+    mcp: 'Servidor MCP',
     switchToEn: 'Mudar para Inglês',
     switchToPt: 'Mudar para Português'
   },

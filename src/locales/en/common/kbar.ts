@@ -11,6 +11,7 @@ export const actions = {
   home: 'Home',
   about: 'About',
   projects: 'Projects',
+  mcp: 'MCP Server',
   switchToEn: 'Switch to English',
   switchToPt: 'Switch to Portuguese'
 };
