@@ -35,7 +35,7 @@ export default async function Home({ params }: PageProps) {
   const t = await getT();
 
   return (
-    <div className="mx-auto flex max-w-3xl flex-1 items-center overflow-hidden px-5 py-navHeightMobile md:w-[800px] md:px-0 md:py-navHeightDesktop">
+    <div className="mx-auto flex max-w-3xl flex-1 items-center overflow-hidden px-5 py-nav-height-mobile md:w-[800px] md:px-0 md:py-nav-height-desktop">
       <main className="relative z-10 h-full bg-transparent px-5 leading-8 text-secondary">
         <h1 className="bg-linear-to-r from-[#9442FE] to-[#3378FF] bg-clip-text text-transparent">
           {t.pages.home.title}

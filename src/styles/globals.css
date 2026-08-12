@@ -21,11 +21,9 @@
   --font-mono: var(--font-mono), monospace;
   --font-heading: var(--font-heading), monospace;
 
+  /* Padding resolves from the --spacing-* namespace in Tailwind v4. */
   --spacing-nav-height-desktop: 3.75rem;
   --spacing-nav-height-mobile: 6.875rem;
-
-  --padding-nav-height-desktop: 3.75rem;
-  --padding-nav-height-mobile: 6.875rem;
 
   --transition-duration-default: 0.2s;
 
