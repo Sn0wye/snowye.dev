@@ -6,19 +6,11 @@ import { z } from 'zod';
 export const env = createEnv({
   extends: [vercel()],
   server: {
-    NODE_ENV: z.enum(['development', 'test', 'production']),
-    KV_REST_API_READ_ONLY_TOKEN: z.string().min(1),
-    KV_REST_API_TOKEN: z.string().min(1),
-    KV_REST_API_URL: z.url().min(1),
-    KV_URL: z.url().min(1)
+    NODE_ENV: z.enum(['development', 'test', 'production'])
   },
   client: {},
   runtimeEnv: {
-    NODE_ENV: process.env.NODE_ENV,
-    KV_REST_API_READ_ONLY_TOKEN: process.env.KV_REST_API_READ_ONLY_TOKEN,
-    KV_REST_API_TOKEN: process.env.KV_REST_API_TOKEN,
-    KV_REST_API_URL: process.env.KV_REST_API_URL,
-    KV_URL: process.env.KV_URL
+    NODE_ENV: process.env.NODE_ENV
   },
   skipValidation: !!process.env.CI
 });

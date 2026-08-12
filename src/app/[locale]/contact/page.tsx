@@ -57,8 +57,8 @@ export default async function Contact({ params }: PageProps) {
       <div>
         <WebPageJsonLd
           locale={locale}
-          path='/contact'
-          type='ContactPage'
+          path="/contact"
+          type="ContactPage"
           name={t.pages.contact.title}
           description={stripHtml(t.pages.contact.description)}
         />
@@ -66,9 +66,9 @@ export default async function Contact({ params }: PageProps) {
         <h2>{t.pages.contact.book}</h2>
         <Button
           asChild
-          className='mt-5! border transition-colors hover:border-white hover:bg-transparent hover:text-white'
+          className="mt-5! border transition-colors hover:border-white hover:bg-transparent hover:text-white"
         >
-          <a href={CAL_URL} target='_blank' rel='noreferrer noopener'>
+          <a href={CAL_URL} target="_blank" rel="noreferrer noopener">
             {t.pages.contact.cta}
           </a>
         </Button>
