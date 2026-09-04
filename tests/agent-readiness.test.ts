@@ -55,6 +55,9 @@ describe('human and agent representations', () => {
       expect(html).toContain(`<html lang="${language}">`);
       expect(html).toContain('<h1');
       expect(html).toContain('<h2');
+      expect(html).toContain('<details');
+      expect(html).not.toMatch(/<details[^>]+open/);
+      expect(html).toContain('min-h-svh');
       expect(visibleText(html).length).toBeGreaterThan(500);
       expect(html).toContain('property="og:type"');
       expect(html).toContain('property="og:image"');

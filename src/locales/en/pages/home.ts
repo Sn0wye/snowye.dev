@@ -4,6 +4,7 @@ export const home = {
   description: 'Building software that scales.',
   metaDescription:
     'Gabriel Trzimajewski is a Senior Backend Software Engineer from Brazil building distributed systems, APIs and cloud infrastructure with Java, Spring Boot, Node.js and C#/.NET.',
+  detailsLabel: 'More about my work',
   introduction:
     'I design and deliver backend systems that stay understandable as products, teams, and traffic grow. My work combines pragmatic architecture with careful observability, reliable delivery, and direct communication about technical trade-offs.',
   sections: [
