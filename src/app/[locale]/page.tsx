@@ -25,7 +25,16 @@ export async function generateMetadata({
     title: t.pages.home.title,
     description: t.pages.home.metaDescription,
     openGraph: {
-      description: t.pages.home.metaDescription
+      type: 'profile',
+      description: t.pages.home.metaDescription,
+      images: [
+        {
+          url: '/static/images/me.jpeg',
+          width: 336,
+          height: 336,
+          alt: 'Gabriel Trzimajewski'
+        }
+      ]
     }
   };
 }
@@ -36,7 +45,7 @@ export default async function Home({ params }: PageProps) {
   const t = await getT();
 
   return (
-    <div className="mx-auto flex max-w-3xl flex-1 items-center overflow-hidden px-5 py-nav-height-mobile md:w-[800px] md:px-0 md:py-nav-height-desktop">
+    <div className="mx-auto flex w-full max-w-3xl flex-1 px-5 py-nav-height-mobile md:w-[800px] md:px-0 md:py-nav-height-desktop">
       <WebPageJsonLd
         locale={locale}
         path="/"
@@ -44,15 +53,26 @@ export default async function Home({ params }: PageProps) {
         name={t.pages.home.title}
         description={t.pages.home.metaDescription}
       />
-      <main className="relative z-10 h-full bg-transparent px-5 leading-8 text-secondary">
-        <h1 className="bg-linear-to-r from-[#9442FE] to-[#3378FF] bg-clip-text text-transparent">
-          {t.pages.home.title}
-        </h1>
-        <div className="flex flex-col">
-          <strong dangerouslySetInnerHTML={{ __html: t.pages.home.meta }} />
-          <Typewriter strings={t.pages.home.description} />
+      <main className="relative z-10 w-full bg-transparent px-5 leading-8 text-secondary">
+        <section className="flex min-h-[65vh] flex-col justify-center">
+          <h1 className="bg-linear-to-r from-[#9442FE] to-[#3378FF] bg-clip-text text-transparent">
+            {t.pages.home.title}
+          </h1>
+          <div className="flex flex-col">
+            <strong dangerouslySetInnerHTML={{ __html: t.pages.home.meta }} />
+            <Typewriter strings={t.pages.home.description} />
+          </div>
+          <ClientOpenCommandPalette />
+        </section>
+        <div className="space-y-8 border-white/10 border-t py-10">
+          <p>{t.pages.home.introduction}</p>
+          {t.pages.home.sections.map(section => (
+            <section key={section.title}>
+              <h2 className="mb-2 text-primary text-xl">{section.title}</h2>
+              <p>{section.body}</p>
+            </section>
+          ))}
         </div>
-        <ClientOpenCommandPalette />
       </main>
     </div>
   );

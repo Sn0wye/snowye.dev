@@ -4,6 +4,7 @@ import { cv } from './cv';
 import { home } from './home';
 import { mcp } from './mcp';
 import { notFound } from './not-found';
+import { privacy } from './privacy';
 import { projects } from './projects';
 
 export const pages = {
@@ -13,5 +14,6 @@ export const pages = {
   projects,
   contact,
   mcp,
+  privacy,
   notFound
 };

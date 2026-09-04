@@ -21,6 +21,7 @@
     "check:fix": "biome check . --write",
     "format": "biome format . --write",
     "format:check": "biome format .",
+    "test": "bun run build && bun test tests",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -55,6 +56,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.12",
+    "@types/bun": "^1.4.0",
     "@types/node": "26.4.1",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.7",

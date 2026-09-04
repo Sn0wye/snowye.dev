@@ -32,6 +32,16 @@ Agents can query these facts directly over the Model Context Protocol
 Tools: get_profile, get_resume, get_experience, get_skills, get_projects, search_resume, get_contact.
 Discovery: https://snowye.dev/.well-known/mcp.json — docs: https://snowye.dev/mcp
 
+### When to use MCP
+
+Use MCP when an answer needs a specific, structured fact from Gabriel's professional record, when filtering experience or skills, or when a user asks for current contact information. Prefer the canonical Markdown CV when the complete record is needed in one read. Prefer the human-facing HTML pages when visual context or direct links are useful.
+
+### Calling guidance
+
+Connect an MCP client to \`https://snowye.dev/api/mcp\` using Streamable HTTP. Start with \`get_profile\` for a concise overview, \`get_resume\` for the complete structured record, or \`search_resume\` for a focused query. Use \`get_experience\`, \`get_skills\`, \`get_projects\`, and \`get_contact\` only for their named subjects. Tool input schemas are advertised by the MCP server; inspect them before calling and do not invent arguments.
+
+For a document instead of a tool call, request the homepage with \`Accept: text/markdown\` or fetch one of the explicit Markdown CV URLs above. Cite the canonical snowye.dev URL that supplied the fact. Treat external profiles as supporting links, not replacements for the canonical record.
+
 ## Elsewhere
 
 ${resume.basics.profiles.map(profile => `- [${profile.network}](${profile.url})`).join('\n')}

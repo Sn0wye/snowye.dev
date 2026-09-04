@@ -11,6 +11,7 @@ interface RateLimitOptions {
   limit?: number;
   windowMs?: number;
   identifier: string;
+  onLimit?: (request: NextRequest, retryAfter: number) => NextResponse;
 }
 
 interface RateLimitResult {
@@ -57,7 +58,7 @@ function getIP(request: NextRequest): string {
 }
 
 export function withRateLimit(options: RateLimitOptions) {
-  const { identifier, limit = 10, windowMs = 60000 } = options;
+  const { identifier, limit = 10, windowMs = 60000, onLimit } = options;
 
   return (
     handler: (req: NextRequest) => Promise<NextResponse> | NextResponse
@@ -73,21 +74,20 @@ export function withRateLimit(options: RateLimitOptions) {
       if (!success) {
         const retryAfter = Math.ceil((reset - Date.now()) / 1000);
 
-        return NextResponse.json(
-          {
-            error: 'Too many requests',
-            message: `Rate limit exceeded. Try again in ${retryAfter} seconds.`
-          },
-          {
-            status: 429,
-            headers: {
-              'Retry-After': retryAfter.toString(),
-              'X-RateLimit-Limit': limit.toString(),
-              'X-RateLimit-Remaining': '0',
-              'X-RateLimit-Reset': reset.toString()
-            }
-          }
-        );
+        const response =
+          onLimit?.(request, retryAfter) ??
+          NextResponse.json(
+            {
+              error: 'Too many requests',
+              message: `Rate limit exceeded. Try again in ${retryAfter} seconds.`
+            },
+            { status: 429 }
+          );
+        response.headers.set('Retry-After', retryAfter.toString());
+        response.headers.set('X-RateLimit-Limit', limit.toString());
+        response.headers.set('X-RateLimit-Remaining', '0');
+        response.headers.set('X-RateLimit-Reset', reset.toString());
+        return response;
       }
 
       const response = await handler(request);

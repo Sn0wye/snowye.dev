@@ -1,14 +1,11 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import { Link } from '@/i18n/navigation';
 import { useT } from '@/i18n/use-t';
 import lottieAnimation from '../../../public/static/icons/404.json';
 
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
-
-const ShortcutError = dynamic(() => import('@/components/shortcut-error'), {
-  ssr: false
-});
 
 export default function NotFound() {
   const t = useT();
@@ -25,7 +22,16 @@ export default function NotFound() {
         />
       </div>
       <p>{t.pages.notFound.description}</p>
-      <ShortcutError />
+      <nav
+        aria-label="Page recovery"
+        className="mt-4 flex flex-wrap justify-center gap-4"
+      >
+        <Link href="/">{t.pages.notFound.links.home}</Link>
+        <Link href="/projects">{t.pages.notFound.links.projects}</Link>
+        <Link href="/contact">{t.pages.notFound.links.contact}</Link>
+        <a href="/sitemap.xml">{t.pages.notFound.links.sitemap}</a>
+        <a href="/llms.txt">{t.pages.notFound.links.agents}</a>
+      </nav>
     </div>
   );
 }
