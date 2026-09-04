@@ -2,7 +2,15 @@ import type { MetadataRoute } from 'next';
 import { routing } from '@/i18n/routing';
 
 const BASE_URL = 'https://snowye.dev';
-const PATHS = ['', '/about', '/cv', '/projects', '/contact', '/mcp'] as const;
+const PATHS = [
+  '',
+  '/about',
+  '/cv',
+  '/projects',
+  '/contact',
+  '/mcp',
+  '/privacy'
+] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return routing.locales.flatMap(locale => {

@@ -26,6 +26,18 @@ export const SiteJsonLd = ({ locale }: { locale: AppLocale }) => {
         url: SITE_URL,
         email: `mailto:${resume.basics.email}`,
         description: resume.basics.summary,
+        contactPoint: {
+          '@type': 'ContactPoint',
+          contactType: 'professional inquiries',
+          email: resume.basics.email,
+          telephone: resume.basics.phone
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Blumenau',
+          addressRegion: 'Santa Catarina',
+          addressCountry: 'BR'
+        },
         logo: {
           '@type': 'ImageObject',
           '@id': `${SITE_URL}/#logo`,
@@ -54,7 +66,9 @@ export const SiteJsonLd = ({ locale }: { locale: AppLocale }) => {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(jsonLd).replaceAll('<', '\\u003c')
+      }}
     />
   );
 };

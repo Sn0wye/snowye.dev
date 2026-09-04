@@ -1,7 +1,8 @@
 import { cva } from 'cva';
 import type { LucideProps } from 'lucide-react';
-import NextLink from 'next/link';
 import type React from 'react';
+import { Link as NextLink } from '@/i18n/navigation';
+import { getT } from '@/i18n/server-t';
 import { SocialIcon } from './social-icons';
 
 interface Link {
@@ -39,12 +40,24 @@ const links: Link[] = [
   }
 ];
 
-export function Footer() {
+export async function Footer() {
+  const t = await getT();
+
   return (
-    <footer className="z-20 flex items-center justify-center bg-transparent py-5 gap-5 mb-1">
-      {links.map((link, index) => (
-        <LinkComponent key={link.url} link={link} index={index} />
-      ))}
+    <footer className="z-20 mb-1 flex flex-wrap items-center justify-center gap-5 bg-transparent py-5">
+      <nav aria-label="Contact and social links" className="contents">
+        {links.map((link, index) => (
+          <LinkComponent key={link.url} link={link} index={index} />
+        ))}
+      </nav>
+      <nav aria-label="Legal">
+        <NextLink
+          href="/privacy"
+          className="border-0 text-secondary text-sm transition-colors hover:text-primary hover:opacity-100 focus:text-primary"
+        >
+          {t.pages.privacy.navLabel}
+        </NextLink>
+      </nav>
     </footer>
   );
 }

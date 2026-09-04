@@ -5,7 +5,6 @@ import { Button } from '@/components/button';
 import { WebPageJsonLd } from '@/components/web-page-json-ld';
 import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
-import { stripHtml } from '@/utils/stripHtml';
 
 const CAL_URL = 'https://cal.com/trzimajewski';
 
@@ -29,9 +28,9 @@ export async function generateMetadata({
 
   return {
     title: t.pages.contact.title,
-    description: stripHtml(t.pages.contact.description),
+    description: t.pages.contact.metaDescription,
     openGraph: {
-      description: stripHtml(t.pages.contact.description),
+      description: t.pages.contact.metaDescription,
       url: `${localePath}/contact`
     }
   };
@@ -60,7 +59,7 @@ export default async function Contact({ params }: PageProps) {
           path="/contact"
           type="ContactPage"
           name={t.pages.contact.title}
-          description={stripHtml(t.pages.contact.description)}
+          description={t.pages.contact.metaDescription}
         />
         <p dangerouslySetInnerHTML={{ __html: t.pages.contact.description }} />
         <h2>{t.pages.contact.book}</h2>

@@ -1,8 +1,5 @@
 import { Analytics } from '@vercel/analytics/react';
 import type { Metadata, Viewport } from 'next';
-// eslint-disable-next-line camelcase
-import { Fira_Code } from 'next/font/google';
-import localFont from 'next/font/local';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
@@ -16,55 +13,6 @@ import { Toaster } from '@/components/toaster';
 import { TooltipProvider } from '@/components/tooltip';
 import { messages } from '@/i18n/messages';
 import { routing } from '@/i18n/routing';
-import { cn } from '@/lib/cn';
-import '../../styles/globals.css';
-
-const fontSans = localFont({
-  src: [
-    {
-      path: '../font/Biotif-Regular.woff2',
-      weight: '400',
-      style: 'normal'
-    },
-    {
-      path: '../font/Biotif-Medium.woff2',
-      weight: '500',
-      style: 'normal'
-    },
-    {
-      path: '../font/Biotif-Bold.woff2',
-      style: 'normal',
-      weight: '700'
-    },
-    {
-      path: '../font/Biotif-RegularItalic.woff2',
-      style: 'italic',
-      weight: '400'
-    }
-  ],
-  display: 'swap',
-  variable: '--font-sans'
-});
-
-const fontMono = Fira_Code({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-  weight: '500'
-});
-
-const fontHeading = localFont({
-  src: [
-    {
-      path: '../font/NeuzeitGrotesk-Bold.woff2',
-      style: 'normal',
-      weight: '400'
-    }
-  ],
-  weight: '400',
-  display: 'swap',
-  variable: '--font-heading'
-});
 
 export const metadata = {
   metadataBase: new URL('https://snowye.dev'),
@@ -126,46 +74,35 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
   setRequestLocale(locale);
 
   return (
-    <html lang={locale}>
-      <head>
-        <SiteJsonLd locale={locale} />
-        <PersonJsonLd locale={locale} />
-      </head>
-      <body
-        suppressHydrationWarning
-        className={cn(
-          fontSans.variable,
-          fontMono.variable,
-          fontHeading.variable
-        )}
+    <>
+      <SiteJsonLd locale={locale} />
+      <PersonJsonLd locale={locale} />
+      <NextIntlClientProvider
+        locale={locale}
+        messages={messages[locale] as unknown as Record<string, unknown>}
       >
-        <NextIntlClientProvider
-          locale={locale}
-          messages={messages[locale] as unknown as Record<string, unknown>}
-        >
-          <TooltipProvider delayDuration={150}>
-            <div className="relative z-0 flex min-h-screen flex-col">
-              {/* overflow-hidden: the WebGL canvas carries explicit pixel
+        <TooltipProvider delayDuration={150}>
+          <div className="relative z-0 flex min-h-screen flex-col">
+            {/* overflow-hidden: the WebGL canvas carries explicit pixel
                   dimensions, so it must never be able to grow the document. */}
-              <div className="absolute inset-0 h-full w-full overflow-hidden">
-                <Particles
-                  particleCount={150}
-                  particleSpread={20}
-                  speed={0.05}
-                  particleBaseSize={100}
-                  disableRotation={false}
-                />
-              </div>
-              <Navbar />
-              {children}
-              <Footer />
+            <div className="absolute inset-0 h-full w-full overflow-hidden">
+              <Particles
+                particleCount={150}
+                particleSpread={20}
+                speed={0.05}
+                particleBaseSize={100}
+                disableRotation={false}
+              />
             </div>
-            <CommandPalette />
-            <Toaster />
-          </TooltipProvider>
-          <Analytics />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+            <Navbar />
+            {children}
+            <Footer />
+          </div>
+          <CommandPalette />
+          <Toaster />
+        </TooltipProvider>
+        <Analytics />
+      </NextIntlClientProvider>
+    </>
   );
 }
