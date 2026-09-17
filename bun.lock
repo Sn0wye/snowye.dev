@@ -16,7 +16,7 @@
         "@vercel/analytics": "^2.0.0",
         "clsx": "^2.1.0",
         "cmdk": "^1.0.0",
-        "cva": "1.0.0-beta.11",
+        "cva": "1.0.0-beta.12",
         "date-fns": "^4.0.0",
         "lottie-react": "^2.4.0",
         "lucide-react": "^1.0.0",
@@ -387,7 +387,7 @@
 
     "csstype": ["csstype@3.2.3", "", {}, "sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ=="],
 
-    "cva": ["cva@1.0.0-beta.11", "", { "dependencies": { "clsx": "^2.1.1" }, "peerDependencies": { "typescript": ">= 6.0.0" }, "optionalPeers": ["typescript"] }, "sha512-UqjHhjuziR0StvDr7iSS/Rq0+aayUFhUV9P8UMpxWO7sbBIfuriCjAC0U/eRmuo1HYYfFmFHWpTnkQgfmgOULQ=="],
+    "cva": ["cva@1.0.0-beta.12", "", { "dependencies": { "clsx": "^2.1.1" }, "peerDependencies": { "typescript": ">= 6.0.0" }, "optionalPeers": ["typescript"] }, "sha512-Xn85p3Jyr4oVh5t69/9uOyKlEazrYdolpXXPB1bpr5apy1MS76lde5ET/WLRk3TZNldsXnj/e4Dpyh1NXFSgUg=="],
 
     "date-fns": ["date-fns@4.4.0", "", {}, "sha512-+1UMbeh68lH1SegH83CGWwpb6OHHbpSgr3+s5Eww5M4CAgswBpoWS0AjTOfEJ33HiYKz1hdj/KTFprzXHmq/6w=="],
 
