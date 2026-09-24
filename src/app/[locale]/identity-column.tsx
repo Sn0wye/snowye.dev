@@ -8,7 +8,10 @@ import { OpenSignal } from '@/components/shell/open-signal';
 import { ShortcutButton } from '@/components/shell/shortcut-button';
 import { SocialLinks } from '@/components/shell/social-links';
 import { TypedLine } from '@/components/shell/typed-line';
-import { usePronunciation } from '@/components/shell/use-pronunciation';
+import {
+  syllablesOf,
+  usePronunciation
+} from '@/components/shell/use-pronunciation';
 import { cn } from '@/lib/cn';
 
 type IdentityColumnProps = {
@@ -39,7 +42,7 @@ export function IdentityColumn({
   sections,
   copy
 }: IdentityColumnProps) {
-  const syllables = pronunciation.spell.split('-');
+  const { parts: syllables, separator } = syllablesOf(pronunciation.spell);
   const voice = usePronunciation(syllables.length);
   const { active, jumpTo } = useScrollSpy(sections.map(s => s.id));
   let letterIndex = 0;
@@ -51,9 +54,9 @@ export function IdentityColumn({
           aria-label={name}
           className="text-[3.25rem] font-semibold leading-[1.02] tracking-[-0.04em] text-primary"
         >
-          {name.split(' ').map(word => (
+          {name.split(' ').map((word, w) => (
             <span
-              key={word}
+              key={`${word}-${w}`}
               aria-hidden
               className="mr-[0.25em] inline-block whitespace-nowrap"
             >
@@ -106,7 +109,7 @@ export function IdentityColumn({
                       {syllable}
                     </span>
                     {i < syllables.length - 1 && (
-                      <span className="text-primary/30">-</span>
+                      <span className="text-primary/30">{separator}</span>
                     )}
                   </span>
                 ))}

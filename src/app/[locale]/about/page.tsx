@@ -1,15 +1,25 @@
+import { format } from 'date-fns';
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import { setRequestLocale } from 'next-intl/server';
-import { Base } from '@/components/base';
 import { Faq } from '@/components/faq';
+import { PageShell } from '@/components/shell/page-shell';
+import { richText, Section } from '@/components/shell/section';
 import { WebPageJsonLd } from '@/components/web-page-json-ld';
+import { getResume } from '@/data/resume';
+import {
+  parseMonth,
+  roleEnd,
+  roleStart,
+  rolesByRecency
+} from '@/data/resume-derived';
 import { env } from '@/env';
 import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
+import { cn } from '@/lib/cn';
+import { dateFnsLocaleFor, getDurationString } from '@/utils/getDurationString';
 import { stripHtml } from '@/utils/stripHtml';
-import { Career } from './career';
-import { NamePronunciation } from './name-pronunciation';
+import { PhotoStack } from './photo-stack';
+import { PronounceSurname } from './pronounce-surname';
 
 export function generateStaticParams() {
   return routing.locales.map(locale => ({ locale }));
@@ -41,7 +51,7 @@ export async function generateMetadata({
       url: `${localePath}/about`,
       images: [
         {
-          url: '/static/imagePaths/me.jpeg',
+          url: '/static/images/me.jpeg',
           width: 336,
           height: 336
         }
@@ -56,18 +66,18 @@ export default async function About({ params }: PageProps) {
   const t = await getT();
   const a = t.pages.about;
 
-  const meta = {
-    imagePath: '/static/imagePaths/me.jpeg',
-    primaryColor: 'pink',
-    secondaryColor: 'purple'
-  } as const;
+  // Facts come from the Résumé Source (ADR-0001); the locale files only
+  // carry voice.
+  const resume = getResume(locale);
+  const dfLocale = dateFnsLocaleFor(locale);
+  const month = (value: string) =>
+    format(parseMonth(value), 'LLL yyyy', { locale: dfLocale });
 
   return (
-    <Base
+    <PageShell
+      current="/about"
+      title={t.common.navbar.about}
       tagline={a.tagline}
-      title={a.title}
-      primaryColor={meta.primaryColor}
-      secondaryColor={meta.secondaryColor}
     >
       <WebPageJsonLd
         locale={locale}
@@ -77,93 +87,100 @@ export default async function About({ params }: PageProps) {
         description={stripHtml(a.description)}
       />
 
-      <div className="flex flex-col justify-between md:flex-row">
-        <section className="mt-0 w-auto md:w-[48%]">
-          <Image
-            alt="Gabriel Trzimajewski"
-            src="/static/images/me.jpeg"
-            width={336}
-            height={336}
-            style={{
-              width: 'auto',
-              height: 'auto'
-            }}
-            placeholder="blur"
-            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAP0lEQVQImQE0AMv/AFBQUJKSkqmpqaOjowCurq7v7+/Jycm5ubkA////jIyMn5+fg4ODADAwMD09PWlpaQAAAApRGnEHblMWAAAAAElFTkSuQmCC"
-            priority
-          />
-        </section>
-        <section className="mt-0 w-auto md:w-[48%]">
-          <p className="mt-4 md:-mt-1.5">
+      <div className="mt-12 grid gap-12 md:grid-cols-[minmax(0,1fr)_18rem] md:gap-16">
+        <div className={cn('max-w-2xl space-y-5', richText)}>
+          <p>
             {a.bio.p1Before}
             <strong>
-              {a.bio.p1FirstName} <NamePronunciation />
+              {a.bio.p1FirstName} <PronounceSurname />
             </strong>
             {/* p1After ships with markup (<strong>, <a>) — render via HTML. */}
             <span dangerouslySetInnerHTML={{ __html: a.bio.p1After }} />
           </p>
           <p dangerouslySetInnerHTML={{ __html: a.bio.p2 }} />
-        </section>
-      </div>
-
-      <div className="flex flex-col justify-between md:flex-row">
-        <section className="mt-0 w-auto md:w-[48%]">
           <p dangerouslySetInnerHTML={{ __html: a.bio.p3 }} />
-        </section>
-        <section className="mt-0 w-auto md:w-[48%]">
-          <Image
-            alt="Gabriel Trzimajewski"
-            src="/static/images/me2.jpeg"
-            width={336}
-            height={336}
-            style={{
-              width: 'auto',
-              height: 'auto'
-            }}
-            placeholder="blur"
-            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAP0lEQVQImQE0AMv/AFBQUJKSkqmpqaOjowCurq7v7+/Jycm5ubkA////jIyMn5+fg4ODADAwMD09PWlpaQAAAApRGnEHblMWAAAAAElFTkSuQmCC"
-            priority
-          />
-        </section>
+        </div>
+        <div className="md:pt-2">
+          <PhotoStack alt={resume.basics.name} />
+        </div>
       </div>
 
-      <h2>{a.highlights}</h2>
-      <ul>
-        {a.highlightsList.map(item => (
-          <li key={item} dangerouslySetInnerHTML={{ __html: item }} />
-        ))}
-      </ul>
+      <div className="mt-20">
+        <Section title={a.highlights}>
+          <ul className={cn('space-y-3', richText)}>
+            {a.highlightsList.map(item => (
+              <li
+                key={item}
+                className="relative pl-5 before:absolute before:top-[0.8em] before:left-0 before:h-px before:w-2.5 before:bg-white/25"
+                dangerouslySetInnerHTML={{ __html: item }}
+              />
+            ))}
+          </ul>
+        </Section>
 
-      <h2>{a.career}</h2>
-      <Career />
+        <Section title={a.career}>
+          <ul className="-mx-4 -mt-3">
+            {rolesByRecency(resume).map(role => (
+              <li
+                key={`${role.name}-${role.startDate}`}
+                className="grid grid-cols-[7.5rem_minmax(0,1fr)] gap-4 rounded-xl px-4 py-3 transition-colors hover:bg-white/[0.03] sm:grid-cols-[7.5rem_minmax(0,1fr)_auto]"
+              >
+                <span className="text-[13px] tabular-nums leading-[1.9] text-secondary/60">
+                  {role.startDate.slice(0, 4)} – {role.endDate?.slice(0, 4)}
+                </span>
+                <span>
+                  <span className="block text-primary">{role.name}</span>
+                  <span className="block">{role.position}</span>
+                </span>
+                <span className="col-start-2 text-[13px] text-secondary/60 sm:col-start-auto sm:text-right">
+                  {month(role.startDate)} –{' '}
+                  {role.endDate ? month(role.endDate) : t.pages.cv.present}
+                  <span className="block">
+                    {getDurationString(
+                      roleStart(role).toISOString(),
+                      roleEnd(role)?.toISOString(),
+                      locale
+                    )}
+                  </span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Section>
 
-      <h2>{a.education}</h2>
-      <article style={{ marginBottom: 40 }}>
-        <h3>{a.educationItem.degree}</h3>
-        <p style={{ margin: 0 }}>
-          <span className="cursor-default border-b border-solid border-primary text-primary no-underline transition-opacity duration-200 ease-in-out">
-            {a.educationItem.school}
-          </span>
-          <span> • {a.educationItem.location}</span>
-        </p>
-        <p style={{ margin: 0 }}>
-          <span>{a.educationItem.dates}</span>
-          <span> • </span>
-          <span>{a.educationItem.gpa}</span>
-        </p>
-        <p>{a.educationItem.focus}</p>
-      </article>
+        <Section title={a.education}>
+          {resume.education.map(item => (
+            <div key={item.institution} className="space-y-1">
+              <p className="text-primary">
+                {item.studyType}, {item.area}
+              </p>
+              <p>
+                {item.institution}, {item.startDate.slice(0, 4)} –{' '}
+                {item.endDate?.slice(0, 4) ?? t.pages.cv.present}
+                {item.score && `, GPA ${item.score}`}
+              </p>
+              {item.courses.length > 0 && (
+                <p className="pt-2 text-[14px] text-secondary/70">
+                  {item.courses.join(', ')}
+                </p>
+              )}
+            </div>
+          ))}
+        </Section>
 
-      <Faq />
+        <Faq />
 
-      <h2>{a.languages}</h2>
-      <ul>
-        {a.languagesList.map(item => (
-          <li key={item.name}>
-            <strong>{item.name}</strong> — {item.level}
-          </li>
-        ))}
-      </ul>
-    </Base>
+        <Section title={a.languages}>
+          <ul className="space-y-1">
+            {resume.languages.map(language => (
+              <li key={language.language}>
+                <span className="text-primary">{language.language}</span>,{' '}
+                {language.fluency}
+              </li>
+            ))}
+          </ul>
+        </Section>
+      </div>
+    </PageShell>
   );
 }

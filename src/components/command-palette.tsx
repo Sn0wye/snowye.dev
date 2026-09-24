@@ -22,7 +22,6 @@ import { usePathname, useRouter } from '@/i18n/navigation';
 import type { AppLocale } from '@/i18n/routing';
 import { useAppLocale, useT } from '@/i18n/use-t';
 import { cn } from '@/lib/cn';
-import { geist } from '@/styles/fonts';
 import aboutIcon from '../../public/static/icons/about.json';
 import copyLinkIcon from '../../public/static/icons/copy-link.json';
 import emailIcon from '../../public/static/icons/email.json';
@@ -198,10 +197,7 @@ export function CommandPalette() {
               aria-describedby={undefined}
             >
               <motion.div
-                className={cn(
-                  geist,
-                  'fixed inset-x-0 top-[12vh] z-50 mx-auto w-[min(640px,calc(100vw-2rem))] font-sans outline-none'
-                )}
+                className="fixed inset-x-0 top-[12vh] z-50 mx-auto w-[min(640px,calc(100vw-2rem))] outline-none"
                 initial={
                   reduced
                     ? { opacity: 0 }

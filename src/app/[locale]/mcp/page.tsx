@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
-import { Base } from '@/components/base';
+import { CodeBlock } from '@/components/shell/code-block';
+import { PageShell } from '@/components/shell/page-shell';
+import { richText, Section } from '@/components/shell/section';
 import { WebPageJsonLd } from '@/components/web-page-json-ld';
 import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
+import { cn } from '@/lib/cn';
 import { MCP_ENDPOINT } from '@/mcp/manifest';
 import { tools } from '@/mcp/tools';
 import { stripHtml } from '@/utils/stripHtml';
@@ -47,71 +50,84 @@ const CURL = `curl -X POST ${MCP_ENDPOINT} \\
        "params":{"name":"search_resume",
                  "arguments":{"query":"kafka"}}}'`;
 
-function Code({ children }: { children: string }) {
-  return (
-    <pre className="my-4 overflow-x-auto rounded-md border border-white/10 bg-white/5 p-4 text-sm leading-6">
-      <code>{children}</code>
-    </pre>
-  );
-}
+const DISCOVERY = [
+  { href: '/.well-known/mcp.json', note: 'JSON' },
+  { href: '/api/mcp', note: 'GET' },
+  { href: '/llms.txt', note: 'TXT' }
+];
 
 export default async function Mcp({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getT();
+  const m = t.pages.mcp;
 
   return (
-    <Base
-      tagline={t.pages.mcp.tagline}
-      title={t.pages.mcp.title}
-      primaryColor="purple"
-      secondaryColor="cyan"
-    >
+    <PageShell current="/mcp" title={t.common.navbar.mcp} tagline={m.tagline}>
       <WebPageJsonLd
         locale={locale}
         path="/mcp"
-        name={t.pages.mcp.title}
-        description={stripHtml(t.pages.mcp.description)}
+        name={m.title}
+        description={stripHtml(m.description)}
       />
-      <p dangerouslySetInnerHTML={{ __html: t.pages.mcp.description }} />
+      <p
+        className={cn('mt-6 max-w-2xl', richText)}
+        dangerouslySetInnerHTML={{ __html: m.description }}
+      />
 
-      <h2>{t.pages.mcp.connect}</h2>
-      <p>{t.pages.mcp.connectDescription}</p>
-      <Code>{CLIENT_CONFIG}</Code>
+      <div className="mt-20">
+        <Section title={m.connect}>
+          <p>{m.connectDescription}</p>
+          <CodeBlock label="client config">{CLIENT_CONFIG}</CodeBlock>
+        </Section>
 
-      <h2>{t.pages.mcp.discovery}</h2>
-      <p>{t.pages.mcp.discoveryDescription}</p>
-      <ul>
-        <li>
-          <a href="/.well-known/mcp.json">/.well-known/mcp.json</a>
-        </li>
-        <li>
-          <a href="/api/mcp">/api/mcp</a> (GET)
-        </li>
-        <li>
-          <a href="/llms.txt">/llms.txt</a>
-        </li>
-      </ul>
+        <Section title={m.discovery}>
+          <p>{m.discoveryDescription}</p>
+          <ul className="-mx-4 mt-4">
+            {DISCOVERY.map(item => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  className="flex items-baseline justify-between rounded-xl px-4 py-2.5 transition-colors hover:bg-white/[0.035]"
+                >
+                  <span className="font-mono text-[14px] text-primary">
+                    {item.href}
+                  </span>
+                  <span className="text-[13px] text-secondary/60">
+                    {item.note}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </Section>
 
-      <h2>{t.pages.mcp.tools}</h2>
-      <p>{t.pages.mcp.toolsDescription}</p>
-      <dl>
-        {tools.map(tool => (
-          <div key={tool.name} className="my-3">
-            <dt>
-              <code className="text-primary">{tool.name}</code>
-            </dt>
-            <dd className="text-secondary">{tool.description}</dd>
-          </div>
-        ))}
-      </dl>
+        <Section title={m.tools}>
+          <p>{m.toolsDescription}</p>
+          <dl className="mt-6 space-y-5">
+            {tools.map(tool => (
+              <div key={tool.name}>
+                <dt className="font-mono text-[14px] text-primary">
+                  {tool.name}
+                </dt>
+                <dd className="mt-1">{tool.description}</dd>
+              </div>
+            ))}
+          </dl>
+        </Section>
 
-      <h2>{t.pages.mcp.tryIt}</h2>
-      <p>{t.pages.mcp.tryItDescription}</p>
-      <Code>{CURL}</Code>
+        <Section title={m.tryIt}>
+          <p>{m.tryItDescription}</p>
+          <CodeBlock label="curl command">{CURL}</CodeBlock>
+        </Section>
 
-      <h2>{t.pages.mcp.alsoFor}</h2>
-      <p dangerouslySetInnerHTML={{ __html: t.pages.mcp.alsoForDescription }} />
-    </Base>
+        <Section title={m.alsoFor}>
+          <p
+            className={richText}
+            dangerouslySetInnerHTML={{ __html: m.alsoForDescription }}
+          />
+        </Section>
+      </div>
+    </PageShell>
   );
 }

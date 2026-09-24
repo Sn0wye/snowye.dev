@@ -4,146 +4,30 @@
   --color-primary: #f2f2f2;
   --color-secondary: #8f9ba8;
   --color-background: #08070b;
-  --color-hover: #212024;
-  --color-command: rgba(255, 255, 255, 0.05);
-  --color-linkedin: #0077b5;
-  --color-instagram: #e1306c;
-  --color-github: #777777;
-  --color-geist-yellow: #ffff80;
-  --color-geist-pink: #ff80bf;
-  --color-geist-purple: #9580ff;
-  --color-geist-red: #ff9580;
-  --color-geist-orange: #ffca80;
-  --color-geist-green: #8aff80;
-  --color-geist-cyan: #80ffea;
 
   --font-sans: var(--font-sans), system-ui, -apple-system, sans-serif;
-  --font-mono: var(--font-mono), monospace;
-  --font-heading: var(--font-heading), monospace;
-
-  /* Padding resolves from the --spacing-* namespace in Tailwind v4. */
-  --spacing-nav-height-desktop: 3.75rem;
-  --spacing-nav-height-mobile: 6.875rem;
-
-  --transition-duration-default: 0.2s;
-
-  --radius-default: 0.5rem;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
 }
 
 @layer base {
-  * {
-    @apply font-sans;
-  }
-
   html,
   body {
-    @apply bg-background antialiased;
+    @apply bg-background font-sans text-secondary antialiased;
   }
 
-  ::-webkit-scrollbar {
-    @apply w-1.5;
+  ::selection {
+    @apply bg-white/20 text-primary;
   }
 
-  ::-webkit-scrollbar-track {
-    @apply bg-[#151417];
-  }
-
-  ::-webkit-scrollbar-thumb {
-    @apply rounded-lg border-8 border-solid border-primary bg-primary;
-  }
-
-  code {
-    @apply rounded-lg bg-[#151417] font-mono text-[15px] text-primary;
-  }
-
-  :not(pre) > code {
-    @apply p-1;
-  }
-
-  h1 {
-    @apply mb-5 font-heading text-5xl leading-12.5 text-primary;
-  }
-
-  h2 {
-    @apply mt-14 font-heading text-2xl text-primary;
-  }
-
-  a {
-    @apply border-b border-solid border-primary text-primary no-underline transition-opacity duration-200 ease-in-out;
-  }
-
-  a:hover,
-  a:focus {
-    @apply opacity-80;
-  }
-
-  h3,
-  h3 a {
-    @apply mt-5 text-lg font-bold text-primary;
-  }
-
-  ul {
-    @apply list-inside list-disc;
-  }
-
-  img {
-    @apply rounded-lg;
-  }
-
-  p {
-    @apply my-5 text-secondary;
-  }
-
-  strong {
-    @apply font-medium text-primary;
-  }
-
-  blockquote {
-    @apply border-l-4 border-solid border-hover pl-5 italic text-secondary;
-  }
-}
-
-/*
- * Redesigned surfaces (home, projects) opt out of the element-level base
- * styles above, which were written for the legacy pages. Remove this block
- * together with those styles once every page has moved over.
- */
-@layer base {
-  [data-redesign] :is(h1, h2, h3, p, ul, dl, dd, figure) {
-    margin: 0;
-  }
-
-  [data-redesign] :is(h1, h2, h3) {
-    font-family: var(--font-sans);
-    font-size: inherit;
-    line-height: inherit;
-    font-weight: inherit;
-    color: inherit;
-  }
-
-  [data-redesign] :is(p, strong) {
-    color: inherit;
-    font-weight: inherit;
-  }
-
-  [data-redesign] a {
-    border-bottom-width: 0;
-    color: inherit;
-  }
-
-  [data-redesign] :is(a:hover, a:focus) {
-    opacity: 1;
-  }
-
-  [data-redesign] ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  [data-redesign] :focus-visible {
+  :focus-visible {
     outline: 1px solid var(--color-primary);
     outline-offset: 3px;
     border-radius: 4px;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(255 255 255 / 0.15) transparent;
   }
 }
 
@@ -182,5 +66,20 @@
 
   @media (prefers-reduced-motion: reduce) {
     animation: none;
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+    filter: blur(4px);
+  }
+}
+
+@keyframes toast-out {
+  to {
+    opacity: 0;
+    transform: translateY(4px) scale(0.98);
   }
 }

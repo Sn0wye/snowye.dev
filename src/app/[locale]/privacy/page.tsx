@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
-import { Base } from '@/components/base';
+import { PageShell } from '@/components/shell/page-shell';
+import { Section } from '@/components/shell/section';
 import { WebPageJsonLd } from '@/components/web-page-json-ld';
 import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
@@ -42,30 +43,26 @@ export default async function Privacy({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getT();
+  const p = t.pages.privacy;
 
   return (
-    <Base
-      primaryColor="purple"
-      secondaryColor="cyan"
-      title={t.pages.privacy.title}
-      tagline={t.pages.privacy.tagline}
-    >
+    <PageShell current="/privacy" title={p.navLabel} tagline={p.tagline}>
       <WebPageJsonLd
         locale={locale}
         path="/privacy"
         type="WebPage"
-        name={t.pages.privacy.title}
-        description={t.pages.privacy.metaDescription}
+        name={p.title}
+        description={p.metaDescription}
       />
-      <p className="mb-8 text-sm">{t.pages.privacy.updated}</p>
-      <div className="space-y-8">
-        {t.pages.privacy.sections.map(section => (
-          <section key={section.title}>
-            <h2 className="mb-2 text-primary text-xl">{section.title}</h2>
-            <p>{section.body}</p>
-          </section>
+      <p className="mt-6 text-[13px] text-secondary/60">{p.updated}</p>
+
+      <div className="mt-16">
+        {p.sections.map(section => (
+          <Section key={section.title} title={section.title}>
+            <p className="max-w-2xl">{section.body}</p>
+          </Section>
         ))}
       </div>
-    </Base>
+    </PageShell>
   );
 }

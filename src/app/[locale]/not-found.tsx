@@ -1,37 +1,31 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-import { Link } from '@/i18n/navigation';
-import { useT } from '@/i18n/use-t';
-import lottieAnimation from '../../../public/static/icons/404.json';
-
-const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
+import { NotFoundView } from '@/components/shell/not-found-view';
+import { routing } from '@/i18n/routing';
+import { useAppLocale, useT } from '@/i18n/use-t';
 
 export default function NotFound() {
   const t = useT();
+  const n = t.pages.notFound;
+  const locale = useAppLocale();
+  // localePrefix: 'as-needed' — only non-default locales are prefixed.
+  const prefix = locale === routing.defaultLocale ? '' : `/${locale}`;
 
   return (
-    <div className="flex flex-1 flex-col items-center justify-center px-5 py-nav-height-mobile">
-      <h1>{t.pages.notFound.title}</h1>
-      <div className="flex justify-center">
-        <Lottie
-          animationData={lottieAnimation}
-          loop={true}
-          autoPlay={true}
-          style={{ width: '60%' }}
-        />
-      </div>
-      <p>{t.pages.notFound.description}</p>
-      <nav
-        aria-label="Page recovery"
-        className="mt-4 flex flex-wrap justify-center gap-4"
-      >
-        <Link href="/">{t.pages.notFound.links.home}</Link>
-        <Link href="/projects">{t.pages.notFound.links.projects}</Link>
-        <Link href="/contact">{t.pages.notFound.links.contact}</Link>
-        <a href="/sitemap.xml">{t.pages.notFound.links.sitemap}</a>
-        <a href="/llms.txt">{t.pages.notFound.links.agents}</a>
-      </nav>
-    </div>
+    <NotFoundView
+      title={n.title}
+      description={n.description}
+      whereTo={n.whereTo}
+      noMatch={n.noMatch}
+      destinations={[
+        { label: n.links.home, href: prefix || '/' },
+        { label: t.common.navbar.about, href: `${prefix}/about` },
+        { label: n.links.projects, href: `${prefix}/projects` },
+        { label: 'CV', href: `${prefix}/cv` },
+        { label: n.links.contact, href: `${prefix}/contact` },
+        { label: n.links.sitemap, href: '/sitemap.xml' },
+        { label: n.links.agents, href: '/llms.txt' }
+      ]}
+    />
   );
 }

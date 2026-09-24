@@ -13,8 +13,6 @@ import { TARGET_STACK } from '@/data/target-stack';
 import { Link } from '@/i18n/navigation';
 import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
-import { cn } from '@/lib/cn';
-import { geist } from '@/styles/fonts';
 import { IdentityColumn } from './identity-column';
 import { WorkAndStack } from './work-and-stack';
 
@@ -83,13 +81,7 @@ export default async function Home({ params }: PageProps) {
   ] as const;
 
   return (
-    <div
-      data-redesign
-      className={cn(
-        geist,
-        'min-h-svh w-full flex-1 bg-background font-sans text-[15px] leading-[1.7] text-secondary'
-      )}
-    >
+    <div className="min-h-svh w-full flex-1 text-[15px] leading-[1.7]">
       <WebPageJsonLd
         locale={locale}
         path="/"
