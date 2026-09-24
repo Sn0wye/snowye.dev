@@ -1,7 +1,6 @@
 'use client';
 
 import { Command as CommandPrimitive } from 'cmdk';
-/* eslint-disable react/no-unknown-property */
 import type * as React from 'react';
 import { cn } from '@/lib/cn';
 
@@ -11,7 +10,7 @@ const Command = ({
 }: React.ComponentProps<typeof CommandPrimitive>) => (
   <CommandPrimitive
     className={cn(
-      'w-full min-w-[640px] overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 p-2 shadow-(--cmdk-shadow) duration-100 ease-in-out  [&_:not([hidden])+[cmdk-group]]:mt-2 **:[[cmdk-group-heading]]:px-2',
+      'w-full overflow-hidden rounded-2xl bg-black p-2 shadow-[0_24px_80px_-12px_rgba(0,0,0,0.9),inset_0_1px_0_0_rgba(255,255,255,0.06)] ring-1 ring-white/10 transition-transform duration-100 ease-out [&_:not([hidden])+[cmdk-group]]:mt-3',
       className
     )}
     {...props}
@@ -25,7 +24,7 @@ const CommandInput = ({
 }: React.ComponentProps<typeof CommandPrimitive.Input>) => (
   <CommandPrimitive.Input
     className={cn(
-      'mb-4 w-full rounded-none border-b border-zinc-800 bg-transparent px-2 pb-4 pt-2 text-lg text-zinc-50 outline-none placeholder:text-zinc-400',
+      'mb-2 h-12 w-full border-white/[0.06] border-b bg-transparent px-3 text-[15px] text-white outline-none placeholder:text-white/35',
       className
     )}
     {...props}
@@ -39,7 +38,7 @@ const CommandList = ({
 }: React.ComponentProps<typeof CommandPrimitive.List>) => (
   <CommandPrimitive.List
     className={cn(
-      'h-[min(330px,calc(var(--cmdk-list-height)))] max-h-[400px] overflow-auto overscroll-contain transition-[height] duration-100 ease-in-out',
+      'h-[min(360px,var(--cmdk-list-height))] scroll-py-2 overflow-auto overscroll-contain transition-[height] duration-200 ease-out',
       className
     )}
     {...props}
@@ -51,7 +50,7 @@ const CommandEmpty = (
   props: React.ComponentProps<typeof CommandPrimitive.Empty>
 ) => (
   <CommandPrimitive.Empty
-    className="flex h-12 items-center justify-center whitespace-pre-wrap text-sm text-zinc-400"
+    className="flex h-12 items-center justify-center text-[13px] text-white/40"
     {...props}
   />
 );
@@ -63,7 +62,7 @@ const CommandGroup = ({
 }: React.ComponentProps<typeof CommandPrimitive.Group>) => (
   <CommandPrimitive.Group
     className={cn(
-      '**:[[cmdk-group-heading]]:mb-2 **:[[cmdk-group-heading]]:flex **:[[cmdk-group-heading]]:select-none **:[[cmdk-group-heading]]:items-center **:[[cmdk-group-heading]]:px-2 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:text-zinc-400',
+      '**:[[cmdk-group-heading]]:mb-1 **:[[cmdk-group-heading]]:select-none **:[[cmdk-group-heading]]:px-3 **:[[cmdk-group-heading]]:py-1 **:[[cmdk-group-heading]]:text-[11px] **:[[cmdk-group-heading]]:text-white/35',
       className
     )}
     {...props}
@@ -76,24 +75,25 @@ const CommandSeparator = ({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Separator>) => (
   <CommandPrimitive.Separator
-    className={cn('my-1 h-px w-full bg-zinc-800', className)}
+    className={cn('my-1 h-px w-full bg-white/[0.06]', className)}
     {...props}
   />
 );
 CommandSeparator.displayName = CommandPrimitive.Separator.displayName;
 
+/**
+ * The highlight is not painted here: the palette slides one shared element
+ * between items, so an item only brightens its own text.
+ */
 const CommandItem = ({
   className,
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Item>) => (
   <CommandPrimitive.Item
     className={cn(
-      '[selected="true"]:bg-white/5 flex h-12 cursor-pointer select-none items-center gap-2 rounded-lg px-4 text-sm text-zinc-400 transition-all transition-none duration-150 ease-in-out will-change-[background,color] active:bg-zinc-800 active:transition-colors data-[selected="true"]:bg-white/5 data-[selected="true"]:text-zinc-100 [&+&]:mt-1 [&_svg]:h-4 [&_svg]:w-4',
+      'group relative isolate flex h-11 cursor-pointer select-none items-center gap-3 rounded-lg px-3 text-[14px] text-white/55 transition-colors duration-150 data-[selected=true]:text-white [&_svg]:size-4',
       className
     )}
-    style={{
-      contentVisibility: 'auto'
-    }}
     {...props}
   />
 );
@@ -106,7 +106,7 @@ const CommandShortcut = ({
   return (
     <span
       className={cn(
-        'ml-auto text-xs tracking-widest text-zinc-500 dark:text-zinc-400',
+        'ml-auto text-[11px] tracking-widest text-white/40',
         className
       )}
       {...props}

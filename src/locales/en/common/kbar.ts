@@ -26,6 +26,12 @@ export const sections = {
 export const placeholder = 'What do you need?';
 export const empty = 'No results found.';
 
+export const hints = {
+  navigate: 'navigate',
+  select: 'select',
+  close: 'close'
+};
+
 export const toast = {
   title: 'Copied :D',
   description: 'You can now share it with anyone.'
@@ -37,5 +43,6 @@ export const kbar = {
   sections,
   placeholder,
   empty,
+  hints,
   toast
 };

@@ -102,3 +102,85 @@
     @apply border-l-4 border-solid border-hover pl-5 italic text-secondary;
   }
 }
+
+/*
+ * Redesigned surfaces (home, projects) opt out of the element-level base
+ * styles above, which were written for the legacy pages. Remove this block
+ * together with those styles once every page has moved over.
+ */
+@layer base {
+  [data-redesign] :is(h1, h2, h3, p, ul, dl, dd, figure) {
+    margin: 0;
+  }
+
+  [data-redesign] :is(h1, h2, h3) {
+    font-family: var(--font-sans);
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+    color: inherit;
+  }
+
+  [data-redesign] :is(p, strong) {
+    color: inherit;
+    font-weight: inherit;
+  }
+
+  [data-redesign] a {
+    border-bottom-width: 0;
+    color: inherit;
+  }
+
+  [data-redesign] :is(a:hover, a:focus) {
+    opacity: 1;
+  }
+
+  [data-redesign] ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  [data-redesign] :focus-visible {
+    outline: 1px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@keyframes caret-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@utility animate-caret {
+  animation: caret-blink 1.06s step-end infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+/* Letter-by-letter reveal; each letter sets --i to its index. Pure CSS so it
+   plays on first paint, before (or without) hydration. */
+@keyframes blur-in {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(8px);
+  }
+}
+
+@utility animate-blur-in {
+  animation: blur-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(150ms + var(--i, 0) * 30ms);
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}

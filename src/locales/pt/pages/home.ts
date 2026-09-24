@@ -5,6 +5,27 @@ export const home = {
   metaDescription:
     'Gabriel Trzimajewski é Engenheiro de Software Backend Sênior brasileiro, construindo sistemas distribuídos, APIs e infraestrutura em nuvem com Java, Spring Boot, Node.js e C#/.NET.',
   detailsLabel: 'Mais sobre meu trabalho',
+  openSignal: 'Aberto a novas oportunidades',
+  pronounce: 'Ouça como se fala meu nome',
+  nav: {
+    intro: 'Introdução',
+    work: 'Experiência',
+    stack: 'Stack',
+    approach: 'Abordagem',
+    pages: 'Páginas'
+  },
+  timeline: 'Passe o mouse na linha do tempo para viajar pelos anos',
+  stack: {
+    hint: 'Passe o mouse numa tecnologia para ver onde a usei',
+    usedAt: 'Usado em {companies}',
+    unused: 'De projetos pessoais e estudo'
+  },
+  localTime: '{time} em {city}',
+  timeDiff: {
+    same: 'mesmo horário que você',
+    ahead: '{hours}h à sua frente',
+    behind: '{hours}h atrás de você'
+  },
   introduction:
     'Projeto e entrego sistemas de backend que continuam compreensíveis conforme produtos, equipes e tráfego crescem. Meu trabalho combina arquitetura pragmática, observabilidade cuidadosa, entregas confiáveis e comunicação direta sobre decisões e compromissos técnicos.',
   sections: [
