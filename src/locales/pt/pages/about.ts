@@ -32,15 +32,6 @@ export const about = {
   career: 'Carreira',
   present: 'Atual',
   education: 'Formação',
-  educationItem: {
-    degree: 'Bacharelado em Ciência da Computação',
-    school: 'UNINTER',
-    location: 'Brasil',
-    dates: 'Fev 2025 – Fev 2029',
-    gpa: 'CR 9,32/10',
-    focus:
-      'Foco em Algoritmos, Estruturas de Dados, Bancos de Dados, Sistemas Distribuídos e Matemática Aplicada (Cálculo, Álgebra Linear, Probabilidade e Estatística), com exposição a IA e Computação em Nuvem.'
-  },
   faq: {
     title: 'Perguntas frequentes',
     items: [
@@ -70,9 +61,5 @@ export const about = {
       }
     ]
   },
-  languages: 'Idiomas',
-  languagesList: [
-    { name: 'Português', level: 'nativo' },
-    { name: 'Inglês', level: 'fluente' }
-  ]
+  languages: 'Idiomas'
 };

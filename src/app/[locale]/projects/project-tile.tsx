@@ -4,7 +4,7 @@ import type { LottieRefCurrentProps } from 'lottie-react';
 import { ArrowUpRight } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { type PointerEvent, useRef } from 'react';
-import { Specimen } from './specimen';
+import { Specimen } from '@/components/shell/specimen';
 
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 

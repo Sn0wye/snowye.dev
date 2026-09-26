@@ -43,3 +43,12 @@ export function usePronunciation(syllables: number) {
 
   return { play, playing: progress !== null, progress: progress ?? 0, current };
 }
+
+/**
+ * Splits a respelling into syllables. English copy joins them with dashes
+ * (`tree-mah-zhess-key`), Portuguese with spaces (`tri ma jés ki`).
+ */
+export const syllablesOf = (spell: string) => ({
+  parts: spell.split(/[-\s]+/).filter(Boolean),
+  separator: spell.includes('-') ? '-' : ' '
+});
