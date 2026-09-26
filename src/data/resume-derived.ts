@@ -120,3 +120,31 @@ export const getSignatureSkills = (locale: AppLocale, limit = 15): string[] => {
  */
 export const getKnownForSet = (locale: AppLocale): string[] =>
   scoreSkills(getResume(locale)).map(skill => skill.keyword);
+
+/**
+ * Which roles mention each skill, newest role first, keyed by the skill as
+ * given. Lets the Identity Page link a skill to the places it was used.
+ * Slash-joined entries (`C#/.NET`) match on either half.
+ */
+export const getSkillUsage = (
+  locale: AppLocale,
+  skills: string[]
+): Record<string, string[]> => {
+  const roles = rolesByRecency(getResume(locale)).map(work => ({
+    name: work.name,
+    text: [work.summary ?? '', ...work.highlights].join(' ').toLowerCase()
+  }));
+
+  return Object.fromEntries(
+    skills.map(skill => [
+      skill,
+      roles
+        .filter(role =>
+          skill
+            .split('/')
+            .some(part => countOccurrences(role.text, part.trim()) > 0)
+        )
+        .map(role => role.name)
+    ])
+  );
+};
