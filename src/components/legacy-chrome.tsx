@@ -8,7 +8,7 @@ import { usePathname } from '@/i18n/navigation';
  * legacy navbar, footer and particles stay out of their way. Delete this
  * component once every page has moved over.
  */
-const REDESIGNED = new Set(['/']);
+const REDESIGNED = new Set(['/', '/projects']);
 
 export function LegacyChrome({ children }: { children: ReactNode }) {
   const pathname = usePathname();

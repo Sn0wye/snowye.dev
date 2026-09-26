@@ -4,5 +4,11 @@ export const projects = {
     "Side projects are a way to convert your <strong>thoughts and personality</strong> into code. Here you can see the <strong>{totalProjects} different.</strong> apps, projects and libraries that I've been working on.",
   featured: 'Featured Projects',
   all: 'All Projects',
-  crafts: 'Crafts'
+  crafts: 'Crafts',
+  craft: 'Craft',
+  timeline: {
+    title: '{total} projects since {first}',
+    hint: 'Hover to travel through the years',
+    year: '{count} in {year}'
+  }
 };
