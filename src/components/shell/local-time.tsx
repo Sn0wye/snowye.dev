@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useAppLocale } from '@/i18n/use-t';
 import { interpolate } from '@/utils/interpolate';
+import { RollingText } from './rolling-text';
 
 const HOME_ZONE = 'America/Sao_Paulo';
 
@@ -59,9 +60,11 @@ export function LocalTime({ city, copy, className }: LocalTimeProps) {
 
   return (
     <p className={className}>
-      <span className="text-primary tabular-nums">
-        {interpolate(copy.localTime, { time, city })}
-      </span>
+      {/* The digits roll over as the minute changes. */}
+      <RollingText
+        text={interpolate(copy.localTime, { time, city })}
+        className="text-primary tabular-nums"
+      />
       , {diff}
     </p>
   );

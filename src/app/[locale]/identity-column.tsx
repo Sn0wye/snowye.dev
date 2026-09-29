@@ -1,6 +1,7 @@
 'use client';
 
 import { Volume2 } from 'lucide-react';
+import { motion, useReducedMotion } from 'motion/react';
 import {
   useCallback,
   useEffect,
@@ -20,6 +21,7 @@ import {
   usePronunciation
 } from '@/components/shell/use-pronunciation';
 import { cn } from '@/lib/cn';
+import { spring } from '@/lib/motion';
 
 type IdentityColumnProps = {
   name: string;
@@ -55,6 +57,7 @@ export function IdentityColumn({
   // The name blurs in on the page the visitor lands on; arriving by a page
   // transition, it morphs in from the header instead.
   const intro = useFirstLoad();
+  const reduced = useReducedMotion();
   let letterIndex = 0;
 
   return (
@@ -156,14 +159,18 @@ export function IdentityColumn({
                     }}
                     className="group flex items-center gap-4 py-1 text-[13px]"
                   >
-                    <span
-                      className={cn(
-                        'h-px transition-all duration-300 ease-out',
-                        isActive
-                          ? 'w-16 bg-primary'
-                          : 'w-8 bg-white/20 group-hover:w-12 group-hover:bg-white/50'
+                    <span className="relative h-px w-16">
+                      <span className="absolute inset-y-0 left-0 w-8 bg-white/20 transition-all duration-300 ease-(--ease-out) group-hover:w-12 group-hover:bg-white/50" />
+                      {isActive && (
+                        // One line, handed from section to section, so it
+                        // glides to wherever the page is.
+                        <motion.span
+                          layoutId="section-nav-indicator"
+                          className="absolute inset-0 bg-primary"
+                          transition={reduced ? { duration: 0 } : spring.snappy}
+                        />
                       )}
-                    />
+                    </span>
                     <span
                       className={cn(
                         'transition-colors',

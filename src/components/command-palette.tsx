@@ -22,7 +22,7 @@ import { usePathname, useRouter } from '@/i18n/navigation';
 import type { AppLocale } from '@/i18n/routing';
 import { useAppLocale, useT } from '@/i18n/use-t';
 import { cn } from '@/lib/cn';
-import { directionTo, spring } from '@/lib/motion';
+import { directionTo, ease, spring } from '@/lib/motion';
 import aboutIcon from '../../public/static/icons/about.json';
 import copyLinkIcon from '../../public/static/icons/copy-link.json';
 import emailIcon from '../../public/static/icons/email.json';
@@ -46,6 +46,21 @@ export { useCommandPalette };
 
 /** The cmdk value of the highlighted item, so each item can react to it. */
 const SelectedContext = createContext('');
+
+/** On open, the items arrive one after another, 20ms apart. */
+const list = {
+  hidden: {},
+  shown: { transition: { staggerChildren: 0.02, delayChildren: 0.04 } }
+};
+const arrive = (reduced: boolean | null) => ({
+  hidden: reduced ? { opacity: 0 } : { opacity: 0, y: 4, filter: 'blur(2px)' },
+  shown: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.25, ease: ease.out }
+  }
+});
 
 export function CommandPalette() {
   const ref = React.useRef<HTMLDivElement | null>(null);
@@ -246,12 +261,19 @@ export function CommandPalette() {
                     <CommandList>
                       <CommandEmpty>{k.empty}</CommandEmpty>
                       {activePage === 'home' && (
-                        <Home
-                          navigate={navigate}
-                          switchLocale={switchLocale}
-                          currentLocale={currentLocale}
-                          onClose={() => setIsOpen(false)}
-                        />
+                        <motion.div
+                          className="contents"
+                          variants={list}
+                          initial="hidden"
+                          animate="shown"
+                        >
+                          <Home
+                            navigate={navigate}
+                            switchLocale={switchLocale}
+                            currentLocale={currentLocale}
+                            onClose={() => setIsOpen(false)}
+                          />
+                        </motion.div>
                       )}
                     </CommandList>
                   </SelectedContext.Provider>
@@ -497,6 +519,7 @@ function Item({
   icon: ReactElement<LottieComponentProps> | ReactElement;
 }) {
   const selected = useContext(SelectedContext) === children;
+  const reduced = useReducedMotion();
 
   // Lottie icons play while their item is highlighted.
   useEffect(() => {
@@ -518,22 +541,27 @@ function Item({
           transition={spring.snappy}
         />
       )}
-      <span className="flex size-5 items-center justify-center opacity-60 transition-opacity group-data-[selected=true]:opacity-100">
-        {icon}
-      </span>
-      {children}
-      {shortcut && (
-        <span className="ml-auto flex gap-1">
-          {shortcut.split(' ').map(key => (
-            <kbd
-              key={key}
-              className="flex h-5 min-w-5 items-center justify-center rounded bg-white/[0.06] px-1 font-sans text-[11px] text-white/40 transition-colors group-data-[selected=true]:text-white/70"
-            >
-              {key}
-            </kbd>
-          ))}
+      <motion.span
+        variants={arrive(reduced)}
+        className="flex flex-1 items-center gap-3"
+      >
+        <span className="flex size-5 items-center justify-center opacity-60 transition-opacity group-data-[selected=true]:opacity-100">
+          {icon}
         </span>
-      )}
+        {children}
+        {shortcut && (
+          <span className="ml-auto flex gap-1">
+            {shortcut.split(' ').map(key => (
+              <kbd
+                key={key}
+                className="flex h-5 min-w-5 items-center justify-center rounded bg-white/[0.06] px-1 font-sans text-[11px] text-white/40 transition-colors group-data-[selected=true]:text-white/70"
+              >
+                {key}
+              </kbd>
+            ))}
+          </span>
+        )}
+      </motion.span>
     </CommandItem>
   );
 }

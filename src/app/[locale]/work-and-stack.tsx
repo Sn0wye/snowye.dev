@@ -1,6 +1,7 @@
 'use client';
 
 import { type PointerEvent, useRef, useState } from 'react';
+import { RollingText, SwapText } from '@/components/shell/rolling-text';
 import { useAppLocale } from '@/i18n/use-t';
 import { cn } from '@/lib/cn';
 import { interpolate } from '@/utils/interpolate';
@@ -47,6 +48,8 @@ export function WorkAndStack({
   const [skill, setSkill] = useState<string | null>(null);
   const [hoveredRole, setHoveredRole] = useState<string | null>(null);
   const [cursor, setCursor] = useState<number | null>(null);
+  // Which way the month label rolls: up when scrubbing forward in time.
+  const [direction, setDirection] = useState<1 | -1>(1);
   const track = useRef<HTMLDivElement>(null);
 
   const spans = roles.map(role => ({
@@ -82,7 +85,10 @@ export function WorkAndStack({
       1,
       Math.max(0, (event.clientX - rect.left) / rect.width)
     );
-    setCursor(first + Math.round(fraction * (length - 1)));
+    const next = first + Math.round(fraction * (length - 1));
+    if (cursor !== null && next !== cursor)
+      setDirection(next > cursor ? 1 : -1);
+    setCursor(next);
   };
 
   const cursorLabel =
@@ -113,26 +119,39 @@ export function WorkAndStack({
           className="relative cursor-crosshair touch-none select-none py-3"
         >
           <p className="mb-4 h-5 text-[13px]" aria-hidden>
-            {cursorLabel ? (
-              <span className="text-primary">{cursorLabel}</span>
-            ) : (
-              <span className="text-secondary/60">{copy.timeline}</span>
-            )}
+            <SwapText id={cursorLabel ? 'month' : 'hint'}>
+              {cursorLabel ? (
+                <RollingText
+                  text={cursorLabel}
+                  direction={direction}
+                  className="text-primary"
+                />
+              ) : (
+                <span className="text-secondary/60">{copy.timeline}</span>
+              )}
+            </SwapText>
           </p>
           <div className="relative">
             <ul className="space-y-2" aria-hidden>
               {[...spans].reverse().map(span => (
                 <li key={span.company} className="h-1">
                   <span
-                    className={cn(
-                      'block h-full rounded-full transition-colors duration-150',
-                      lit?.has(span.company) ? 'bg-primary' : 'bg-white/15'
-                    )}
+                    className="block h-full overflow-hidden rounded-full bg-white/15"
                     style={{
                       marginLeft: `${((span.from - first) / length) * 100}%`,
                       width: `${((span.to - span.from + 1) / length) * 100}%`
                     }}
-                  />
+                  >
+                    {/* Lit bars fill from their start date forward. */}
+                    <span
+                      className={cn(
+                        'block h-full origin-left bg-primary transition-transform ease-(--ease-out) motion-reduce:transition-none',
+                        lit?.has(span.company)
+                          ? 'scale-x-100 duration-300'
+                          : 'scale-x-0 duration-200'
+                      )}
+                    />
+                  </span>
                 </li>
               ))}
             </ul>
@@ -211,11 +230,13 @@ export function WorkAndStack({
           ))}
         </ul>
         <p aria-live="polite" className="mt-5 px-2 text-[13px]">
-          {usedAt ? (
-            <span className="text-primary">{usedAt}</span>
-          ) : (
-            <span className="text-secondary/60">{copy.hint}</span>
-          )}
+          <SwapText id={skill ?? 'hint'}>
+            {usedAt ? (
+              <span className="text-primary">{usedAt}</span>
+            ) : (
+              <span className="text-secondary/60">{copy.hint}</span>
+            )}
+          </SwapText>
         </p>
       </section>
     </>
