@@ -22,6 +22,7 @@ import { usePathname, useRouter } from '@/i18n/navigation';
 import type { AppLocale } from '@/i18n/routing';
 import { useAppLocale, useT } from '@/i18n/use-t';
 import { cn } from '@/lib/cn';
+import { directionTo, spring } from '@/lib/motion';
 import aboutIcon from '../../public/static/icons/about.json';
 import copyLinkIcon from '../../public/static/icons/copy-link.json';
 import emailIcon from '../../public/static/icons/email.json';
@@ -69,8 +70,9 @@ export function CommandPalette() {
     if (pathname === to) {
       return;
     }
-    router.push(to);
     setIsOpen(false);
+    // Same directional page transition as the header links.
+    router.push(to, { transitionTypes: directionTo(pathname, to) });
   };
 
   const switchLocale = (next: AppLocale) => {
@@ -209,7 +211,7 @@ export function CommandPalette() {
                     ? { opacity: 0 }
                     : { opacity: 0, scale: 0.98, y: -6, filter: 'blur(4px)' }
                 }
-                transition={{ type: 'spring', bounce: 0.18, duration: 0.35 }}
+                transition={spring.soft}
               >
                 <DialogPrimitive.Title className="sr-only">
                   {k.placeholder}
@@ -513,7 +515,7 @@ function Item({
         <motion.span
           layoutId="command-palette-highlight"
           className="absolute inset-0 -z-10 rounded-lg bg-white/[0.07]"
-          transition={{ type: 'spring', bounce: 0.15, duration: 0.3 }}
+          transition={spring.snappy}
         />
       )}
       <span className="flex size-5 items-center justify-center opacity-60 transition-opacity group-data-[selected=true]:opacity-100">

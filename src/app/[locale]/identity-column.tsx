@@ -1,13 +1,20 @@
 'use client';
 
 import { Volume2 } from 'lucide-react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  ViewTransition
+} from 'react';
 import { LocalTime } from '@/components/shell/local-time';
 import { LocaleToggle } from '@/components/shell/locale-toggle';
 import { OpenSignal } from '@/components/shell/open-signal';
 import { ShortcutButton } from '@/components/shell/shortcut-button';
 import { SocialLinks } from '@/components/shell/social-links';
 import { TypedLine } from '@/components/shell/typed-line';
+import { useFirstLoad } from '@/components/shell/use-first-load';
 import {
   syllablesOf,
   usePronunciation
@@ -45,6 +52,9 @@ export function IdentityColumn({
   const { parts: syllables, separator } = syllablesOf(pronunciation.spell);
   const voice = usePronunciation(syllables.length);
   const { active, jumpTo } = useScrollSpy(sections.map(s => s.id));
+  // The name blurs in on the page the visitor lands on; arriving by a page
+  // transition, it morphs in from the header instead.
+  const intro = useFirstLoad();
   let letterIndex = 0;
 
   return (
@@ -55,24 +65,32 @@ export function IdentityColumn({
           className="text-[3.25rem] font-semibold leading-[1.02] tracking-[-0.04em] text-primary"
         >
           {name.split(' ').map((word, w) => (
-            <span
+            // Each word pairs with the same word in the header, so the two
+            // lines here glide into the one line there without reflowing.
+            <ViewTransition
               key={`${word}-${w}`}
-              aria-hidden
-              className="mr-[0.25em] inline-block whitespace-nowrap"
+              name={`site-name-${w}`}
+              share="morph"
+              default="none"
             >
-              {word.split('').map(char => {
-                const i = letterIndex++;
-                return (
-                  <span
-                    key={i}
-                    className="inline-block animate-blur-in"
-                    style={{ '--i': i } as React.CSSProperties}
-                  >
-                    {char}
-                  </span>
-                );
-              })}
-            </span>
+              <span
+                aria-hidden
+                className="mr-[0.25em] inline-block whitespace-nowrap"
+              >
+                {word.split('').map(char => {
+                  const i = letterIndex++;
+                  return (
+                    <span
+                      key={i}
+                      className={cn('inline-block', intro && 'animate-blur-in')}
+                      style={{ '--i': i } as React.CSSProperties}
+                    >
+                      {char}
+                    </span>
+                  );
+                })}
+              </span>
+            </ViewTransition>
           ))}
         </h1>
 

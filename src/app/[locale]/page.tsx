@@ -13,6 +13,7 @@ import { TARGET_STACK } from '@/data/target-stack';
 import { Link } from '@/i18n/navigation';
 import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
+import { directionTo } from '@/lib/motion';
 import { IdentityColumn } from './identity-column';
 import { WorkAndStack } from './work-and-stack';
 
@@ -160,6 +161,7 @@ export default async function Home({ params }: PageProps) {
                 <li key={page.href}>
                   <Link
                     href={page.href}
+                    transitionTypes={directionTo('/', page.href)}
                     className="group flex items-baseline justify-between rounded-xl px-4 py-3 transition-colors hover:bg-white/[0.03]"
                   >
                     <span className="text-primary">{page.label}</span>

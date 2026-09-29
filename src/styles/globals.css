@@ -83,3 +83,258 @@
     transform: translateY(4px) scale(0.98);
   }
 }
+
+/*
+ * Page transitions (React <ViewTransition>, see components/shell/
+ * page-transition.tsx). Old content leaves fast, new content arrives gently;
+ * the header stays anchored while the content moves. Timings mirror
+ * src/lib/motion.ts.
+ */
+:root {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --vt-exit: 160ms;
+  --vt-enter: 260ms;
+  --vt-move: 420ms;
+}
+
+/* Clicks during a transition reach the live page, not the overlay. */
+::view-transition {
+  pointer-events: none;
+}
+
+@keyframes vt-fade {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+  }
+}
+
+@keyframes vt-slide {
+  from {
+    translate: var(--vt-offset) 0;
+  }
+}
+
+@keyframes vt-via-blur {
+  40% {
+    filter: blur(1px);
+  }
+}
+
+/* The page itself: the root snapshot is exactly what was on screen, so it
+   slides from where the visitor was looking, whatever the scroll position
+   or layout. The header, name and underline are named, so they are lifted
+   out of the root and move on their own (below). */
+html:active-view-transition-type(nav-forward, nav-back)::view-transition-old(
+  root
+) {
+  animation:
+    var(--vt-exit) ease-in both vt-fade reverse,
+    var(--vt-move) var(--ease-out) both vt-slide reverse;
+}
+
+html:active-view-transition-type(nav-forward, nav-back)::view-transition-new(
+  root
+) {
+  animation:
+    var(--vt-enter) ease-out var(--vt-exit) both vt-fade,
+    var(--vt-move) var(--ease-out) both vt-slide;
+}
+
+/* Forward: old content exits left, new enters from the right. Back mirrors. */
+html:active-view-transition-type(nav-forward)::view-transition-old(root),
+html:active-view-transition-type(nav-back)::view-transition-new(root) {
+  --vt-offset: -40px;
+}
+
+html:active-view-transition-type(nav-forward)::view-transition-new(root),
+html:active-view-transition-type(nav-back)::view-transition-old(root) {
+  --vt-offset: 40px;
+}
+
+/* Untyped navigations (the language switch) crossfade with a soft blur. */
+::view-transition-old(root) {
+  animation: var(--vt-exit) ease-in both vt-fade reverse;
+}
+
+::view-transition-new(root) {
+  animation: var(--vt-enter) ease-out var(--vt-exit) both vt-fade;
+}
+
+/* Shared elements (the name, the current-page underline) glide between
+   their old and new places, softened mid-flight. */
+::view-transition-group(.morph) {
+  animation-duration: var(--vt-move);
+  animation-timing-function: var(--ease-out);
+}
+
+::view-transition-image-pair(.morph) {
+  animation: var(--vt-move) var(--ease-out) vt-via-blur;
+}
+
+/* Snapshots are bitmaps: scaled down they stay crisp, scaled up they blur.
+   So the sharper (larger) snapshot carries the flight. Leaving home the big
+   old name holds until late; coming home the big new name takes over early.
+   Linear, so the keyframe percentages are real time. */
+html:active-view-transition-type(leave-home)::view-transition-old(.morph) {
+  animation: var(--vt-move) linear both vt-hold-out;
+}
+
+html:active-view-transition-type(leave-home)::view-transition-new(.morph) {
+  animation: var(--vt-move) linear both vt-late-in;
+}
+
+html:active-view-transition-type(enter-home)::view-transition-old(.morph) {
+  animation: var(--vt-move) linear both vt-early-out;
+}
+
+html:active-view-transition-type(enter-home)::view-transition-new(.morph) {
+  animation: var(--vt-move) linear both vt-early-in;
+}
+
+@keyframes vt-hold-out {
+  0%,
+  65% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-late-in {
+  0%,
+  65% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes vt-early-out {
+  0% {
+    opacity: 1;
+  }
+  20%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-early-in {
+  0% {
+    opacity: 0;
+  }
+  20%,
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Arriving on or leaving a page that has no match (e.g. the underline
+   coming from home), a shared element simply fades. */
+::view-transition-new(.morph):only-child {
+  animation: var(--vt-enter) ease-out var(--vt-exit) both vt-fade;
+}
+
+::view-transition-old(.morph):only-child {
+  animation: var(--vt-exit) ease-in both vt-fade reverse;
+}
+
+/* Between inner pages the name does not move, so it holds perfectly still
+   with the header instead of blurring and crossfading in place. */
+html:not(
+  :active-view-transition-type(leave-home, enter-home)
+)::view-transition-group(site-name-0),
+html:not(
+  :active-view-transition-type(leave-home, enter-home)
+)::view-transition-group(site-name-1),
+html:not(
+  :active-view-transition-type(leave-home, enter-home)
+)::view-transition-image-pair(site-name-0),
+html:not(
+  :active-view-transition-type(leave-home, enter-home)
+)::view-transition-image-pair(site-name-1),
+html:not(
+  :active-view-transition-type(leave-home, enter-home)
+)::view-transition-new(site-name-0),
+html:not(
+  :active-view-transition-type(leave-home, enter-home)
+)::view-transition-new(site-name-1) {
+  animation: none;
+}
+
+html:not(
+  :active-view-transition-type(leave-home, enter-home)
+)::view-transition-old(site-name-0),
+html:not(
+  :active-view-transition-type(leave-home, enter-home)
+)::view-transition-old(site-name-1) {
+  display: none;
+}
+
+/* The header is the fixed reference point between inner pages. */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(site-header) {
+  display: none;
+}
+
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+/* Home has no header: it fades in on the way out of home, and away on the
+   way back. */
+::view-transition-new(site-header):only-child {
+  animation: var(--vt-enter) ease-out var(--vt-exit) both vt-fade;
+}
+
+::view-transition-old(site-header):only-child {
+  display: block;
+  animation: var(--vt-exit) ease-in both vt-fade reverse;
+}
+
+/* The two words stagger so their paths never cross: leaving home "Gabriel"
+   shrinks away first and "Trzimajewski" follows; coming home the order
+   flips. Longhand after the shorthands above, so only the delay changes. */
+html:active-view-transition-type(leave-home)::view-transition-group(
+  site-name-1
+),
+html:active-view-transition-type(leave-home)::view-transition-image-pair(
+  site-name-1
+),
+html:active-view-transition-type(leave-home)::view-transition-old(site-name-1),
+html:active-view-transition-type(leave-home)::view-transition-new(site-name-1),
+html:active-view-transition-type(enter-home)::view-transition-group(
+  site-name-0
+),
+html:active-view-transition-type(enter-home)::view-transition-image-pair(
+  site-name-0
+),
+html:active-view-transition-type(enter-home)::view-transition-old(site-name-0),
+html:active-view-transition-type(enter-home)::view-transition-new(site-name-0) {
+  animation-delay: 80ms;
+}
+
+::view-transition-group(site-name-0),
+::view-transition-group(site-name-1),
+::view-transition-group(nav-indicator) {
+  z-index: 101;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* No travel, only crossfades. */
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+  }
+
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    --vt-offset: 0px;
+  }
+}
