@@ -32,15 +32,6 @@ export const about = {
   career: 'Career',
   present: 'Present',
   education: 'Education',
-  educationItem: {
-    degree: 'B.Sc. Computer Science',
-    school: 'UNINTER',
-    location: 'Brazil',
-    dates: 'Feb 2025 – Feb 2029',
-    gpa: 'GPA 9.32/10',
-    focus:
-      'Focus on Algorithms, Data Structures, Databases, Distributed Systems, and Applied Mathematics (Calculus, Linear Algebra, Probability & Statistics), with exposure to AI and Cloud Computing.'
-  },
   faq: {
     title: 'FAQ',
     items: [
@@ -70,9 +61,5 @@ export const about = {
       }
     ]
   },
-  languages: 'Languages',
-  languagesList: [
-    { name: 'Portuguese', level: 'native' },
-    { name: 'English', level: 'fluent' }
-  ]
+  languages: 'Languages'
 };

@@ -23,6 +23,11 @@ export const kbar = {
   },
   placeholder: 'Do que você precisa?',
   empty: 'Nenhum resultado encontrado.',
+  hints: {
+    navigate: 'navegar',
+    select: 'selecionar',
+    close: 'fechar'
+  },
   toast: {
     title: 'Copiado :D',
     description: 'Agora você pode compartilhar com seus amigos.'

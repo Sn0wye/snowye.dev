@@ -7,7 +7,7 @@ import { type AppLocale, routing } from '@/i18n/routing';
 import { useAppLocale, useT } from '@/i18n/use-t';
 import { cn } from '@/lib/cn';
 
-export function LocaleSwitcher() {
+export function LocaleToggle({ className }: { className?: string }) {
   const t = useT();
   const router = useRouter();
   const pathname = usePathname();
@@ -27,28 +27,23 @@ export function LocaleSwitcher() {
   };
 
   return (
-    <fieldset className="ml-1 flex items-center gap-0.5 rounded-lg bg-transparent p-1 text-xs font-medium uppercase tracking-[0.075em]">
+    <fieldset className={cn('flex items-center gap-3', className)}>
       <legend className="sr-only">{t.common.localeSwitcher.label}</legend>
-      {routing.locales.map(locale => {
-        const isActive = locale === current;
-        return (
-          <button
-            key={locale}
-            type="button"
-            disabled={isPending || isActive}
-            onClick={() => onSelect(locale)}
-            aria-current={isActive ? 'true' : undefined}
-            className={cn(
-              'cursor-pointer rounded-md px-2 py-1 transition-colors duration-200 ease-in-out',
-              isActive
-                ? 'bg-hover text-primary'
-                : 'text-secondary hover:bg-hover hover:text-primary'
-            )}
-          >
-            {locale}
-          </button>
-        );
-      })}
+      {routing.locales.map(locale => (
+        <button
+          key={locale}
+          type="button"
+          disabled={isPending}
+          onClick={() => onSelect(locale)}
+          aria-current={locale === current ? 'true' : undefined}
+          className={cn(
+            'cursor-pointer transition-colors',
+            locale === current ? 'text-primary' : 'hover:text-primary'
+          )}
+        >
+          {locale}
+        </button>
+      ))}
     </fieldset>
   );
 }

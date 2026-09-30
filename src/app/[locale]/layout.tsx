@@ -4,10 +4,8 @@ import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { CommandPalette } from '@/components/command-palette-loader';
-import { Footer } from '@/components/footer';
-import { Navbar } from '@/components/navbar';
-import Particles from '@/components/particles';
 import { PersonJsonLd } from '@/components/person-json-ld';
+import { FirstLoadMarker } from '@/components/shell/use-first-load';
 import { SiteJsonLd } from '@/components/site-json-ld';
 import { Toaster } from '@/components/toaster';
 import { TooltipProvider } from '@/components/tooltip';
@@ -83,21 +81,9 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
       >
         <TooltipProvider delayDuration={150}>
           <div className="relative z-0 flex min-h-screen flex-col">
-            {/* overflow-hidden: the WebGL canvas carries explicit pixel
-                  dimensions, so it must never be able to grow the document. */}
-            <div className="absolute inset-0 h-full w-full overflow-hidden">
-              <Particles
-                particleCount={150}
-                particleSpread={20}
-                speed={0.05}
-                particleBaseSize={100}
-                disableRotation={false}
-              />
-            </div>
-            <Navbar />
             {children}
-            <Footer />
           </div>
+          <FirstLoadMarker />
           <CommandPalette />
           <Toaster />
         </TooltipProvider>
