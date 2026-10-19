@@ -31,7 +31,9 @@ const workSchema = z.object({
     .regex(/^\d{4}-\d{2}$/)
     .optional(),
   summary: z.string().optional(),
-  highlights: z.array(z.string()).default([])
+  highlights: z.array(z.string()).default([]),
+  /** Skills used in this role. Each must also appear in the `skills` catalog. */
+  keywords: z.array(z.string()).default([])
 });
 
 const educationSchema = z.object({
@@ -44,34 +46,50 @@ const educationSchema = z.object({
   courses: z.array(z.string()).default([])
 });
 
-const resumeSchema = z.object({
-  meta: z.object({
-    locale: z.string(),
-    present_label: z.string(),
-    section_titles: z.record(z.string(), z.string())
-  }),
-  basics: z.object({
-    name: z.string(),
-    label: z.string(),
-    email: z.email(),
-    phone: z.string().optional(),
-    location: z.object({
-      city: z.string(),
-      region: z.string(),
-      countryCode: z.string()
+const resumeSchema = z
+  .object({
+    meta: z.object({
+      locale: z.string(),
+      present_label: z.string(),
+      section_titles: z.record(z.string(), z.string())
     }),
-    summary: z.string(),
-    profiles: z.array(profileSchema).default([])
-  }),
-  work: z.array(workSchema).min(1),
-  education: z.array(educationSchema).default([]),
-  skills: z
-    .array(z.object({ name: z.string(), keywords: z.array(z.string()) }))
-    .default([]),
-  languages: z
-    .array(z.object({ language: z.string(), fluency: z.string() }))
-    .default([])
-});
+    basics: z.object({
+      name: z.string(),
+      label: z.string(),
+      email: z.email(),
+      phone: z.string().optional(),
+      location: z.object({
+        city: z.string(),
+        region: z.string(),
+        countryCode: z.string()
+      }),
+      summary: z.string(),
+      profiles: z.array(profileSchema).default([])
+    }),
+    work: z.array(workSchema).min(1),
+    education: z.array(educationSchema).default([]),
+    skills: z
+      .array(z.object({ name: z.string(), keywords: z.array(z.string()) }))
+      .default([]),
+    languages: z
+      .array(z.object({ language: z.string(), fluency: z.string() }))
+      .default([])
+  })
+  .superRefine((resume, ctx) => {
+    const catalog = new Set(
+      resume.skills.flatMap(group => group.keywords.map(k => k.toLowerCase()))
+    );
+    resume.work.forEach((work, index) => {
+      for (const keyword of work.keywords) {
+        if (!catalog.has(keyword.toLowerCase()))
+          ctx.addIssue({
+            code: 'custom',
+            path: ['work', index, 'keywords'],
+            message: `"${keyword}" (${work.name}) is not in the skills catalog`
+          });
+      }
+    });
+  });
 
 export type Resume = z.infer<typeof resumeSchema>;
 export type Work = z.infer<typeof workSchema>;

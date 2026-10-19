@@ -119,10 +119,12 @@ export default async function Home({ params }: PageProps) {
             skills={skills}
             pinnedSkills={TARGET_STACK.length}
             usage={getSkillUsage(locale, skills)}
+            currentMonth={new Date().toISOString().slice(0, 7)}
             copy={{
               work: home.nav.work,
               stack: home.nav.stack,
               timeline: home.timeline,
+              present: t.pages.cv.present,
               ...home.stack
             }}
           />

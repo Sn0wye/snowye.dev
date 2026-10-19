@@ -28,7 +28,8 @@ basics:
     countryCode: BR
   summary: >-
     Engenheiro de Software com foco em backend e mais de 5 anos construindo sistemas
-    distribuídos, APIs e infraestrutura em nuvem em escala. Mais recentemente na K2 Partnering
+    distribuídos, APIs e infraestrutura em nuvem em escala. Atualmente na Paytrack, atuando com Java e
+    Spring Boot no backend e React com TypeScript no frontend. Anteriormente na K2 Partnering
     Solutions, alocado no Bradesco em uma plataforma interna de observabilidade e processamento
     de logs em escala bancária, com fluxo auditado de acesso por incidente e modernização de
     sistema legado em Java 8.
@@ -37,12 +38,11 @@ basics:
     ~50% com migração de região via Terraform e rightsizing, diminuiu o tempo de investigação
     de incidentes em ~80% com alertas baseados em SLO no Datadog e levou consultas de busca
     no PostgreSQL de ~8s para menos de 200ms. Atua com Java e Spring Boot, TypeScript e
-    Node.js, Go e C#/.NET com Entity Framework Core. Forte em engenharia de confiabilidade,
+    Node.js e Go. Forte em engenharia de confiabilidade,
     observabilidade, mensageria com Kafka e gRPC, otimização de custos, tuning de banco de
     dados, sistemas financeiros e bancários, modernização de legado e integração
     mainframe-web. Também atua em IA aplicada na camada de aplicação e infraestrutura com
-    LangChain, AI SDK e Claude Code, incluindo Skills e servidores MCP. Somente remoto;
-    disponibilidade imediata. Autodidata, orientado a sistemas, com foco em confiabilidade e
+    LangChain, AI SDK e Claude Code, incluindo Skills e servidores MCP. Autodidata, orientado a sistemas, com foco em confiabilidade e
     performance.
   profiles:
     - network: LinkedIn
@@ -53,12 +53,41 @@ basics:
       url: https://github.com/Sn0wye
 
 work:
+  - name: Paytrack
+    position: Engenheiro de Software Sênior
+    location: Híbrido, Blumenau, Brasil
+    url: https://paytrack.com.br
+    startDate: '2026-09'
+    keywords:
+      - Java
+      - TypeScript
+      - Spring Boot
+      - Node.js
+      - React
+      - PostgreSQL
+      - Kafka
+      - Observabilidade
+      - Investigação de Incidentes
+    summary: >-
+      Engenheiro backend atuando com Java e Spring Boot, com contribuições no frontend em
+      React e TypeScript.
+
   - name: Banco Bradesco
     position: Engenheiro de Software Sênior
     location: Remoto, Brasil
     url: https://k2partnering.com
     startDate: '2025-04'
-    endDate: '2026-06'
+    endDate: '2026-07'
+    keywords:
+      - Java
+      - Java 8
+      - Spring Boot
+      - Node.js
+      - PostgreSQL
+      - Observabilidade
+      - Monitoramento
+      - Investigação de Incidentes
+      - Auditoria
     summary: >-
       Alocado no Bradesco por meio da K2 Partnering Solutions como engenheiro backend no time Open Platform, atuando em uma
       plataforma interna já existente de processamento de logs e observabilidade usada em
@@ -81,6 +110,40 @@ work:
     location: Remoto, Brasil
     startDate: '2024-02'
     endDate: '2025-03'
+    keywords:
+      - Java
+      - TypeScript
+      - Go
+      - Spring Boot
+      - Node.js
+      - NestJS
+      - Express
+      - REST
+      - gRPC
+      - Webhooks
+      - OpenAPI
+      - Swagger
+      - 'Backend for Frontend (BFF)'
+      - Microsserviços
+      - PostgreSQL
+      - pg_trgm
+      - MongoDB
+      - Kafka
+      - AWS
+      - Terraform
+      - Docker
+      - GitHub Actions
+      - CI/CD
+      - Rightsizing
+      - Datadog
+      - Observabilidade
+      - SLO
+      - Error Budget
+      - Alertas
+      - Investigação de Incidentes
+      - JUnit
+      - Cobertura de Testes
+      - B3
     summary: >-
       Microsserviços distribuídos para uma plataforma de investimentos, incluindo a API de
       integração com a B3, infraestrutura AWS e observabilidade.
@@ -100,31 +163,25 @@ work:
       - Conduziu refatorações que aumentaram a coesão e reduziram o acoplamento entre serviços, além de melhorias de performance de código.
       - Trabalhou com PostgreSQL e MongoDB como principais bancos de dados dos serviços.
 
-  - name: Avalie Mais
-    position: Engenheiro de Software Full Stack
-    location: Remoto, Brasil
-    startDate: '2021-12'
-    endDate: '2024-02'
-    summary: >-
-      Plataforma de pesquisas anônimas para o varejo, com requisitos rígidos de anonimização
-      de dados e conformidade com privacidade.
-    highlights:
-      - Desenvolveu e manteve um aplicativo de pesquisas anônimas para o varejo que gerou insights estratégicos, melhorando decisões sobre instalação de lojas e estrutura organizacional.
-      - Projetou e implementou uma arquitetura segura garantindo anonimização completa dos dados e conformidade total com regulamentações de privacidade.
-      - Construiu um sistema altamente otimizado que manteve zero problemas de performance apesar do aumento contínuo da demanda de usuários.
-      - Entregou serviços backend com PHP 7 e Laravel, cobertos por testes com PHPUnit.
-      - Construiu o frontend web com React 17 e Tailwind CSS.
-      - Modelou e otimizou o schema MySQL que sustentava a coleta e os relatórios das pesquisas.
-
   - name: Mercante
     position: Engenheiro de Software Full Stack
     location: Remoto, Brasil
     url: https://mercante.com.py
     startDate: '2021-07'
-    endDate: '2023-06'
+    endDate: '2024-02'
+    keywords:
+      - TypeScript
+      - Node.js
+      - NestJS
+      - React
+      - SEO
+      - PostgreSQL
+      - VPS
+      - Observabilidade
+      - E-commerce
     summary: >-
-      Atuação como contratado em meio período na Mercante, agência digital paraguaia, sobreposta
-      ao período na Avalie Mais. Plataformas de e-commerce e infraestrutura self-hosted para PMEs
+      Atuação como contratado em meio período na Mercante, agência digital paraguaia.
+      Plataformas de e-commerce e infraestrutura self-hosted para PMEs
       no Brasil e no Paraguai, várias delas ainda em produção hoje.
     highlights:
       - Projetou e entregou plataformas de e-commerce para mais de 10 pequenas e médias empresas no Brasil e no Paraguai pela Mercante, com aumento médio de 30% nas vendas dos clientes após o lançamento.
@@ -162,8 +219,6 @@ skills:
       - TypeScript
       - JavaScript
       - Go
-      - 'C#'
-      - PHP
       - SQL
       - Bash
   - name: Backend e Frameworks
@@ -172,9 +227,6 @@ skills:
       - Node.js
       - NestJS
       - Express
-      - .NET
-      - Entity Framework Core
-      - Laravel
       - REST
       - gRPC
       - protobuf
@@ -201,7 +253,6 @@ skills:
     keywords:
       - PostgreSQL
       - pg_trgm
-      - MySQL
       - Oracle
       - MongoDB
       - Redis
@@ -210,7 +261,6 @@ skills:
       - Otimização de Consultas
       - Tuning de Banco de Dados
       - Modelagem de Dados
-      - Migrations Code-First
   - name: Cloud e Infraestrutura
     keywords:
       - AWS
@@ -243,13 +293,11 @@ skills:
       - Site Reliability Engineering
       - Tuning de Performance
       - Auditoria
-      - Conformidade
   - name: Testes e Qualidade
     keywords:
       - JUnit
       - Mockito
       - Jest
-      - PHPUnit
       - Testes Unitários
       - Testes de Integração
       - Cobertura de Testes
@@ -276,8 +324,6 @@ skills:
       - Plataformas de Observabilidade
       - Modernização de Legado
       - Integração com Mainframe
-      - Anonimização de Dados
-      - Conformidade com Privacidade
   - name: Formas de Trabalho
     keywords:
       - Git

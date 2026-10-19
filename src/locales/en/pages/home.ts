@@ -1,9 +1,9 @@
 export const home = {
   title: 'Gabriel Trzimajewski',
-  meta: 'Senior Backend Software Engineer. Previously at <a href="https://banco.bradesco" target="_blank" rel="noreferrer">Bradesco</a>.',
+  meta: 'Senior Backend Software Engineer at <a href="https://paytrack.com.br" target="_blank" rel="noreferrer">Paytrack</a>.',
   description: 'Building software that scales.',
   metaDescription:
-    'Gabriel Trzimajewski is a Senior Backend Software Engineer from Brazil building distributed systems, APIs and cloud infrastructure with Java, Spring Boot, Node.js and C#/.NET.',
+    'Gabriel Trzimajewski is a Senior Backend Software Engineer from Brazil building distributed systems, APIs and cloud infrastructure with Java, Spring Boot and Node.js.',
   detailsLabel: 'More about my work',
   openSignal: 'Open to new roles',
   pronounce: 'Hear how to say my name',
@@ -31,7 +31,7 @@ export const home = {
   sections: [
     {
       title: 'Backend engineering for real-world systems',
-      body: 'My core stack includes Java and Spring Boot, Node.js and TypeScript, and C#/.NET. I use those tools to build APIs, event-driven services, integrations, and cloud infrastructure where correctness and operability matter. I focus on clear service boundaries, useful tests, predictable failure handling, and telemetry that helps teams diagnose production behavior instead of guessing.'
+      body: 'My core stack includes Java and Spring Boot, plus Node.js and TypeScript. I use those tools to build APIs, event-driven services, integrations, and cloud infrastructure where correctness and operability matter. I focus on clear service boundaries, useful tests, predictable failure handling, and telemetry that helps teams diagnose production behavior instead of guessing.'
     },
     {
       title: 'How I approach software delivery',
