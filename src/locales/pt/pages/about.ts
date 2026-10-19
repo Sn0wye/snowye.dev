@@ -12,12 +12,11 @@ export const about = {
     ipaLabel: 'IPA'
   },
   bio: {
-    p1Before: 'Hey, eu sou o ',
+    p1Before: 'Oi, eu sou o ',
     p1FirstName: 'Gabriel',
     p1After:
-      '! Sou um cara autodidata que vive, ama e aprende, escuta muita música, ama programar, viajar e tocar piano. Sempre fui apaixonado por computadores desde criança, e descobri a beleza do JavaScript na <strong><a href="https://rocketseat.com.br" target="_blank" rel="noreferrer">Rocketseat</a></strong> no início de 2020.',
-    p2: 'Mais recentemente fui <strong>Engenheiro de Software Sênior</strong> no <a href="https://banco.bradesco" target="_blank" rel="noreferrer">Bradesco</a>, no time Open, construindo uma plataforma interna de processamento de logs e observabilidade usada em <strong>escala bancária</strong> para investigação de incidentes e monitoramento de sistemas. Sou Brasileiro com muito orgulho e fã de carteirinha do <strong>twenty one pilots</strong>.',
-    p3: 'Sou um <strong>engenheiro focado em backend</strong> com mais de 5 anos entregando <strong>sistemas distribuídos</strong>, APIs e infraestrutura na nuvem. Me importo com <strong>confiabilidade</strong>, <strong>performance</strong> e escrever código que seja gostoso de manter às 3 da manhã quando algo pega fogo. Antes do Bradesco, passei mais de um ano na <strong>Mundo Invest</strong> liderando uma integração com a B3 que processava <strong>~100 mil requisições/dia</strong>, onde reduzi custos de nuvem em <strong>~50%</strong> e derrubei uma query crítica de <strong>~8s para menos de 200ms</strong>.'
+      '! Sou engenheiro de software backend, autodidata, e hoje trabalho na <a href="https://paytrack.com.br" target="_blank" rel="noreferrer">Paytrack</a>, em Blumenau. Antes, passei pelo <a href="https://banco.bradesco" target="_blank" rel="noreferrer">Bradesco</a> e pela <a href="https://mundoinvest.com.br" target="_blank" rel="noreferrer">Mundo Invest</a>. O que mais gosto de fazer é deixar sistemas mais rápidos, caçar bugs difíceis e aprender coisas novas. Quando algo quebra, quero entender a causa antes de corrigir. Gosto de entregar rápido, mas com qualidade. Fora do trabalho, acompanho <strong>F1 e GT3</strong>, jogo, escuto muita música e viajo quando dá.',
+    p2: 'Trabalho de forma <strong>AI-first</strong>: uso agentes de IA para escrever e revisar código e automatizar o dia a dia, e concentro minha energia em arquitetura e decisões técnicas. Também estudo tudo o que gira em torno disso, como LLMs, agentes e MCP, para acompanhar de perto para onde o mercado está indo.'
   },
   highlights: 'Destaques',
   highlightsList: [
@@ -38,7 +37,7 @@ export const about = {
       {
         question: 'Quem é Gabriel Trzimajewski?',
         answer:
-          'Gabriel Trzimajewski é Engenheiro de Software Backend Sênior de Blumenau, Santa Catarina, Brasil, com mais de 5 anos construindo sistemas distribuídos, APIs e infraestrutura em nuvem. Mais recentemente atuou no Bradesco em uma plataforma interna de processamento de logs e observabilidade usada em escala bancária.'
+          'Gabriel Trzimajewski é Engenheiro de Software Backend Sênior de Blumenau, Santa Catarina, Brasil, com mais de 5 anos construindo sistemas distribuídos, APIs e infraestrutura em nuvem. Hoje está na Paytrack, construindo o futuro da gestão de viagens corporativas; antes, atuou no Bradesco em uma plataforma interna de processamento de logs e observabilidade usada em escala bancária.'
       },
       {
         question: 'Com quais tecnologias o Gabriel trabalha?',

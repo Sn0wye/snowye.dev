@@ -18,6 +18,14 @@ export const projects: Projects = [
     year: 2026,
     projects: [
       {
+        id: '0c19b50c-f43d-4d02-90be-6c82ffeba618',
+        title: 'Paytrack',
+        url: 'https://paytrack.com.br',
+        description: 'Corporate expense and travel management platform.',
+        iconName: 'savings',
+        featured: true
+      },
+      {
         id: 'd927829b-514e-40d5-a732-3bbcea05b5a4',
         title: 'CloudCertify',
         url: 'https://cloudcertify.snowye.dev',

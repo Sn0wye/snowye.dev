@@ -12,12 +12,11 @@ export const about = {
     ipaLabel: 'IPA'
   },
   bio: {
-    p1Before: "Hey, I'm ",
+    p1Before: "Hi, I'm ",
     p1FirstName: 'Gabriel',
     p1After:
-      '! I\'m a self-taught guy who lives, loves and learns, listens to a lot of music, loves coding, traveling and playing piano. I\'ve always been into computers since I was a kid, and then I discovered the beauty of JavaScript at <strong><a href="https://rocketseat.com.br" target="_blank" rel="noreferrer">Rocketseat</a></strong> back in early 2020.',
-    p2: 'Most recently I was a <strong>Senior Software Engineer</strong> at <a href="https://banco.bradesco" target="_blank" rel="noreferrer">Bradesco</a>, on the Open Platform team, building an internal log processing and observability platform used at <strong>banking scale</strong> for incident investigation and system monitoring. I\'m from Brazil and a big fan of <strong>twenty one pilots</strong>.',
-    p3: "I'm a <strong>backend-focused engineer</strong> with 5+ years shipping <strong>distributed systems</strong>, APIs, and cloud infra. I care about <strong>reliability</strong>, <strong>performance</strong>, and writing code that's actually nice to maintain at 3am when something is on fire. Before Bradesco, I spent a year+ at <strong>Mundo Invest</strong> leading a B3 (Brazilian stock exchange) integration handling <strong>~100k requests/day</strong>, where I cut cloud costs by <strong>~50%</strong> and dropped a critical query from <strong>~8s to under 200ms</strong>."
+      '! I\'m a self-taught backend software engineer, currently at <a href="https://paytrack.com.br" target="_blank" rel="noreferrer">Paytrack</a> in Blumenau. Before that, I worked at <a href="https://banco.bradesco" target="_blank" rel="noreferrer">Bradesco</a> and <a href="https://mundoinvest.com.br" target="_blank" rel="noreferrer">Mundo Invest</a>. What I enjoy most is making systems faster, hunting down hard bugs, and learning new things. When something breaks, I want to understand the cause before fixing it. I like shipping fast, without giving up quality. Outside work, I follow <strong>F1 and GT3</strong>, play games, listen to a lot of music, and travel when I can.',
+    p2: 'I work <strong>AI-first</strong>: I use AI agents to write and review code and automate day-to-day work, and put my energy into architecture and technical decisions. I also study everything around it, like LLMs, agents, and MCP, to keep up with where the industry is heading.'
   },
   highlights: 'Highlights',
   highlightsList: [
@@ -38,7 +37,7 @@ export const about = {
       {
         question: 'Who is Gabriel Trzimajewski?',
         answer:
-          'Gabriel Trzimajewski is a Senior Backend Software Engineer from Blumenau, Santa Catarina, Brazil, with 5+ years building distributed systems, APIs and cloud infrastructure. He most recently worked at Bradesco on an internal log processing and observability platform used at banking scale.'
+          'Gabriel Trzimajewski is a Senior Backend Software Engineer from Blumenau, Santa Catarina, Brazil, with 5+ years building distributed systems, APIs and cloud infrastructure. He is currently at Paytrack, building the future of corporate travel management; before that he worked at Bradesco on an internal log processing and observability platform used at banking scale.'
       },
       {
         question: 'What technologies does Gabriel work with?',

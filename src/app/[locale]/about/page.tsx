@@ -98,7 +98,6 @@ export default async function About({ params }: PageProps) {
             <span dangerouslySetInnerHTML={{ __html: a.bio.p1After }} />
           </p>
           <p dangerouslySetInnerHTML={{ __html: a.bio.p2 }} />
-          <p dangerouslySetInnerHTML={{ __html: a.bio.p3 }} />
         </div>
         <div className="md:pt-2">
           <PhotoStack alt={resume.basics.name} />
