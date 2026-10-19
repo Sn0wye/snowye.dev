@@ -26,15 +26,15 @@ Glossary for snowye.dev. Terms only — no implementation details, no specs.
 
 **Signature Skills** — the ~15 terms the site presents to humans as what Gabriel is known for. The **Target Stack** is pinned to the front in its declared order; the remaining slots are earned by derived score — skill keywords ranked by how often they occur in the Résumé Source prose, weighted so recent roles and the summary count for more, ties breaking toward the more recent role.
 
-**Target Stack** — the technologies Gabriel is currently applying for roles with: Java, Spring Boot, Node.js, React, C#/.NET. Site-owned, not in the Résumé Source, because it records what he wants to be *hired for* rather than what he *did*. The two deliberately disagree: React and C#/.NET rank 38th and 23rd by frequency but lead most target job specs. Revisited when the job search changes.
+**Target Stack** — the technologies Gabriel is currently applying for roles with: Java, Spring Boot, Node.js, React. Site-owned, not in the Résumé Source, because it records what he wants to be *hired for* rather than what he *did*. The two deliberately disagree: React ranks low by frequency but leads most target job specs. Revisited when the job search changes.
 
 **Known-For Set** — the machine-readable counterpart to Signature Skills, published as JSON-LD `knowsAbout`. Not shown to humans, so it favours breadth (every keyword with real support in the prose) over the curated fifteen.
 
 **Positioning** — *Senior Backend Software Engineer*. Backend is the role being sold; full-stack work is real history and is welcome, but it is texture, never the headline. Full-stack roles are accepted, so the site must not read as backend-exclusive.
 
-**Allocation** — Gabriel was employed by K2 Partnering Solutions and allocated to Bradesco. "Where he worked" (Bradesco) and "who employed him" (K2) are distinct facts and must not be collapsed into one. The engagement ended June 2026, so both are past tense and no current employer is named anywhere on the site.
+**Allocation** — Gabriel was employed by K2 Partnering Solutions and allocated to Bradesco. "Where he worked" (Bradesco) and "who employed him" (K2) are distinct facts and must not be collapsed into one. The engagement ended July 2026, so both are past tense. Since September 2026 Gabriel is employed directly by Paytrack (hybrid, Blumenau), the current employer named on the site.
 
-**Between roles** — the current state: no active engagement, actively looking. Every "Present"/current-employer construct on the site is therefore a factual error until fixed.
+**Between roles** — no active engagement, actively looking. Was the state from July to September 2026; not the current state. While in it, every "Present"/current-employer construct on the site is a factual error.
 
 **Open Signal** — a calm "open to roles" line on the Identity Page. Derived, never hand-set: it appears when the most recent role in the Résumé Source has an end date in the past, and vanishes when a new role is added. It states openness, not urgency — "available immediately" is Evaluator voice and belongs on the CV Page.
 

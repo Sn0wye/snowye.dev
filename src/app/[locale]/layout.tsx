@@ -16,7 +16,7 @@ export const metadata = {
   metadataBase: new URL('https://snowye.dev'),
   title: 'Gabriel Trzimajewski',
   description:
-    'Gabriel Trzimajewski is a Senior Backend Software Engineer from Brazil, working with Java, Spring Boot, Node.js, React and C#/.NET across distributed systems, observability and cloud infrastructure.',
+    'Gabriel Trzimajewski is a Senior Backend Software Engineer from Brazil, working with Java, Spring Boot, Node.js and React across distributed systems, observability and cloud infrastructure.',
   creator: 'Gabriel Trzimajewski',
   alternates: {
     canonical: 'https://snowye.dev',
@@ -36,7 +36,7 @@ export const metadata = {
     type: 'profile',
     title: 'Gabriel Trzimajewski',
     description:
-      'Senior Backend Software Engineer — Java, Spring Boot, Node.js, React, C#/.NET.',
+      'Senior Backend Software Engineer — Java, Spring Boot, Node.js, React.',
     url: 'https://snowye.dev',
     images: [{ url: '/static/images/me.jpeg', width: 336, height: 336 }]
   },

@@ -28,19 +28,20 @@ basics:
     countryCode: BR
   summary: >-
     Backend-focused Software Engineer with 5+ years building distributed systems, APIs,
-    and cloud infrastructure at scale. Most recently at K2 Partnering Solutions, allocated to
+    and cloud infrastructure at scale. Currently at Paytrack, working with Java and Spring Boot on the backend and
+    React with TypeScript on the frontend. Previously at K2 Partnering Solutions, allocated to
     Bradesco on an internal observability and log-processing platform operating at banking
     scale, with audited incident-based access workflows and legacy Java 8 modernization. Before that at Mundo
     Invest, where he led a B3 stock exchange integration API handling ~100k requests/day for
     ~10k monthly active users, cut AWS costs by ~50% through a Terraform region migration
     and rightsizing, reduced incident investigation time by ~80% with Datadog SLO alerting,
     and took PostgreSQL search queries from ~8s to under 200ms. Comfortable across Java and
-    Spring Boot, TypeScript and Node.js, Go, and C#/.NET with Entity Framework Core. Strong
+    Spring Boot, TypeScript and Node.js, and Go. Strong
     on reliability engineering, observability, messaging with Kafka and gRPC, cost
     optimization, database performance tuning, financial and banking-scale systems, legacy
     modernization, and mainframe-to-web integration. Also working in applied AI at the
     application and infrastructure layer with LangChain, the AI SDK, and Claude Code
-    including Skills and MCP servers. Remote only; available immediately. Self-taught,
+    including Skills and MCP servers. Self-taught,
     systems-oriented, focused on reliability and performance.
   profiles:
     - network: LinkedIn
@@ -51,12 +52,41 @@ basics:
       url: https://github.com/Sn0wye
 
 work:
+  - name: Paytrack
+    position: Senior Software Engineer
+    location: Hybrid, Blumenau, Brazil
+    url: https://paytrack.com.br
+    startDate: '2026-09'
+    keywords:
+      - Java
+      - TypeScript
+      - Spring Boot
+      - Node.js
+      - React
+      - PostgreSQL
+      - Kafka
+      - Observability
+      - Incident Investigation
+    summary: >-
+      Backend engineer working with Java and Spring Boot, contributing to the frontend with
+      React and TypeScript.
+
   - name: Bradesco
     position: Senior Software Engineer
     location: Remote, Brazil
     url: https://banco.bradesco
     startDate: '2025-04'
-    endDate: '2026-06'
+    endDate: '2026-07'
+    keywords:
+      - Java
+      - Java 8
+      - Spring Boot
+      - Node.js
+      - PostgreSQL
+      - Observability
+      - Monitoring
+      - Incident Investigation
+      - Auditing
     summary: >-
       Allocated to Bradesco via K2 Partnering Solutions as a backend engineer on the Open Platform team, working on an
       existing internal log processing and observability platform used at banking scale for
@@ -79,6 +109,40 @@ work:
     location: Remote, Brazil
     startDate: '2024-02'
     endDate: '2025-03'
+    keywords:
+      - Java
+      - TypeScript
+      - Go
+      - Spring Boot
+      - Node.js
+      - NestJS
+      - Express
+      - REST
+      - gRPC
+      - Webhooks
+      - OpenAPI
+      - Swagger
+      - 'Backend for Frontend (BFF)'
+      - Microservices
+      - PostgreSQL
+      - pg_trgm
+      - MongoDB
+      - Kafka
+      - AWS
+      - Terraform
+      - Docker
+      - GitHub Actions
+      - CI/CD
+      - Rightsizing
+      - Datadog
+      - Observability
+      - SLO
+      - Alerting
+      - Incident Investigation
+      - JUnit
+      - Test Coverage
+      - Stock Exchange Integration
+      - B3
     summary: >-
       Distributed microservices for a Brazilian investment platform, including a B3 stock
       exchange integration API, AWS infrastructure, and observability.
@@ -98,31 +162,25 @@ work:
       - Led refactorings that improved cohesion and reduced coupling across services, alongside code performance improvements.
       - Worked with PostgreSQL and MongoDB as primary data stores across services.
 
-  - name: Avalie Mais
-    position: Full Stack Engineer
-    location: Remote, Brazil
-    startDate: '2021-12'
-    endDate: '2024-02'
-    summary: >-
-      Anonymous retail survey platform with strict data-anonymization and privacy-compliance
-      requirements.
-    highlights:
-      - Developed and managed an anonymous retail survey application that produced strategic insights, improving decision-making on store installations and organizational structure.
-      - Designed and implemented a secure architecture guaranteeing complete data anonymization and full compliance with privacy regulations.
-      - Built a highly optimized system that maintained zero performance issues despite continuously increasing user demand.
-      - Delivered backend services with PHP 7 and Laravel, covered by PHPUnit tests.
-      - Built the web frontend with React 17 and Tailwind CSS.
-      - Modeled and tuned the MySQL schema backing survey collection and reporting.
-
   - name: Mercante
     position: Full Stack Engineer
     location: Remote, Brazil
     url: https://mercante.com.py
     startDate: '2021-07'
-    endDate: '2023-06'
+    endDate: '2024-02'
+    keywords:
+      - TypeScript
+      - Node.js
+      - NestJS
+      - React
+      - SEO
+      - PostgreSQL
+      - VPS
+      - Observability
+      - E-commerce
     summary: >-
-      Part-time contract engineering for Mercante, a Paraguay-based digital agency, overlapping
-      with the Avalie Mais role. E-commerce platforms and self-hosted infrastructure for SMBs
+      Part-time contract engineering for Mercante, a Paraguay-based digital agency.
+      E-commerce platforms and self-hosted infrastructure for SMBs
       in Brazil and Paraguay, several of which are still in production today.
     highlights:
       - Designed and delivered e-commerce platforms for 10+ small and medium businesses across Brazil and Paraguay through Mercante, achieving an average 30% increase in client sales after launch.
@@ -160,8 +218,6 @@ skills:
       - TypeScript
       - JavaScript
       - Go
-      - 'C#'
-      - PHP
       - SQL
       - Bash
   - name: Backend and Frameworks
@@ -170,9 +226,6 @@ skills:
       - Node.js
       - NestJS
       - Express
-      - .NET
-      - Entity Framework Core
-      - Laravel
       - REST
       - gRPC
       - protobuf
@@ -199,7 +252,6 @@ skills:
     keywords:
       - PostgreSQL
       - pg_trgm
-      - MySQL
       - Oracle
       - MongoDB
       - Redis
@@ -208,7 +260,6 @@ skills:
       - Query Optimization
       - Database Performance Tuning
       - Data Modeling
-      - Code-First Migrations
   - name: Cloud and Infrastructure
     keywords:
       - AWS
@@ -241,13 +292,11 @@ skills:
       - Site Reliability Engineering
       - Performance Tuning
       - Auditing
-      - Compliance
   - name: Testing and Quality
     keywords:
       - JUnit
       - Mockito
       - Jest
-      - PHPUnit
       - Unit Testing
       - Integration Testing
       - Test Coverage
@@ -274,8 +323,6 @@ skills:
       - Observability Platforms
       - Legacy Modernization
       - Mainframe Integration
-      - Data Anonymization
-      - Privacy Compliance
   - name: Ways of Working
     keywords:
       - Git

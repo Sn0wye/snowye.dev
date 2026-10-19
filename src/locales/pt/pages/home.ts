@@ -1,9 +1,9 @@
 export const home = {
   title: 'Gabriel Trzimajewski',
-  meta: 'Engenheiro de Software Backend Sênior. Anteriormente no <a href="https://banco.bradesco" target="_blank" rel="noreferrer">Bradesco</a>.',
+  meta: 'Engenheiro de Software Backend Sênior na <a href="https://paytrack.com.br" target="_blank" rel="noreferrer">Paytrack</a>.',
   description: 'Construindo software que escala.',
   metaDescription:
-    'Gabriel Trzimajewski é Engenheiro de Software Backend Sênior brasileiro, construindo sistemas distribuídos, APIs e infraestrutura em nuvem com Java, Spring Boot, Node.js e C#/.NET.',
+    'Gabriel Trzimajewski é Engenheiro de Software Backend Sênior brasileiro, construindo sistemas distribuídos, APIs e infraestrutura em nuvem com Java, Spring Boot e Node.js.',
   detailsLabel: 'Mais sobre meu trabalho',
   openSignal: 'Aberto a novas oportunidades',
   pronounce: 'Ouça como se fala meu nome',
@@ -31,7 +31,7 @@ export const home = {
   sections: [
     {
       title: 'Engenharia de backend para sistemas reais',
-      body: 'Minha stack principal inclui Java e Spring Boot, Node.js e TypeScript, além de C#/.NET. Uso essas ferramentas para construir APIs, serviços orientados a eventos, integrações e infraestrutura em nuvem onde correção e operação importam. Priorizo limites claros entre serviços, testes úteis, tratamento previsível de falhas e telemetria que ajuda equipes a entender o comportamento em produção sem depender de suposições.'
+      body: 'Minha stack principal inclui Java e Spring Boot, além de Node.js e TypeScript. Uso essas ferramentas para construir APIs, serviços orientados a eventos, integrações e infraestrutura em nuvem onde correção e operação importam. Priorizo limites claros entre serviços, testes úteis, tratamento previsível de falhas e telemetria que ajuda equipes a entender o comportamento em produção sem depender de suposições.'
     },
     {
       title: 'Como trabalho com entrega de software',

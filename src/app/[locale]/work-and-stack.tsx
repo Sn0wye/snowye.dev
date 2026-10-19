@@ -18,6 +18,8 @@ type WorkAndStackProps = {
   skills: string[];
   pinnedSkills: number;
   usage: Record<string, string[]>;
+  /** `YYYY-MM`; where an ongoing role's bar ends. */
+  currentMonth: string;
   copy: {
     work: string;
     stack: string;
@@ -25,6 +27,7 @@ type WorkAndStackProps = {
     hint: string;
     usedAt: string;
     unused: string;
+    present: string;
   };
 };
 
@@ -42,6 +45,7 @@ export function WorkAndStack({
   skills,
   pinnedSkills,
   usage,
+  currentMonth,
   copy
 }: WorkAndStackProps) {
   const locale = useAppLocale();
@@ -55,7 +59,7 @@ export function WorkAndStack({
   const spans = roles.map(role => ({
     ...role,
     from: monthIndex(role.startDate),
-    to: monthIndex(role.endDate ?? role.startDate)
+    to: monthIndex(role.endDate ?? currentMonth)
   }));
   const first = Math.min(...spans.map(s => s.from));
   const last = Math.max(...spans.map(s => s.to));
@@ -188,7 +192,8 @@ export function WorkAndStack({
                 )}
               >
                 <span className="text-[13px] tabular-nums leading-[1.9] text-secondary/60">
-                  {span.startDate.slice(0, 4)} – {span.endDate?.slice(0, 4)}
+                  {span.startDate.slice(0, 4)} –{' '}
+                  {span.endDate?.slice(0, 4) ?? copy.present}
                 </span>
                 <span>
                   <span className="block text-primary">{span.company}</span>

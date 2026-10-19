@@ -17,7 +17,7 @@ export const about = {
     p1After:
       '! Sou um cara autodidata que vive, ama e aprende, escuta muita música, ama programar, viajar e tocar piano. Sempre fui apaixonado por computadores desde criança, e descobri a beleza do JavaScript na <strong><a href="https://rocketseat.com.br" target="_blank" rel="noreferrer">Rocketseat</a></strong> no início de 2020.',
     p2: 'Mais recentemente fui <strong>Engenheiro de Software Sênior</strong> no <a href="https://banco.bradesco" target="_blank" rel="noreferrer">Bradesco</a>, no time Open, construindo uma plataforma interna de processamento de logs e observabilidade usada em <strong>escala bancária</strong> para investigação de incidentes e monitoramento de sistemas. Sou Brasileiro com muito orgulho e fã de carteirinha do <strong>twenty one pilots</strong>.',
-    p3: 'Sou um <strong>engenheiro focado em backend</strong> com mais de 4 anos entregando <strong>sistemas distribuídos</strong>, APIs e infraestrutura na nuvem. Me importo com <strong>confiabilidade</strong>, <strong>performance</strong> e escrever código que seja gostoso de manter às 3 da manhã quando algo pega fogo. Antes do Bradesco, passei mais de um ano na <strong>Mundo Invest</strong> liderando uma integração com a B3 que processava <strong>~100 mil requisições/dia</strong>, onde reduzi custos de nuvem em <strong>~50%</strong> e derrubei uma query crítica de <strong>~8s para menos de 200ms</strong>.'
+    p3: 'Sou um <strong>engenheiro focado em backend</strong> com mais de 5 anos entregando <strong>sistemas distribuídos</strong>, APIs e infraestrutura na nuvem. Me importo com <strong>confiabilidade</strong>, <strong>performance</strong> e escrever código que seja gostoso de manter às 3 da manhã quando algo pega fogo. Antes do Bradesco, passei mais de um ano na <strong>Mundo Invest</strong> liderando uma integração com a B3 que processava <strong>~100 mil requisições/dia</strong>, onde reduzi custos de nuvem em <strong>~50%</strong> e derrubei uma query crítica de <strong>~8s para menos de 200ms</strong>.'
   },
   highlights: 'Destaques',
   highlightsList: [
@@ -43,16 +43,11 @@ export const about = {
       {
         question: 'Com quais tecnologias o Gabriel trabalha?',
         answer:
-          'Principalmente Java e Spring Boot, Node.js e TypeScript, C#/.NET e React no frontend. Na infraestrutura: AWS, Terraform, Docker, Kafka, gRPC, PostgreSQL e Datadog para observabilidade e alertas baseados em SLO.'
+          'Principalmente Java e Spring Boot, Node.js e TypeScript, e React no frontend. Na infraestrutura: AWS, Terraform, Docker, Kafka, gRPC, PostgreSQL e Datadog para observabilidade e alertas baseados em SLO.'
       },
       {
         question: 'Como se pronuncia Trzimajewski?',
         answer: 'Aproximadamente "tri-ma-jés-ki" (IPA: tɾi maˈʒɛs.ki).'
-      },
-      {
-        question: 'O Gabriel está disponível para trabalhar?',
-        answer:
-          'Sim — está aberto a vagas sênior de backend e fullstack, remotas ou no Brasil. O contato mais rápido é a página snowye.dev/pt/contact ou o e-mail gabriel@snowye.dev.'
       },
       {
         question: 'O que o Gabriel já entregou na prática?',
