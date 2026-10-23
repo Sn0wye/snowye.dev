@@ -61,7 +61,7 @@ export const projects: Projects = [
       {
         id: 'c3db7b4b-6efa-4bb9-8028-28ee3cafe3a7',
         title: 'Topdek Informática',
-        url: 'https://topdek.com.br/',
+        url: 'https://www.topdekinformatica.com.br/',
         description: 'Informatics store.',
         iconName: 'store',
         featured: false
@@ -80,14 +80,6 @@ export const projects: Projects = [
     year: 2022,
     projects: [
       {
-        id: '1',
-        title: 'Personal Portfolio',
-        url: 'https://github.com/Sn0wye/snowye.dev',
-        description: "This portfolio. It's open souce!",
-        iconName: 'book',
-        featured: true
-      },
-      {
         id: '33117c18-5dc0-4ab4-a717-d36f4661904d',
         title: 'Smart Store',
         url: 'https://smartstore.com.py/',
@@ -102,6 +94,15 @@ export const projects: Projects = [
         url: 'https://flashimportados.com/',
         description:
           'Store specialized in sweets, various foods, beverages, and cosmetics.',
+        iconName: 'store',
+        featured: false
+      },
+      {
+        id: '7cd1cb16-4f40-4360-b4fd-168b174b7f6e',
+        title: 'Nitecore Outdoor',
+        url: 'https://nitecoreoutdoor.com.py/category/edc-everday-carry-series',
+        description:
+          'Official Nitecore distributor: flashlights and outdoor gear.',
         iconName: 'store',
         featured: false
       }
@@ -144,8 +145,16 @@ export const projects: Projects = [
       {
         id: 'b65eb1bb-2a18-4d50-a967-4676ff809710',
         title: 'Jack Center',
-        url: 'https://jackcenter.com.br/',
+        url: 'https://farmaciajackcenter.com.py/',
         description: 'Supplements store.',
+        iconName: 'store',
+        featured: false
+      },
+      {
+        id: 'ca1f1c6a-ede8-4921-a3d4-d7ff5cd48ba0',
+        title: 'Visão VIP',
+        url: 'https://www.visaovip.com/',
+        description: 'Informatics store.',
         iconName: 'store',
         featured: false
       }
@@ -155,10 +164,19 @@ export const projects: Projects = [
     year: 2020,
     projects: [
       {
-        id: '3',
-        title: 'Coffee Delivery',
-        url: 'https://coffee-delivery-pied.vercel.app/',
-        description: "One of the first applications I've done.",
+        id: '9d6af6d0-7bd6-44eb-adf8-68afa586d0d4',
+        title: 'Sunflex Sport',
+        url: 'https://sunflexsport.com/',
+        description: 'Fishing articles store.',
+        iconName: 'store',
+        featured: false
+      },
+      {
+        id: '9a50806a-5795-48b8-8a31-b5e54df99e2f',
+        title: 'Maruri Fishing',
+        url: 'https://marurifishing.com.py/',
+        description: 'Fishing equipment store.',
+        iconName: 'store',
         featured: false
       }
     ]
