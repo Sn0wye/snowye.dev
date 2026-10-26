@@ -90,7 +90,7 @@ export default async function Projects({ params }: PageProps) {
               title={project.title}
               note={String(project.year)}
               url={project.url}
-              description={project.description}
+              description={project.description?.[locale]}
               iconName={project.iconName}
             />
           ))}
@@ -100,7 +100,8 @@ export default async function Projects({ params }: PageProps) {
               title={craft.title}
               note={`${copy.craft}, ${craft.year}`}
               url={craft.url}
-              description={craft.description}
+              description={craft.description?.[locale]}
+              iconName={craft.iconName}
             />
           ))}
           <YearsTile
@@ -130,7 +131,7 @@ export default async function Projects({ params }: PageProps) {
                     </span>
                     <span className="text-primary">{project.title}</span>
                     <span className="col-start-2 sm:col-start-auto">
-                      {project.description}
+                      {project.description?.[locale]}
                     </span>
                   </a>
                 </li>

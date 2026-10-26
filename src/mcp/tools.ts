@@ -31,15 +31,15 @@ const localeArg = (args: Record<string, unknown>): AppLocale => {
     : 'en';
 };
 
+const localeProperty: JsonSchema = {
+  type: 'string',
+  enum: [...routing.locales],
+  description: 'Language of the answer. Defaults to "en".'
+};
+
 const localeSchema: JsonSchema = {
   type: 'object',
-  properties: {
-    locale: {
-      type: 'string',
-      enum: [...routing.locales],
-      description: 'Language of the answer. Defaults to "en".'
-    }
-  },
+  properties: { locale: localeProperty },
   additionalProperties: false
 };
 
@@ -118,6 +118,7 @@ export const tools: Tool[] = [
     inputSchema: {
       type: 'object',
       properties: {
+        locale: localeProperty,
         featuredOnly: {
           type: 'boolean',
           description: 'Return only the featured projects. Defaults to false.'
@@ -125,15 +126,20 @@ export const tools: Tool[] = [
       },
       additionalProperties: false
     },
-    run: args =>
-      projects
+    run: args => {
+      const locale = localeArg(args);
+      return projects
         .map(group => ({
           year: group.year,
           projects: group.projects
             .filter(project => (args.featuredOnly ? project.featured : true))
-            .map(({ id: _id, iconName: _icon, ...project }) => project)
+            .map(({ id: _id, iconName: _icon, description, ...project }) => ({
+              ...project,
+              description: description?.[locale]
+            }))
         }))
-        .filter(group => group.projects.length > 0)
+        .filter(group => group.projects.length > 0);
+    }
   },
   {
     name: 'search_resume',
