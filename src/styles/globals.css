@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-primary: #f2f2f2;
@@ -170,16 +170,16 @@
    or layout. The header, name and underline are named, so they are lifted
    out of the root and move on their own (below). */
 html:active-view-transition-type(nav-forward, nav-back)::view-transition-old(
-  root
-) {
+    root
+  ) {
   animation:
     var(--vt-exit) ease-in both vt-fade reverse,
     var(--vt-move) var(--ease-out) both vt-slide reverse;
 }
 
 html:active-view-transition-type(nav-forward, nav-back)::view-transition-new(
-  root
-) {
+    root
+  ) {
   animation:
     var(--vt-enter) ease-out var(--vt-exit) both vt-fade,
     var(--vt-move) var(--ease-out) both vt-slide;
@@ -289,32 +289,32 @@ html:active-view-transition-type(enter-home)::view-transition-new(.morph) {
 /* Between inner pages the name does not move, so it holds perfectly still
    with the header instead of blurring and crossfading in place. */
 html:not(
-  :active-view-transition-type(leave-home, enter-home)
-)::view-transition-group(site-name-0),
+    :active-view-transition-type(leave-home, enter-home)
+  )::view-transition-group(site-name-0),
 html:not(
-  :active-view-transition-type(leave-home, enter-home)
-)::view-transition-group(site-name-1),
+    :active-view-transition-type(leave-home, enter-home)
+  )::view-transition-group(site-name-1),
 html:not(
-  :active-view-transition-type(leave-home, enter-home)
-)::view-transition-image-pair(site-name-0),
+    :active-view-transition-type(leave-home, enter-home)
+  )::view-transition-image-pair(site-name-0),
 html:not(
-  :active-view-transition-type(leave-home, enter-home)
-)::view-transition-image-pair(site-name-1),
+    :active-view-transition-type(leave-home, enter-home)
+  )::view-transition-image-pair(site-name-1),
 html:not(
-  :active-view-transition-type(leave-home, enter-home)
-)::view-transition-new(site-name-0),
+    :active-view-transition-type(leave-home, enter-home)
+  )::view-transition-new(site-name-0),
 html:not(
-  :active-view-transition-type(leave-home, enter-home)
-)::view-transition-new(site-name-1) {
+    :active-view-transition-type(leave-home, enter-home)
+  )::view-transition-new(site-name-1) {
   animation: none;
 }
 
 html:not(
-  :active-view-transition-type(leave-home, enter-home)
-)::view-transition-old(site-name-0),
+    :active-view-transition-type(leave-home, enter-home)
+  )::view-transition-old(site-name-0),
 html:not(
-  :active-view-transition-type(leave-home, enter-home)
-)::view-transition-old(site-name-1) {
+    :active-view-transition-type(leave-home, enter-home)
+  )::view-transition-old(site-name-1) {
   display: none;
 }
 
@@ -347,19 +347,19 @@ html:not(
    shrinks away first and "Trzimajewski" follows; coming home the order
    flips. Longhand after the shorthands above, so only the delay changes. */
 html:active-view-transition-type(leave-home)::view-transition-group(
-  site-name-1
-),
+    site-name-1
+  ),
 html:active-view-transition-type(leave-home)::view-transition-image-pair(
-  site-name-1
-),
+    site-name-1
+  ),
 html:active-view-transition-type(leave-home)::view-transition-old(site-name-1),
 html:active-view-transition-type(leave-home)::view-transition-new(site-name-1),
 html:active-view-transition-type(enter-home)::view-transition-group(
-  site-name-0
-),
+    site-name-0
+  ),
 html:active-view-transition-type(enter-home)::view-transition-image-pair(
-  site-name-0
-),
+    site-name-0
+  ),
 html:active-view-transition-type(enter-home)::view-transition-old(site-name-0),
 html:active-view-transition-type(enter-home)::view-transition-new(site-name-0) {
   animation-delay: 80ms;

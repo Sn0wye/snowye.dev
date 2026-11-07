@@ -1,4 +1,5 @@
 import { headers } from 'next/headers';
+
 import { NotFoundView } from '@/components/shell/not-found-view';
 import { getMessages } from '@/i18n/messages';
 

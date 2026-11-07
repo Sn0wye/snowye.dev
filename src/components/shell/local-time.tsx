@@ -1,8 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+
 import { useAppLocale } from '@/i18n/use-t';
 import { interpolate } from '@/utils/interpolate';
+
 import { RollingText } from './rolling-text';
 
 const HOME_ZONE = 'America/Sao_Paulo';

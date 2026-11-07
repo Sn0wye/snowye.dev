@@ -1,8 +1,10 @@
 import { Fragment, ViewTransition } from 'react';
+
 import { Link } from '@/i18n/navigation';
 import { getT } from '@/i18n/server-t';
 import { cn } from '@/lib/cn';
 import { directionTo } from '@/lib/motion';
+
 import { LocaleToggle } from './locale-toggle';
 import { ShortcutButton } from './shortcut-button';
 

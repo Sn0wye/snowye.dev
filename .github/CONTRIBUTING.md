@@ -42,14 +42,14 @@ bun install
 
 Here are some useful scripts for when you are developing:
 
-| Command               | Description                                 |
-| --------------------- | ------------------------------------------- |
-| `bun run dev`         | Builds and starts the project in watch-mode |
-| `bun run build`       | Builds the project                          |
-| `bun run typecheck`   | Type checks the project                     |
-| `bun run format`      | Formats the code                            |
-| `bun run check`       | Lints and formats the code                  |
-| `bun run check:fix`   | Lints the code and fixes any errors         |
+| Command         | Description                                 |
+| --------------- | ------------------------------------------- |
+| `bun run dev`   | Builds and starts the project in watch-mode |
+| `bun run build` | Builds the project                          |
+| `bun check`     | Type checks the project                     |
+| `bun lint`      | Lints the code (`--fix` to apply fixes)     |
+| `bun fmt`       | Formats the code (`--check` to only check)  |
+| `bun run test`  | Builds the project and runs the tests       |
 
 When making commits, make sure to follow the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) guidelines, i.e. prepending the message with `feat:`, `fix:`, `chore:`, `docs:`, etc... You can use `git status` to double check which files have not yet been staged for commit:
 

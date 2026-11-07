@@ -1,8 +1,9 @@
 import { Analytics } from '@vercel/analytics/react';
 import type { Metadata, Viewport } from 'next';
-import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
+import { notFound } from 'next/navigation';
+
 import { CommandPalette } from '@/components/command-palette-loader';
 import { PersonJsonLd } from '@/components/person-json-ld';
 import { FirstLoadMarker } from '@/components/shell/use-first-load';

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+
 import { useCommandPalette } from '@/components/command-palette-store';
 import { cn } from '@/lib/cn';
 

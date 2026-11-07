@@ -8,8 +8,12 @@ on:
   merge_group:
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
-  lint-type-check:
+  ci:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,11 +28,20 @@ jobs:
       - name: Install deps
         run: bun install --frozen-lockfile
 
+      - name: Format
+        run: bun fmt --check
+
       - name: Lint
-        run: bun run check
+        run: bun lint
 
       - name: Type check
-        run: bun run typecheck
+        run: bun check
+
+      - name: Audit
+        run: bun audit --audit-level=high
+
+      - name: Build
+        run: bun run build
 
       - name: Agent readiness integration tests
-        run: bun run test
+        run: bun test tests

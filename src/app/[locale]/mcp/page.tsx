@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
+
 import { CodeBlock } from '@/components/shell/code-block';
 import { PageShell } from '@/components/shell/page-shell';
 import { richText, Section } from '@/components/shell/section';

@@ -1,5 +1,7 @@
 import type { CSSProperties } from 'react';
+
 import { SocialIcon } from '@/components/social-icons';
+
 import { SOCIAL_LINKS } from './social-links';
 
 type Destination = { label: string; href: string };

@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
+
 import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
 import { stripHtml } from '@/utils/stripHtml';
+
 import { CraftIndex } from './craft-index';
 
 export function generateStaticParams() {

@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
+import { notFound } from 'next/navigation';
+
 import { type AppLocale, routing } from '@/i18n/routing';
 import { findMoment, findProject, moments } from '@/motion/registry';
+
 import { CraftIndex } from '../craft-index';
 
 export function generateStaticParams() {

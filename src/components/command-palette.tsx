@@ -16,13 +16,14 @@ import React, {
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 
 import type { LottieComponentProps, LottieRefCurrentProps } from 'lottie-react';
-
 import { useHotkeys } from 'react-hotkeys-hook';
+
 import { usePathname, useRouter } from '@/i18n/navigation';
 import type { AppLocale } from '@/i18n/routing';
 import { useAppLocale, useT } from '@/i18n/use-t';
 import { cn } from '@/lib/cn';
 import { directionTo, ease, spring } from '@/lib/motion';
+
 import aboutIcon from '../../public/static/icons/about.json';
 import craftIcon from '../../public/static/icons/bolt.json';
 import copyLinkIcon from '../../public/static/icons/copy-link.json';
@@ -32,12 +33,12 @@ import mcpIcon from '../../public/static/icons/mcp.json';
 import projectsIcon from '../../public/static/icons/projects.json';
 import sourceIcon from '../../public/static/icons/source.json';
 import {
+  Command as CommandRoot,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-  CommandList,
-  Command as CommandRoot
+  CommandList
 } from './command';
 import { useCommandPalette } from './command-palette-store';
 import { SocialIcon } from './social-icons';

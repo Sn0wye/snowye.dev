@@ -1,7 +1,7 @@
 import {
-  type SwiftSpring,
   settleTime,
   springValue,
+  type SwiftSpring,
   swiftSpring
 } from '@/lib/swift-spring';
 
@@ -26,11 +26,7 @@ const ranks = swiftSpring(0.25, 0.85);
 const thumb = swiftSpring(0.3, 1);
 
 export type Heading =
-  | 'transportation'
-  | 'food'
-  | 'utilities'
-  | 'entertainment'
-  | 'uncategorized';
+  'transportation' | 'food' | 'utilities' | 'entertainment' | 'uncategorized';
 
 /** Category heading order, which breaks ties. */
 const HEADINGS: Heading[] = [

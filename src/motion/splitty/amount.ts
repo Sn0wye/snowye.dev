@@ -1,4 +1,5 @@
 import { settleTime, springValue } from '@/lib/swift-spring';
+
 import { easeOut, springs } from './timelines';
 
 /**
@@ -20,18 +21,7 @@ export const APP_SIZE = 76;
 
 /** A key on the pad, as the review gallery's keypad names them. */
 export type Key =
-  | '1'
-  | '2'
-  | '3'
-  | '4'
-  | '5'
-  | '6'
-  | '7'
-  | '8'
-  | '9'
-  | '.'
-  | '0'
-  | 'del';
+  '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '.' | '0' | 'del';
 
 /**
  * One touch on the pad. `text` is what the amount reads after it lands,

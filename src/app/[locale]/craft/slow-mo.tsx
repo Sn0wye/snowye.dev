@@ -1,6 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'motion/react';
+
 import { Kbd } from '@/components/kbd';
 import { cn } from '@/lib/cn';
 import { useTimeScale } from '@/lib/time-scale';

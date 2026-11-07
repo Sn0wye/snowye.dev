@@ -1,5 +1,6 @@
 import { translation as en } from '@/locales/en';
 import { translation as pt } from '@/locales/pt';
+
 import type { AppLocale } from './routing';
 
 // Both locales share the EN shape — TS will enforce the PT bundle matches it.

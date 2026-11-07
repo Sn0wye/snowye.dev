@@ -2,6 +2,7 @@
 
 import { Check, Copy } from 'lucide-react';
 import { useState } from 'react';
+
 import { cn } from '@/lib/cn';
 
 /** A code sample with a copy button in its corner. */

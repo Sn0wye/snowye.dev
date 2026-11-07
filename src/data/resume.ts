@@ -1,8 +1,10 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+
 import { notFound } from 'next/navigation';
 import { parse } from 'yaml';
 import { z } from 'zod';
+
 import type { AppLocale } from '@/i18n/routing';
 
 /**

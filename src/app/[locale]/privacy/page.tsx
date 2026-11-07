@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
+
 import { PageShell } from '@/components/shell/page-shell';
 import { Section } from '@/components/shell/section';
 import { WebPageJsonLd } from '@/components/web-page-json-ld';
