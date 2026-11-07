@@ -13,6 +13,7 @@ import {
 import { cn } from '@/lib/cn';
 import { spring } from '@/lib/motion';
 import { useTimeScale } from '@/lib/time-scale';
+import { type ListasKind, listasScenes } from '@/motion/listas/moments';
 import type { LiveKind, Recording } from '@/motion/registry';
 import { duration as amountDuration } from '@/motion/splitty/amount';
 import { duration as chartsDuration } from '@/motion/splitty/charts';
@@ -27,6 +28,7 @@ import { type Clock, useClock, useRefreshRate } from './clock';
 import { LiveAmount } from './live-amount';
 import { LiveCharts } from './live-charts';
 import { LiveCoin } from './live-coin';
+import { LiveListas } from './live-listas';
 
 const coinTimelines: Partial<Record<LiveKind, () => CoinTimeline>> = {
   'settled-coin': settledCoin,
@@ -34,10 +36,18 @@ const coinTimelines: Partial<Record<LiveKind, () => CoinTimeline>> = {
   loader
 };
 
+const isListas = (kind: LiveKind): kind is ListasKind => kind in listasScenes;
+
+const listasDurations = Object.fromEntries(
+  Object.entries(listasScenes).map(([kind, scene]) => [kind, scene().duration])
+) as Record<ListasKind, number>;
+
 const durationOf = (kind: LiveKind) =>
-  kind === 'charts'
-    ? chartsDuration
-    : (coinTimelines[kind]?.().duration ?? amountDuration);
+  isListas(kind)
+    ? listasDurations[kind]
+    : kind === 'charts'
+      ? chartsDuration
+      : (coinTimelines[kind]?.().duration ?? amountDuration);
 
 /** The app's background in dark appearance. */
 const APP_BACKGROUND = '#09090b';
@@ -106,6 +116,7 @@ function LiveView({
     onClockRef.current?.(clock);
   });
 
+  if (isListas(kind)) return <LiveListas kind={kind} onDraw={register} />;
   if (kind === 'amount') return <LiveAmount onDraw={register} />;
   if (kind === 'charts') return <LiveCharts onDraw={register} />;
   if (!coin) return null;
