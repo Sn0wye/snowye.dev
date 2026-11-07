@@ -382,3 +382,37 @@ html:active-view-transition-type(enter-home)::view-transition-new(site-name-0) {
     --vt-offset: 0px;
   }
 }
+
+/* The craft stage's scrubber: a hairline track with a small round thumb. */
+@utility scrubber {
+  appearance: none;
+  height: 16px;
+  background: transparent;
+  cursor: pointer;
+
+  &::-webkit-slider-runnable-track {
+    height: 2px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.12);
+  }
+  &::-moz-range-track {
+    height: 2px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.12);
+  }
+  &::-webkit-slider-thumb {
+    appearance: none;
+    margin-top: -5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    background: var(--color-primary);
+  }
+  &::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--color-primary);
+  }
+}

@@ -24,6 +24,7 @@ import { useAppLocale, useT } from '@/i18n/use-t';
 import { cn } from '@/lib/cn';
 import { directionTo, ease, spring } from '@/lib/motion';
 import aboutIcon from '../../public/static/icons/about.json';
+import craftIcon from '../../public/static/icons/bolt.json';
 import copyLinkIcon from '../../public/static/icons/copy-link.json';
 import emailIcon from '../../public/static/icons/email.json';
 import homeIcon from '../../public/static/icons/home.json';
@@ -108,6 +109,7 @@ export function CommandPalette() {
   useHotkeys('g+h', () => navigate('/'), { preventDefault: true });
   useHotkeys('g+a', () => navigate('/about'), { preventDefault: true });
   useHotkeys('g+p', () => navigate('/projects'), { preventDefault: true });
+  useHotkeys('g+c', () => navigate('/craft'), { preventDefault: true });
   useHotkeys('g+m', () => navigate('/mcp'), { preventDefault: true });
   useHotkeys(
     'u',
@@ -325,6 +327,7 @@ function Home({ navigate, switchLocale, currentLocale, onClose }: HomeProps) {
   const homeRef = useRef<LottieRefCurrentProps>(null);
   const aboutRef = useRef<LottieRefCurrentProps>(null);
   const projectsRef = useRef<LottieRefCurrentProps>(null);
+  const craftRef = useRef<LottieRefCurrentProps>(null);
   const mcpRef = useRef<LottieRefCurrentProps>(null);
 
   const iconStyle = { width: 20, height: 20 };
@@ -375,6 +378,19 @@ function Home({ navigate, switchLocale, currentLocale, onClose }: HomeProps) {
           onSelect={() => navigate('/projects')}
         >
           {k.actions.projects}
+        </Item>
+        <Item
+          icon={
+            <Lottie
+              lottieRef={craftRef}
+              animationData={craftIcon}
+              {...baseIconProps}
+            />
+          }
+          shortcut="G C"
+          onSelect={() => navigate('/craft')}
+        >
+          {k.actions.craft}
         </Item>
         <Item
           icon={

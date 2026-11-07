@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { notFound } from 'next/navigation';
 import { parse } from 'yaml';
 import { z } from 'zod';
 import type { AppLocale } from '@/i18n/routing';
@@ -108,6 +109,10 @@ const cache = new Map<AppLocale, Resume>();
 export const getResume = (locale: AppLocale): Resume => {
   const cached = cache.get(locale);
   if (cached) return cached;
+
+  // Pages render in parallel with the [locale] layout's hasLocale check, so a
+  // stray /favicon.ico (skipped by the proxy matcher) reaches here as a locale.
+  if (!Object.hasOwn(SOURCE_BY_LOCALE, locale)) notFound();
 
   const path = join(
     process.cwd(),

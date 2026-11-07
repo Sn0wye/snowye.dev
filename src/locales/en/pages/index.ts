@@ -1,5 +1,6 @@
 import { about } from './about';
 import { contact } from './contact';
+import { craft } from './craft';
 import { cv } from './cv';
 import { home } from './home';
 import { mcp } from './mcp';
@@ -12,6 +13,7 @@ export const pages = {
   about,
   cv,
   projects,
+  craft,
   contact,
   mcp,
   privacy,

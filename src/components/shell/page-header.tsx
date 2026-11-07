@@ -12,6 +12,7 @@ export async function PageHeader({ current }: { current: string }) {
   const pages = [
     { label: t.common.navbar.about, href: '/about' },
     { label: t.common.navbar.projects, href: '/projects' },
+    { label: t.common.navbar.craft, href: '/craft' },
     { label: 'CV', href: '/cv' },
     { label: t.common.navbar.mcp, href: '/mcp' },
     { label: t.common.navbar.contact, href: '/contact' }
@@ -47,7 +48,9 @@ export async function PageHeader({ current }: { current: string }) {
           ))}
         </Link>
         {pages.map(page => {
-          const isCurrent = page.href === current;
+          // A craft detail page still belongs to Craft.
+          const isCurrent =
+            page.href === current || current.startsWith(`${page.href}/`);
           return (
             <Link
               key={page.href}
