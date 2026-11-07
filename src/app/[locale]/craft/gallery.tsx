@@ -4,6 +4,7 @@ import { ArrowUpRight, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { AnimatePresence, LayoutGroup, motion } from 'motion/react';
 import { usePathname } from 'next/navigation';
 import { useCallback, useEffect } from 'react';
+
 import type { AppLocale } from '@/i18n/routing';
 import type { Moment, Project } from '@/motion/registry';
 import { MomentStage, MomentTile, type StageCopy } from '@/motion/stage/stage';

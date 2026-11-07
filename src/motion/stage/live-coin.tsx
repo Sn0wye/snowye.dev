@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+
 import type { CoinTimeline } from '@/motion/splitty/timelines';
 
 const CORAL = [0xf2, 0x54, 0x2d];

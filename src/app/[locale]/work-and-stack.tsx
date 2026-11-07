@@ -1,6 +1,7 @@
 'use client';
 
 import { type PointerEvent, useRef, useState } from 'react';
+
 import { RollingText, SwapText } from '@/components/shell/rolling-text';
 import { useAppLocale } from '@/i18n/use-t';
 import { cn } from '@/lib/cn';

@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react';
+
 import { Link } from '@/i18n/navigation';
 import { getT } from '@/i18n/server-t';
+
 import { PageHeader } from './page-header';
 import { SocialLinks } from './social-links';
 import { TypedLine } from './typed-line';

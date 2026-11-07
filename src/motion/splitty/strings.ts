@@ -1,4 +1,5 @@
 import type { AppLocale } from '@/i18n/routing';
+
 import type { Category, Heading } from './charts';
 
 /**

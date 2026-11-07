@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
+
 import { Faq } from '@/components/faq';
 import { PageShell } from '@/components/shell/page-shell';
 import { richText, Section } from '@/components/shell/section';
@@ -9,8 +10,8 @@ import { getResume } from '@/data/resume';
 import {
   parseMonth,
   roleEnd,
-  roleStart,
-  rolesByRecency
+  rolesByRecency,
+  roleStart
 } from '@/data/resume-derived';
 import { env } from '@/env';
 import { type AppLocale, routing } from '@/i18n/routing';
@@ -18,6 +19,7 @@ import { getT } from '@/i18n/server-t';
 import { cn } from '@/lib/cn';
 import { dateFnsLocaleFor, getDurationString } from '@/utils/getDurationString';
 import { stripHtml } from '@/utils/stripHtml';
+
 import { PhotoStack } from './photo-stack';
 import { PronounceSurname } from './pronounce-surname';
 

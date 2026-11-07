@@ -1,0 +1,13 @@
+# Formatter, linter and type checker are all built into Bun:
+#   bun fmt     format (bun fmt --check in CI)
+#   bun lint    lint   (bun lint --fix to apply fixes)
+#   bun check   type check, same errors as tsc
+
+[fmt]
+singleQuote = true
+trailingComma = "none"
+arrowParens = "avoid"
+quoteProps = "preserve"
+endOfLine = "lf"
+sortImports = true
+ignorePatterns = ["public/static/icons/"]

@@ -61,8 +61,8 @@ export function withRateLimit(options: RateLimitOptions) {
   const { identifier, limit = 10, windowMs = 60000, onLimit } = options;
 
   return (
-    handler: (req: NextRequest) => Promise<NextResponse> | NextResponse
-  ) =>
+      handler: (req: NextRequest) => Promise<NextResponse> | NextResponse
+    ) =>
     async (request: NextRequest): Promise<NextResponse> => {
       const ip = getIP(request);
       const { success, remaining, reset } = await checkRateLimit(

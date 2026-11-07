@@ -6,6 +6,7 @@ import { getT } from '@/i18n/server-t';
 import { cn } from '@/lib/cn';
 import { moments, projects } from '@/motion/registry';
 import { stripHtml } from '@/utils/stripHtml';
+
 import { Gallery } from './gallery';
 import { SlowMoHint } from './slow-mo';
 

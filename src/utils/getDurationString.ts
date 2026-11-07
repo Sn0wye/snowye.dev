@@ -1,5 +1,6 @@
 import { intervalToDuration, parseISO } from 'date-fns';
 import { enUS, ptBR } from 'date-fns/locale';
+
 import { type AppLocale, routing } from '@/i18n/routing';
 
 const labels: Record<

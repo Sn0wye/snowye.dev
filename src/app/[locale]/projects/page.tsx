@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
+
 import { PageShell } from '@/components/shell/page-shell';
 import { richText, Section } from '@/components/shell/section';
 import { WebPageJsonLd } from '@/components/web-page-json-ld';
@@ -10,6 +11,7 @@ import { cn } from '@/lib/cn';
 import { getTotalProjects } from '@/utils/getTotalProjects';
 import { interpolate } from '@/utils/interpolate';
 import { stripHtml } from '@/utils/stripHtml';
+
 import { ProjectTile } from './project-tile';
 import { YearsTile } from './years-tile';
 

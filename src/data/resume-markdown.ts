@@ -1,6 +1,7 @@
 import { getMessages } from '@/i18n/messages';
 import type { AppLocale } from '@/i18n/routing';
 import { interpolate } from '@/utils/interpolate';
+
 import { getResume } from './resume';
 import { getSignatureSkills, rolesByRecency } from './resume-derived';
 

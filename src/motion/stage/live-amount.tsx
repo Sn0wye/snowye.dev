@@ -2,6 +2,7 @@
 
 import { ChevronLeft } from 'lucide-react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+
 import { useAppLocale } from '@/i18n/use-t';
 import {
   type AmountLayout,

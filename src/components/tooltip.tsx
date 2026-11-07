@@ -2,6 +2,7 @@
 
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import { type ComponentPropsWithoutRef, forwardRef } from 'react';
+
 import { cn } from '@/lib/cn';
 
 export const TooltipProvider = TooltipPrimitive.Provider;

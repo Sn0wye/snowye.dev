@@ -10,6 +10,7 @@ import {
   useRef,
   useState
 } from 'react';
+
 import { cn } from '@/lib/cn';
 import { spring } from '@/lib/motion';
 import { useTimeScale } from '@/lib/time-scale';
@@ -24,6 +25,7 @@ import {
   settledCoin,
   splash
 } from '@/motion/splitty/timelines';
+
 import { type Clock, useClock, useRefreshRate } from './clock';
 import { LiveAmount } from './live-amount';
 import { LiveCharts } from './live-charts';

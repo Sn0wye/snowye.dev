@@ -2,6 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import { useTransition } from 'react';
+
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { type AppLocale, routing } from '@/i18n/routing';
 import { useAppLocale, useT } from '@/i18n/use-t';

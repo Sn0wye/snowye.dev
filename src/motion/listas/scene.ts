@@ -1,4 +1,4 @@
-import { type Curve, checkPop, curves, flipping, snapBack } from './curves';
+import { checkPop, type Curve, curves, flipping, snapBack } from './curves';
 
 /**
  * The list screen as the app lays it out at 390 px, in CSS pixels, and the

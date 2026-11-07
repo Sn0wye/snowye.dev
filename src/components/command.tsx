@@ -2,6 +2,7 @@
 
 import { Command as CommandPrimitive } from 'cmdk';
 import type * as React from 'react';
+
 import { cn } from '@/lib/cn';
 
 const Command = ({

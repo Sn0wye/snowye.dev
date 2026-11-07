@@ -21,12 +21,7 @@ export type Project = {
 };
 
 export type LiveKind =
-  | 'settled-coin'
-  | 'splash'
-  | 'loader'
-  | 'amount'
-  | 'charts'
-  | ListasKind;
+  'settled-coin' | 'splash' | 'loader' | 'amount' | 'charts' | ListasKind;
 
 export type Recording = {
   /** Basename under /static/motion/<project>/. */

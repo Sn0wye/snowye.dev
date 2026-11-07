@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+
 import { routing } from '@/i18n/routing';
 
 const BASE_URL = 'https://snowye.dev';

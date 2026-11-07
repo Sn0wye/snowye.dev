@@ -1,4 +1,5 @@
 import type { AppLocale } from '@/i18n/routing';
+
 import { getResume, type Resume, type Work } from './resume';
 import { TARGET_STACK } from './target-stack';
 

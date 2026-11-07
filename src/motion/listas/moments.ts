@@ -3,19 +3,19 @@ import {
   avatarsAt,
   exitDone,
   type ItemSpec,
+  type Lift,
   LIST_W,
   LIST_X,
   LIST_Y,
-  type Lift,
   type PeerSpec,
-  type RowFrame,
   ringAt,
+  type RowFrame,
   rowsAt,
-  SCREEN_W,
   type Scene,
+  SCREEN_W,
   type ScreenFrame,
-  SETTLE,
   seam,
+  SETTLE,
   touch
 } from './scene';
 

@@ -1,6 +1,7 @@
 import { ChevronRight } from 'lucide-react';
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
+
 import { WebPageJsonLd } from '@/components/web-page-json-ld';
 import { getResume } from '@/data/resume';
 import {
@@ -14,6 +15,7 @@ import { Link } from '@/i18n/navigation';
 import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
 import { directionTo } from '@/lib/motion';
+
 import { IdentityColumn } from './identity-column';
 import { WorkAndStack } from './work-and-stack';
 

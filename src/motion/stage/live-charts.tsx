@@ -15,6 +15,7 @@ import {
   Zap
 } from 'lucide-react';
 import { Fragment, useEffect, useLayoutEffect, useRef, useState } from 'react';
+
 import { useAppLocale } from '@/i18n/use-t';
 import {
   buildScene,
@@ -23,26 +24,26 @@ import {
   CARD_X,
   CARD_Y,
   CATEGORY,
-  CATEGORY_ROW_H,
   type Category,
+  CATEGORY_ROW_H,
   CHIP_H,
   DONUT_H,
   DONUT_Y,
   EXPENSE_ROW_H,
-  HEADING_ROW_H,
   type Heading,
+  HEADING_ROW_H,
   INNER_R,
   INNER_W,
   LEGEND_Y,
-  type NumericLayout,
   numericFrame,
+  type NumericLayout,
   OUTER_R,
   PICKER_GAP,
   PICKER_H,
   PICKER_Y,
+  type Scene,
   SCREEN_H,
   SCREEN_W,
-  type Scene,
   sectorPath,
   TINT,
   touchAt

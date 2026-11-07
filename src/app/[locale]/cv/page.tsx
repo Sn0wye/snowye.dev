@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
+
 import { OpenSignal } from '@/components/shell/open-signal';
 import { PageShell } from '@/components/shell/page-shell';
 import { Section } from '@/components/shell/section';
@@ -17,6 +18,7 @@ import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
 import { dateFnsLocaleFor } from '@/utils/getDurationString';
 import { interpolate } from '@/utils/interpolate';
+
 import { Highlights } from './highlights';
 
 export function generateStaticParams() {

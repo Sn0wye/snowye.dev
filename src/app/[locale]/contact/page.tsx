@@ -1,6 +1,7 @@
 import { ArrowUpRight, CalendarDays } from 'lucide-react';
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
+
 import { LocalTime } from '@/components/shell/local-time';
 import { PageShell } from '@/components/shell/page-shell';
 import { richText } from '@/components/shell/section';
@@ -10,6 +11,7 @@ import { getResume } from '@/data/resume';
 import { type AppLocale, routing } from '@/i18n/routing';
 import { getT } from '@/i18n/server-t';
 import { cn } from '@/lib/cn';
+
 import { CopyEmailTile } from './copy-email-tile';
 
 const CAL_URL = 'https://cal.com/trzimajewski';

@@ -1,6 +1,7 @@
 'use client';
 
 import { useLocale } from 'next-intl';
+
 import { getMessages, type Messages } from './messages';
 import type { AppLocale } from './routing';
 

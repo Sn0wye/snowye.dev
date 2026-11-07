@@ -1,4 +1,5 @@
 import { getLocale } from 'next-intl/server';
+
 import { getMessages, type Messages } from './messages';
 import type { AppLocale } from './routing';
 
