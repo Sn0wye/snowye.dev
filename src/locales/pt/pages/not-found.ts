@@ -1,11 +1,11 @@
 export const notFound = {
-  title: 'quatro zero quatro',
+  badge: 'Ops!',
+  title: 'Houston, temos um problema!',
   description:
-    'Esta página não existe ou pode ter sido movida. Use um destes links para continuar:',
-  whereTo: 'Para onde você queria ir?',
-  noMatch: 'Nada encontrado. O sitemap lista todas as páginas.',
+    'Esta página saiu da rota e entrou em território desconhecido. Ela pode ter sido movida, ou nunca existiu.',
+  cta: 'Voltar ao Controle da Missão',
+  linksLabel: 'Links do site',
   links: {
-    home: 'Início',
     projects: 'Projetos',
     contact: 'Contato',
     sitemap: 'Mapa do site',

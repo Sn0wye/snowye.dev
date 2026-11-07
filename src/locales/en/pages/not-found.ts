@@ -1,11 +1,11 @@
 export const notFound = {
-  title: 'four oh four',
+  badge: 'Oops!',
+  title: 'Houston, we have a problem!',
   description:
-    "This page doesn't exist or may have moved. Use one of these links to continue:",
-  whereTo: 'Where did you mean to go?',
-  noMatch: 'Nothing matches. The sitemap lists every page.',
+    'This page drifted off course and into uncharted territory. It may have moved, or never existed.',
+  cta: 'Return to Mission Control',
+  linksLabel: 'Site links',
   links: {
-    home: 'Home',
     projects: 'Projects',
     contact: 'Contact',
     sitemap: 'Sitemap',

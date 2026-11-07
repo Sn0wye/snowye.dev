@@ -1,23 +1,30 @@
+import { headers } from 'next/headers';
 import { NotFoundView } from '@/components/shell/not-found-view';
+import { getMessages } from '@/i18n/messages';
 
-// Catches any unmatched route outside the [locale] segment.
-// next-intl middleware normally rewrites unknown paths into a locale,
-// so this is a safety net for static/edge cases. Hardcoded to English.
-export default function GlobalNotFound() {
+// Catches any unmatched route, including unknown paths under /pt.
+// The proxy sets x-site-locale from the path (/pt/... → pt, else en),
+// so the page speaks the visitor's language; English is the default.
+export default async function GlobalNotFound() {
+  const locale = (await headers()).get('x-site-locale') === 'pt' ? 'pt' : 'en';
+  const t = getMessages(locale);
+  const n = t.pages.notFound;
+  const prefix = locale === 'pt' ? '/pt' : '';
+
   return (
     <NotFoundView
-      title="four oh four"
-      description="This page doesn't exist or may have moved. Choose where to go next:"
-      whereTo="Where did you mean to go?"
-      noMatch="Nothing matches. The sitemap lists every page."
+      badge={n.badge}
+      title={n.title}
+      description={n.description}
+      cta={{ label: n.cta, href: prefix || '/' }}
+      linksLabel={n.linksLabel}
       destinations={[
-        { label: 'Home', href: '/' },
-        { label: 'About', href: '/about' },
-        { label: 'Projects', href: '/projects' },
-        { label: 'CV', href: '/cv' },
-        { label: 'Contact', href: '/contact' },
-        { label: 'Sitemap', href: '/sitemap.xml' },
-        { label: 'Agent instructions', href: '/llms.txt' }
+        { label: t.common.navbar.about, href: `${prefix}/about` },
+        { label: n.links.projects, href: `${prefix}/projects` },
+        { label: 'CV', href: `${prefix}/cv` },
+        { label: n.links.contact, href: `${prefix}/contact` },
+        { label: n.links.sitemap, href: '/sitemap.xml' },
+        { label: n.links.agents, href: '/llms.txt' }
       ]}
     />
   );
