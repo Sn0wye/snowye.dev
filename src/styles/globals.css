@@ -69,6 +69,50 @@
   }
 }
 
+/* 404 starfield: a few stars breathe; the way home drifts like it's in
+   orbit. Both stand still for reduced motion. */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: var(--star-opacity, 0.8);
+  }
+  50% {
+    opacity: 0.15;
+  }
+}
+
+@utility animate-twinkle {
+  animation: twinkle 4s ease-in-out infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2.5deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(1.5deg);
+  }
+}
+
+@utility animate-drift {
+  animation: drift 7s ease-in-out infinite;
+
+  &:hover,
+  &:focus-visible {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    transform: rotate(-2deg);
+  }
+}
+
 @keyframes toast-in {
   from {
     opacity: 0;

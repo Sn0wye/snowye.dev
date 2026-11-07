@@ -13,12 +13,12 @@ export default function NotFound() {
 
   return (
     <NotFoundView
+      badge={n.badge}
       title={n.title}
       description={n.description}
-      whereTo={n.whereTo}
-      noMatch={n.noMatch}
+      cta={{ label: n.cta, href: prefix || '/' }}
+      linksLabel={n.linksLabel}
       destinations={[
-        { label: n.links.home, href: prefix || '/' },
         { label: t.common.navbar.about, href: `${prefix}/about` },
         { label: n.links.projects, href: `${prefix}/projects` },
         { label: 'CV', href: `${prefix}/cv` },
