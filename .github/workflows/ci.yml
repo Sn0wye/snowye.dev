@@ -31,9 +31,6 @@ jobs:
       - name: Format
         run: bun fmt --check
 
-      - name: Lint
-        run: bun lint
-
       - name: Type check
         run: bun check
 
@@ -45,3 +42,23 @@ jobs:
 
       - name: Agent readiness integration tests
         run: bun test tests
+
+  # bun lint is only in canary builds so far. Fold this step into the ci job
+  # once a stable release ships it.
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v7
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: canary
+
+      - name: Install deps
+        run: bun install --frozen-lockfile
+
+      - name: Lint
+        run: bun lint
