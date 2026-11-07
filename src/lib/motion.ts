@@ -24,6 +24,7 @@ export const PAGE_ORDER = [
   '/',
   '/about',
   '/projects',
+  '/craft',
   '/cv',
   '/mcp',
   '/contact',
@@ -35,9 +36,15 @@ export const PAGE_ORDER = [
  * direction, plus `leave-home` / `enter-home` when the name travels between
  * the home page and the header. Between inner pages the name stays put.
  */
+/** A nested page (/craft/dock) sits where its section does. */
+const section = (path: string) =>
+  PAGE_ORDER.indexOf(
+    `/${path.split('/')[1] ?? ''}` as (typeof PAGE_ORDER)[number]
+  );
+
 export const directionTo = (from: string, to: string) => {
-  const a = PAGE_ORDER.indexOf(from as (typeof PAGE_ORDER)[number]);
-  const b = PAGE_ORDER.indexOf(to as (typeof PAGE_ORDER)[number]);
+  const a = section(from);
+  const b = section(to);
   if (a === -1 || b === -1 || a === b) return [];
   const types = [b > a ? 'nav-forward' : 'nav-back'];
   if (from === '/') types.push('leave-home');

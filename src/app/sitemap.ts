@@ -7,6 +7,7 @@ const PATHS = [
   '/about',
   '/cv',
   '/projects',
+  '/craft',
   '/contact',
   '/mcp',
   '/privacy'
