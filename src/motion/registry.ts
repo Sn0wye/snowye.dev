@@ -2,10 +2,13 @@
  * Shipped projects for /craft, which takes over from /projects: case studies,
  * showcases and motion. Only motion exists so far. A moment is one piece of
  * a real product's motion: shown live where the app's curves are pure
- * functions of time (ported, and verified against SwiftUI), and as a screen
- * recording where it depends on the app's own views. Adding a project means
+ * functions of time (ported and verified against SwiftUI, or, for a web app,
+ * its own CSS timings and Motion springs), and as a screen recording where
+ * it depends on the app's own views. Adding a project means
  * adding entries here; the pages read nothing else.
  */
+
+import type { ListasKind } from './listas/moments';
 
 type Copy = { en: string; pt: string };
 
@@ -22,7 +25,8 @@ export type LiveKind =
   | 'splash'
   | 'loader'
   | 'amount'
-  | 'charts';
+  | 'charts'
+  | ListasKind;
 
 export type Recording = {
   /** Basename under /static/motion/<project>/. */
@@ -60,6 +64,22 @@ export const projects: Project[] = [
         url: 'https://splitty-landing.vercel.app'
       },
       { label: 'GitHub', url: 'https://github.com/Sn0wye/splitty' }
+    ]
+  },
+  {
+    slug: 'listas',
+    name: 'Listas',
+    tagline: {
+      en: 'Shared checklists in real time, opened by a secret link, no account needed. A Next.js PWA on a Rust API.',
+      pt: 'Checklists compartilhados em tempo real, abertos por um link secreto, sem precisar de conta. Um PWA em Next.js sobre uma API em Rust.'
+    },
+    stack: 'Next.js · Rust · WebSockets · Motion',
+    links: [
+      {
+        label: 'sharedlists-delta.vercel.app',
+        url: 'https://sharedlists-delta.vercel.app'
+      },
+      { label: 'GitHub', url: 'https://github.com/Sn0wye/sharedlists' }
     ]
   }
 ];
@@ -133,6 +153,56 @@ export const moments: Moment[] = [
       pt: 'Períodos, visões e categorias: o donut desliza entre eles e cada número rola até o valor novo.'
     },
     live: 'charts'
+  },
+  {
+    slug: 'tick',
+    project: 'listas',
+    title: { en: 'Ticking off', pt: 'Marcar como feito' },
+    summary: {
+      en: 'The box pops and draws its check, the strike follows the text, and the row holds its place until both land before it sinks under the open ones.',
+      pt: 'A caixa pulsa e desenha o check, o risco acompanha o texto, e a linha segura o lugar até os dois terminarem antes de descer para baixo dos abertos.'
+    },
+    live: 'tick'
+  },
+  {
+    slug: 'presence',
+    project: 'listas',
+    title: { en: 'Live presence', pt: 'Presença ao vivo' },
+    summary: {
+      en: 'Who is here, who is typing and which item each person is on, all over the list’s own socket.',
+      pt: 'Quem está aqui, quem está digitando e em qual item cada um está, tudo pelo socket da própria lista.'
+    },
+    live: 'presence'
+  },
+  {
+    slug: 'swipe-to-delete',
+    project: 'listas',
+    title: { en: 'Swipe to delete', pt: 'Deslizar para apagar' },
+    summary: {
+      en: 'Short of the threshold the row springs back; past it, it leaves and collapses, and Undo brings it back to its place.',
+      pt: 'Antes do limite a linha volta; depois dele, ela sai e se fecha, e Desfazer devolve ela ao lugar.'
+    },
+    live: 'swipe-to-delete'
+  },
+  {
+    slug: 'reorder',
+    project: 'listas',
+    title: { en: 'Reorder', pt: 'Reordenar' },
+    summary: {
+      en: 'Held by its grip, the row stays under the finger; each neighbour slides out of the way once the row passes its middle, and on release it settles into its slot.',
+      pt: 'Segurada pela alça, a linha fica sob o dedo; cada vizinha sai do caminho quando a linha passa do meio dela, e ao soltar ela assenta no lugar.'
+    },
+    live: 'reorder'
+  },
+  {
+    slug: 'someone-else',
+    project: 'listas',
+    title: { en: 'Someone else, live', pt: 'Outra pessoa, ao vivo' },
+    summary: {
+      en: 'Ana moves an item to the top, then swipes one away and takes it back. Her drags stay on her phone; Gabriel sees her colour on the row she touches, then each change landing as it reaches him.',
+      pt: 'A Ana leva um item para o topo, depois desliza outro para apagar e desfaz. Os arrastos ficam no celular dela; o Gabriel vê a cor dela na linha que ela toca, e cada mudança chegando para ele.'
+    },
+    live: 'someone-else'
   }
 ];
 
