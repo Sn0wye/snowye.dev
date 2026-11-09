@@ -6,8 +6,23 @@ import { usePathname } from 'next/navigation';
 import { useCallback, useEffect } from 'react';
 
 import type { AppLocale } from '@/i18n/routing';
+import { cn } from '@/lib/cn';
 import type { Moment, Project } from '@/motion/registry';
 import { MomentStage, MomentTile, type StageCopy } from '@/motion/stage/stage';
+
+/** Tiles and the open stage, per project frame: a phone or a terminal. */
+const frames = {
+  phone: {
+    grid: 'sm:grid-cols-2 lg:grid-cols-3',
+    tile: 'aspect-[4/5]',
+    stage: 'aspect-[4/5] h-[min(64svh,44rem)] max-w-[calc(100vw-2.5rem)]'
+  },
+  wide: {
+    grid: 'sm:grid-cols-2',
+    tile: 'aspect-[8/5]',
+    stage: 'aspect-[8/5] w-[min(64rem,calc(100vw-2.5rem),calc(64svh*1.6))]'
+  }
+};
 
 type GalleryCopy = {
   live: string;
@@ -40,6 +55,8 @@ export function Gallery({
   const prefix = match?.[1] ?? '';
   const open = moments.find(m => m.slug === match?.[2]) ?? null;
   const index = open ? moments.indexOf(open) : -1;
+  const openFrame =
+    frames[projects.find(p => p.slug === open?.project)?.frame ?? 'phone'];
 
   const go = useCallback(
     (slug: string | null, replace = false) => {
@@ -78,79 +95,87 @@ export function Gallery({
 
   return (
     <LayoutGroup>
-      {projects.map(project => (
-        <section key={project.slug} className="mt-20">
-          <header className="mb-8 flex flex-wrap items-end justify-between gap-x-8 gap-y-3 border-white/[0.06] border-b pb-5">
-            <div>
-              <h2 className="font-medium text-[1.5rem] text-primary tracking-[-0.03em]">
-                {project.name}
-              </h2>
-              <p className="mt-1 max-w-xl text-[14px]">
-                {project.tagline[locale]}
-              </p>
-            </div>
-            <div className="flex flex-col items-end gap-1 text-[13px]">
-              <span className="font-mono text-[11px] text-secondary/60">
-                {project.stack}
-              </span>
-              <span className="flex gap-4">
-                {project.links.map(link => (
-                  <a
-                    key={link.url}
-                    href={link.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="group flex items-center gap-1 transition-colors hover:text-primary"
-                  >
-                    {link.label}
-                    <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                  </a>
-                ))}
-              </span>
-            </div>
-          </header>
+      {projects.map(project => {
+        const frame = frames[project.frame ?? 'phone'];
+        return (
+          <section key={project.slug} className="mt-20">
+            <header className="mb-8 flex flex-wrap items-end justify-between gap-x-8 gap-y-3 border-white/[0.06] border-b pb-5">
+              <div>
+                <h2 className="font-medium text-[1.5rem] text-primary tracking-[-0.03em]">
+                  {project.name}
+                </h2>
+                <p className="mt-1 max-w-xl text-[14px]">
+                  {project.tagline[locale]}
+                </p>
+              </div>
+              <div className="flex flex-col items-end gap-1 text-[13px]">
+                <span className="font-mono text-[11px] text-secondary/60">
+                  {project.stack}
+                </span>
+                <span className="flex gap-4">
+                  {project.links.map(link => (
+                    <a
+                      key={link.url}
+                      href={link.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group flex items-center gap-1 transition-colors hover:text-primary"
+                    >
+                      {link.label}
+                      <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </a>
+                  ))}
+                </span>
+              </div>
+            </header>
 
-          <div className="grid grid-cols-1 gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {moments
-              .filter(m => m.project === project.slug)
-              .map(moment => (
-                <figure key={moment.slug}>
-                  <button
-                    type="button"
-                    onClick={() => go(moment.slug)}
-                    aria-label={moment.title[locale]}
-                    className="group relative block aspect-[4/5] w-full cursor-zoom-in rounded-2xl text-left"
-                  >
-                    {/* The open moment's tile steps aside for the stage; the
+            <div
+              className={cn('grid grid-cols-1 gap-x-5 gap-y-10', frame.grid)}
+            >
+              {moments
+                .filter(m => m.project === project.slug)
+                .map(moment => (
+                  <figure key={moment.slug}>
+                    <button
+                      type="button"
+                      onClick={() => go(moment.slug)}
+                      aria-label={moment.title[locale]}
+                      className={cn(
+                        'group relative block w-full cursor-zoom-in rounded-2xl text-left',
+                        frame.tile
+                      )}
+                    >
+                      {/* The open moment's tile steps aside for the stage; the
                         empty slot keeps the grid from closing up. */}
-                    {open?.slug !== moment.slug && (
-                      <MomentTile
-                        slug={moment.slug}
-                        kind={moment.live}
-                        project={moment.project}
-                        recording={moment.live ? undefined : moment.recording}
-                        className="size-full ring-1 ring-white/[0.06] ring-inset transition-shadow group-hover:ring-white/[0.16]"
-                      />
-                    )}
-                  </button>
-                  <figcaption className="mt-3">
-                    <span className="flex items-baseline justify-between gap-3">
-                      <span className="text-primary">
-                        {moment.title[locale]}
+                      {open?.slug !== moment.slug && (
+                        <MomentTile
+                          slug={moment.slug}
+                          kind={moment.live}
+                          project={moment.project}
+                          recording={moment.live ? undefined : moment.recording}
+                          className="size-full ring-1 ring-white/[0.06] ring-inset transition-shadow group-hover:ring-white/[0.16]"
+                        />
+                      )}
+                    </button>
+                    <figcaption className="mt-3">
+                      <span className="flex items-baseline justify-between gap-3">
+                        <span className="text-primary">
+                          {moment.title[locale]}
+                        </span>
+                        <span className="font-mono text-[10px] text-secondary/60 uppercase tracking-wider">
+                          {moment.live ? copy.live : copy.recording}
+                        </span>
                       </span>
-                      <span className="font-mono text-[10px] text-secondary/60 uppercase tracking-wider">
-                        {moment.live ? copy.live : copy.recording}
+                      <span className="mt-1 block text-[13px] text-secondary/80">
+                        {moment.summary[locale]}
                       </span>
-                    </span>
-                    <span className="mt-1 block text-[13px] text-secondary/80">
-                      {moment.summary[locale]}
-                    </span>
-                  </figcaption>
-                </figure>
-              ))}
-          </div>
-        </section>
-      ))}
+                    </figcaption>
+                  </figure>
+                ))}
+            </div>
+          </section>
+        );
+      })}
 
       <AnimatePresence>
         {open && (
@@ -192,7 +217,7 @@ export function Gallery({
                 live={open.live}
                 recording={open.recording}
                 copy={copy.stage}
-                frameClassName="aspect-[4/5] h-[min(64svh,44rem)] max-w-[calc(100vw-2.5rem)]"
+                frameClassName={openFrame.stage}
               />
               <motion.div
                 initial={{ opacity: 0 }}

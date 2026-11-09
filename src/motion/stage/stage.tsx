@@ -25,12 +25,14 @@ import {
   settledCoin,
   splash
 } from '@/motion/splitty/timelines';
+import { type YtdKind, ytdScenes } from '@/motion/ytd/moments';
 
 import { type Clock, useClock, useRefreshRate } from './clock';
 import { LiveAmount } from './live-amount';
 import { LiveCharts } from './live-charts';
 import { LiveCoin } from './live-coin';
 import { LiveListas } from './live-listas';
+import { LiveTerminal } from './live-terminal';
 
 const coinTimelines: Partial<Record<LiveKind, () => CoinTimeline>> = {
   'settled-coin': settledCoin,
@@ -44,12 +46,20 @@ const listasDurations = Object.fromEntries(
   Object.entries(listasScenes).map(([kind, scene]) => [kind, scene().duration])
 ) as Record<ListasKind, number>;
 
+const isYtd = (kind: LiveKind): kind is YtdKind => kind in ytdScenes;
+
+const ytdDurations = Object.fromEntries(
+  Object.entries(ytdScenes).map(([kind, scene]) => [kind, scene().duration])
+) as Record<YtdKind, number>;
+
 const durationOf = (kind: LiveKind) =>
   isListas(kind)
     ? listasDurations[kind]
-    : kind === 'charts'
-      ? chartsDuration
-      : (coinTimelines[kind]?.().duration ?? amountDuration);
+    : isYtd(kind)
+      ? ytdDurations[kind]
+      : kind === 'charts'
+        ? chartsDuration
+        : (coinTimelines[kind]?.().duration ?? amountDuration);
 
 /** The app's background in dark appearance. */
 const APP_BACKGROUND = '#09090b';
@@ -119,6 +129,7 @@ function LiveView({
   });
 
   if (isListas(kind)) return <LiveListas kind={kind} onDraw={register} />;
+  if (isYtd(kind)) return <LiveTerminal kind={kind} onDraw={register} />;
   if (kind === 'amount') return <LiveAmount onDraw={register} />;
   if (kind === 'charts') return <LiveCharts onDraw={register} />;
   if (!coin) return null;
