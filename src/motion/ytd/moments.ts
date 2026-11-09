@@ -1,10 +1,6 @@
-import {
-  bytesReading,
-  mediaReading,
-  type Press,
-  type TerminalFrame,
-  Trail
-} from './trail';
+import { type Script, script, type Stroke } from '@/motion/keystrokes';
+
+import { bytesReading, mediaReading, type TerminalFrame, Trail } from './trail';
 import {
   audioFor,
   audioHeader,
@@ -23,12 +19,15 @@ import {
 
 /**
  * `ytd down` sessions, scripted the way they run: the same calls in the
- * same order as cmd/down.go, with the keys a person presses and the time
- * each step takes on a fast connection.
+ * same order as cmd/down.go, the keys a person presses, and the time each
+ * step takes on a fast connection. The first one types `ytd down ` and
+ * pastes the link; the others start with their command already typed.
  */
 
 export type TerminalScene = {
   duration: number;
+  /** What the person presses, for the terminal and the keystroke overlay. */
+  strokes: Stroke[];
   frame: (t: number) => TerminalFrame;
 };
 
@@ -43,23 +42,26 @@ const transfer = (total: number, seconds: number, ramp = 0.35) => {
   return (el: number) => rate * shape(el);
 };
 
-/** A key held down: one press, then the OS repeat after its delay. */
-const held = (from: number, to: number, delay = 0.25, every = 0.05) => {
-  const presses: Press[] = [{ at: from, key: 'down' }];
-  for (let at = from + delay; at <= to; at += every)
-    presses.push({ at, key: 'down' });
-  return presses;
-};
-
 const hiddenNote = (container: string) =>
   container === 'mp4'
     ? 'VP9 streams do not fit in mp4 without re-encoding; use --format webm or mkv to see them'
     : '';
 
-/** The steps every session starts with: the command, its intro and the video. */
-function opening(u: Trail, flags: string, enter: number, found: number) {
-  u.prompt(`ytd down ${URL}${flags}`, -Infinity);
-  if (!u.enter(enter)) return false;
+/** `ytd down `, ⌘V, Enter. Returns when Enter goes down. */
+function command(keys: Script) {
+  keys.type('ytd down ').wait(0.3).paste(URL).wait(0.45);
+  const enter = keys.now;
+  keys.press('Enter');
+  return enter;
+}
+
+/**
+ * The steps every session starts with: the command, its intro and the
+ * video. With `flags`, the command is on the prompt already.
+ */
+function opening(u: Trail, enter: number, found: number, flags?: string) {
+  const already = flags === undefined ? '' : `ytd down ${URL}${flags}`;
+  if (!u.prompt(0, enter, already)) return false;
   u.intro(VERSION);
   if (!u.task('Fetching video info', 'Video found', enter, found)) return false;
   u.info(TITLE, AUTHOR, DURATION);
@@ -71,43 +73,42 @@ function opening(u: Trail, flags: string, enter: number, found: number) {
 /* -------------------------------------------------------------------------- */
 
 export const down = (): TerminalScene => {
-  const command = `ytd down ${URL}`;
-  const typeFrom = 0.4;
-  const enter = 2.35;
+  const keys = script(0.5);
+  const enter = command(keys);
   const found = enter + 1;
+  // Look around the list, come back to the top one.
+  keys
+    .at(found + 0.65)
+    .press('ArrowDown', [], 0.35)
+    .press('ArrowDown', [], 0.55)
+    .press('ArrowUp', [], 0.35)
+    .press('ArrowUp', [], 0.55);
+  const videoPicked = keys.now;
+  keys.press('Enter', [], 0.7);
+  const audioPicked = keys.now;
+  keys.press('Enter');
+
   const video = videoFor('mp4');
   const audio = audioFor('mp4');
-  const videoKeys: Press[] = [
-    { at: 4, key: 'down' },
-    { at: 4.35, key: 'down' },
-    { at: 4.9, key: 'up' },
-    { at: 5.25, key: 'up' },
-    { at: 5.8, key: 'enter' }
-  ];
-  const audioKeys: Press[] = [{ at: 6.5, key: 'enter' }];
-  const download = { since: 6.5, seconds: 2.6 };
   const total = (video[0]?.size ?? 0) + (audio[0]?.size ?? 0);
-  const downloaded = download.since + download.seconds;
-  const mux = { since: downloaded, until: downloaded + 0.55 };
-  const duration = 12.5;
+  const seconds = 2.6;
+  const downloaded = audioPicked + seconds;
+  const muxed = downloaded + 0.55;
+  const duration = muxed + 2.6;
 
   return {
     duration,
+    strokes: keys.strokes,
     frame: t => {
-      const u = new Trail(t);
+      const u = new Trail(t, keys.strokes);
       const fade = seam(t, duration);
-      u.prompt(command, typeFrom);
-      if (!u.enter(enter)) return u.frame(fade);
-      u.intro(VERSION);
-      if (!u.task('Fetching video info', 'Video found', enter, found))
-        return u.frame(fade);
-      u.info(TITLE, AUTHOR, DURATION);
+      if (!opening(u, enter, found)) return u.frame(fade);
       const v = u.select(
         'Video quality',
         hiddenNote('mp4'),
         videoHeader,
         video.map(videoRow),
-        videoKeys
+        found
       );
       if (v === null) return u.frame(fade);
       const a = u.select(
@@ -115,25 +116,25 @@ export const down = (): TerminalScene => {
         '',
         audioHeader,
         audio.map(audioRow),
-        audioKeys
+        videoPicked
       );
       if (a === null) return u.frame(fade);
       const finished = u.progress(
         'Downloading',
-        download.since,
-        bytesReading(total, transfer(total, download.seconds)),
+        audioPicked,
+        bytesReading(total, transfer(total, seconds)),
         {
           at: downloaded,
           done: 'Downloaded',
-          detail: `${formatSize(total)} in ${download.seconds.toFixed(1)}s`
+          detail: `${formatSize(total)} in ${seconds.toFixed(1)}s`
         }
       );
       if (!finished) return u.frame(fade);
-      if (!u.task('Muxing into mp4', 'Muxed into mp4', mux.since, mux.until))
+      if (!u.task('Muxing into mp4', 'Muxed into mp4', downloaded, muxed))
         return u.frame(fade);
       // The container costs a little less than the two streams' own framing.
-      u.saved(savedPath('mp4'), total * 0.998, mux.until - enter);
-      u.prompt('', mux.until);
+      u.saved(savedPath('mp4'), total * 0.998, muxed - enter);
+      u.prompt(muxed, Infinity);
       return u.frame(fade);
     }
   };
@@ -146,41 +147,49 @@ export const down = (): TerminalScene => {
 export const picker = (): TerminalScene => {
   const enter = 0.3;
   const found = 1.1;
+  const keys = script(enter).press('Enter');
   // mkv takes every codec, so the list is long enough to scroll.
+  const flags = ' --format mkv';
+  keys
+    .at(found + 0.7)
+    .press('ArrowDown', [], 0.32)
+    .press('ArrowDown', [], 0.32)
+    .press('ArrowDown', [], 0.7)
+    .press('ArrowUp', [], 0.32)
+    .press('ArrowUp', [], 0.32)
+    .press('ArrowUp', [], 0.8)
+    // Up from the top wraps to the last row, scrolling the list; down from
+    // there wraps back.
+    .press('ArrowUp', [], 1.1)
+    .press('ArrowDown', [], 0.6)
+    .press('ArrowDown', [], 0.32)
+    .press('ArrowDown', [], 0.6);
+  const videoPicked = keys.now;
+  keys
+    .press('Enter', [], 0.7)
+    .press('ArrowDown', [], 0.35)
+    .press('ArrowUp', [], 0.5);
+  const audioPicked = keys.now;
+  keys.press('Enter');
+
   const video = videoFor('mkv');
   const audio = audioFor('mkv');
-  const videoKeys: Press[] = [
-    { at: 1.8, key: 'down' },
-    { at: 2.1, key: 'down' },
-    { at: 2.4, key: 'down' },
-    ...held(2.9, 3.6),
-    { at: 4.6, key: 'end' },
-    { at: 5.3, key: 'down' },
-    { at: 5.85, key: 'down' },
-    { at: 6.2, key: 'down' },
-    { at: 6.8, key: 'enter' }
-  ];
-  const audioKeys: Press[] = [
-    { at: 7.5, key: 'down' },
-    { at: 7.85, key: 'up' },
-    { at: 8.4, key: 'enter' }
-  ];
-  const duration = 10;
-  const audioTotal = audio[0]?.size ?? 0;
-  const total = (video[2]?.size ?? 0) + audioTotal;
+  const total = (video[2]?.size ?? 0) + (audio[0]?.size ?? 0);
+  const duration = audioPicked + 1.6;
 
   return {
     duration,
+    strokes: keys.strokes,
     frame: t => {
-      const u = new Trail(t);
+      const u = new Trail(t, keys.strokes);
       const fade = seam(t, duration);
-      if (!opening(u, ' --format mkv', enter, found)) return u.frame(fade);
+      if (!opening(u, enter, found, flags)) return u.frame(fade);
       const v = u.select(
         'Video quality',
         hiddenNote('mkv'),
         videoHeader,
         video.map(videoRow),
-        videoKeys
+        found
       );
       if (v === null) return u.frame(fade);
       const a = u.select(
@@ -188,10 +197,14 @@ export const picker = (): TerminalScene => {
         '',
         audioHeader,
         audio.map(audioRow),
-        audioKeys
+        videoPicked
       );
       if (a === null) return u.frame(fade);
-      u.progress('Downloading', 8.4, bytesReading(total, transfer(total, 2.2)));
+      u.progress(
+        'Downloading',
+        audioPicked,
+        bytesReading(total, transfer(total, 2.2))
+      );
       return u.frame(fade);
     }
   };
@@ -204,6 +217,8 @@ export const picker = (): TerminalScene => {
 export const reencode = (): TerminalScene => {
   const enter = 0.5;
   const found = 1.35;
+  const keys = script(enter).press('Enter');
+  const flags = ' --format mp3 --best';
   // ffmpeg re-encodes, so every audio stream qualifies; --best takes the top.
   const best = audioFor('mp3')[0];
   const size = best?.size ?? 0;
@@ -212,22 +227,20 @@ export const reencode = (): TerminalScene => {
   const speed = 108;
   const encode = {
     since: download.since + download.seconds,
-    startup,
-    speed,
     seconds: startup + DURATION / speed
   };
   const encoded = encode.since + encode.seconds;
   // libmp3lame -q:a 0 averages about 245 kbps.
   const mp3 = (245_000 * DURATION) / 8;
-  const duration = 8;
+  const duration = encoded + 2.4;
 
   return {
     duration,
+    strokes: keys.strokes,
     frame: t => {
-      const u = new Trail(t);
+      const u = new Trail(t, keys.strokes);
       const fade = seam(t, duration);
-      if (!opening(u, ' --format mp3 --best', enter, found))
-        return u.frame(fade);
+      if (!opening(u, enter, found, flags)) return u.frame(fade);
       if (best) u.picked('Audio quality', audioRow(best));
       if (
         !u.progress(
@@ -246,7 +259,7 @@ export const reencode = (): TerminalScene => {
         !u.progress(
           'Re-encoding with ffmpeg',
           encode.since,
-          mediaReading(el => Math.max(0, el - encode.startup) * encode.speed),
+          mediaReading(el => Math.max(0, el - startup) * speed),
           {
             at: encoded,
             done: 'Re-encoded',
@@ -256,7 +269,7 @@ export const reencode = (): TerminalScene => {
       )
         return u.frame(fade);
       u.saved(savedPath('mp3'), mp3, encoded - enter);
-      u.prompt('', encoded);
+      u.prompt(encoded, Infinity);
       return u.frame(fade);
     }
   };
@@ -269,24 +282,26 @@ export const reencode = (): TerminalScene => {
 export const cancel = (): TerminalScene => {
   const enter = 0.5;
   const found = 1.35;
+  const interrupt = found + 2.7;
+  const keys = script(enter).press('Enter').at(interrupt).press('c', ['ctrl']);
+  // Two connections: about a fifth of the usual speed.
+  const flags = ' --best -c 2';
+
   const video = videoFor('mp4')[0];
   const audio = audioFor('mp4')[0];
   const total = (video?.size ?? 0) + (audio?.size ?? 0);
-  // Two connections: about a fifth of the usual speed.
   const bytes = transfer(total, 8.1);
-  const interrupt = found + 2.7;
-  const echo = { from: interrupt + 0.75, enter: interrupt + 1.45 };
-  const duration = 8;
+  const duration = interrupt + 2.2;
 
   return {
     duration,
+    strokes: keys.strokes,
     frame: t => {
-      const u = new Trail(t);
+      const u = new Trail(t, keys.strokes);
       const fade = seam(t, duration);
-      if (!opening(u, ' --best -c 2', enter, found)) return u.frame(fade);
+      if (!opening(u, enter, found, flags)) return u.frame(fade);
       if (video) u.picked('Video quality', videoRow(video));
       if (audio) u.picked('Audio quality', audioRow(audio));
-      u.press(interrupt, 'ctrl-c');
       const stopped = u.progress(
         'Downloading',
         found,
@@ -295,11 +310,7 @@ export const cancel = (): TerminalScene => {
       );
       if (!stopped) return u.frame(fade);
       u.cancelled();
-      // Exit status 130: killed by SIGINT.
-      u.prompt('echo $?', echo.from, 0.07);
-      if (!u.enter(echo.enter)) return u.frame(fade);
-      u.print('130');
-      u.prompt('', echo.enter);
+      u.prompt(interrupt, Infinity);
       return u.frame(fade);
     }
   };

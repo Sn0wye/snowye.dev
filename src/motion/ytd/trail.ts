@@ -1,3 +1,5 @@
+import { between, type Stroke, typedText } from '@/motion/keystrokes';
+
 import { DURATION, formatSize } from './video';
 
 /**
@@ -6,6 +8,8 @@ import { DURATION, formatSize } from './video';
  * Saved, Fail) on a fresh Trail for every frame, and each call draws what
  * the terminal shows at that instant: a live block at its last tick, a
  * picker after the keys pressed so far, a finished step once it is done.
+ * What the person types comes from the moment's keystroke script, so the
+ * prompt and the pickers move with the keys on the overlay.
  *
  * The cadences are the Go ones: live blocks redraw every 110 ms, the
  * download reports its bytes every 200 ms, ffmpeg its media time every
@@ -31,15 +35,10 @@ export type Tone =
 export type Span = { text: string; tone?: Tone };
 export type Line = Span[];
 
-export type Key = 'up' | 'down' | 'home' | 'end' | 'enter' | 'ctrl-c';
-export type Press = { at: number; key: Key };
-
 export type TerminalFrame = {
   rows: Line[];
   /** Where the cursor is, or null while ytd hides it. */
   cursor: { row: number; col: number } | null;
-  /** The last key pressed, for the overlay. */
-  press: Press | null;
   fade: number;
 };
 
@@ -160,19 +159,49 @@ export const mediaReading =
     };
   };
 
-/** A picker's state after the keys pressed so far. */
-function pickerAt(keys: Press[], t: number, n: number) {
+/** picker.handleKey: what a key does in the picker, if anything. */
+function action(stroke: Stroke) {
+  if (stroke.mods?.includes('ctrl')) {
+    if (stroke.key === 'p') return 'up';
+    if (stroke.key === 'n') return 'down';
+    if (stroke.key === 'c' || stroke.key === 'd') return 'abort';
+    return null;
+  }
+  switch (stroke.key) {
+    case 'ArrowUp':
+    case 'k':
+      return 'up';
+    case 'ArrowDown':
+    case 'j':
+      return 'down';
+    case 'Home':
+    case 'g':
+      return 'home';
+    case 'End':
+    case 'G':
+      return 'end';
+    case 'Enter':
+    case ' ':
+      return 'enter';
+    case 'Escape':
+    case 'q':
+      return 'abort';
+  }
+  return null;
+}
+
+/** A picker's state after the keys pressed so far. Up and down wrap around. */
+function pickerAt(keys: Stroke[], n: number) {
   const size = Math.min(n, PICKER_ROWS);
   let cur = 0;
   let top = 0;
-  for (const { at, key } of keys) {
-    if (at > t) break;
-    // picker.handleKey: up and down wrap around.
-    if (key === 'enter') return { cur, top, size, chosen: true };
-    if (key === 'up') cur = (cur - 1 + n) % n;
-    if (key === 'down') cur = (cur + 1) % n;
-    if (key === 'home') cur = 0;
-    if (key === 'end') cur = n - 1;
+  for (const key of keys) {
+    const act = action(key);
+    if (act === 'enter') return { cur, top, size, chosen: true };
+    if (act === 'up') cur = (cur - 1 + n) % n;
+    if (act === 'down') cur = (cur + 1) % n;
+    if (act === 'home') cur = 0;
+    if (act === 'end') cur = n - 1;
     top = Math.min(Math.max(top, cur - size + 1), cur);
   }
   return { cur, top, size, chosen: false };
@@ -185,9 +214,12 @@ export class Trail {
   private hidden = false;
   private started = false;
   private gapNext = false;
-  private keys: Press[] = [];
 
-  constructor(private readonly t: number) {}
+  /** `keys` is the moment's keystroke script; `t` the instant drawn. */
+  constructor(
+    private readonly t: number,
+    private readonly keys: Stroke[] = []
+  ) {}
 
   private println(...spans: Span[]) {
     this.lines.push(spans.filter(span => span.text));
@@ -208,31 +240,26 @@ export class Trail {
 
   /* Shell ------------------------------------------------------------------ */
 
-  /** The prompt, with `command` typed one key at a time from `from`. */
-  prompt(command: string, from: number, perKey = 0.032) {
-    const typed = Math.max(0, Math.floor((this.t - from) / perKey) + 1);
-    this.typing = [
+  /**
+   * A shell prompt shown from `since`, holding `already` and whatever has
+   * been typed or pasted into it until Enter at `enter`. Returns whether Enter was hit:
+   * the command stays and its output starts below.
+   */
+  prompt(since: number, enter: number, already = '') {
+    const line = [
       s('$ ', 'prompt'),
-      s(command.slice(0, this.t < from ? 0 : typed))
+      s(already + typedText(this.keys, since, Math.min(this.t, enter)))
     ];
-    return this.t >= from + command.length * perKey;
-  }
-
-  /** Enter at the prompt: the command stays, its output starts below. */
-  enter(at: number) {
-    if (this.t < at || !this.typing) return false;
-    this.lines.push(this.typing);
-    this.typing = null;
-    this.keys.push({ at, key: 'enter' });
+    if (this.t < enter) {
+      this.typing = line;
+      return false;
+    }
+    this.lines.push(line);
     return true;
   }
 
   print(text: string) {
     this.println(s(text));
-  }
-
-  press(at: number, key: Key) {
-    if (this.t >= at) this.keys.push({ at, key });
   }
 
   /* ui.go ------------------------------------------------------------------ */
@@ -294,10 +321,9 @@ export class Trail {
     note: string,
     header: string,
     rows: string[],
-    keys: Press[]
+    since: number
   ) {
-    const state = pickerAt(keys, this.t, rows.length);
-    for (const key of keys) if (key.at <= this.t) this.keys.push(key);
+    const state = pickerAt(between(this.keys, since, this.t), rows.length);
     this.gap();
     if (state.chosen) {
       this.picked(label, rows[state.cur] ?? '');
@@ -401,7 +427,7 @@ export class Trail {
 
   /* Output ----------------------------------------------------------------- */
 
-  /** The screen: wrapped, scrolled to the bottom, with the cursor and key. */
+  /** The screen: wrapped, scrolled to the bottom, with the cursor. */
   frame(fade = 1): TerminalFrame {
     const all = [...this.lines, ...(this.typing ? [this.typing] : [])];
     const rows = all.flatMap(line => wrap(line, COLS));
@@ -409,11 +435,9 @@ export class Trail {
     const cursorRow = this.typing ? rows.length - 1 : rows.length;
     const cursorCol = this.typing ? width(rows[rows.length - 1] ?? []) : 0;
     const skip = Math.max(0, cursorRow + 1 - ROWS);
-    const press = this.keys.filter(k => k.at <= this.t).at(-1) ?? null;
     return {
       rows: rows.slice(skip),
       cursor: this.hidden ? null : { row: cursorRow - skip, col: cursorCol },
-      press,
       fade
     };
   }

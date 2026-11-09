@@ -1,9 +1,18 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef
+} from 'react';
 
+import { type KeystrokeFrame, keystrokesAt } from '@/motion/keystrokes';
 import { type YtdKind, ytdScenes } from '@/motion/ytd/moments';
-import { COLS, type Key, type Line, ROWS, type Tone } from '@/motion/ytd/trail';
+import { COLS, type Line, ROWS, type Tone } from '@/motion/ytd/trail';
+
+import { KeystrokeBar } from './keystrokes';
 
 /** pkg/ui's lipgloss colours, on a dark terminal. */
 const FG = '#e4e4e7';
@@ -110,21 +119,14 @@ const rowHtml = (line: Line) =>
     .map(span => spanHtml(span.text, span.tone ? tones[span.tone] : ''))
     .join('')}</div>`;
 
-const keyLabels: Record<Key, string> = {
-  up: '↑',
-  down: '↓',
-  home: 'g',
-  end: 'G',
-  enter: '⏎',
-  'ctrl-c': '⌃C'
-};
-/** How long a key stays on the overlay after it is pressed. */
-const KEY_HOLD = 0.55;
+/** Room under the window for the keystrokes, at full size. */
+const KEYS_BAND = 52;
 
 /**
  * A `ytd down` session in a terminal window, scaled to fit the stage. The
  * screen is rebuilt only when its text changes, which is once per tick of
- * ytd's own redraw, a key or a keystroke at the prompt.
+ * ytd's own redraw, a key or a keystroke at the prompt. The keys pressed
+ * show underneath, from the same script that drives the terminal.
  */
 export function LiveTerminal({
   kind,
@@ -139,17 +141,28 @@ export function LiveTerminal({
   const screen = useRef<HTMLDivElement>(null);
   const rows = useRef<HTMLDivElement>(null);
   const cursor = useRef<HTMLSpanElement>(null);
-  const key = useRef<HTMLSpanElement>(null);
+  const drawKeys = useRef<(frame: KeystrokeFrame, t: number) => void>(() => {});
+  const registerKeys = useCallback(
+    (draw: (frame: KeystrokeFrame, t: number) => void) => {
+      drawKeys.current = draw;
+    },
+    []
+  );
 
   useLayoutEffect(() => {
     const el = box.current;
     const w = win.current;
     if (!el || !w) return;
     const fit = () => {
+      // The keys shrink with small tiles, but stay readable.
+      const keys = Math.min(1, Math.max(0.6, el.clientWidth / 900));
+      const band = KEYS_BAND * keys;
       const k = Math.min(
         (el.clientWidth / w.offsetWidth) * 0.92,
-        (el.clientHeight / w.offsetHeight) * 0.9
+        ((el.clientHeight - band) / w.offsetHeight) * 0.92
       );
+      el.style.setProperty('--keys-scale', String(keys));
+      w.style.top = `calc(50% - ${band / 2}px)`;
       w.style.transform = `translate(-50%, -50%) scale(${k})`;
     };
     fit();
@@ -177,18 +190,7 @@ export function LiveTerminal({
           c.style.top = `${PAD_Y + frame.cursor.row * LINE}px`;
         }
       }
-      const k = key.current;
-      if (k) {
-        const age = frame.press ? t - frame.press.at : Infinity;
-        if (frame.press && age < KEY_HOLD) {
-          k.textContent = keyLabels[frame.press.key];
-          // Pressed: a quick dip, then a fade at the end of the hold.
-          const dip = Math.min(1, age / 0.08);
-          k.style.opacity = String(Math.min(1, (KEY_HOLD - age) / 0.18));
-          k.style.transform = `scale(${0.9 + 0.1 * dip})`;
-          k.style.display = 'flex';
-        } else k.style.display = 'none';
-      }
+      drawKeys.current(keystrokesAt(scene.strokes, t), t);
     });
   }, [scene, onDraw]);
 
@@ -230,12 +232,7 @@ export function LiveTerminal({
           />
         </div>
       </div>
-      {/* The key being pressed. Not part of the app. */}
-      <span
-        ref={key}
-        aria-hidden
-        className="pointer-events-none absolute right-4 bottom-4 hidden h-8 min-w-8 items-center justify-center rounded-lg bg-white/[0.1] px-2 font-mono text-[13px] text-white/90 ring-1 ring-white/20 backdrop-blur-md"
-      />
+      <KeystrokeBar register={registerKeys} />
     </div>
   );
 }

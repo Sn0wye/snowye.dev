@@ -235,8 +235,8 @@ export const moments: Moment[] = [
     project: 'ytd',
     title: { en: 'Quality picker', pt: 'Seletor de qualidade' },
     summary: {
-      en: 'Arrow keys in raw mode, redrawn on each press. Held down, the cursor runs with the key repeat; past twelve rows the list scrolls under a count of what is left, End jumps to the last row and down from there wraps to the top.',
-      pt: 'Setas em raw mode, redesenhado a cada tecla. Segurando, o cursor corre com a repetição do teclado; passando de doze linhas a lista rola sob a contagem do que falta, End pula para a última linha e descer dali volta ao topo.'
+      en: 'Arrow keys in raw mode, redrawn on each press. Up from the top wraps to the last row, scrolling the list past its first twelve under a count of what is left; down from there wraps back.',
+      pt: 'Setas em raw mode, redesenhado a cada tecla. Subir do topo dá a volta até a última linha e rola a lista além das doze primeiras, sob a contagem do que falta; descer dali volta ao topo.'
     },
     live: 'quality-picker'
   },
@@ -255,8 +255,8 @@ export const moments: Moment[] = [
     project: 'ytd',
     title: { en: 'Ctrl-C', pt: 'Ctrl-C' },
     summary: {
-      en: 'Cancelled mid-download, the bar stays where it stopped, the trail closes as cancelled, the cursor comes back and the exit code is 130.',
-      pt: 'Cancelado no meio do download, a barra fica onde parou, o trilho fecha como cancelado, o cursor volta e o código de saída é 130.'
+      en: 'Cancelled mid-download, the bar stays where it stopped, the trail closes as cancelled and the cursor comes back.',
+      pt: 'Cancelado no meio do download, a barra fica onde parou, o trilho fecha como cancelado e o cursor volta.'
     },
     live: 'ctrl-c'
   }
