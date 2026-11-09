@@ -3,12 +3,14 @@
  * showcases and motion. Only motion exists so far. A moment is one piece of
  * a real product's motion: shown live where the app's curves are pure
  * functions of time (ported and verified against SwiftUI, or, for a web app,
- * its own CSS timings and Motion springs), and as a screen recording where
+ * its own CSS timings and Motion springs, or, for a terminal app, its Go
+ * redraw loop and the cadence of what it reports), and as a screen recording where
  * it depends on the app's own views. Adding a project means
  * adding entries here; the pages read nothing else.
  */
 
 import type { ListasKind } from './listas/moments';
+import type { YtdKind } from './ytd/moments';
 
 type Copy = { en: string; pt: string };
 
@@ -18,10 +20,18 @@ export type Project = {
   tagline: Copy;
   stack: string;
   links: { label: string; url: string }[];
+  /** A phone screen by default; a terminal needs a wide frame. */
+  frame?: 'wide';
 };
 
 export type LiveKind =
-  'settled-coin' | 'splash' | 'loader' | 'amount' | 'charts' | ListasKind;
+  | 'settled-coin'
+  | 'splash'
+  | 'loader'
+  | 'amount'
+  | 'charts'
+  | ListasKind
+  | YtdKind;
 
 export type Recording = {
   /** Basename under /static/motion/<project>/. */
@@ -76,6 +86,17 @@ export const projects: Project[] = [
       },
       { label: 'GitHub', url: 'https://github.com/Sn0wye/sharedlists' }
     ]
+  },
+  {
+    slug: 'ytd',
+    name: 'ytd',
+    tagline: {
+      en: 'YouTube downloads from the terminal: pick the video and audio quality, get one file back. Plain Go, no ffmpeg unless it has to re-encode.',
+      pt: 'Downloads do YouTube pelo terminal: escolha a qualidade do vídeo e do áudio e receba um arquivo só. Go puro, sem ffmpeg a não ser que precise recodificar.'
+    },
+    stack: 'Go · Lip Gloss',
+    links: [{ label: 'GitHub', url: 'https://github.com/Sn0wye/ytd' }],
+    frame: 'wide'
   }
 ];
 
@@ -198,6 +219,46 @@ export const moments: Moment[] = [
       pt: 'A Ana leva um item para o topo, depois desliza outro para apagar e desfaz. Os arrastos ficam no celular dela; o Gabriel vê a cor dela na linha que ela toca, e cada mudança chegando para ele.'
     },
     live: 'someone-else'
+  },
+  {
+    slug: 'ytd-down',
+    project: 'ytd',
+    title: { en: 'Down, start to finish', pt: 'Download, do início ao fim' },
+    summary: {
+      en: 'One step at a time down the rail: a spinner while it looks the video up, two pickers, a bar for the download, and the file at the bottom.',
+      pt: 'Um passo de cada vez descendo o trilho: um spinner enquanto busca o vídeo, dois seletores, uma barra para o download e o arquivo no fim.'
+    },
+    live: 'ytd-down'
+  },
+  {
+    slug: 'quality-picker',
+    project: 'ytd',
+    title: { en: 'Quality picker', pt: 'Seletor de qualidade' },
+    summary: {
+      en: 'Arrow keys in raw mode, redrawn on each press. Held down, the cursor runs with the key repeat; past twelve rows the list scrolls under a count of what is left, End jumps to the last row and down from there wraps to the top.',
+      pt: 'Setas em raw mode, redesenhado a cada tecla. Segurando, o cursor corre com a repetição do teclado; passando de doze linhas a lista rola sob a contagem do que falta, End pula para a última linha e descer dali volta ao topo.'
+    },
+    live: 'quality-picker'
+  },
+  {
+    slug: 're-encode',
+    project: 'ytd',
+    title: { en: 'Re-encoding to mp3', pt: 'Recodificando para mp3' },
+    summary: {
+      en: 'ffmpeg reports its progress on a pipe every half second, so its bar steps in media time while the spinner keeps its own beat.',
+      pt: 'O ffmpeg manda o progresso por um pipe a cada meio segundo, então a barra anda em tempo de mídia enquanto o spinner segue no próprio ritmo.'
+    },
+    live: 're-encode'
+  },
+  {
+    slug: 'ctrl-c',
+    project: 'ytd',
+    title: { en: 'Ctrl-C', pt: 'Ctrl-C' },
+    summary: {
+      en: 'Cancelled mid-download, the bar stays where it stopped, the trail closes as cancelled, the cursor comes back and the exit code is 130.',
+      pt: 'Cancelado no meio do download, a barra fica onde parou, o trilho fecha como cancelado, o cursor volta e o código de saída é 130.'
+    },
+    live: 'ctrl-c'
   }
 ];
 
