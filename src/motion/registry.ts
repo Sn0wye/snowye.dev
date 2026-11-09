@@ -71,8 +71,8 @@ export const projects: Project[] = [
     stack: 'Next.js · Rust · WebSockets · Motion',
     links: [
       {
-        label: 'sharedlists-delta.vercel.app',
-        url: 'https://sharedlists-delta.vercel.app'
+        label: 'sharedlists.snowye.dev',
+        url: 'https://sharedlists.snowye.dev'
       },
       { label: 'GitHub', url: 'https://github.com/Sn0wye/sharedlists' }
     ]
