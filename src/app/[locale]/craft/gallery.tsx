@@ -10,7 +10,7 @@ import { cn } from '@/lib/cn';
 import type { Moment, Project } from '@/motion/registry';
 import { MomentStage, MomentTile, type StageCopy } from '@/motion/stage/stage';
 
-/** Tiles and the open stage, per project frame: a phone or a terminal. */
+/** Tiles and the open stage, per project frame: a phone, a terminal or a browser. */
 const frames = {
   phone: {
     grid: 'sm:grid-cols-2 lg:grid-cols-3',
@@ -21,6 +21,11 @@ const frames = {
     grid: 'sm:grid-cols-2',
     tile: 'aspect-[8/5]',
     stage: 'aspect-[8/5] w-[min(64rem,calc(100vw-2.5rem),calc(64svh*1.6))]'
+  },
+  browser: {
+    grid: 'sm:grid-cols-2',
+    tile: 'aspect-[5/4]',
+    stage: 'aspect-[5/4] w-[min(58rem,calc(100vw-2.5rem),calc(72svh*1.25))]'
   }
 };
 

@@ -14,6 +14,10 @@ import {
 import { cn } from '@/lib/cn';
 import { spring } from '@/lib/motion';
 import { useTimeScale } from '@/lib/time-scale';
+import {
+  type CloudCertifyKind,
+  cloudcertifyScenes
+} from '@/motion/cloudcertify/moments';
 import { type ListasKind, listasScenes } from '@/motion/listas/moments';
 import type { LiveKind, Recording } from '@/motion/registry';
 import { duration as amountDuration } from '@/motion/splitty/amount';
@@ -30,6 +34,7 @@ import { type YtdKind, ytdScenes } from '@/motion/ytd/moments';
 import { type Clock, useClock, useRefreshRate } from './clock';
 import { LiveAmount } from './live-amount';
 import { LiveCharts } from './live-charts';
+import { LiveCloudCertify } from './live-cloudcertify';
 import { LiveCoin } from './live-coin';
 import { LiveListas } from './live-listas';
 import { LiveTerminal } from './live-terminal';
@@ -52,14 +57,26 @@ const ytdDurations = Object.fromEntries(
   Object.entries(ytdScenes).map(([kind, scene]) => [kind, scene().duration])
 ) as Record<YtdKind, number>;
 
+const isCloudCertify = (kind: LiveKind): kind is CloudCertifyKind =>
+  kind in cloudcertifyScenes;
+
+const cloudcertifyDurations = Object.fromEntries(
+  Object.entries(cloudcertifyScenes).map(([kind, scene]) => [
+    kind,
+    scene().duration
+  ])
+) as Record<CloudCertifyKind, number>;
+
 const durationOf = (kind: LiveKind) =>
   isListas(kind)
     ? listasDurations[kind]
     : isYtd(kind)
       ? ytdDurations[kind]
-      : kind === 'charts'
-        ? chartsDuration
-        : (coinTimelines[kind]?.().duration ?? amountDuration);
+      : isCloudCertify(kind)
+        ? cloudcertifyDurations[kind]
+        : kind === 'charts'
+          ? chartsDuration
+          : (coinTimelines[kind]?.().duration ?? amountDuration);
 
 /** The app's background in dark appearance. */
 const APP_BACKGROUND = '#09090b';
@@ -130,6 +147,8 @@ function LiveView({
 
   if (isListas(kind)) return <LiveListas kind={kind} onDraw={register} />;
   if (isYtd(kind)) return <LiveTerminal kind={kind} onDraw={register} />;
+  if (isCloudCertify(kind))
+    return <LiveCloudCertify kind={kind} onDraw={register} />;
   if (kind === 'amount') return <LiveAmount onDraw={register} />;
   if (kind === 'charts') return <LiveCharts onDraw={register} />;
   if (!coin) return null;
