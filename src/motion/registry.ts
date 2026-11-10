@@ -9,6 +9,7 @@
  * adding entries here; the pages read nothing else.
  */
 
+import type { CloudCertifyKind } from './cloudcertify/moments';
 import type { ListasKind } from './listas/moments';
 import type { YtdKind } from './ytd/moments';
 
@@ -20,8 +21,8 @@ export type Project = {
   tagline: Copy;
   stack: string;
   links: { label: string; url: string }[];
-  /** A phone screen by default; a terminal needs a wide frame. */
-  frame?: 'wide';
+  /** A phone screen by default; a terminal needs a wide frame, a web app a browser window. */
+  frame?: 'wide' | 'browser';
 };
 
 export type LiveKind =
@@ -31,7 +32,8 @@ export type LiveKind =
   | 'amount'
   | 'charts'
   | ListasKind
-  | YtdKind;
+  | YtdKind
+  | CloudCertifyKind;
 
 export type Recording = {
   /** Basename under /static/motion/<project>/. */
@@ -70,6 +72,26 @@ export const projects: Project[] = [
       },
       { label: 'GitHub', url: 'https://github.com/Sn0wye/splitty' }
     ]
+  },
+  {
+    slug: 'cloudcertify',
+    name: 'CloudCertify',
+    tagline: {
+      en: 'Free practice for AWS certifications: exam-style questions, drills drawn from what you missed, and a confidence rating that tells a lucky guess from a misconception. Next.js on an ASP.NET Core API.',
+      pt: 'Prática gratuita para certificações AWS: questões no estilo da prova, drills montados a partir do que você errou e uma nota de confiança que separa um chute certo de um equívoco. Next.js sobre uma API em ASP.NET Core.'
+    },
+    stack: 'Next.js · ASP.NET Core · PostgreSQL · Motion',
+    links: [
+      {
+        label: 'cloudcertify.snowye.dev',
+        url: 'https://cloudcertify.snowye.dev'
+      },
+      {
+        label: 'GitHub',
+        url: 'https://github.com/CloudCertify/CloudCertify'
+      }
+    ],
+    frame: 'browser'
   },
   {
     slug: 'listas',
@@ -169,6 +191,46 @@ export const moments: Moment[] = [
       pt: 'Períodos, visões e categorias: o donut desliza entre eles e cada número rola até o valor novo.'
     },
     live: 'charts'
+  },
+  {
+    slug: 'check',
+    project: 'cloudcertify',
+    title: { en: 'Check', pt: 'Conferir' },
+    summary: {
+      en: 'A wrong pick, checked. It shakes, the right answer nods, and the explanation springs open and scrolls itself into view. Continue brings the next question in from the right.',
+      pt: 'Uma escolha errada, conferida. Ela treme, a resposta certa acena, e a explicação abre numa mola e rola sozinha até ficar à vista. Continuar traz a próxima questão pela direita.'
+    },
+    live: 'check'
+  },
+  {
+    slug: 'keyboard-drill',
+    project: 'cloudcertify',
+    title: { en: 'From the keyboard', pt: 'Pelo teclado' },
+    summary: {
+      en: 'Digits pick and move focus with them, Enter checks and then continues. A question that wants two answers takes two digits.',
+      pt: 'Os números escolhem e levam o foco junto, Enter confere e depois continua. Uma questão que pede duas respostas leva dois números.'
+    },
+    live: 'keyboard-drill'
+  },
+  {
+    slug: 'revisit',
+    project: 'cloudcertify',
+    title: { en: 'Marked to revisit', pt: 'Marcada para revisar' },
+    summary: {
+      en: 'In an exam nothing is graded until the end, so you rate how sure you are. A guess puts a mark on the navigator, and jumping back to it slides the question in from the left.',
+      pt: 'Numa prova nada é corrigido até o fim, então você diz o quanto tem certeza. Um chute deixa uma marca no navegador, e voltar a ela traz a questão pela esquerda.'
+    },
+    live: 'revisit'
+  },
+  {
+    slug: 'hero-chip',
+    project: 'cloudcertify',
+    title: { en: 'Rotating chip', pt: 'Selo rotativo' },
+    summary: {
+      en: 'The landing page names each provider in turn. The old word drops out letter by letter from the end, and the new one rises in only once it has gone.',
+      pt: 'A landing page nomeia cada provedor por vez. A palavra antiga sai letra por letra a partir do fim, e a nova só sobe depois que ela sumiu.'
+    },
+    live: 'hero-chip'
   },
   {
     slug: 'tick',
