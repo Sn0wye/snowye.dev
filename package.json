@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@types/bun": "^1.4.0",
-    "@types/node": "26.6.5",
+    "@types/node": "26.6.6",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "postcss": "^8.4.35",
@@ -68,6 +68,6 @@
     "unrs-resolver"
   ],
   "engines": {
-    "node": "24.x"
+    "node": "26.x"
   }
 }
