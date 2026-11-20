@@ -4,8 +4,8 @@ import { DURATION, formatSize } from './video';
 
 /**
  * ytd's pkg/ui, ported to a pure function of time. A moment replays the
- * same calls cmd/down.go makes (Intro, Task, Info, Select, StartProgress,
- * Saved, Fail) on a fresh Trail for every frame, and each call draws what
+ * same calls cmd/down.go and cmd/playlist.go make (Intro, Task, Info,
+ * Describe, Select, MultiSelect, StartProgress, Saved, Finish, Fail) on a fresh Trail for every frame, and each call draws what
  * the terminal shows at that instant: a live block at its last tick, a
  * picker after the keys pressed so far, a finished step once it is done.
  * What the person types comes from the moment's keystroke script, so the
@@ -53,44 +53,77 @@ const glyph = {
 const spinner = ['◒', '◐', '◓', '◑'];
 
 const s = (text: string, tone?: Tone): Span => ({ text, tone });
+/**
+ * Cells a character takes in a terminal: two for East Asian wide ones
+ * (Hangul, CJK, fullwidth forms, most emoji), one otherwise.
+ */
+export const cellWidth = (ch: string) => {
+  const c = ch.codePointAt(0) ?? 0;
+  return (c >= 0x1100 && c <= 0x115f) ||
+    (c >= 0x2e80 && c <= 0xa4cf) ||
+    (c >= 0xac00 && c <= 0xd7a3) ||
+    (c >= 0xf900 && c <= 0xfaff) ||
+    (c >= 0xfe30 && c <= 0xfe4f) ||
+    (c >= 0xff00 && c <= 0xff60) ||
+    (c >= 0xffe0 && c <= 0xffe6) ||
+    (c >= 0x1f300 && c <= 0x1f64f) ||
+    (c >= 0x1f900 && c <= 0x1f9ff) ||
+    (c >= 0x20000 && c <= 0x3fffd)
+    ? 2
+    : 1;
+};
+
+const textWidth = (text: string) =>
+  [...text].reduce((n, ch) => n + cellWidth(ch), 0);
 const width = (line: Line) =>
-  line.reduce((n, span) => n + [...span.text].length, 0);
+  line.reduce((n, span) => n + textWidth(span.text), 0);
 
 /** ansi.Truncate: cut to w cells, ending in the tail. */
 function truncate(line: Line, w: number, tail = '…'): Line {
   if (width(line) <= w) return line;
   const out: Line = [];
-  let room = w - tail.length;
+  let room = w - textWidth(tail);
   for (const span of line) {
-    const chars = [...span.text];
-    if (chars.length <= room) {
+    const fits = textWidth(span.text);
+    if (fits <= room) {
       out.push(span);
-      room -= chars.length;
+      room -= fits;
       continue;
     }
-    out.push({ ...span, text: chars.slice(0, room).join('') + tail });
+    let kept = '';
+    for (const ch of span.text) {
+      if (cellWidth(ch) > room) break;
+      kept += ch;
+      room -= cellWidth(ch);
+    }
+    out.push({ ...span, text: kept + tail });
     return out;
   }
   return out;
 }
 
-/** The terminal soft-wraps a printed line at the last column. */
+/**
+ * The terminal soft-wraps a printed line at the last column; a wide
+ * character that would straddle it moves to the next row.
+ */
 function wrap(line: Line, cols: number): Line[] {
   if (width(line) <= cols) return [line];
   const rows: Line[] = [[]];
   let used = 0;
   for (const span of line) {
-    let chars = [...span.text];
-    while (chars.length) {
-      if (used === cols) {
+    let text = '';
+    for (const ch of span.text) {
+      const w = cellWidth(ch);
+      if (used + w > cols) {
+        if (text) rows[rows.length - 1]?.push({ ...span, text });
         rows.push([]);
         used = 0;
+        text = '';
       }
-      const take = chars.slice(0, cols - used);
-      rows[rows.length - 1]?.push({ ...span, text: take.join('') });
-      used += take.length;
-      chars = chars.slice(take.length);
+      text += ch;
+      used += w;
     }
+    if (text) rows[rows.length - 1]?.push({ ...span, text });
   }
   return rows;
 }
@@ -108,7 +141,7 @@ export const clock = (seconds: number) => {
 };
 
 /** ui.Duration: 45s, 3m12s, 1h05m. */
-const duration = (seconds: number) => {
+export const duration = (seconds: number) => {
   const d = Math.round(seconds);
   if (d < 60) return `${d}s`;
   if (d < 3600)
@@ -159,7 +192,7 @@ export const mediaReading =
     };
   };
 
-/** picker.handleKey: what a key does in the picker, if anything. */
+/** picker.move and isAbort: what a key does in either list, if anything. */
 function action(stroke: Stroke) {
   if (stroke.mods?.includes('ctrl')) {
     if (stroke.key === 'p') return 'up';
@@ -174,6 +207,10 @@ function action(stroke: Stroke) {
     case 'ArrowDown':
     case 'j':
       return 'down';
+    case 'PageUp':
+      return 'pageUp';
+    case 'PageDown':
+      return 'pageDown';
     case 'Home':
     case 'g':
       return 'home';
@@ -181,8 +218,9 @@ function action(stroke: Stroke) {
     case 'G':
       return 'end';
     case 'Enter':
-    case ' ':
       return 'enter';
+    case ' ':
+      return 'space';
     case 'Escape':
     case 'q':
       return 'abort';
@@ -190,21 +228,73 @@ function action(stroke: Stroke) {
   return null;
 }
 
-/** A picker's state after the keys pressed so far. Up and down wrap around. */
+type Action = NonNullable<ReturnType<typeof action>>;
+
+/** picker.move: up and down wrap around; page keys stop at the ends. */
+function move(act: Action, cur: number, n: number, page: number) {
+  switch (act) {
+    case 'up':
+      return (cur - 1 + n) % n;
+    case 'down':
+      return (cur + 1) % n;
+    case 'pageUp':
+      return Math.max(cur - page, 0);
+    case 'pageDown':
+      return Math.min(cur + page, n - 1);
+    case 'home':
+      return 0;
+    case 'end':
+      return n - 1;
+  }
+  return null;
+}
+
+/** list.run: the window follows the cursor after each key. */
+const follow = (top: number, cur: number, size: number) =>
+  Math.min(Math.max(top, cur - size + 1), cur);
+
+/** The quality picker's state after the keys pressed so far. */
 function pickerAt(keys: Stroke[], n: number) {
   const size = Math.min(n, PICKER_ROWS);
   let cur = 0;
   let top = 0;
   for (const key of keys) {
     const act = action(key);
-    if (act === 'enter') return { cur, top, size, chosen: true };
-    if (act === 'up') cur = (cur - 1 + n) % n;
-    if (act === 'down') cur = (cur + 1) % n;
-    if (act === 'home') cur = 0;
-    if (act === 'end') cur = n - 1;
-    top = Math.min(Math.max(top, cur - size + 1), cur);
+    if (!act) continue;
+    // handleKey: enter or space picks the row under the cursor.
+    if (act === 'enter' || act === 'space')
+      return { cur, top, size, chosen: true };
+    cur = move(act, cur, n, size) ?? cur;
+    top = follow(top, cur, size);
   }
   return { cur, top, size, chosen: false };
+}
+
+/**
+ * The playlist checklist's state after the keys pressed so far: every row
+ * starts selected; enter confirms only with something selected.
+ */
+function checklistAt(keys: Stroke[], n: number) {
+  const size = Math.min(n, PICKER_ROWS);
+  const sel = Array.from({ length: n }, () => true);
+  let cur = 0;
+  let top = 0;
+  for (const key of keys) {
+    const act = action(key);
+    if (act === 'enter' && sel.some(Boolean))
+      return { cur, top, size, sel, chosen: true };
+    const next = act ? move(act, cur, n, size) : null;
+    if (next !== null) cur = next;
+    else if (!key.mods?.length) {
+      // multiKey: space or x toggles, a selects all (none when all are), i inverts.
+      if (key.key === ' ' || key.key === 'x') sel[cur] = !sel[cur];
+      if (key.key === 'a' || key.key === 'A') sel.fill(!sel.every(Boolean));
+      if (key.key === 'i' || key.key === 'I')
+        for (let i = 0; i < n; i++) sel[i] = !sel[i];
+    }
+    top = follow(top, cur, size);
+  }
+  return { cur, top, size, sel, chosen: false };
 }
 
 export class Trail {
@@ -296,12 +386,13 @@ export class Trail {
   }
 
   info(title: string, author: string, seconds: number) {
+    this.describe(title, `${author} · ${clock(seconds)}`);
+  }
+
+  /** A bold title and a dim detail under the current step. */
+  describe(title: string, detail: string) {
     this.println(this.rail(), s('  '), s(title, 'bold'));
-    this.println(
-      this.rail(),
-      s('  '),
-      s(`${author} · ${clock(seconds)}`, 'dim')
-    );
+    this.println(this.rail(), s('  '), s(detail, 'dim'));
     this.gapNext = true;
   }
 
@@ -351,6 +442,60 @@ export class Trail {
     const below = rows.length - top - size;
     if (below > 0)
       lines.push([this.rail(), s('    '), s(`… ${below} more`, 'dim')]);
+    this.live(lines);
+    return null;
+  }
+
+  /**
+   * MultiSelect: the checklist under `label`, every row selected, until
+   * Enter; then `done(n)` as a done step. Returns the kept indexes, or null
+   * while the checklist is open.
+   */
+  multiSelect(
+    label: string,
+    header: string,
+    rows: string[],
+    done: (n: number) => string,
+    since: number
+  ) {
+    const state = checklistAt(between(this.keys, since, this.t), rows.length);
+    const kept = state.sel.flatMap((on, i) => (on ? [i] : []));
+    this.gap();
+    if (state.chosen) {
+      this.picked(label, done(kept.length));
+      return kept;
+    }
+    this.println(
+      s(glyph.active, 'accent'),
+      s(`  ${label}`),
+      s('  '),
+      s('↑↓ · space toggle · a all/none · i invert · enter', 'dim')
+    );
+    const { cur, top, size, sel } = state;
+    const lines: Line[] = [
+      [this.rail(), s('      '), s(header.trimStart(), 'dim')]
+    ];
+    for (let i = top; i < top + size; i++) {
+      const row = rows[i] ?? '';
+      const cursor = i === cur ? s('›', 'accent') : s(' ');
+      lines.push(
+        sel[i]
+          ? [
+              this.rail(),
+              s('  '),
+              cursor,
+              s(' '),
+              s('◼', 'accent'),
+              s(` ${row}`)
+            ]
+          : [this.rail(), s('  '), cursor, s(' '), s(`◻ ${row}`, 'dim')]
+      );
+    }
+    const status: string[] = [];
+    const below = rows.length - top - size;
+    if (below > 0) status.push(`… ${below} more`);
+    status.push(`${kept.length} of ${rows.length} selected`);
+    lines.push([this.rail(), s('      '), s(status.join(' · '), 'dim')]);
     this.live(lines);
     return null;
   }
@@ -417,6 +562,17 @@ export class Trail {
       s('   '),
       s(`${formatSize(size)} · ${took.toFixed(1)}s`, 'dim')
     );
+  }
+
+  /** Finish: the summary, green when nothing failed, and its dim details. */
+  finish(ok: boolean, title: string, details: string[]) {
+    this.gap();
+    this.println(
+      s(glyph.close, 'rail'),
+      s('  '),
+      s(title, ok ? 'ok' : 'accent')
+    );
+    for (const line of details) this.println(s('   '), s(line, 'dim'));
   }
 
   cancelled() {

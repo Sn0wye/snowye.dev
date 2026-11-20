@@ -1,14 +1,28 @@
 import { type Script, script, type Stroke } from '@/motion/keystrokes';
 
-import { bytesReading, mediaReading, type TerminalFrame, Trail } from './trail';
+import {
+  bytesReading,
+  duration as shortDuration,
+  mediaReading,
+  type TerminalFrame,
+  Trail
+} from './trail';
 import {
   audioFor,
   audioHeader,
   audioRow,
   AUTHOR,
   DURATION,
+  entries,
+  entryHeader,
+  entryRow,
   formatSize,
+  ID,
+  PLAYLIST_TITLE,
+  PLAYLIST_URL,
+  playlistDir,
   savedPath,
+  shortTitle,
   TITLE,
   URL,
   VERSION,
@@ -18,10 +32,11 @@ import {
 } from './video';
 
 /**
- * `ytd down` sessions, scripted the way they run: the same calls in the
- * same order as cmd/down.go, the keys a person presses, and the time each
- * step takes on a fast connection. The first one types `ytd down ` and
- * pastes the link; the others start with their command already typed.
+ * ytd sessions, scripted the way they run: the same calls in the same order
+ * as cmd/down.go and cmd/playlist.go, the keys a person presses, and the
+ * time each step takes on a fast connection. The link, or just the video
+ * ID, is ytd's only argument. The first one types `ytd ` and pastes the
+ * link; the others start with their command already typed.
  */
 
 export type TerminalScene = {
@@ -47,9 +62,9 @@ const hiddenNote = (container: string) =>
     ? 'VP9 streams do not fit in mp4 without re-encoding; use --format webm or mkv to see them'
     : '';
 
-/** `ytd down `, ⌘V, Enter. Returns when Enter goes down. */
+/** `ytd `, ⌘V, Enter. Returns when Enter goes down. */
 function command(keys: Script) {
-  keys.type('ytd down ').wait(0.3).paste(URL).wait(0.45);
+  keys.type('ytd ').wait(0.3).paste(URL).wait(0.45);
   const enter = keys.now;
   keys.press('Enter');
   return enter;
@@ -57,10 +72,10 @@ function command(keys: Script) {
 
 /**
  * The steps every session starts with: the command, its intro and the
- * video. With `flags`, the command is on the prompt already.
+ * video. With `args`, the command is on the prompt already.
  */
-function opening(u: Trail, enter: number, found: number, flags?: string) {
-  const already = flags === undefined ? '' : `ytd down ${URL}${flags}`;
+function opening(u: Trail, enter: number, found: number, args?: string) {
+  const already = args === undefined ? '' : `ytd ${args}`;
   if (!u.prompt(0, enter, already)) return false;
   u.intro(VERSION);
   if (!u.task('Fetching video info', 'Video found', enter, found)) return false;
@@ -72,16 +87,16 @@ function opening(u: Trail, enter: number, found: number, flags?: string) {
 /* A whole download                                                            */
 /* -------------------------------------------------------------------------- */
 
-export const down = (): TerminalScene => {
+export const download = (): TerminalScene => {
   const keys = script(0.5);
   const enter = command(keys);
   const found = enter + 1;
-  // Look around the list, come back to the top one.
+  // Past 4K and 1440p AV1, one too far, back to 1080p H.264.
   keys
     .at(found + 0.65)
     .press('ArrowDown', [], 0.35)
+    .press('ArrowDown', [], 0.35)
     .press('ArrowDown', [], 0.55)
-    .press('ArrowUp', [], 0.35)
     .press('ArrowUp', [], 0.55);
   const videoPicked = keys.now;
   keys.press('Enter', [], 0.7);
@@ -90,7 +105,7 @@ export const down = (): TerminalScene => {
 
   const video = videoFor('mp4');
   const audio = audioFor('mp4');
-  const total = (video[0]?.size ?? 0) + (audio[0]?.size ?? 0);
+  const total = (video[2]?.size ?? 0) + (audio[0]?.size ?? 0);
   const seconds = 2.6;
   const downloaded = audioPicked + seconds;
   const muxed = downloaded + 0.55;
@@ -148,8 +163,9 @@ export const picker = (): TerminalScene => {
   const enter = 0.3;
   const found = 1.1;
   const keys = script(enter).press('Enter');
-  // mkv takes every codec, so the list is long enough to scroll.
-  const flags = ' --format mkv';
+  // The bare video ID works as well as a link. mkv takes every codec, so
+  // the list is long enough to scroll.
+  const args = `${ID} --format mkv`;
   keys
     .at(found + 0.7)
     .press('ArrowDown', [], 0.32)
@@ -183,7 +199,7 @@ export const picker = (): TerminalScene => {
     frame: t => {
       const u = new Trail(t, keys.strokes);
       const fade = seam(t, duration);
-      if (!opening(u, enter, found, flags)) return u.frame(fade);
+      if (!opening(u, enter, found, args)) return u.frame(fade);
       const v = u.select(
         'Video quality',
         hiddenNote('mkv'),
@@ -218,7 +234,7 @@ export const reencode = (): TerminalScene => {
   const enter = 0.5;
   const found = 1.35;
   const keys = script(enter).press('Enter');
-  const flags = ' --format mp3 --best';
+  const args = `${URL} --format mp3 --best`;
   // ffmpeg re-encodes, so every audio stream qualifies; --best takes the top.
   const best = audioFor('mp3')[0];
   const size = best?.size ?? 0;
@@ -240,7 +256,7 @@ export const reencode = (): TerminalScene => {
     frame: t => {
       const u = new Trail(t, keys.strokes);
       const fade = seam(t, duration);
-      if (!opening(u, enter, found, flags)) return u.frame(fade);
+      if (!opening(u, enter, found, args)) return u.frame(fade);
       if (best) u.picked('Audio quality', audioRow(best));
       if (
         !u.progress(
@@ -284,13 +300,13 @@ export const cancel = (): TerminalScene => {
   const found = 1.35;
   const interrupt = found + 2.7;
   const keys = script(enter).press('Enter').at(interrupt).press('c', ['ctrl']);
-  // Two connections: about a fifth of the usual speed.
-  const flags = ' --best -c 2';
+  // Two connections instead of eight: about 8 MB/s for the 4K AV1 stream.
+  const args = `${ID} --best -c 2`;
 
   const video = videoFor('mp4')[0];
   const audio = audioFor('mp4')[0];
   const total = (video?.size ?? 0) + (audio?.size ?? 0);
-  const bytes = transfer(total, 8.1);
+  const bytes = transfer(total, total / (8 * 2 ** 20));
   const duration = interrupt + 2.2;
 
   return {
@@ -299,7 +315,7 @@ export const cancel = (): TerminalScene => {
     frame: t => {
       const u = new Trail(t, keys.strokes);
       const fade = seam(t, duration);
-      if (!opening(u, enter, found, flags)) return u.frame(fade);
+      if (!opening(u, enter, found, args)) return u.frame(fade);
       if (video) u.picked('Video quality', videoRow(video));
       if (audio) u.picked('Audio quality', audioRow(audio));
       const stopped = u.progress(
@@ -316,8 +332,104 @@ export const cancel = (): TerminalScene => {
   };
 };
 
+/* -------------------------------------------------------------------------- */
+/* A playlist                                                                  */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * One AAC stream is a few MB, under ytd's 10 MB range, so each video comes
+ * down over a single connection: about 7 MB/s, not the parallel rate.
+ */
+const SINGLE = 7 * 2 ** 20;
+/** client.GetVideo for each entry, before its bar starts. */
+const LOOKUP = 0.3;
+/** Muxing a few MB of AAC into m4a, bar held at 100%. */
+const MUX = 0.08;
+
+export const playlist = (): TerminalScene => {
+  const enter = 0.5;
+  const found = 1.5;
+  const keys = script(enter).press('Enter');
+  // -a saves m4a: AAC copied as-is, no ffmpeg.
+  const already = `ytd ${PLAYLIST_URL} -a`;
+  // Clear the list, tick the original, the metal cover six down, then page
+  // to the end and tick the one with the Foo Fighters.
+  keys
+    .at(found + 0.8)
+    .press('a', [], 0.6)
+    .press(' ', [], 0.55);
+  for (let i = 0; i < 6; i++) keys.press('ArrowDown', [], i < 5 ? 0.16 : 0.45);
+  keys
+    .press(' ', [], 0.6)
+    .press('PageDown', [], 0.6)
+    .press('ArrowUp', [], 0.45)
+    .press(' ', [], 0.75);
+  const picked = keys.now;
+  keys.press('Enter');
+
+  // What those keys leave ticked.
+  const kept = [0, 6, 14];
+  // Each kept video: when its bar starts, how long it downloads, when it is done.
+  let at = picked;
+  const runs = kept.map(i => {
+    const e = entries[i] ?? { title: '', seconds: 0, size: 0 };
+    const since = at + LOOKUP;
+    const seconds = 0.12 + e.size / SINGLE;
+    const done = since + seconds + MUX;
+    at = done;
+    return { e, since, seconds, done };
+  });
+  const finished = at;
+  const duration = finished + 2.6;
+
+  return {
+    duration,
+    strokes: keys.strokes,
+    frame: t => {
+      const u = new Trail(t, keys.strokes);
+      const fade = seam(t, duration);
+      if (!u.prompt(0, enter, already)) return u.frame(fade);
+      u.intro(VERSION);
+      if (!u.task('Fetching playlist', 'Playlist found', enter, found))
+        return u.frame(fade);
+      u.describe(PLAYLIST_TITLE, `${entries.length} videos`);
+      const chosen = u.multiSelect(
+        'Videos',
+        entryHeader,
+        entries.map(entryRow),
+        n => `${n} of ${entries.length} videos`,
+        found
+      );
+      if (chosen === null) return u.frame(fade);
+      u.picked('Saving as m4a', `best quality · ${playlistDir}`);
+      for (const [k, run] of runs.entries()) {
+        if (t < run.since) return u.frame(fade);
+        const label = `[${k + 1}/${runs.length}] ${shortTitle(run.e.title)}`;
+        const size = run.e.size;
+        const ok = u.progress(
+          label,
+          run.since,
+          bytesReading(size, transfer(size, run.seconds, 0.08)),
+          {
+            at: run.done,
+            done: label,
+            detail: `${formatSize(size * 0.998)} · ${(run.done - run.since + LOOKUP).toFixed(1)}s`
+          }
+        );
+        if (!ok) return u.frame(fade);
+      }
+      u.finish(true, `${runs.length} saved, 0 skipped, 0 failed`, [
+        `${playlistDir} · ${shortDuration(finished - enter)}`
+      ]);
+      u.prompt(finished, Infinity);
+      return u.frame(fade);
+    }
+  };
+};
+
 export const ytdScenes = {
-  'ytd-down': down,
+  download,
+  playlist,
   'quality-picker': picker,
   're-encode': reencode,
   'ctrl-c': cancel

@@ -113,8 +113,8 @@ export const projects: Project[] = [
     slug: 'ytd',
     name: 'ytd',
     tagline: {
-      en: 'YouTube downloads from the terminal: pick the video and audio quality, get one file back. Plain Go, no ffmpeg unless it has to re-encode.',
-      pt: 'Downloads do YouTube pelo terminal: escolha a qualidade do vídeo e do áudio e receba um arquivo só. Go puro, sem ffmpeg a não ser que precise recodificar.'
+      en: 'YouTube videos and playlists from the terminal: pick the video and audio quality, get one file back. Plain Go, no ffmpeg unless it has to re-encode.',
+      pt: 'Vídeos e playlists do YouTube pelo terminal: escolha a qualidade do vídeo e do áudio e receba um arquivo só. Go puro, sem ffmpeg a não ser que precise recodificar.'
     },
     stack: 'Go · Lip Gloss',
     links: [{ label: 'GitHub', url: 'https://github.com/Sn0wye/ytd' }],
@@ -283,22 +283,35 @@ export const moments: Moment[] = [
     live: 'someone-else'
   },
   {
-    slug: 'ytd-down',
+    slug: 'download',
     project: 'ytd',
-    title: { en: 'Down, start to finish', pt: 'Download, do início ao fim' },
-    summary: {
-      en: 'One step at a time down the rail: a spinner while it looks the video up, two pickers, a bar for the download, and the file at the bottom.',
-      pt: 'Um passo de cada vez descendo o trilho: um spinner enquanto busca o vídeo, dois seletores, uma barra para o download e o arquivo no fim.'
+    title: {
+      en: 'A download, start to finish',
+      pt: 'Download, do início ao fim'
     },
-    live: 'ytd-down'
+    summary: {
+      en: 'The link is the only argument, pasted as is. One step at a time down the rail: a spinner while it looks the video up, two pickers, a bar for the download, and the file at the bottom.',
+      pt: 'O link é o único argumento, colado do jeito que veio. Um passo de cada vez descendo o trilho: um spinner enquanto busca o vídeo, dois seletores, uma barra para o download e o arquivo no fim.'
+    },
+    live: 'download'
+  },
+  {
+    slug: 'playlist',
+    project: 'ytd',
+    title: { en: 'A whole playlist', pt: 'Uma playlist inteira' },
+    summary: {
+      en: 'A playlist link opens a checklist with every video ticked. A clears it, space ticks the ones to keep, page down jumps to the end; then each video takes its own bar, one after another, and the trail closes on a count of what was saved.',
+      pt: 'Um link de playlist abre um checklist com todos os vídeos marcados. A desmarca tudo, espaço marca os que ficam, page down pula para o fim; depois cada vídeo ganha a própria barra, um depois do outro, e o trilho fecha com a contagem do que foi salvo.'
+    },
+    live: 'playlist'
   },
   {
     slug: 'quality-picker',
     project: 'ytd',
     title: { en: 'Quality picker', pt: 'Seletor de qualidade' },
     summary: {
-      en: 'Arrow keys in raw mode, redrawn on each press. Up from the top wraps to the last row, scrolling the list past its first twelve under a count of what is left; down from there wraps back.',
-      pt: 'Setas em raw mode, redesenhado a cada tecla. Subir do topo dá a volta até a última linha e rola a lista além das doze primeiras, sob a contagem do que falta; descer dali volta ao topo.'
+      en: 'Just the video ID works too. Arrow keys in raw mode, redrawn on each press. Up from the top wraps to the last row, scrolling the list past its first twelve under a count of what is left; down from there wraps back.',
+      pt: 'Só o ID do vídeo também funciona. Setas em raw mode, redesenhado a cada tecla. Subir do topo dá a volta até a última linha e rola a lista além das doze primeiras, sob a contagem do que falta; descer dali volta ao topo.'
     },
     live: 'quality-picker'
   },

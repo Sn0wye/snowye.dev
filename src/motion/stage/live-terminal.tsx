@@ -10,7 +10,13 @@ import {
 
 import { type KeystrokeFrame, keystrokesAt } from '@/motion/keystrokes';
 import { type YtdKind, ytdScenes } from '@/motion/ytd/moments';
-import { COLS, type Line, ROWS, type Tone } from '@/motion/ytd/trail';
+import {
+  cellWidth,
+  COLS,
+  type Line,
+  ROWS,
+  type Tone
+} from '@/motion/ytd/trail';
 
 import { KeystrokeBar } from './keystrokes';
 
@@ -51,12 +57,15 @@ const cells: Record<string, string> = {
   '◆': 'dia fill',
   '▲': 'tri',
   '●': 'dot fill',
-  '○': 'dot'
+  '○': 'dot',
+  '◼': 'sq fill',
+  '◻': 'sq'
 };
 
 const CSS = `
 .yt-c{display:inline-block;position:relative;width:1ch;height:${LINE}px;vertical-align:top;text-align:center}
 .yt-c::before,.yt-c::after{content:'';position:absolute}
+.yt-w{width:2ch;overflow:hidden}
 .yt-v::before{left:calc(50% - .7px);width:1.4px;top:0;bottom:0;background:currentColor}
 .yt-dr::before{left:calc(50% - .7px);width:1.4px;top:calc(50% - .7px);bottom:0;background:currentColor}
 .yt-dr::after{left:calc(50% - .7px);right:0;top:calc(50% - .7px);height:1.4px;background:currentColor}
@@ -74,6 +83,8 @@ const CSS = `
 .yt-tri::before{left:calc(50% - .33em);top:calc(50% - .3em);width:.66em;height:.56em;background:currentColor;clip-path:polygon(50% 0,100% 100%,0 100%)}
 .yt-dot::before{left:calc(50% - .26em);top:calc(50% - .26em);width:.52em;height:.52em;box-sizing:border-box;border:1.4px solid currentColor;border-radius:50%}
 .yt-dot.yt-fill::before{background:currentColor}
+.yt-sq::before{left:calc(50% - .26em);top:calc(50% - .26em);width:.52em;height:.52em;box-sizing:border-box;border:1.4px solid currentColor;border-radius:1.5px}
+.yt-sq.yt-fill::before{background:currentColor}
 `;
 
 const escape = (text: string) =>
@@ -108,7 +119,9 @@ function spanHtml(text: string, style: string) {
           .split(' ')
           .map(c => `yt-${c}`)
           .join(' ')}"></span>`
-      : `<span class="yt-c">${escape(ch)}</span>`;
+      : cellWidth(ch) === 2
+        ? `<span class="yt-c yt-w">${escape(ch)}</span>`
+        : `<span class="yt-c">${escape(ch)}</span>`;
   }
   flush();
   return style ? `<span style="${style}">${out}</span>` : out;
@@ -123,7 +136,7 @@ const rowHtml = (line: Line) =>
 const KEYS_BAND = 52;
 
 /**
- * A `ytd down` session in a terminal window, scaled to fit the stage. The
+ * A ytd session in a terminal window, scaled to fit the stage. The
  * screen is rebuilt only when its text changes, which is once per tick of
  * ytd's own redraw, a key or a keystroke at the prompt. The keys pressed
  * show underneath, from the same script that drives the terminal.

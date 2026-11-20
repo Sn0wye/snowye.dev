@@ -149,6 +149,8 @@ const names: Record<string, string> = {
   Tab: '⇥',
   Home: 'home',
   End: 'end',
+  PageUp: 'pg up',
+  PageDown: 'pg dn',
   ' ': '␣'
 };
 const modOrder: [Mod, string][] = [
