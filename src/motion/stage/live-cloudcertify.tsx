@@ -26,10 +26,14 @@ import {
   type OptionMode,
   type Point,
   type PracticeView,
+  type ResultsView,
+  runLengths,
+  type StripCell,
   VIEW_H,
   VIEW_W
 } from '@/motion/cloudcertify/moments';
 import { type KeystrokeFrame, keystrokesAt } from '@/motion/keystrokes';
+import { archivo } from '@/styles/archivo';
 
 import { KeystrokeBar } from './keystrokes';
 
@@ -37,34 +41,27 @@ import { KeystrokeBar } from './keystrokes';
 /* The app's look                                                              */
 /* -------------------------------------------------------------------------- */
 
-/** Tailwind's default stacks: the app sets no font of its own. */
-const SANS =
-  'ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
+/** Archivo on the body, as the app's root layout sets it. */
+const SANS = archivo.style.fontFamily;
 const MONO =
   'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
 
 /** lucide-react 0.486, the version the app ships. */
 const ICONS = {
+  tick: ['M20 6 9 17l-5-5'],
+  flame: [
+    'M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z'
+  ],
+  volume: [
+    'M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z',
+    'M16 9a5 5 0 0 1 0 6',
+    'M19.364 18.364a9 9 0 0 0 0-12.728'
+  ],
   check: ['M21.801 10A10 10 0 1 1 17 3.335', 'm9 11 3 3L22 4'],
-  checkCircle: ['circle:12:12:10', 'm9 12 2 2 4-4'],
-  x: ['circle:12:12:10', 'm15 9-6 6', 'm9 9 6 6'],
   alert: [
     'm21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3',
     'M12 9v4',
     'M12 17h.01'
-  ],
-  help: [
-    'circle:12:12:10',
-    'M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3',
-    'M12 17h.01'
-  ],
-  list: [
-    'M10 12h11',
-    'M10 18h11',
-    'M10 6h11',
-    'M4 10h2',
-    'M4 6h1v4',
-    'M6 18H4c0-1 2-2 2-3s-1-1.5-2-1'
   ],
   loader: ['M21 12a9 9 0 1 1-6.219-8.56'],
   sparkles: [
@@ -98,18 +95,22 @@ const ICONS = {
 function Icon({
   name,
   className,
-  style
+  style,
+  strokeWidth = 2,
+  fill = 'none'
 }: {
   name: keyof typeof ICONS;
   className?: string;
   style?: React.CSSProperties;
+  strokeWidth?: number;
+  fill?: string;
 }) {
   return (
     <svg
       viewBox="0 0 24 24"
-      fill="none"
+      fill={fill}
       stroke="currentColor"
-      strokeWidth={2}
+      strokeWidth={strokeWidth}
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden
@@ -132,6 +133,7 @@ const C = {
   success: '#15a06e',
   danger: '#e23b48',
   warning: '#ffb020',
+  secondary: '#ffb020',
   page: '#f5f3ec'
 };
 
@@ -245,11 +247,11 @@ function AppHeader({ home }: { home?: boolean }) {
   );
 }
 
-function BackLink() {
+function BackLink({ label }: { label: string }) {
   return (
     <span className="mb-6 inline-flex items-center gap-2 font-bold text-black text-sm">
       <Icon name="left" />
-      {copy.back}
+      {label}
     </span>
   );
 }
@@ -279,109 +281,42 @@ function Footer() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Question cards                                                              */
+/* An attempt: AttemptFrame, AttemptQuestion and the dock                      */
 /* -------------------------------------------------------------------------- */
 
 const difficultyFill = { easy: C.success, medium: C.warning, hard: C.danger };
 
-function Badge({
-  children,
-  fill = 'white',
-  ink = 'black'
-}: {
-  children: React.ReactNode;
-  fill?: string;
-  ink?: string;
-}) {
+/** DifficultyBadge: the outline Badge, filled by difficulty. */
+function DifficultyBadge({ question }: { question: Question }) {
   return (
     <span
       className={cn(
-        'inline-flex w-fit max-w-full items-center justify-center gap-1 overflow-hidden break-words border-2 border-black px-3 py-1 text-center font-bold text-xs',
+        'inline-flex w-fit max-w-full items-center justify-center gap-1 overflow-hidden break-words border-2 border-black px-3 py-1 text-center font-bold text-black text-xs',
         HARD_2
       )}
-      style={{ background: fill, color: ink }}
+      style={{ background: difficultyFill[question.difficulty] }}
     >
-      {children}
+      {copy.difficulty[question.difficulty]}
     </span>
   );
 }
 
-/** CardHeader: counter, meta, the question, and the progress bar. */
-function QuestionHeader({
-  question,
-  index,
-  total,
-  meta
-}: {
-  question: Question;
-  index: number;
-  total: number;
-  meta: string;
-}) {
-  return (
-    <div className="grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 border-black border-b-2 px-6 pb-6">
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <Badge>{copy.counter(index + 1, total)}</Badge>
-        <div className="flex flex-wrap gap-2">
-          <Badge fill={C.primary} ink="white">
-            {meta}
-          </Badge>
-          <Badge fill={difficultyFill[question.difficulty]}>
-            {copy.difficulty[question.difficulty]}
-          </Badge>
-        </div>
-      </div>
-      <div data-a="title">
-        <div className="font-black text-2xl text-black leading-none">
-          {question.text}
-        </div>
-      </div>
-      {question.selectCount > 1 && (
-        <p className="mt-2 font-bold text-black/60 text-sm">
-          {copy.selectAnswers(question.selectCount)}
-        </p>
-      )}
-      <div className="mt-6 w-full">
-        <div className="relative h-3 w-full overflow-hidden border-2 border-black bg-white">
-          <div data-a="bar" className="size-full flex-1 bg-[#2347d9]" />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/** practice-question-card.tsx's option colouring, per mode. */
-const practiceBox: Record<OptionMode, string> = {
-  idle: 'bg-white',
-  selected: 'bg-white text-[#2347d9]',
-  correct: 'bg-[#15a06e] text-black',
-  wrong: 'bg-[#e23b48] text-black',
-  dim: 'bg-white'
-};
-
 /** ui/kbd.tsx: a keycap like the outline Badge, shown wherever there is a fine pointer. */
-function Kbd({
-  children,
-  className
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
+function Kbd({ children }: { children: React.ReactNode }) {
   return (
     <kbd
       className={cn(
         'inline-flex h-6 min-w-6 shrink-0 items-center justify-center border-2 border-black bg-white px-1.5 font-black text-black text-xs leading-none',
-        HARD_2,
-        className
+        HARD_2
       )}
-      style={{ fontFamily: SANS }}
+      style={{ fontFamily: 'inherit' }}
     >
       {children}
     </kbd>
   );
 }
 
-/** shortcut-legend.tsx: the card's shortcuts in its footer, md and up. */
+/** shortcut-legend.tsx: the screen's shortcuts, md and up with a fine pointer. */
 function ShortcutLegend({
   items,
   className
@@ -411,200 +346,331 @@ function ShortcutLegend({
 const enterKey = <Icon name="enter" className="size-3" />;
 const selectKey = (count: number) => `1–${Math.min(count, 9)}`;
 
-function Option({
-  id,
-  text,
-  box,
-  ink,
-  icon,
-  hand,
-  shortcut
+/** The full-screen frame: a way out, the strip, the Question; the dock is drawn over it. */
+function AttemptFrame({
+  strip,
+  aside,
+  children
 }: {
-  id: string;
-  text: string;
-  box: string;
-  ink: string;
-  icon: 'check' | 'x' | null;
-  /** cursor-pointer while it can be picked; disabled options show none. */
-  hand: boolean;
-  /** Its digit, for the first nine. */
-  shortcut: number;
+  strip: React.ReactNode;
+  aside?: React.ReactNode;
+  children: React.ReactNode;
 }) {
   return (
-    <div
-      data-a={id}
-      data-hand={hand || undefined}
-      className="flex items-start gap-3 border-2 border-black p-4"
-    >
-      <div
-        className={cn(
-          'mt-0.5 flex size-6 shrink-0 items-center justify-center border-2 border-black',
-          box
-        )}
-      >
-        {icon && (
-          <span key={icon} data-a={`${id}-icon`} className="flex">
-            <Icon name={icon === 'check' ? 'check' : 'x'} />
+    <div className="flex min-h-[800px] flex-col">
+      <header className="relative z-10 px-4 pt-2 pb-3">
+        <div className="mx-auto flex max-w-4xl items-end gap-5">
+          <span
+            data-hand
+            className="-ml-2 flex size-11 shrink-0 items-center justify-center"
+          >
+            <Icon name="close" className="size-6" strokeWidth={3} />
           </span>
-        )}
-      </div>
-      <span className={cn('font-medium', ink)}>{text}</span>
-      {shortcut <= 9 && <Kbd className="mt-0.5 ml-auto">{shortcut}</Kbd>}
+          {strip}
+          {aside}
+        </div>
+      </header>
+      <main className="mx-auto w-full max-w-4xl flex-1 px-4 pt-10">
+        {children}
+      </main>
     </div>
   );
 }
 
-function PracticeCard({ view }: { view: PracticeView }) {
-  const { question, phase } = view;
-  const revealed = phase === 'revealed';
+/** The dock, pinned to the bottom of the window so the primary action never moves. */
+function Dock({ children }: { children: React.ReactNode }) {
   return (
     <div
-      data-a="card"
-      className="flex w-full flex-col gap-6 border-4 border-black bg-white py-6 text-black shadow-[8px_8px_0px_0px_#000]"
+      data-a="dock"
+      className="absolute inset-x-0 bottom-0 z-20 border-black border-t-4 bg-white px-4 pt-4 pb-4"
     >
-      <QuestionHeader
-        question={question}
+      <div className="mx-auto flex max-w-4xl flex-row items-end gap-8">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+const DOCK_BUTTON =
+  'flex h-14 shrink-0 items-center justify-center border-2 border-black font-black text-lg';
+
+/** AttemptQuestion: the counter line, the Question, and two columns of options. */
+function AttemptQuestion({
+  index,
+  total,
+  question,
+  actions,
+  option
+}: {
+  index: number;
+  total: number;
+  question: Question;
+  actions?: React.ReactNode;
+  option: (
+    answer: Question['answers'][number],
+    i: number
+  ) => { ink: string; mark: 'check' | 'x' | null; hand: boolean };
+}) {
+  return (
+    <>
+      <div key={question.id} data-a="question">
+        <div className="flex items-center gap-3">
+          <p className="font-bold text-black/60 text-sm">
+            {copy.counter(index + 1, total)}
+          </p>
+          <DifficultyBadge question={question} />
+          <span className="flex-1" />
+          {actions}
+          {/* SoundToggle: sound on. */}
+          <span
+            data-hand
+            className="-my-3 -mr-2 flex size-11 items-center justify-center text-black"
+          >
+            <Icon name="volume" className="size-5" strokeWidth={2.5} />
+          </span>
+        </div>
+        <h1
+          className="mt-3 max-w-[34ch] font-extrabold text-4xl leading-[1.15]"
+          style={{ fontStretch: '88%' }}
+        >
+          {question.text}
+        </h1>
+        {question.selectCount > 1 && (
+          <p className="mt-3 font-bold">
+            {copy.selectAnswers(question.selectCount)}
+          </p>
+        )}
+      </div>
+      <div className="mt-10 grid grid-cols-2 gap-4">
+        {question.answers.map((answer, i) => {
+          const { ink, mark, hand } = option(answer, i);
+          return (
+            <div
+              key={answer.id}
+              data-a={answer.id}
+              data-hand={hand || undefined}
+              className={cn(
+                'flex min-h-16 items-center gap-3 border-2 border-black p-4 text-left font-semibold text-lg leading-snug',
+                ink
+              )}
+            >
+              {/* One box, three jobs: the shortcut key, the pick, then the verdict. */}
+              <span className="flex size-7 shrink-0 items-center justify-center border-2 border-black bg-white font-black text-black text-sm">
+                {mark ? (
+                  <Icon
+                    name={mark === 'check' ? 'tick' : 'close'}
+                    strokeWidth={4}
+                  />
+                ) : (
+                  i < 9 && <span>{i + 1}</span>
+                )}
+              </span>
+              {answer.text}
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Drill                                                                       */
+/* -------------------------------------------------------------------------- */
+
+/** drill-columns.tsx: one column per Question, a streak a staircase. */
+function DrillColumns({
+  outcomes,
+  current,
+  className
+}: {
+  outcomes: (boolean | null)[];
+  current: number;
+  className?: string;
+}) {
+  const runs = runLengths(outcomes);
+  return (
+    <div className={cn('flex items-end border-black border-b-2', className)}>
+      {outcomes.map((outcome, i) => {
+        // Neighbouring right answers share a border, so a streak is one shape.
+        const joined = outcome === true && outcomes[i - 1] === true;
+        const gap = i === 0 ? '' : joined ? '-ml-[2px]' : 'ml-[3px]';
+        if (outcome === null)
+          return i === current ? (
+            <div
+              key={`${i}-current`}
+              data-a={`col-${i}`}
+              className={cn(
+                'h-1/4 flex-1 border-2 border-black border-dashed border-b-0',
+                gap
+              )}
+            />
+          ) : (
+            <div
+              key={`${i}-empty`}
+              className={cn('h-[3px] flex-1 bg-black/20', gap)}
+            />
+          );
+        return (
+          <div
+            key={`${i}-${outcome}`}
+            data-a={`col-${i}`}
+            className={cn(
+              'min-h-[6px] flex-1 border-2 border-black border-b-0',
+              gap
+            )}
+            style={{
+              background: outcome ? C.success : C.danger,
+              height: `${outcome ? 20 + 16 * Math.min(runs[i] ?? 0, 5) : 14}%`
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+const optionInk: Record<OptionMode, string> = {
+  idle: 'text-black',
+  selected: 'text-white',
+  capped: 'text-black',
+  correct: 'text-black',
+  wrong: 'text-black',
+  dim: 'text-black'
+};
+
+function PracticePage({ view }: { view: PracticeView }) {
+  const revealed = view.phase === 'revealed';
+  return (
+    <AttemptFrame
+      strip={
+        <DrillColumns
+          outcomes={view.outcomes}
+          current={view.current}
+          className="h-14 flex-1"
+        />
+      }
+      aside={
+        <p
+          data-a="streak"
+          className="flex min-w-11 items-center justify-end gap-1 pb-0.5"
+        >
+          <Icon
+            name="flame"
+            className="size-5"
+            strokeWidth={3}
+            fill={view.streak >= 3 ? C.secondary : 'none'}
+          />
+          <span
+            key={view.streak}
+            data-a="streak-num"
+            className="inline-block font-black text-xl tabular-nums"
+          >
+            {view.streak}
+          </span>
+        </p>
+      }
+    >
+      <AttemptQuestion
         index={view.index}
         total={view.total}
-        meta={view.drillTitle}
+        question={view.question}
+        option={answer => {
+          const mode = view.modes[answer.id] ?? 'idle';
+          return {
+            ink: optionInk[mode],
+            mark:
+              mode === 'correct' || mode === 'selected'
+                ? 'check'
+                : mode === 'wrong'
+                  ? 'x'
+                  : null,
+            hand:
+              !revealed &&
+              !view.checking &&
+              mode !== 'capped' &&
+              (mode !== 'idle' ||
+                !view.canCheck ||
+                view.question.selectCount === 1)
+          };
+        }}
       />
-      <div className="px-6 py-6">
-        <div key={question.id} data-a="answers" className="space-y-3">
-          {question.answers.map((answer, i) => {
-            const mode = view.modes[answer.id] ?? 'idle';
-            return (
-              <Option
-                key={answer.id}
-                id={answer.id}
-                shortcut={i + 1}
-                text={answer.text}
-                box={practiceBox[mode]}
-                hand={
-                  !revealed &&
-                  !view.checking &&
-                  (mode === 'selected' ||
-                    !view.canCheck ||
-                    question.selectCount === 1)
-                }
-                ink={mode === 'selected' ? 'text-white' : 'text-black'}
-                icon={
-                  mode === 'selected' || mode === 'correct'
-                    ? 'check'
-                    : mode === 'wrong'
-                      ? 'x'
-                      : null
-                }
-              />
-            );
-          })}
-        </div>
-        {revealed && (
+    </AttemptFrame>
+  );
+}
+
+function PracticeDock({ view }: { view: PracticeView }) {
+  const revealed = view.phase === 'revealed';
+  const { question } = view;
+  const answer = question.answers
+    .filter(a => a.correct)
+    .map(a => a.text)
+    .join(', ');
+  return (
+    <Dock>
+      <div className="min-w-0 flex-1">
+        {revealed ? (
           <div
             data-a="explain"
             className="overflow-hidden"
             style={{ height: 0 }}
           >
-            <div className="mt-6 border-2 border-black bg-[#f5f3ec]">
-              <div
-                className="flex items-center gap-2 border-black border-b-2 px-4 py-2"
-                style={{ background: view.correct ? C.success : C.danger }}
+            <div>
+              <p
+                className="font-black text-3xl"
+                style={{ fontStretch: '112%' }}
               >
-                <span data-a="explain-icon" className="flex">
-                  <Icon
-                    name={view.correct ? 'check' : 'x'}
-                    className="text-black"
-                  />
-                </span>
-                <p className="font-black text-black text-sm">
-                  {view.correct ? copy.correct : copy.notQuite}
-                </p>
-              </div>
-              <p className="px-4 py-3 text-black/80 text-sm">
+                {!view.correct
+                  ? copy.notQuite
+                  : view.streak >= 2
+                    ? copy.correctStreak(view.streak)
+                    : copy.correct}
+              </p>
+              {!view.correct && (
+                <p className="mt-1 font-bold">{copy.answerIs(answer)}</p>
+              )}
+              <p className="mt-1 max-w-[70ch] font-medium text-[0.9375rem] leading-snug">
                 {question.explanation}
               </p>
+              <div className="mt-2">
+                <span data-hand className={cn(button('outline', 'sm'), HARD_4)}>
+                  <Icon name="alert" className="mr-2" />
+                  {copy.report}
+                </span>
+              </div>
             </div>
           </div>
-        )}
-        {revealed && (
-          <div className="mt-4 flex justify-end">
-            <span data-hand className={cn(button('outline', 'sm'), HARD_4)}>
-              <Icon name="alert" className="mr-2" />
-              {copy.report}
-            </span>
-          </div>
+        ) : (
+          <ShortcutLegend
+            items={[
+              {
+                keys: [selectKey(question.answers.length)],
+                label: copy.shortcuts.select
+              },
+              { keys: [enterKey], label: copy.shortcuts.check }
+            ]}
+          />
         )}
       </div>
-      <div className="flex items-center justify-end border-black border-t-2 px-6 pt-6">
-        <ShortcutLegend
-          className="mr-auto pr-4"
-          items={
-            revealed
-              ? [{ keys: [enterKey], label: copy.shortcuts.continue }]
-              : [
-                  {
-                    keys: [selectKey(question.answers.length)],
-                    label: copy.shortcuts.select
-                  },
-                  { keys: [enterKey], label: copy.shortcuts.check }
-                ]
-          }
-        />
-        <span
-          data-a="check"
-          // Disabled buttons take no pointer events: the card shows through.
-          data-hand={revealed || view.canCheck || undefined}
-          className={cn(
-            button('default', 'md'),
-            !revealed && !view.canCheck && 'opacity-50'
-          )}
-        >
-          {revealed ? (
-            <span data-a="continue-label" className="inline-flex items-center">
-              {copy.continue}
-              <Icon name="right" className="ml-2" />
-            </span>
-          ) : (
-            <>
-              {view.checking && (
-                <span data-a="spinner" className="flex">
-                  <Icon name="loader" />
-                </span>
-              )}
-              {view.checking ? copy.checking : copy.check}
-            </>
-          )}
-        </span>
-      </div>
-    </div>
-  );
-}
-
-function PracticePage({ view }: { view: PracticeView }) {
-  return (
-    <>
-      <AppHeader />
-      <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-12">
-        <BackLink />
-        {view.banner && (
-          <div
-            className={cn(
-              'mb-4 flex flex-wrap items-center gap-x-3 gap-y-1 border-2 border-black bg-white px-4 py-3',
-              HARD_4
-            )}
-          >
-            <Icon name="sparkles" className="text-black" />
-            <span className="font-black text-black text-sm uppercase tracking-wide">
-              {copy.drillLabel}
-            </span>
-            <span className="font-bold text-black/70 text-sm">
-              {view.banner}
-            </span>
-          </div>
+      {/* One button for Check and Continue: focus and the pointer stay where they were. */}
+      <span
+        data-a="primary"
+        // A disabled button takes no pointer: the dock shows through.
+        data-hand={revealed || view.canCheck || view.checking || undefined}
+        className={cn(
+          DOCK_BUTTON,
+          'min-w-52 gap-2 px-10',
+          revealed ? 'text-black' : 'text-white'
         )}
-        <PracticeCard view={view} />
-      </main>
-      <Footer />
-    </>
+      >
+        {view.checking && (
+          <span data-a="spinner" className="flex">
+            <Icon name="loader" className="size-5" />
+          </span>
+        )}
+        {view.checking ? copy.checking : revealed ? copy.continue : copy.check}
+      </span>
+    </Dock>
   );
 }
 
@@ -612,55 +678,57 @@ function PracticePage({ view }: { view: PracticeView }) {
 /* Exam                                                                        */
 /* -------------------------------------------------------------------------- */
 
-const RATING = {
-  guess: { icon: 'help', fill: C.danger },
-  unsure: { icon: 'alert', fill: C.warning },
-  confident: { icon: 'checkCircle', fill: C.success }
-} as const;
+const STRIP_TONE: Record<StripCell['tone'], string> = {
+  empty: 'rgb(0 0 0 / 0.2)',
+  answered: C.primary,
+  revisit: C.secondary
+};
 
-function ConfidenceRating({ view }: { view: ExamView }) {
+/**
+ * exam-strip.tsx as the Navigator: one column per Question, height its
+ * Confidence. The column under the pointer and its number are the browser's
+ * part, drawn from where the pointer is.
+ */
+function ExamStrip({
+  cells,
+  current
+}: {
+  cells: StripCell[];
+  current: number;
+}) {
   return (
     <div
-      data-a="rating"
-      className="space-y-2 border-2 border-black bg-white p-4"
+      data-strip
+      data-hand
+      className="relative h-[4.5rem] flex-1 cursor-pointer select-none py-2"
     >
-      <div className="flex flex-wrap items-center gap-3">
-        <span className="font-bold text-black">{copy.confidence.label}</span>
-        <div className="flex flex-wrap gap-2">
-          {(['guess', 'unsure', 'confident'] as const).map(option => {
-            const selected = view.rating === option;
-            const { icon, fill } = RATING[option];
-            return (
-              <span
-                key={option}
-                data-a={`conf-${option}`}
-                data-hand
-                className="flex items-center gap-1.5 border-2 border-black px-3 py-1.5 font-bold text-black text-sm"
-              >
-                <span
-                  key={String(selected)}
-                  data-a={`conf-${option}-icon`}
-                  className="flex"
-                >
-                  <Icon
-                    name={icon}
-                    style={selected ? undefined : { color: fill }}
-                  />
-                </span>
-                {copy.confidence.options[option]}
-              </span>
-            );
-          })}
-        </div>
+      <div className="flex h-full items-end gap-px border-black border-b-2">
+        {cells.map((cell, i) => (
+          <div
+            key={i}
+            data-a={`col-${i}`}
+            data-col
+            className="flex-1"
+            style={{
+              height: cell.tone === 'empty' ? 3 : `${cell.height}%`,
+              background: STRIP_TONE[cell.tone]
+            }}
+          />
+        ))}
       </div>
-      <p className="flex min-h-5 items-center gap-1.5 font-bold text-black/70 text-sm">
-        {(view.rating === 'guess' || view.rating === 'unsure') && (
-          <>
-            <Icon name="alert" style={{ color: C.warning }} />
-            {copy.confidence.revisitHint}
-          </>
-        )}
-      </p>
+      <div
+        data-a="marker"
+        className="absolute bottom-0 h-1.5 -translate-x-1/2 bg-black"
+        style={{
+          width: `max(6px, ${100 / cells.length}%)`,
+          left: `${((current + 0.5) / cells.length) * 100}%`
+        }}
+      />
+      <span
+        data-strip-label
+        className="pointer-events-none absolute top-full z-10 -translate-x-1/2 bg-black px-2 py-0.5 font-black text-sm text-white tabular-nums"
+        style={{ display: 'none' }}
+      />
     </div>
   );
 }
@@ -668,162 +736,167 @@ function ConfidenceRating({ view }: { view: ExamView }) {
 function ExamPage({ view }: { view: ExamView }) {
   const { question } = view;
   return (
-    <>
-      <AppHeader />
-      <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-12">
-        <BackLink />
-        <div className="relative flex items-start justify-center gap-6">
-          <aside
-            data-sticky={96}
-            className="relative z-40 w-10 shrink-0 self-start"
+    <AttemptFrame strip={<ExamStrip cells={view.cells} current={view.index} />}>
+      <AttemptQuestion
+        index={view.index}
+        total={view.total}
+        question={question}
+        actions={
+          <span
+            data-hand
+            className="flex h-11 items-center font-black text-sm underline decoration-2 underline-offset-4"
           >
-            <span
-              data-a="nav-open"
-              data-hand
-              className={button('outline', 'icon')}
-            >
-              <Icon name="list" />
-            </span>
-          </aside>
-          <div className="min-w-0 max-w-4xl flex-1 space-y-6">
-            <div
-              data-a="card"
-              className="flex w-full flex-col gap-6 border-4 border-black bg-white py-6 text-black shadow-[8px_8px_0px_0px_#000]"
-            >
-              <QuestionHeader
-                question={question}
-                index={view.index}
-                total={view.total}
-                meta={view.quizTitle}
-              />
-              <div className="px-6 py-6">
-                <div key={question.id} data-a="answers" className="space-y-3">
-                  {question.answers.map((answer, i) => {
-                    const selected = view.selected.includes(answer.id);
-                    return (
-                      <Option
-                        key={answer.id}
-                        id={answer.id}
-                        shortcut={i + 1}
-                        text={answer.text}
-                        box={selected ? 'bg-black text-white' : 'bg-white'}
-                        ink={selected ? 'text-white' : 'text-black'}
-                        icon={selected ? 'check' : null}
-                        hand
-                      />
-                    );
-                  })}
-                </div>
-              </div>
-              <div className="flex items-center justify-between border-black border-t-2 px-6 pt-6">
-                <span
-                  data-a="prev"
-                  data-hand
-                  className={button('outline', 'md')}
-                >
-                  <Icon name="left" className="mr-2" />
-                  {copy.previous}
-                </span>
-                <ShortcutLegend
-                  className="justify-center px-4"
-                  items={[
-                    {
-                      keys: [selectKey(question.answers.length)],
-                      label: copy.shortcuts.select
-                    },
-                    { keys: [enterKey], label: copy.shortcuts.next },
-                    {
-                      keys: [
-                        <Icon key="left" name="left" className="size-3" />,
-                        <Icon key="right" name="right" className="size-3" />
-                      ],
-                      label: copy.shortcuts.navigate
-                    }
-                  ]}
-                />
-                <span
-                  data-a="next"
-                  data-hand
-                  className={button('default', 'md')}
-                >
-                  {copy.next}
-                  <Icon name="right" className="ml-2" />
-                </span>
-              </div>
-            </div>
-            {view.selected.length > 0 && <ConfidenceRating view={view} />}
-            <div className="flex justify-end">
-              <span data-hand className={cn(button('default', 'md'), HARD_4)}>
-                {copy.finishQuiz}
-              </span>
-            </div>
-          </div>
-        </div>
-      </main>
-      <Footer />
-    </>
+            {copy.finish}
+          </span>
+        }
+        option={answer => {
+          const selected = view.selected.includes(answer.id);
+          return {
+            ink: selected ? 'text-white' : 'text-black',
+            mark: selected ? 'check' : null,
+            hand: true
+          };
+        }}
+      />
+      <ShortcutLegend
+        className="mt-8"
+        items={[
+          {
+            keys: [selectKey(question.answers.length)],
+            label: copy.shortcuts.select
+          },
+          { keys: [enterKey], label: copy.shortcuts.next },
+          {
+            keys: [
+              <Icon key="left" name="left" className="size-3" />,
+              <Icon key="right" name="right" className="size-3" />
+            ],
+            label: copy.shortcuts.navigate
+          }
+        ]}
+      />
+    </AttemptFrame>
   );
 }
 
-/** The native <dialog>: no transition, a backdrop and a panel from the left. */
-function Navigator({ view }: { view: ExamView }) {
-  const answered = view.answered.filter(Boolean).length;
-  const review = view.review.filter(Boolean).length;
+const RATINGS = ['guess', 'unsure', 'confident'] as const;
+
+function ExamDock({ view }: { view: ExamView }) {
+  const answered = view.selected.length > 0;
   return (
-    <>
-      <div className="absolute inset-0 bg-black/40" />
-      <div className="absolute inset-y-0 left-0 w-72">
-        <div className="flex h-full flex-col overflow-hidden border-black border-r-4 bg-white text-black shadow-[8px_0_0_0_#000]">
-          <div className="p-4">
-            <div className="mb-4 flex items-start justify-between gap-3 border-black border-b-2 pb-4">
-              <div>
-                <h2 className="font-black text-black">
-                  {copy.navigator.title}
-                </h2>
-                <p className="font-bold text-black/60 text-sm">
-                  {copy.navigator.answeredCount(answered, view.total)}
-                </p>
-                {review > 0 && (
-                  <p className="mt-1 flex items-center gap-1.5 font-bold text-black/70 text-sm">
-                    <Icon name="alert" style={{ color: C.warning }} />
-                    {copy.navigator.reviewCount(review)}
-                  </p>
+    <Dock>
+      <div className="min-w-0 flex-1 space-y-2">
+        {/* ConfidenceRating: always in place, inert until there is an answer. */}
+        <div data-a="rating">
+          <div className="mb-1.5 flex flex-wrap items-baseline gap-x-3">
+            <span className="font-bold text-black text-sm">
+              {copy.confidence.label}
+            </span>
+            <p className="font-medium text-black/70 text-sm">
+              {(view.rating === 'guess' || view.rating === 'unsure') &&
+                copy.confidence.revisitHint}
+            </p>
+          </div>
+          <div className="grid max-w-md grid-cols-3 gap-2">
+            {RATINGS.map(option => (
+              <span
+                key={option}
+                data-a={`conf-${option}`}
+                data-hand={answered || undefined}
+                className={cn(
+                  'flex h-11 items-center justify-center border-2 border-black font-bold text-[0.9375rem]',
+                  view.rating === 'confident' && option === 'confident'
+                    ? 'text-white'
+                    : 'text-black'
                 )}
-              </div>
-              <span data-hand className={cn(button('outline', 'icon'), HARD_4)}>
-                <Icon name="close" />
+              >
+                {copy.confidence.options[option]}
               </span>
-            </div>
-            <div className="grid grid-cols-5 gap-2">
-              {view.answered.map((isAnswered, i) => {
-                const current = i === view.index;
-                return (
-                  <span
-                    key={i}
-                    data-a={`nav-${i}`}
-                    data-hand
-                    className={cn(
-                      'relative flex size-9 items-center justify-center border-2 border-black font-bold text-sm',
-                      current
-                        ? 'translate-x-px translate-y-px bg-black text-white'
-                        : HARD_2,
-                      !current &&
-                        (isAnswered
-                          ? 'bg-[#2347d9] text-white'
-                          : 'bg-white text-black')
-                    )}
-                  >
-                    {i + 1}
-                    {view.review[i] && (
-                      <span className="absolute -top-1 -right-1 size-3 border-2 border-black bg-[#ffb020]" />
-                    )}
-                  </span>
-                );
-              })}
-            </div>
+            ))}
           </div>
         </div>
       </div>
+      <div className="flex gap-3">
+        <span
+          data-a="prev"
+          data-hand
+          className={cn(DOCK_BUTTON, 'w-14 bg-white')}
+        >
+          <Icon name="left" className="size-6" strokeWidth={3} />
+        </span>
+        <span
+          data-a="next"
+          data-hand
+          className={cn(DOCK_BUTTON, 'min-w-52 bg-[#2347d9] px-10 text-white')}
+        >
+          {copy.next}
+        </span>
+      </div>
+    </Dock>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Results                                                                     */
+/* -------------------------------------------------------------------------- */
+
+function ResultsPage({ view }: { view: ResultsView }) {
+  return (
+    <>
+      <AppHeader />
+      <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-12">
+        <BackLink label={copy.results.backToCertification} />
+        <h1 className="font-black text-lg">
+          {copy.results.practiceTitle}
+          <span className="font-medium text-black/60">, {view.title}</span>
+        </h1>
+        <DrillColumns
+          outcomes={view.outcomes}
+          current={-1}
+          className="mt-6 h-48 border-b-4"
+        />
+        <div className="mt-8">
+          <p
+            className="font-black text-[9rem] leading-none tabular-nums"
+            style={{ fontStretch: '125%' }}
+          >
+            <span data-a="score">0</span>%
+          </p>
+        </div>
+        <p
+          className="mt-4 inline-block border-2 border-black px-3 py-1 font-black"
+          style={{ background: view.passed ? C.success : C.danger }}
+        >
+          {copy.results.passingScore(view.passed, `${view.passingScore}%`)}
+        </p>
+        <p
+          className="mt-4 max-w-[30ch] font-extrabold text-3xl leading-tight"
+          style={{ fontStretch: '88%' }}
+        >
+          {copy.results.scoreLine(view.correct, view.outcomes.length)}.
+          {view.longestRun > 1 &&
+            ` ${copy.results.longestRun(view.longestRun)}`}
+        </p>
+        <p className="mt-3 max-w-[46ch] font-medium text-black/70 text-lg">
+          {copy.results.missedReturn}
+        </p>
+        <div className="mt-8 flex flex-row gap-4">
+          {/* Focused on arrival, so Enter starts the next one. */}
+          <span
+            className={cn(button('default', 'lg'), HARD_4)}
+            style={{
+              boxShadow:
+                '0 0 0 2px #fff, 0 0 0 6px rgb(0 0 0 / 0.4), 4px 4px 0 0 #000'
+            }}
+          >
+            {copy.results.nextDrill}
+          </span>
+          <span className={cn(button('outline', 'lg'), HARD_4)}>
+            {copy.results.backToCertification}
+          </span>
+        </div>
+      </main>
+      <Footer />
     </>
   );
 }
@@ -1160,12 +1233,16 @@ export function LiveCloudCertify({
           el.style.height = `${full * Number(value)}px`;
           continue;
         }
+        if (key === 'text') {
+          if (el.textContent !== String(value)) el.textContent = String(value);
+          continue;
+        }
         const css = el.style as unknown as Record<string, string>;
         if (css[key] !== String(value)) css[key] = String(value);
       }
     }
 
-    // The page scrolls under a sticky header and a sticky navigator.
+    // The page scrolls under a sticky header.
     const max = Math.max(0, root.offsetHeight - VIEW_H);
     const s = Math.min(max, Math.max(0, scrollOf(legs.current, t)));
     root.style.transform = `translateY(${-s}px)`;
@@ -1215,19 +1292,46 @@ export function LiveCloudCertify({
       }
       c.style.transform = `translate(${x}px, ${y}px)`;
       // The hand over anything with cursor-pointer, as the browser decides it:
-      // whatever is on top under the tip, a modal shutting out the page.
+      // the page and the dock pinned over it.
       const vp = viewport.current?.getBoundingClientRect();
-      const top = viewport.current?.querySelector('[data-modal]') ?? root;
       let overTarget = false;
-      if (vp?.width) {
+      if (vp?.width && content.current) {
         const k = vp.width / VIEW_W;
         const px = vp.left + x * k;
         const py = vp.top + y * k;
-        for (const el of top.querySelectorAll('[data-hand]')) {
+        const under = (el: Element) => {
           const r = el.getBoundingClientRect();
-          if (px >= r.left && px <= r.right && py >= r.top && py <= r.bottom) {
+          return px >= r.left && px <= r.right && py >= r.top && py <= r.bottom;
+        };
+        for (const el of content.current.querySelectorAll('[data-hand]')) {
+          if (under(el)) {
             overTarget = true;
             break;
+          }
+        }
+        // ExamStrip on a mouse: the column under the pointer, outlined, and its number.
+        const strip =
+          content.current.querySelector<HTMLElement>('[data-strip]');
+        if (strip) {
+          const cols = strip.querySelectorAll<HTMLElement>('[data-col]');
+          const r = strip.getBoundingClientRect();
+          const pointed = under(strip)
+            ? Math.min(
+                cols.length - 1,
+                Math.max(0, Math.floor(((px - r.left) / r.width) * cols.length))
+              )
+            : -1;
+          cols.forEach((col, i) => {
+            const outline = i === pointed ? '2px solid #000' : '';
+            if (col.style.outline !== outline) col.style.outline = outline;
+          });
+          const label = strip.querySelector<HTMLElement>('[data-strip-label]');
+          if (label) {
+            label.style.display = pointed < 0 ? 'none' : '';
+            if (pointed >= 0) {
+              label.style.left = `${((pointed + 0.5) / cols.length) * 100}%`;
+              label.textContent = String(pointed + 1);
+            }
           }
         }
       }
@@ -1444,13 +1548,11 @@ export function LiveCloudCertify({
             >
               {view.kind === 'practice' && <PracticePage view={view} />}
               {view.kind === 'exam' && <ExamPage view={view} />}
+              {view.kind === 'results' && <ResultsPage view={view} />}
               {view.kind === 'home' && <HomePage view={view} />}
             </div>
-            {view.kind === 'exam' && view.navOpen && (
-              <div data-modal className="absolute inset-0 z-[60]">
-                <Navigator view={view} />
-              </div>
-            )}
+            {view.kind === 'practice' && <PracticeDock view={view} />}
+            {view.kind === 'exam' && <ExamDock view={view} />}
             {scene.pointer && (
               <>
                 <div

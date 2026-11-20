@@ -99,7 +99,25 @@ export const support = question(
 export const drill = {
   title: 'Cloud Technology and Services (CLF-C02)',
   total: 15,
-  composition: { missed: 6, due: 3, unseen: 4, mastered: 2 }
+  /** How its results came out, as the results screen replays them. */
+  outcomes: [
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true
+  ],
+  passingScore: 70
 };
 
 export const quiz = {
@@ -109,40 +127,40 @@ export const quiz = {
 
 /** en.ts, the strings these screens read. */
 export const copy = {
-  back: 'Back',
   counter: (index: number, total: number) => `Question ${index} of ${total}`,
   selectAnswers: (count: number) => `Select ${count} answers`,
   check: 'Check',
   checking: 'Checking...',
   continue: 'Continue',
   correct: 'Correct',
+  correctStreak: (count: number) => `Correct, ${count} in a row`,
   notQuite: 'Not quite',
+  answerIs: (answer: string) => `Answer: ${answer}`,
+  finish: 'Finish',
+  next: 'Next',
   shortcuts: {
     select: 'select',
     check: 'check',
-    continue: 'continue',
     next: 'next',
     navigate: 'navigate'
   },
   report: 'Report a problem',
-  previous: 'Previous',
-  next: 'Next',
-  finishQuiz: 'Finish Quiz',
-  drillLabel: 'Built for you',
-  composition: ({ missed, due, unseen, mastered }: typeof drill.composition) =>
-    `${missed} missed · ${due} due · ${unseen} new${mastered > 0 ? ` · ${mastered} mastered` : ''}`,
   difficulty: { easy: 'Easy', medium: 'Medium', hard: 'Hard' },
   confidence: {
     label: 'How sure are you?',
     revisitHint: 'Marked to revisit before you finish.',
     options: { guess: 'Guess', unsure: 'Unsure', confident: 'Confident' }
   },
-  navigator: {
-    title: 'Questions',
-    answeredCount: (answered: number, total: number) =>
-      `${answered} of ${total} answered`,
-    reviewCount: (count: number) =>
-      count === 1 ? '1 to revisit' : `${count} to revisit`
+  results: {
+    backToCertification: 'Back to Certification',
+    practiceTitle: 'Drill results',
+    passingScore: (passed: boolean, score: string) =>
+      `${passed ? 'PASS' : 'FAIL'} (Passing score: ${score})`,
+    scoreLine: (correct: number, total: number) =>
+      `You got ${correct} out of ${total} questions correct`,
+    longestRun: (count: number) => `Longest run: ${count}.`,
+    missedReturn: 'What you missed comes back in later mixes.',
+    nextDrill: 'Start next drill'
   },
   footer: {
     coffee: 'Buy me a coffee',

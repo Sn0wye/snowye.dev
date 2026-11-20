@@ -10,11 +10,11 @@ import { clamp01, type Curve, springCurve, tween } from '../listas/curves';
 
 export { clamp01, type Curve };
 
-/** Tailwind's `ease-out`, on the answer options and confidence buttons. */
+/** Tailwind's `ease-out`, on the confidence buttons. */
 export const tailwindEaseOut = cubicBezier(0, 0, 0.2, 1);
 /** Tailwind's default transition curve, for `transition-all`. */
 export const tailwindEase = cubicBezier(0.4, 0, 0.2, 1);
-/** `--ease-out` in index.css, on every Button. */
+/** `--ease-out` in index.css: every control of an attempt, and the strip. */
 export const appEaseOut = cubicBezier(0.23, 1, 0.32, 1);
 /** Motion's named "easeOut" and "easeInOut". */
 export const motionEaseOut = cubicBezier(0, 0, 0.58, 1);
@@ -22,7 +22,7 @@ export const motionEaseInOut = cubicBezier(0.42, 0, 0.58, 1);
 
 /**
  * Seconds until Motion's spring reports itself done, which is when
- * AnimatePresence lets the next element in and onAnimationComplete fires.
+ * AnimatePresence lets the next element in.
  */
 const settleOf = (generator: { next: (ms: number) => { done: boolean } }) => {
   for (let ms = 0; ms < 5000; ms++)
@@ -31,23 +31,42 @@ const settleOf = (generator: { next: (ms: number) => { done: boolean } }) => {
 };
 
 export const curves = {
-  /** use-question-motion `spring`: question changes, the explanation, Continue. */
-  question: springCurve(0.45, 0.12),
-  /** pop.tsx: icons springing in on mount. */
-  pop: springCurve(0.35, 0.5),
-  /** Options and confidence buttons: duration-150 ease-out. */
+  /** AttemptQuestion: the Question comes in from the side of travel. */
+  question: springCurve(0.35, 0.1),
+  /** AttemptQuestion: each option rises in, a beat after the one before. */
+  optionIn: springCurve(0.3, 0.2),
+  /** The dock's explanation opening to its height. */
+  dock: springCurve(0.3, 0.15),
+  /** DrillColumns: a column rising to its height. */
+  column: springCurve(0.5, 0.45),
+  /** The streak's number, remounted on every change. */
+  streak: springCurve(0.4, 0.5),
+  /** ExamStrip: the marker under the current Question. */
+  marker: springCurve(0.35, 0.2),
+  /** The reveal's fade, shake and nod: `{ duration: 0.35, ease: 'easeOut' }`. */
+  reveal: tween(0.35, motionEaseOut),
+  /** `press` in attempt-frame.tsx: duration-150 ease-[var(--ease-out)]. */
+  press: tween(0.15, appEaseOut),
+  /** ConfidenceRating's buttons: duration-150 ease-out. */
   option: tween(0.15, tailwindEaseOut),
-  /** Buttons: duration-150 ease-[var(--ease-out)]. */
-  button: tween(0.15, appEaseOut),
-  /** The navigator's squares and the progress bar: transition-all. */
+  /** ExamStrip's columns: duration-300 ease-[var(--ease-out)]. */
+  strip: tween(0.3, appEaseOut),
+  /** transition-colors and transition-opacity: Tailwind's default 150 ms. */
   all: tween(0.15, tailwindEase)
 };
 
-/** The explanation opening: height 0 → its own height, plus opacity. */
-export const explanationSettle = Math.max(
-  settleOf(spring({ keyframes: [0, 130], duration: 450, bounce: 0.12 })),
-  settleOf(spring({ keyframes: [0, 1], duration: 450, bounce: 0.12 }))
-);
+/** Option `i` rises in on its own delay, `0.04 + i * 0.035`, and keeps it for later changes. */
+export const optionDelay = (i: number) => 0.04 + i * 0.035;
+
+/** ScoreCount: `{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }`. */
+export const scoreEase = cubicBezier(0.22, 1, 0.36, 1);
+
+/** Tailwind's animate-pulse: opacity to 0.5 and back every 2 s. */
+const pulseEase = cubicBezier(0.4, 0, 0.6, 1);
+export const pulse = (t: number) => {
+  const u = ((t % 2) + 2) % 2;
+  return u < 1 ? 1 - 0.5 * pulseEase(u) : 0.5 + 0.5 * pulseEase(u - 1);
+};
 
 /**
  * Motion keyframes over `duration`, evenly spaced, each segment on `ease`:
@@ -170,26 +189,34 @@ const lerpNumber = (a: number, b: number, p: number) => a + (b - a) * p;
  * element asks for over time. `values[i]` is what the stylesheet says at
  * `times[i]`; undefined means the element is not mounted, and a fresh mount
  * starts at its value without transitioning. A change mid-flight starts
- * from wherever the property was, the way browsers retarget.
+ * from wherever the property was, the way browsers retarget. `curveAt`
+ * picks the curve for the change made at `times[i]`, where it depends on
+ * what changed.
  */
 function transitionOf<T>(
   times: number[],
   values: (T | undefined)[],
   curve: Curve,
   lerp: (a: T, b: T, p: number) => T,
-  same: (a: T, b: T) => boolean
+  same: (a: T, b: T) => boolean,
+  curveAt?: (i: number) => Curve
 ) {
-  type Leg = { at: number; from: T; to: T };
+  type Leg = { at: number; from: T; to: T; curve: Curve };
   const legs: (Leg | null)[] = [];
   let leg: Leg | null = null;
-  const valueOf = (l: Leg, t: number) => lerp(l.from, l.to, curve(t - l.at));
+  const valueOf = (l: Leg, t: number) => lerp(l.from, l.to, l.curve(t - l.at));
   values.forEach((value, i) => {
     const at = times[i] ?? 0;
     if (value === undefined) leg = null;
     else if (!leg)
-      leg = { at: Number.NEGATIVE_INFINITY, from: value, to: value };
+      leg = { at: Number.NEGATIVE_INFINITY, from: value, to: value, curve };
     else if (!same(leg.to, value))
-      leg = { at, from: valueOf(leg, at), to: value };
+      leg = {
+        at,
+        from: valueOf(leg, at),
+        to: value,
+        curve: curveAt?.(i) ?? curve
+      };
     legs.push(leg);
   });
   return (t: number): T | undefined => {
@@ -206,14 +233,16 @@ function transitionOf<T>(
 export const numberTransition = (
   times: number[],
   values: (number | undefined)[],
-  curve: Curve
+  curve: Curve,
+  curveAt?: (i: number) => Curve
 ) =>
   transitionOf(
     times,
     values,
     curve,
     lerpNumber,
-    (a, b) => Math.abs(a - b) < 1e-9
+    (a, b) => Math.abs(a - b) < 1e-9,
+    curveAt
   );
 
 export const colorTransition = (

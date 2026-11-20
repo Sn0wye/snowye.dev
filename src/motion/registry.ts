@@ -197,8 +197,8 @@ export const moments: Moment[] = [
     project: 'cloudcertify',
     title: { en: 'Check', pt: 'Conferir' },
     summary: {
-      en: 'A wrong pick, checked. It shakes, the right answer nods, and the explanation springs open and scrolls itself into view. Continue brings the next question in from the right.',
-      pt: 'Uma escolha errada, conferida. Ela treme, a resposta certa acena, e a explicação abre numa mola e rola sozinha até ficar à vista. Continuar traz a próxima questão pela direita.'
+      en: 'A wrong pick, checked. It shakes, the right answer stands up off the page, and the dock floods red with the answer and why. The strip at the top drops a short red column, and Continue sits exactly where Check was.',
+      pt: 'Uma escolha errada, conferida. Ela treme, a resposta certa salta da página, e a barra de baixo fica vermelha com a resposta e o porquê. A faixa no topo ganha uma coluna vermelha baixa, e Continuar fica exatamente onde estava Conferir.'
     },
     live: 'check'
   },
@@ -207,8 +207,8 @@ export const moments: Moment[] = [
     project: 'cloudcertify',
     title: { en: 'From the keyboard', pt: 'Pelo teclado' },
     summary: {
-      en: 'Digits pick and move focus with them, Enter checks and then continues. A question that wants two answers takes two digits.',
-      pt: 'Os números escolhem e levam o foco junto, Enter confere e depois continua. Uma questão que pede duas respostas leva dois números.'
+      en: 'Digits pick and move focus with them; once two are picked the rest fade. Enter checks: a third right answer in a row climbs the staircase of columns and lights the flame. Enter again moves on.',
+      pt: 'Os números escolhem e levam o foco junto; com duas marcadas, as outras apagam. Enter confere: o terceiro acerto seguido sobe mais um degrau nas colunas e acende a chama. Enter de novo segue em frente.'
     },
     live: 'keyboard-drill'
   },
@@ -217,10 +217,20 @@ export const moments: Moment[] = [
     project: 'cloudcertify',
     title: { en: 'Marked to revisit', pt: 'Marcada para revisar' },
     summary: {
-      en: 'In an exam nothing is graded until the end, so you rate how sure you are. A guess puts a mark on the navigator, and jumping back to it slides the question in from the left.',
-      pt: 'Numa prova nada é corrigido até o fim, então você diz o quanto tem certeza. Um chute deixa uma marca no navegador, e voltar a ela traz a questão pela esquerda.'
+      en: 'In an exam nothing is graded until the end, so the strip shows what you know instead: a column per question, as tall as you were sure. A guess turns it short and amber, and pointing back along the strip jumps to it, sliding the question in from the left.',
+      pt: 'Numa prova nada é corrigido até o fim, então a faixa mostra o que você sabe: uma coluna por questão, tão alta quanto a sua certeza. Um chute deixa a coluna baixa e âmbar, e apontar de volta na faixa salta até ela, trazendo a questão pela esquerda.'
     },
     live: 'revisit'
+  },
+  {
+    slug: 'results',
+    project: 'cloudcertify',
+    title: { en: 'Results', pt: 'Resultado' },
+    summary: {
+      en: 'The drill replays itself: every column rises again, one after another, and only then does the score count up to answer them.',
+      pt: 'O drill se repete: cada coluna sobe de novo, uma depois da outra, e só então a nota conta até responder a elas.'
+    },
+    live: 'results'
   },
   {
     slug: 'hero-chip',

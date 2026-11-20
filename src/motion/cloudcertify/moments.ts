@@ -18,14 +18,16 @@ import {
   colorTransition,
   type Curve,
   curves,
-  explanationSettle,
   hex,
   keyframes,
   motionEaseInOut,
   motionEaseOut,
   numberTransition,
+  optionDelay,
+  pulse,
   type Rgba,
   rgba,
+  scoreEase,
   wash
 } from './curves';
 
@@ -42,6 +44,9 @@ export const VIEW_H = 800;
 /** AppHeader: h-16 and its border. */
 export const HEADER_H = 66;
 
+/** ExamStrip's columns: h-[4.5rem], less py-2 and the 2 px baseline. */
+export const STRIP_H = 54;
+
 export type Point = { x: number; y: number };
 
 /** The pointer travels to an element (by data-a) or a viewport point. */
@@ -54,9 +59,10 @@ export type Move = {
 export type Press = { down: number; up: number };
 
 /**
- * Scrolling, by who asks for it. `nearest` is the app's scrollIntoView on
- * the explanation, `question` its scroll back to a new question, and
- * `wheel` a person scrolling until something is in view.
+ * Scrolling, by who asks for it. `nearest` is scrollIntoView, `question` a
+ * scroll back to a new question, and `wheel` a person scrolling until
+ * something is in view. The attempt screens fit the window, so only a
+ * page that outgrows it scrolls.
  */
 export type ScrollIntent = {
   at: number;
@@ -64,19 +70,29 @@ export type ScrollIntent = {
   mode: 'nearest' | 'question' | 'wheel';
 };
 
-/** Inline styles per element; `heightFraction` opens to the content's height. */
+/**
+ * Inline styles per element. `heightFraction` opens to the content's
+ * height; `text` replaces the element's text.
+ */
 export type Style = Record<string, string | number>;
 
 export type Rating = 'guess' | 'unsure' | 'confident';
-export type OptionMode = 'idle' | 'selected' | 'correct' | 'wrong' | 'dim';
+export type OptionMode =
+  'idle' | 'selected' | 'capped' | 'correct' | 'wrong' | 'dim';
+
+/** ExamStrip's tones while an Exam runs. */
+export type StripTone = 'empty' | 'answered' | 'revisit';
+export type StripCell = { height: number; tone: StripTone };
 
 export type PracticeView = {
   kind: 'practice';
   question: Question;
   index: number;
   total: number;
-  drillTitle: string;
-  banner: string | null;
+  outcomes: (boolean | null)[];
+  /** The dashed column waiting for a Check, or -1 once it has one. */
+  current: number;
+  streak: number;
   phase: 'answering' | 'revealed';
   checking: boolean;
   modes: Record<string, OptionMode>;
@@ -89,17 +105,25 @@ export type ExamView = {
   question: Question;
   index: number;
   total: number;
-  quizTitle: string;
   selected: string[];
   rating: Rating | null;
-  answered: boolean[];
-  review: boolean[];
-  navOpen: boolean;
+  cells: StripCell[];
+};
+
+export type ResultsView = {
+  kind: 'results';
+  title: string;
+  outcomes: boolean[];
+  correct: number;
+  score: number;
+  longestRun: number;
+  passed: boolean;
+  passingScore: number;
 };
 
 export type HomeView = { kind: 'home'; chip: string };
 
-export type CCView = PracticeView | ExamView | HomeView;
+export type CCView = PracticeView | ExamView | ResultsView | HomeView;
 
 export type CCFrame = {
   view: CCView;
@@ -122,6 +146,7 @@ export type CCScene = {
 
 /** Long before the moment starts: anything set here has settled. */
 const BEFORE = -1e6;
+const NEVER = Number.NEGATIVE_INFINITY;
 
 class Timeline<S> {
   readonly times: number[] = [BEFORE];
@@ -153,7 +178,7 @@ class Timeline<S> {
 
   /** When `key` last changed by `t`; -Infinity if it never has. */
   changedAt(t: number, key: (s: S) => unknown) {
-    let at = Number.NEGATIVE_INFINITY;
+    let at = NEVER;
     const i = this.indexAt(t);
     for (let j = 1; j <= i; j++) {
       const a = this.states[j - 1] as S;
@@ -163,8 +188,18 @@ class Timeline<S> {
     return at;
   }
 
-  number(select: (s: S) => number | undefined, curve: Curve) {
-    return numberTransition(this.times, this.states.map(select), curve);
+  /** A transition; `pick` chooses its curve from the state it heads to. */
+  number(
+    select: (s: S) => number | undefined,
+    curve: Curve,
+    pick?: (s: S) => Curve
+  ) {
+    return numberTransition(
+      this.times,
+      this.states.map(select),
+      curve,
+      pick && (i => pick(this.states[i] as S))
+    );
   }
 
   color(select: (s: S) => Rgba | undefined, curve: Curve) {
@@ -196,65 +231,68 @@ const seam = (t: number, duration: number, over = 0.35) =>
 /* -------------------------------------------------------------------------- */
 
 const WHITE = hex('#ffffff');
-const CREAM = hex('#f5f3ec');
 const PRIMARY = hex('#2347d9');
 const SUCCESS = hex('#15a06e');
 const DANGER = hex('#e23b48');
-const WARNING = hex('#ffb020');
-const SUCCESS_WASH = wash('#15a06e', 0.15);
-const DANGER_WASH = wash('#e23b48', 0.15);
+const SECONDARY = hex('#ffb020');
+const EMPTY = hex('#000000', 0.2);
+/** `hover:bg-secondary/25` on an option. */
+const HOVER = wash('#ffb020', 0.25);
 
 /**
- * The box-shadow stack Tailwind composes: focus ring offset, focus ring,
- * then the hard offset shadow. Each part fades and shrinks with its own
- * progress, as `shadow-none` and a lost focus interpolate.
+ * The box-shadow stack Tailwind composes: focus ring offset, focus ring
+ * (`ring-4 ring-black/40 ring-offset-2`), then the hard offset shadow.
+ * Each part fades and shrinks with its own progress, as `shadow-none` and a
+ * lost focus interpolate.
  */
-const shadowOf = (offset: number, shadow: number, ring = 0) =>
+const shadowOf = (offset: number, alpha: number, ring = 0) =>
   [
     `0 0 0 ${2 * ring}px rgb(255 255 255 / ${ring})`,
     `0 0 0 ${6 * ring}px rgb(0 0 0 / ${0.4 * ring})`,
-    `${offset * shadow}px ${offset * shadow}px 0 0 rgb(0 0 0 / ${shadow})`
+    `${offset}px ${offset}px 0 0 rgb(0 0 0 / ${alpha})`
   ].join(', ');
 
-/** pop.tsx: scale 0.4 → 1 and opacity 0 → 1 on one spring. */
-const pop = (since: number): Style =>
-  since === Number.NEGATIVE_INFINITY
-    ? { transform: 'none', opacity: 1 }
-    : {
-        transform: `scale(${0.4 + 0.6 * curves.pop(since)})`,
-        opacity: clamp01(curves.pop(since))
-      };
-
-/** use-question-motion `enter`: in from the side of travel, through a blur. */
-const enter = (since: number, direction: number, delay = 0): Style => {
-  if (since === Number.NEGATIVE_INFINITY)
-    return { opacity: 1, transform: 'none', filter: 'none' };
-  const p = curves.question(since - delay);
+/** AttemptQuestion's heading: in from the side of travel. */
+const enter = (since: number, direction: number): Style => {
+  if (since === NEVER) return { opacity: 1, transform: 'none' };
+  const p = curves.question(since);
   return {
     opacity: clamp01(p),
-    transform: `translateX(${direction * 24 * (1 - p)}px)`,
-    filter: `blur(${Math.max(0, 4 * (1 - p))}px)`
+    transform: `translateX(${direction * 32 * (1 - p)}px)`
   };
 };
 
-const shake = keyframes([0, -6, 5, -3, 2, 0], 0.4, motionEaseOut);
-const nod = keyframes([1, 1.015, 1], 0.4, motionEaseOut);
+/** An option mounting: up 10 px and in, on its own delay. */
+const rise = (since: number, i: number) =>
+  since === NEVER ? 1 : curves.optionIn(since - optionDelay(i));
+
+const shake = keyframes([0, -8, 6, -4, 2, 0], 0.35, motionEaseOut);
+const nod = keyframes([1, 1.04, 1], 0.35, motionEaseOut);
 
 const press = (pressed: boolean) => (pressed ? 1 : 0);
 
-/** A Button's :active, 4 px down and its shadow gone. */
-const buttonStyle = (t: number, pressT: (t: number) => number | undefined) => {
-  const p = pressT(t) ?? 0;
-  return {
-    translate: `${4 * p}px ${4 * p}px`,
-    boxShadow: shadowOf(4, 1 - p)
-  };
-};
+/** A dock button's :active, 4 px down and its shadow gone. */
+const dockButton = (p: number): Style => ({
+  translate: `${4 * p}px ${4 * p}px`,
+  boxShadow: shadowOf(4 * (1 - p), 1 - p)
+});
 
 /** Network for a Check on a fast connection. */
 const CHECK_RTT = 0.32;
 /** A click: mouse down, then up a beat later; the click lands on up. */
 const CLICK = 0.09;
+
+/** How many right answers in a row end at each Question. */
+export const runLengths = (outcomes: (boolean | null)[]) => {
+  const runs: number[] = [];
+  for (const [i, outcome] of outcomes.entries())
+    runs.push(outcome ? (runs[i - 1] ?? 0) + 1 : 0);
+  return runs;
+};
+
+/** DrillColumns: a right answer a step taller than the last, a miss low. */
+const columnHeight = (outcome: boolean, run: number) =>
+  outcome ? 20 + 16 * Math.min(run, 5) : 14;
 
 /* -------------------------------------------------------------------------- */
 /* Practice: PracticeQuestionCard in a Drill                                   */
@@ -265,6 +303,7 @@ type PracticeState = {
   selected: string[];
   phase: 'answering' | 'revealed';
   checking: boolean;
+  outcomes: (boolean | null)[];
   hover: string | null;
   pressed: string | null;
   focus: string | null;
@@ -278,23 +317,47 @@ const modeOf = (s: PracticeState, q: Question, id: string): OptionMode => {
       : s.selected.includes(id)
         ? 'wrong'
         : 'dim';
-  return s.selected.includes(id) ? 'selected' : 'idle';
+  if (s.selected.includes(id)) return 'selected';
+  return q.selectCount > 1 && s.selected.length >= q.selectCount
+    ? 'capped'
+    : 'idle';
+};
+
+const isRight = (q: Question, selected: string[]) =>
+  selected.length === q.selectCount &&
+  q.answers.every(a => Boolean(a.correct) === selected.includes(a.id));
+
+/** Right answers in a row, ending at the latest Check. */
+const streakOf = (s: PracticeState, index: number) => {
+  let streak = 0;
+  for (
+    let i = s.phase === 'revealed' ? index : index - 1;
+    i >= 0 && s.outcomes[i];
+    i--
+  )
+    streak++;
+  return streak;
 };
 
 function practiceScene({
   questions,
   first,
+  history,
   duration,
   build
 }: {
   questions: Question[];
   /** Zero-based drill index of the first question. */
   first: number;
+  /** What the Questions before it came out as. */
+  history: boolean[];
   duration: number;
-  build: (tl: Timeline<PracticeState>) => {
+  build: (
+    tl: Timeline<PracticeState>,
+    reveal: (at: number) => void
+  ) => {
     strokes?: Stroke[];
     pointer?: CCScene['pointer'];
-    scrolls: ScrollIntent[];
   };
 }): CCScene {
   const tl = new Timeline<PracticeState>({
@@ -302,90 +365,121 @@ function practiceScene({
     selected: [],
     phase: 'answering',
     checking: false,
+    outcomes: Array.from({ length: drill.total }, (_, i) => history[i] ?? null),
     hover: null,
     pressed: null,
     focus: null
   });
-  const { strokes = [], pointer = null, scrolls } = build(tl);
   const questionOf = (s: PracticeState) => questions[s.q] as Question;
+  const indexOf = (s: PracticeState) => first + s.q;
+  // The verdict comes back with the Check and lands in the strip at once.
+  const reveal = (at: number) => {
+    const s = tl.stateAt(at);
+    const outcomes = [...s.outcomes];
+    outcomes[indexOf(s)] = isRight(questionOf(s), s.selected);
+    tl.set(at, { checking: false, phase: 'revealed', outcomes });
+  };
+  const { strokes = [], pointer = null } = build(tl, reveal);
 
   const views = tl.views<PracticeView>(s => {
     const q = questionOf(s);
-    const index = first + s.q;
-    const picked = q.answers.filter(a => s.selected.includes(a.id));
+    const index = indexOf(s);
     return {
       kind: 'practice',
       question: q,
       index,
       total: drill.total,
-      drillTitle: drill.title,
-      // Only before the first answer of the drill (drill-session.tsx).
-      banner:
-        index === 0 && s.phase === 'answering'
-          ? copy.composition(drill.composition)
-          : null,
+      outcomes: s.outcomes,
+      current: s.phase === 'revealed' ? -1 : index,
+      streak: streakOf(s, index),
       phase: s.phase,
       checking: s.checking,
       modes: Object.fromEntries(q.answers.map(a => [a.id, modeOf(s, q, a.id)])),
-      correct:
-        picked.length === q.selectCount &&
-        picked.every(a => a.correct) &&
-        s.selected.length === q.selectCount,
+      correct: isRight(q, s.selected),
       canCheck: s.selected.length === q.selectCount
     };
   });
 
-  // Every answer's CSS transitions, built once from the state they ask for.
+  // Every answer's transitions, built once from the state they ask for.
   const options = questions.flatMap((q, qi) =>
-    q.answers.map(a => {
+    q.answers.map((a, i) => {
       const on = (s: PracticeState) => s.q === qi;
       const mode = (s: PracticeState) => modeOf(s, q, a.id);
+      const shadow = (s: PracticeState) => {
+        const m = mode(s);
+        if (m === 'correct') return 6;
+        return (m === 'idle' && s.pressed !== a.id) || m === 'capped' ? 4 : 0;
+      };
       return {
         id: a.id,
+        i,
         qi,
         background: tl.color(s => {
           if (!on(s)) return undefined;
           const m = mode(s);
           if (m === 'selected') return PRIMARY;
-          if (m === 'correct') return SUCCESS_WASH;
-          if (m === 'wrong') return DANGER_WASH;
-          return m === 'idle' && s.hover === a.id ? CREAM : WHITE;
-        }, curves.option),
+          if (m === 'correct') return SUCCESS;
+          if (m === 'wrong') return DANGER;
+          return m === 'idle' && !s.checking && s.hover === a.id
+            ? HOVER
+            : WHITE;
+        }, curves.press),
         translate: tl.number(s => {
           if (!on(s)) return undefined;
           const m = mode(s);
+          if (m === 'correct') return -2;
           return m === 'selected' || (m === 'idle' && s.pressed === a.id)
-            ? 2
+            ? 4
             : 0;
-        }, curves.option),
-        shadow: tl.number(s => {
-          if (!on(s)) return undefined;
-          return mode(s) === 'idle' && s.pressed !== a.id ? 1 : 0;
-        }, curves.option),
-        opacity: tl.number(
-          s => (on(s) ? (mode(s) === 'dim' ? 0.55 : 1) : undefined),
-          curves.option
+        }, curves.press),
+        shadowX: tl.number(s => (on(s) ? shadow(s) : undefined), curves.press),
+        shadowA: tl.number(
+          s => (on(s) ? (shadow(s) > 0 ? 1 : 0) : undefined),
+          curves.press
         ),
         ring: tl.number(
           s => (on(s) ? press(s.focus === a.id) : undefined),
-          curves.option
+          curves.press
         ),
-        icon: (s: PracticeState) => {
-          if (!on(s)) return null;
-          const m = mode(s);
-          return m === 'selected' || m === 'correct' || m === 'wrong'
-            ? m
-            : null;
-        }
+        // Motion owns opacity: a spring on the option's delay while answering,
+        // the reveal's tween once checked.
+        fade: tl.number(
+          s => {
+            if (!on(s)) return undefined;
+            const m = mode(s);
+            return m === 'dim' || m === 'capped' ? 0.4 : 1;
+          },
+          curves.reveal,
+          s =>
+            s.phase === 'revealed'
+              ? curves.reveal
+              : t => curves.optionIn(t - optionDelay(i))
+        )
       };
     })
   );
-  const checkPress = tl.number(
-    s => press(s.pressed === 'check'),
-    curves.button
+  const primaryBg = tl.color(
+    s => (s.phase === 'revealed' ? WHITE : PRIMARY),
+    curves.press
   );
-  const progress = tl.number(
-    s => ((first + s.q + 1) / drill.total) * 100,
+  const primaryOpacity = tl.number(s => {
+    const q = questionOf(s);
+    return s.phase === 'revealed' ||
+      s.checking ||
+      s.selected.length === q.selectCount
+      ? 1
+      : 0.4;
+  }, curves.press);
+  const primaryPress = tl.number(
+    s => press(s.pressed === 'primary'),
+    curves.press
+  );
+  const dockBg = tl.color(s => {
+    if (s.phase !== 'revealed') return WHITE;
+    return isRight(questionOf(s), s.selected) ? SUCCESS : DANGER;
+  }, curves.all);
+  const streakOpacity = tl.number(
+    s => (streakOf(s, indexOf(s)) === 0 ? 0.3 : 1),
     curves.all
   );
 
@@ -394,7 +488,7 @@ function practiceScene({
     url: 'cloudcertify.snowye.dev/quiz/1/drill/1/session',
     strokes,
     pointer,
-    scrolls,
+    scrolls: [],
     frame: t => {
       const i = tl.indexAt(t);
       const s = tl.states[i] as PracticeState;
@@ -402,38 +496,72 @@ function practiceScene({
       const mountedAt = tl.changedAt(t, st => st.q);
       const revealedAt = tl.changedAt(t, st => `${st.q}:${st.phase}`);
       const checkingAt = tl.changedAt(t, st => st.checking);
+      const runs = runLengths(view.outcomes);
       const styles: Record<string, Style> = {
-        title: enter(t - mountedAt, 1),
-        answers: enter(t - mountedAt, 1, 0.05),
-        check: buttonStyle(t, checkPress),
-        bar: { transform: `translateX(-${100 - (progress(t) ?? 0)}%)` },
-        spinner: { transform: `rotate(${((t - checkingAt) % 1) * 360}deg)` }
+        question: enter(t - mountedAt, 1),
+        primary: {
+          background: rgba(primaryBg(t) ?? PRIMARY),
+          opacity: primaryOpacity(t) ?? 1,
+          ...dockButton(primaryPress(t) ?? 0)
+        },
+        dock: { background: rgba(dockBg(t) ?? WHITE) },
+        spinner: { transform: `rotate(${((t - checkingAt) % 1) * 360}deg)` },
+        streak: { opacity: streakOpacity(t) ?? 1 }
       };
+
+      // A new number remounts and springs in, unless it fell back to zero.
+      const streakAt = tl.changedAt(t, st => streakOf(st, indexOf(st)));
+      if (view.streak > 0 && streakAt !== NEVER) {
+        const p = curves.streak(t - streakAt);
+        styles['streak-num'] = {
+          transform: `translateY(${10 * (1 - p)}px) scale(${1.6 - 0.6 * p})`
+        };
+      } else styles['streak-num'] = { transform: 'none' };
+
+      view.outcomes.forEach((outcome, c) => {
+        if (outcome === null) {
+          if (c === view.current) {
+            const since = tl.changedAt(t, st =>
+              st.phase === 'revealed' ? -1 : indexOf(st)
+            );
+            styles[`col-${c}`] = {
+              opacity: pulse(since === NEVER ? t : t - since)
+            };
+          }
+          return;
+        }
+        const target = columnHeight(outcome, runs[c] ?? 0);
+        const at = tl.changedAt(t, st => st.outcomes[c]);
+        const h =
+          at === NEVER ? target : 25 + (target - 25) * curves.column(t - at);
+        styles[`col-${c}`] = { height: `${h}%` };
+      });
 
       for (const o of options) {
         if (o.qi !== s.q) continue;
-        const ring = o.ring(t) ?? 0;
-        const x = view.modes[o.id] === 'wrong' ? shake(t - revealedAt) : 0;
-        const scale =
-          view.modes[o.id] === 'correct' && s.phase === 'revealed'
-            ? nod(t - revealedAt)
-            : 1;
+        const mode = view.modes[o.id];
+        const up = rise(t - mountedAt, o.i);
+        const revealed = s.phase === 'revealed';
+        const x = revealed && mode === 'wrong' ? shake(t - revealedAt) : 0;
+        const scale = revealed && mode === 'correct' ? nod(t - revealedAt) : 1;
+        const tr = o.translate(t) ?? 0;
         styles[o.id] = {
           background: rgba(o.background(t) ?? WHITE),
-          translate: `${o.translate(t) ?? 0}px ${o.translate(t) ?? 0}px`,
-          boxShadow: shadowOf(4, o.shadow(t) ?? 0, ring),
-          opacity: o.opacity(t) ?? 1,
-          transform: `translateX(${x}px) scale(${scale})`
+          translate: `${tr}px ${tr}px`,
+          boxShadow: shadowOf(
+            o.shadowX(t) ?? 0,
+            o.shadowA(t) ?? 0,
+            o.ring(t) ?? 0
+          ),
+          opacity: clamp01(up) * (o.fade(t) ?? 1),
+          transform: `translateX(${x}px) translateY(${10 * (1 - up)}px) scale(${scale})`
         };
-        styles[`${o.id}-icon`] = pop(t - tl.changedAt(t, o.icon));
       }
 
       if (s.phase === 'revealed') {
-        const p = curves.question(t - revealedAt);
-        styles.explain = { heightFraction: p, opacity: clamp01(p) };
-        styles['explain-icon'] = pop(t - revealedAt);
-        styles['continue-label'] = {
-          transform: `translateY(${8 * (1 - p)}px)`,
+        const p = curves.dock(t - revealedAt);
+        styles.explain = {
+          heightFraction: Math.max(0, p),
           opacity: clamp01(p)
         };
       }
@@ -444,15 +572,17 @@ function practiceScene({
 }
 
 /**
- * A wrong pick, checked: it shakes, the right answer nods, and the
- * explanation opens and scrolls itself into view. Then Continue.
+ * A wrong pick, checked. It shakes, the right answer stands up off the page,
+ * the dock floods red with the answer and why, and the strip drops a short
+ * red column. Continue sits where Check was.
  */
 const check = (): CCScene =>
   practiceScene({
     questions: [backups, serverless],
-    first: 0,
-    duration: 10.4,
-    build: tl => {
+    first: 4,
+    history: [true, true, false, true],
+    duration: 10,
+    build: (tl, reveal) => {
       const moves: Move[] = [];
       const presses: Press[] = [];
       const snowball = 'backups-2';
@@ -464,23 +594,18 @@ const check = (): CCScene =>
       tl.set(pick, { pressed: snowball });
       tl.set(pick + CLICK, { pressed: null, selected: [snowball] });
 
-      // Check is below the fold on a laptop: scroll down to it first.
-      const toCheck = 2.05;
-      tl.set(2.1, { hover: null });
-      moves.push({ at: 2.8, dur: 0.6, to: 'check' });
-      const checkAt = 3.62;
+      moves.push({ at: 2.25, dur: 0.75, to: 'primary' });
+      tl.set(2.42, { hover: null });
+      const checkAt = 3.35;
       presses.push({ down: checkAt, up: checkAt + CLICK });
-      tl.set(checkAt, { pressed: 'check' });
+      tl.set(checkAt, { pressed: 'primary' });
       tl.set(checkAt + CLICK, { pressed: null, checking: true });
-      const revealAt = checkAt + CLICK + CHECK_RTT;
-      tl.set(revealAt, { checking: false, phase: 'revealed' });
+      reveal(checkAt + CLICK + CHECK_RTT);
 
-      // Continue is under the explanation now: scroll to it, then press it.
-      const toContinue = 6.4;
-      moves.push({ at: 7.05, dur: 0.55, to: 'check' });
-      const continueAt = 7.85;
+      // The button never moved: Continue is under the pointer already.
+      const continueAt = 7.6;
       presses.push({ down: continueAt, up: continueAt + CLICK });
-      tl.set(continueAt, { pressed: 'check' });
+      tl.set(continueAt, { pressed: 'primary' });
       tl.set(continueAt + CLICK, {
         pressed: null,
         q: 1,
@@ -488,32 +613,23 @@ const check = (): CCScene =>
         phase: 'answering'
       });
 
-      return {
-        pointer: { start: { x: 880, y: 300 }, moves, presses },
-        scrolls: [
-          {
-            at: revealAt + explanationSettle,
-            target: 'explain',
-            mode: 'nearest'
-          },
-          { at: toCheck, target: 'check', mode: 'wheel' },
-          { at: toContinue, target: 'check', mode: 'wheel' },
-          { at: continueAt + CLICK, target: 'card', mode: 'question' }
-        ]
-      };
+      return { pointer: { start: { x: 900, y: 230 }, moves, presses } };
     }
   });
 
 /**
- * The same drill from the keyboard: digits pick, Enter checks and
- * continues, and focus follows the last digit pressed.
+ * A run kept going from the keyboard: digits pick and carry focus, the
+ * options left over fade once two are picked, and Enter checks. The third
+ * right answer in a row climbs the staircase and lights the flame; Enter
+ * again moves on.
  */
 const keyboard = (): CCScene =>
   practiceScene({
     questions: [serverless, metrics],
-    first: 1,
+    first: 3,
+    history: [false, true, true],
     duration: 8,
-    build: tl => {
+    build: (tl, reveal) => {
       const keys = script(0.75);
       const pick = (digit: number) => {
         const at = keys.now;
@@ -529,9 +645,8 @@ const keyboard = (): CCScene =>
       const checkAt = keys.now;
       keys.press('Enter');
       tl.set(checkAt, { checking: true });
-      const revealAt = checkAt + CHECK_RTT;
-      tl.set(revealAt, { checking: false, phase: 'revealed' });
-      keys.at(5.4);
+      reveal(checkAt + CHECK_RTT);
+      keys.at(5.5);
       const continueAt = keys.now;
       keys.press('Enter');
       // The focused option belonged to the last question; focus goes with it.
@@ -542,54 +657,61 @@ const keyboard = (): CCScene =>
         focus: null
       });
 
-      return {
-        strokes: keys.strokes,
-        scrolls: [
-          {
-            at: revealAt + explanationSettle,
-            target: 'explain',
-            mode: 'nearest'
-          },
-          { at: continueAt, target: 'card', mode: 'question' }
-        ]
-      };
+      return { strokes: keys.strokes };
     }
   });
 
 /* -------------------------------------------------------------------------- */
-/* Exam: QuestionCard, ConfidenceRating and the Navigator                      */
+/* Exam: QuestionCard, ConfidenceRating and the strip                          */
 /* -------------------------------------------------------------------------- */
 
 type ExamState = {
   q: number;
   answers: Record<number, string[]>;
   ratings: Record<number, Rating>;
-  navOpen: boolean;
   hover: string | null;
   pressed: string | null;
 };
 
 const RATINGS: Rating[] = ['guess', 'unsure', 'confident'];
-const RATING_FILL: Record<Rating, Rgba> = {
-  guess: DANGER,
-  unsure: WARNING,
-  confident: SUCCESS
-};
-const needsReview = (r: Rating | undefined) => r === 'guess' || r === 'unsure';
+const needsReview = (r: Rating | null | undefined) =>
+  r === 'guess' || r === 'unsure';
 
-/** Questions 1–6 are behind the visitor; they were unsure about 3. */
-const EARLIER: Record<number, Rating> = { 2: 'unsure' };
+/** exam-strip.tsx: Confidence sets the height; an unrated answer stays low. */
+const confidenceHeight = (r: Rating | null | undefined) =>
+  r === 'confident' ? 100 : r === 'unsure' ? 70 : r === 'guess' ? 45 : 25;
+
+/**
+ * Questions 1–23 are behind the visitor: c confident, u unsure, g guess,
+ * a answered without a rating.
+ */
+const EARLIER = 'ccuccgcacccuccgccucccac';
+const earlier = (i: number): Rating | null => {
+  const c = EARLIER[i];
+  return c === 'c'
+    ? 'confident'
+    : c === 'u'
+      ? 'unsure'
+      : c === 'g'
+        ? 'guess'
+        : null;
+};
+
+const STRIP_FILL: Record<StripTone, Rgba> = {
+  empty: EMPTY,
+  answered: PRIMARY,
+  revisit: SECONDARY
+};
 
 const revisit = (): CCScene => {
   const examQuestions: Record<number, Question> = {
-    6: permissions,
-    7: support
+    23: permissions,
+    24: support
   };
   const tl = new Timeline<ExamState>({
-    q: 6,
+    q: 23,
     answers: {},
     ratings: {},
-    navOpen: false,
     hover: null,
     pressed: null
   });
@@ -605,158 +727,193 @@ const revisit = (): CCScene => {
   const role = 'permissions-2';
   moves.push({ at: 0.5, dur: 0.75, to: role });
   tl.set(1.19, { hover: role });
-  click(1.5, role, { answers: { 6: [role] } });
-  tl.set(1.9, { hover: null });
-  const wheel = 2.15;
+  click(1.5, role, { answers: { 23: [role] } });
 
-  moves.push({ at: 2.75, dur: 0.6, to: 'conf-guess' });
-  tl.set(3.29, { hover: 'conf-guess' });
-  click(3.6, 'conf-guess', { ratings: { 6: 'guess' } });
+  moves.push({ at: 2.0, dur: 0.75, to: 'conf-guess' });
+  tl.set(2.1, { hover: null });
+  click(3.05, 'conf-guess', { ratings: { 23: 'guess' } });
 
-  moves.push({ at: 4.4, dur: 0.55, to: 'next' });
-  tl.set(4.45, { hover: null });
-  const nextAt = click(5.2, 'next', { q: 7 });
+  moves.push({ at: 3.75, dur: 0.6, to: 'next' });
+  click(4.65, 'next', { q: 24 });
 
-  moves.push({ at: 6.0, dur: 0.7, to: 'nav-open' });
-  click(6.95, 'nav-open', { navOpen: true });
+  // Back along the strip: the column is the Question under the pointer.
+  moves.push({ at: 5.5, dur: 0.95, to: 'col-23' });
+  click(6.95, 'strip', { q: 23 });
 
-  moves.push({ at: 7.55, dur: 0.65, to: 'nav-6' });
-  const jumpAt = click(8.5, 'nav-6', { navOpen: false, q: 6 });
-
-  const duration = 11;
+  const duration = 10;
   const questionOf = (s: ExamState) => examQuestions[s.q] as Question;
+  const cellOf = (s: ExamState, i: number): StripCell => {
+    const answered = i < 23 || (s.answers[i]?.length ?? 0) > 0;
+    const rating = i < 23 ? earlier(i) : s.ratings[i];
+    return answered
+      ? {
+          height: confidenceHeight(rating),
+          tone: needsReview(rating) ? 'revisit' : 'answered'
+        }
+      : { height: 0, tone: 'empty' };
+  };
 
-  const views = tl.views<ExamView>(s => {
-    const answered = Array.from({ length: quiz.total }, (_, i) =>
-      i < 6 ? true : (s.answers[i]?.length ?? 0) > 0
-    );
-    const review = Array.from({ length: quiz.total }, (_, i) =>
-      needsReview(i < 6 ? EARLIER[i] : s.ratings[i])
-    );
-    return {
-      kind: 'exam',
-      question: questionOf(s),
-      index: s.q,
-      total: quiz.total,
-      quizTitle: quiz.title,
-      selected: s.answers[s.q] ?? [],
-      rating: s.ratings[s.q] ?? null,
-      answered,
-      review,
-      navOpen: s.navOpen
-    };
-  });
+  const views = tl.views<ExamView>(s => ({
+    kind: 'exam',
+    question: questionOf(s),
+    index: s.q,
+    total: quiz.total,
+    selected: s.answers[s.q] ?? [],
+    rating: s.ratings[s.q] ?? null,
+    cells: Array.from({ length: quiz.total }, (_, i) => cellOf(s, i))
+  }));
 
-  const answered = (s: ExamState) => (s.answers[s.q]?.length ?? 0) > 0;
   const options = Object.entries(examQuestions).flatMap(([qi, q]) =>
-    q.answers.map(a => {
+    q.answers.map((a, i) => {
       const on = (s: ExamState) => s.q === Number(qi);
       const selected = (s: ExamState) => (s.answers[s.q] ?? []).includes(a.id);
+      const lowered = (s: ExamState) => selected(s) || s.pressed === a.id;
       return {
         id: a.id,
+        i,
         qi: Number(qi),
         background: tl.color(s => {
           if (!on(s)) return undefined;
           if (selected(s)) return PRIMARY;
-          return s.hover === a.id ? CREAM : WHITE;
-        }, curves.option),
-        translate: tl.number(
-          s =>
-            on(s) ? (selected(s) || s.pressed === a.id ? 2 : 0) : undefined,
-          curves.option
-        ),
-        shadow: tl.number(
-          s =>
-            on(s) ? (selected(s) || s.pressed === a.id ? 0 : 1) : undefined,
-          curves.option
-        ),
-        icon: (s: ExamState) => (on(s) && selected(s) ? s.q : null)
+          return s.hover === a.id ? HOVER : WHITE;
+        }, curves.press),
+        lowered: tl.number(
+          s => (on(s) ? press(lowered(s)) : undefined),
+          curves.press
+        )
       };
     })
   );
   const ratings = RATINGS.map(r => {
     const id = `conf-${r}`;
-    const on = answered;
     const chosen = (s: ExamState) => s.ratings[s.q] === r;
     return {
       id,
-      background: tl.color(s => {
-        if (!on(s)) return undefined;
-        if (chosen(s)) return RATING_FILL[r];
-        return s.hover === id ? CREAM : WHITE;
-      }, curves.option),
-      lowered: tl.number(
-        s => (on(s) ? press(chosen(s) || s.pressed === id) : undefined),
+      background: tl.color(
+        s => (chosen(s) ? (r === 'confident' ? PRIMARY : SECONDARY) : WHITE),
         curves.option
       ),
-      // Keyed on whether it is chosen: a flip remounts the icon and pops it.
-      icon: (s: ExamState) => (on(s) ? `${s.q}:${chosen(s)}` : null)
+      lowered: tl.number(
+        s => press(chosen(s) || s.pressed === id),
+        curves.option
+      )
     };
   });
-  const buttons = ['prev', 'next', 'nav-open'].map(id => ({
-    id,
-    press: tl.number(s => press(s.pressed === id), curves.button)
-  }));
-  const squarePress = tl.number(
-    s => (s.navOpen ? press(s.pressed === 'nav-6') : undefined),
+  const ratingOpacity = tl.number(
+    s => ((s.answers[s.q]?.length ?? 0) > 0 ? 1 : 0.3),
     curves.all
   );
-  const progress = tl.number(s => ((s.q + 1) / quiz.total) * 100, curves.all);
+  const buttons = ['prev', 'next'].map(id => ({
+    id,
+    press: tl.number(s => press(s.pressed === id), curves.press)
+  }));
+  // Only the Questions this moment touches change; the rest stand as drawn.
+  const columns = Object.keys(examQuestions)
+    .map(Number)
+    .map(i => ({
+      i,
+      height: tl.number(s => {
+        const cell = cellOf(s, i);
+        return cell.tone === 'empty' ? 3 : (cell.height / 100) * STRIP_H;
+      }, curves.strip),
+      fill: tl.color(s => STRIP_FILL[cellOf(s, i).tone], curves.strip)
+    }));
+  const left = (i: number) => ((i + 0.5) / quiz.total) * 100;
 
   return {
     duration,
     url: 'cloudcertify.snowye.dev/quiz/1/session',
     strokes: [],
-    pointer: { start: { x: 900, y: 260 }, moves, presses },
-    scrolls: [
-      { at: wheel, target: 'rating', mode: 'wheel' },
-      { at: nextAt, target: 'card', mode: 'question' },
-      { at: jumpAt, target: 'card', mode: 'question' }
-    ],
+    pointer: { start: { x: 900, y: 230 }, moves, presses },
+    scrolls: [],
     frame: t => {
       const i = tl.indexAt(t);
       const s = tl.states[i] as ExamState;
       const view = views[i] as ExamView;
       const mountedAt = tl.changedAt(t, st => st.q);
+      const from = mountedAt === NEVER ? s.q : tl.stateAt(mountedAt - 1e-6).q;
       // Travel follows the index: back to an earlier question comes in from the left.
-      const direction =
-        mountedAt === Number.NEGATIVE_INFINITY ||
-        s.q > tl.stateAt(mountedAt - 1e-6).q
-          ? 1
-          : -1;
+      const direction = s.q >= from ? 1 : -1;
+      const p = mountedAt === NEVER ? 1 : curves.marker(t - mountedAt);
       const styles: Record<string, Style> = {
-        title: enter(t - mountedAt, direction),
-        answers: enter(t - mountedAt, direction, 0.05),
-        bar: { transform: `translateX(-${100 - (progress(t) ?? 0)}%)` }
+        question: enter(t - mountedAt, direction),
+        marker: { left: `${left(from) + (left(s.q) - left(from)) * p}%` },
+        rating: { opacity: ratingOpacity(t) ?? 1 }
       };
-      for (const b of buttons) styles[b.id] = buttonStyle(t, b.press);
+      for (const b of buttons) styles[b.id] = dockButton(b.press(t) ?? 0);
+      for (const c of columns)
+        styles[`col-${c.i}`] = {
+          height: `${c.height(t) ?? 3}px`,
+          background: rgba(c.fill(t) ?? EMPTY)
+        };
       for (const o of options) {
         if (o.qi !== s.q) continue;
-        const lowered = o.translate(t) ?? 0;
+        const up = rise(t - mountedAt, o.i);
+        const l = o.lowered(t) ?? 0;
         styles[o.id] = {
           background: rgba(o.background(t) ?? WHITE),
-          translate: `${lowered}px ${lowered}px`,
-          boxShadow: shadowOf(4, o.shadow(t) ?? 1)
-        };
-        styles[`${o.id}-icon`] = pop(t - tl.changedAt(t, o.icon));
-      }
-      if (view.selected.length > 0)
-        for (const r of ratings) {
-          const lowered = r.lowered(t) ?? 0;
-          styles[r.id] = {
-            background: rgba(r.background(t) ?? WHITE),
-            translate: `${2 * lowered}px ${2 * lowered}px`,
-            boxShadow: shadowOf(4, 1 - lowered)
-          };
-          styles[`${r.id}-icon`] = pop(t - tl.changedAt(t, r.icon));
-        }
-      if (s.navOpen) {
-        const p = squarePress(t) ?? 0;
-        styles['nav-6'] = {
-          translate: `${2 * p}px ${2 * p}px`,
-          boxShadow: shadowOf(2, 1 - p)
+          translate: `${4 * l}px ${4 * l}px`,
+          boxShadow: shadowOf(4 * (1 - l), 1 - l),
+          opacity: clamp01(up),
+          transform: `translateY(${10 * (1 - up)}px)`
         };
       }
+      for (const r of ratings) {
+        const l = r.lowered(t) ?? 0;
+        styles[r.id] = {
+          background: rgba(r.background(t) ?? WHITE),
+          translate: `${2 * l}px ${2 * l}px`,
+          boxShadow: shadowOf(3 * (1 - l), 1 - l)
+        };
+      }
+      return { view, styles, fade: seam(t, duration) };
+    }
+  };
+};
+
+/* -------------------------------------------------------------------------- */
+/* Results: the Drill's columns replayed, then the score                       */
+/* -------------------------------------------------------------------------- */
+
+/** The results screen mounts as the last Continue lands. */
+const RESULTS_AT = 0.45;
+
+const results = (): CCScene => {
+  const outcomes = drill.outcomes;
+  const runs = runLengths(outcomes);
+  const correct = outcomes.filter(Boolean).length;
+  const score = Math.round((correct / outcomes.length) * 100);
+  const view: ResultsView = {
+    kind: 'results',
+    title: drill.title,
+    outcomes,
+    correct,
+    score,
+    longestRun: Math.max(0, ...runs),
+    passed: score >= drill.passingScore,
+    passingScore: drill.passingScore
+  };
+  // The columns finish rising first; the number answers them.
+  const afterColumns = 0.35 + outcomes.length * 0.05;
+  const duration = 7;
+
+  return {
+    duration,
+    url: 'cloudcertify.snowye.dev/quiz/1/drill/1/session',
+    strokes: [],
+    pointer: null,
+    scrolls: [],
+    frame: t => {
+      const since = t - RESULTS_AT;
+      const styles: Record<string, Style> = {};
+      outcomes.forEach((outcome, i) => {
+        const p = curves.column(since - (0.15 + i * 0.05));
+        styles[`col-${i}`] = {
+          height: `${columnHeight(outcome, runs[i] ?? 0) * p}%`
+        };
+      });
+      const p = scoreEase(clamp01((since - afterColumns) / 0.9));
+      styles.score = { text: String(Math.round(score * p)) };
       return { view, styles, fade: seam(t, duration) };
     }
   };
@@ -827,6 +984,7 @@ export const cloudcertifyScenes = {
   check,
   'keyboard-drill': keyboard,
   revisit,
+  results,
   'hero-chip': hero
 } as const;
 
