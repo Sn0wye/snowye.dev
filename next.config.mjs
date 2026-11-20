@@ -7,7 +7,20 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 const nextConfig = {
   reactStrictMode: true,
   // App Router i18n is handled by next-intl middleware (see src/middleware.ts).
-  typescript: { ignoreBuildErrors: !!process.env.CI }
+  typescript: { ignoreBuildErrors: !!process.env.CI },
+  // ytd dropped its `down` subcommand, and the moment named after it moved.
+  redirects: () => [
+    {
+      source: '/craft/ytd-down',
+      destination: '/craft/download',
+      permanent: true
+    },
+    {
+      source: '/:locale(en|pt)/craft/ytd-down',
+      destination: '/:locale/craft/download',
+      permanent: true
+    }
+  ]
 };
 
 export default withNextIntl(nextConfig);
