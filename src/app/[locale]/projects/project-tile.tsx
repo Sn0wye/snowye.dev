@@ -1,13 +1,16 @@
 'use client';
 
-import type { LottieRefCurrentProps } from 'lottie-react';
+import type { LottieHandle } from 'lottie-react';
 import { ArrowUpRight } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { type PointerEvent, useRef } from 'react';
 
 import { Specimen } from '@/components/shell/specimen';
 
-const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
+const Lottie = dynamic(
+  () => import('lottie-react').then(mod => mod.LottieSvg),
+  { ssr: false }
+);
 
 type ProjectTileProps = {
   title: string;
@@ -26,7 +29,7 @@ export function ProjectTile({
   iconName
 }: ProjectTileProps) {
   const card = useRef<HTMLDivElement>(null);
-  const icon = useRef<LottieRefCurrentProps | null>(null);
+  const icon = useRef<LottieHandle>(null);
   const animation = iconName
     ? require(`../../../../public/static/icons/${iconName}.json`)
     : null;
@@ -66,7 +69,7 @@ export function ProjectTile({
         {animation ? (
           <Lottie
             lottieRef={icon}
-            animationData={animation}
+            src={animation}
             loop={false}
             autoplay={false}
             style={{ width: 40, height: 40 }}
