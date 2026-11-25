@@ -237,10 +237,20 @@ export const moments: Moment[] = [
     project: 'cloudcertify',
     title: { en: 'Rotating chip', pt: 'Selo rotativo' },
     summary: {
-      en: 'The landing page names each provider in turn. The old word drops out letter by letter from the end, and the new one rises in only once it has gone.',
-      pt: 'A landing page nomeia cada provedor por vez. A palavra antiga sai letra por letra a partir do fim, e a nova só sobe depois que ela sumiu.'
+      en: 'The landing page names one exam at a time, every code on offer in turn. The old code drops out letter by letter from the end, and the new one rises in only once it has gone.',
+      pt: 'A landing page nomeia uma prova por vez, cada código disponível na sua vez. O código antigo sai letra por letra a partir do fim, e o novo só sobe depois que ele sumiu.'
     },
     live: 'hero-chip'
+  },
+  {
+    slug: 'skyline',
+    project: 'cloudcertify',
+    title: { en: 'Example result', pt: 'Resultado de exemplo' },
+    summary: {
+      en: 'The landing page shows a finished exam the way the real result arrives: the columns stand up left to right in their mid-exam colours, then the verdict sweeps across. A finding dims every column but its own, and pointing at one reads it out under the strip.',
+      pt: 'A landing page mostra uma prova terminada do jeito que o resultado de verdade chega: as colunas sobem da esquerda para a direita nas cores que tinham durante a prova, e depois o veredito passa por elas. Um achado apaga todas as colunas menos as dele, e apontar para uma lê ela embaixo da faixa.'
+    },
+    live: 'skyline'
   },
   {
     slug: 'tick',

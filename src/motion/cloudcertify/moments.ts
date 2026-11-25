@@ -20,7 +20,7 @@ import {
   curves,
   hex,
   keyframes,
-  motionEaseInOut,
+  mixRgba,
   motionEaseOut,
   numberTransition,
   optionDelay,
@@ -49,11 +49,15 @@ export const STRIP_H = 54;
 
 export type Point = { x: number; y: number };
 
-/** The pointer travels to an element (by data-a) or a viewport point. */
+/**
+ * The pointer travels to an element (by data-a) or a viewport point;
+ * `offset` shifts the landing on an element, to stop beside it.
+ */
 export type Move = {
   at: number;
   dur: number;
   to: string | Point;
+  offset?: Point;
 };
 
 export type Press = { down: number; up: number };
@@ -121,7 +125,18 @@ export type ResultsView = {
   passingScore: number;
 };
 
-export type HomeView = { kind: 'home'; chip: string };
+/** The example result's two findings, as the landing's buttons name them. */
+export type Finding = 'misconception' | 'lucky';
+
+export type HomeView = {
+  kind: 'home';
+  /** The exam code in the hero's chip. */
+  code: string;
+  /** The column the line under the strip reads: the hovered one, else the selected. */
+  pointed: number;
+  /** The finding in the spotlight, if any. */
+  spot: Finding | null;
+};
 
 export type CCView = PracticeView | ExamView | ResultsView | HomeView;
 
@@ -920,29 +935,65 @@ const results = (): CCScene => {
 };
 
 /* -------------------------------------------------------------------------- */
-/* Home: the hero's rotating provider chip                                     */
+/* Home: the landing page                                                      */
 /* -------------------------------------------------------------------------- */
 
-/** RotatingText: rotationInterval 2000, staggerDuration 0.025 from the last. */
-const ROTATE_EVERY = 2;
+/**
+ * The landing's example result: one finished 65-Question Exam, a letter per
+ * Question. c confident, u unsure, g guess; upper case is a right answer.
+ */
+const EXAMPLE =
+  'CCUCcCGCCuCCUgCCcCUCuGCgCCCcUCgCCUuCcGCCuCUgCgcCuGCCUCcCgCGCCUCcC';
+export const EXAMPLE_SCORE = 742;
+export const EXAMPLE_PASSING = 700;
+
+export type ExampleCell = {
+  rating: Rating;
+  /** Percent of the strip, as tall as the visitor was sure. */
+  height: number;
+  right: boolean;
+  /** The column's colour while the Exam ran: confident, or marked to revisit. */
+  before: 'primary' | 'secondary';
+  finding: Finding | null;
+};
+
+export const exampleCells: ExampleCell[] = Array.from(EXAMPLE, letter => {
+  const r = letter.toLowerCase();
+  const rating: Rating =
+    r === 'c' ? 'confident' : r === 'u' ? 'unsure' : 'guess';
+  return {
+    rating,
+    height: r === 'c' ? 100 : r === 'u' ? 70 : 45,
+    right: letter !== r,
+    before: r === 'c' ? 'primary' : 'secondary',
+    finding: letter === 'c' ? 'misconception' : letter === 'G' ? 'lucky' : null
+  };
+});
+
+const firstOf = (finding: Finding) =>
+  exampleCells.findIndex(cell => cell.finding === finding);
+
+/** RotatingText: rotationInterval 2200, staggerDuration 0.025 from the last. */
+const ROTATE_EVERY = 2.2;
 const STAGGER = 0.025;
-const FLOAT_PERIOD = 3.2;
-const floatY = keyframes([0, -9, 0], FLOAT_PERIOD, motionEaseInOut);
-/** FloatSticker delays: AWS, Azure, GCP. */
-const FLOAT_DELAYS = [0, 0.6, 0.3];
+/** Marquee: one loop of its doubled row, `speed` 28 s. */
+const MARQUEE_LOOP = 28;
 
 const exitTime = (text: string) => (text.length - 1) * STAGGER + charOut.settle;
 
+/**
+ * The hero names one exam at a time. Two turns through the codes; the
+ * marquee under the hero does not line up with them, so the seam fades.
+ */
 const hero = (): CCScene => {
-  const chips = copy.home.chips;
-  // Three rotations and the stickers' float line up every 48 s.
-  const duration = 48;
+  const codes = copy.home.codes;
+  const duration = 2 * codes.length * ROTATE_EVERY;
   const views = new Map<string, HomeView>();
-  const viewOf = (chip: string) => {
-    let v = views.get(chip);
+  const viewOf = (code: string) => {
+    let v = views.get(code);
     if (!v) {
-      v = { kind: 'home', chip };
-      views.set(chip, v);
+      v = { kind: 'home', code, pointed: firstOf('misconception'), spot: null };
+      views.set(code, v);
     }
     return v;
   };
@@ -954,28 +1005,163 @@ const hero = (): CCScene => {
     pointer: null,
     scrolls: [],
     frame: t => {
-      // At 0 the previous chip starts leaving, exactly as at 48.
+      // At 0 the last code starts leaving, as it does every turn.
       const k = Math.floor(t / ROTATE_EVERY);
       const since = t - k * ROTATE_EVERY;
-      const incoming = chips[k % chips.length] ?? '';
-      const outgoing = chips[(k + chips.length - 1) % chips.length] ?? '';
-      // AnimatePresence mode="wait": the new word mounts once the old one is out.
+      const incoming = codes[k % codes.length] ?? '';
+      const outgoing = codes[(k + codes.length - 1) % codes.length] ?? '';
+      // AnimatePresence mode="wait": the new code mounts once the old one is out.
       const leaving = since < exitTime(outgoing);
-      const chip = leaving ? outgoing : incoming;
+      const code = leaving ? outgoing : incoming;
       const styles: Record<string, Style> = {};
-      Array.from(chip).forEach((_, i) => {
-        const delay = (chip.length - 1 - i) * STAGGER;
+      Array.from(code).forEach((_, i) => {
+        const delay = (code.length - 1 - i) * STAGGER;
         const y = leaving
           ? charOut.at(since - delay)
           : charIn.at(since - exitTime(outgoing) - delay);
         styles[`chip-${i}`] = { transform: `translateY(${y}%)` };
       });
-      FLOAT_DELAYS.forEach((delay, i) => {
-        const local =
-          (((t - delay) % FLOAT_PERIOD) + FLOAT_PERIOD) % FLOAT_PERIOD;
-        styles[`float-${i}`] = { transform: `translateY(${floatY(local)}px)` };
+      const loop = (((t / MARQUEE_LOOP) % 1) + 1) % 1;
+      styles.marquee = { transform: `translateX(${-50 * loop}%)` };
+      return { view: viewOf(code), styles, fade: seam(t, duration) };
+    }
+  };
+};
+
+type SkylineState = {
+  /** The column under a mouse, if it is on the strip. */
+  hover: number | null;
+  selected: number;
+  spot: Finding | null;
+  /** The finding button under the pointer. */
+  card: Finding | null;
+};
+
+/** The strip's height at `lg`: h-64. */
+const SKYLINE_H = 256;
+
+/**
+ * The landing's example result, from the load. The columns stand up left to
+ * right in their mid-Exam colours and the verdict sweeps across; then the
+ * visitor spotlights the misconceptions, reads one off the strip, and moves
+ * on to the lucky guesses.
+ */
+const skyline = (): CCScene => {
+  const misconception = firstOf('misconception');
+  const lucky = firstOf('lucky');
+  // A misconception halfway along the strip, to read off it.
+  const read = exampleCells.findIndex(
+    (cell, i) => i > 20 && cell.finding === 'misconception'
+  );
+
+  const tl = new Timeline<SkylineState>({
+    hover: null,
+    selected: misconception,
+    spot: null,
+    card: null
+  });
+  const moves: Move[] = [];
+  const presses: Press[] = [];
+  const click = (at: number, then: Partial<SkylineState>) => {
+    presses.push({ down: at, up: at + CLICK });
+    tl.set(at + CLICK, then);
+  };
+  // Below the column, past the marker, over the line that reads it.
+  const readHeight = exampleCells[read]?.height ?? 100;
+  const under = {
+    x: 0,
+    y: (readHeight / 100) * SKYLINE_H * 0.45 + 30
+  };
+
+  moves.push({ at: 3.3, dur: 0.8, to: 'find-misconception' });
+  tl.set(4.0, { card: 'misconception' });
+  click(4.5, { spot: 'misconception' });
+
+  moves.push({ at: 5.5, dur: 0.8, to: `sky-col-${read}`, offset: under });
+  tl.set(5.62, { card: null });
+  // Straight up into the column, so the strip only ever sees this one.
+  moves.push({ at: 6.6, dur: 0.45, to: `sky-col-${read}` });
+  tl.set(6.74, { hover: read });
+  click(7.25, { selected: read });
+
+  moves.push({ at: 8.0, dur: 0.4, to: `sky-col-${read}`, offset: under });
+  tl.set(8.26, { hover: null });
+
+  moves.push({ at: 8.75, dur: 0.8, to: 'find-lucky' });
+  tl.set(9.45, { card: 'lucky' });
+  // A finding that does not hold the selected column moves the selection to its first.
+  click(9.95, { spot: 'lucky', selected: lucky });
+  click(11.75, { spot: null });
+
+  const duration = 14;
+  const pointedOf = (s: SkylineState) => s.hover ?? s.selected;
+  const views = tl.views<HomeView>(s => ({
+    kind: 'home',
+    code: copy.home.codes[0] ?? '',
+    pointed: pointedOf(s),
+    spot: s.spot
+  }));
+
+  const columns = exampleCells.map((cell, i) => ({
+    before: cell.before === 'primary' ? PRIMARY : SECONDARY,
+    after: cell.right ? SUCCESS : DANGER,
+    opacity: tl.number(
+      s => (s.spot && cell.finding !== s.spot && i !== pointedOf(s) ? 0.15 : 1),
+      curves.spotlight
+    )
+  }));
+  const marker = tl.number(pointedOf, curves.press);
+  const cards = (['misconception', 'lucky'] as const).map(finding => {
+    const on = (s: SkylineState) => s.spot === finding;
+    return {
+      finding,
+      background: tl.color(
+        s =>
+          on(s)
+            ? finding === 'misconception'
+              ? DANGER
+              : SECONDARY
+            : s.card === finding
+              ? HOVER
+              : WHITE,
+        curves.press
+      ),
+      lowered: tl.number(s => press(on(s)), curves.press)
+    };
+  });
+  const count = exampleCells.length;
+
+  return {
+    duration,
+    url: 'cloudcertify.snowye.dev',
+    strokes: [],
+    pointer: { start: { x: 160, y: 790 }, moves, presses },
+    // Reloaded where the visitor left it: the result fills the window.
+    scrolls: [{ at: -1, target: 'result-foot', mode: 'wheel' }],
+    frame: t => {
+      const i = tl.indexAt(t);
+      const view = views[i] as HomeView;
+      const styles: Record<string, Style> = {};
+      columns.forEach((c, j) => {
+        const rise = curves.skylineRise(t - j * 0.012);
+        const verdict = curves.skylineVerdict(t - (1.3 + j * 0.02));
+        styles[`sky-col-${j}`] = {
+          transform: `scaleY(${rise})`,
+          background: rgba(mixRgba(c.before, c.after, verdict)),
+          opacity: c.opacity(t) ?? 1
+        };
       });
-      return { view: viewOf(chip), styles, fade: 1 };
+      const m = marker(t) ?? 0;
+      styles['sky-marker'] = { left: `${((m + 0.5) / count) * 100}%` };
+      for (const card of cards) {
+        const l = card.lowered(t) ?? 0;
+        styles[`find-${card.finding}`] = {
+          background: rgba(card.background(t) ?? WHITE),
+          translate: `${4 * l}px ${4 * l}px`,
+          boxShadow: shadowOf(4 * (1 - l), 1 - l)
+        };
+      }
+      return { view, styles, fade: seam(t, duration) };
     }
   };
 };
@@ -985,7 +1171,8 @@ export const cloudcertifyScenes = {
   'keyboard-drill': keyboard,
   revisit,
   results,
-  'hero-chip': hero
+  'hero-chip': hero,
+  skyline
 } as const;
 
 export type CloudCertifyKind = keyof typeof cloudcertifyScenes;

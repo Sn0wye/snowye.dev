@@ -20,6 +20,10 @@ import {
   type CCView,
   type CloudCertifyKind,
   cloudcertifyScenes,
+  EXAMPLE_PASSING,
+  EXAMPLE_SCORE,
+  type ExampleCell,
+  exampleCells,
   type ExamView,
   HEADER_H,
   type HomeView,
@@ -43,8 +47,6 @@ import { KeystrokeBar } from './keystrokes';
 
 /** Archivo on the body, as the app's root layout sets it. */
 const SANS = archivo.style.fontFamily;
-const MONO =
-  'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
 
 /** lucide-react 0.486, the version the app ships. */
 const ICONS = {
@@ -911,189 +913,297 @@ const DOTGRID: React.CSSProperties = {
   backgroundSize: '22px 22px'
 };
 
-function FloatSticker({
-  i,
-  className,
-  fill,
-  rotate,
-  children
-}: {
-  i: number;
-  className: string;
-  fill: string;
-  rotate: number;
-  children: React.ReactNode;
-}) {
+/** `display` in home.tsx: Archivo black, condensed to 70 %. */
+const DISPLAY = 'font-black leading-[0.9] text-balance';
+const condensed = (stretch: number): React.CSSProperties => ({
+  fontStretch: `${stretch}%`
+});
+
+/** HeroCluster: a checked Drill question as a tilted card, with stickers. */
+function HeroCluster() {
+  const codes = copy.home.codes;
+  const sticker =
+    'absolute z-10 border-2 border-black px-3 py-1 font-black shadow-[4px_4px_0px_0px_#000]';
   return (
-    <div className={cn('absolute z-20', className)}>
-      <div data-a={`float-${i}`}>
-        <div
-          className={cn(
-            'border-2 border-black px-3 py-1.5 font-black text-sm',
-            HARD_4,
-            fill
-          )}
-          style={{ rotate: `${rotate}deg` }}
+    <div className="relative mx-auto h-[23rem] w-full max-w-md">
+      <div className="absolute inset-x-8 top-12 h-72 -rotate-6 border-2 border-black bg-[#ffb020] shadow-[8px_8px_0px_0px_#000]" />
+      <div className="absolute inset-x-0 top-2 -rotate-2 border-2 border-black bg-white p-5 shadow-[12px_12px_0px_0px_#000]">
+        <span className="border-2 border-black bg-[#2347d9] px-2 py-0.5 font-black text-sm text-white">
+          {codes[0]}
+        </span>
+        <p
+          className="mt-4 font-extrabold text-xl leading-tight"
+          style={condensed(88)}
         >
-          {children}
+          {copy.home.mockQuestion}
+        </p>
+        <div className="mt-4 space-y-2.5">
+          {['Amazon EC2', 'AWS Fargate', 'Amazon EKS'].map(option => {
+            const right = option === 'AWS Fargate';
+            return (
+              <div
+                key={option}
+                className={cn(
+                  'flex items-center gap-3 border-2 border-black px-3 py-2 font-bold',
+                  right
+                    ? 'bg-[#15a06e]'
+                    : 'bg-white shadow-[3px_3px_0px_0px_#000]'
+                )}
+              >
+                <span className="flex size-5 items-center justify-center border-2 border-black bg-white">
+                  {right && (
+                    <Icon name="tick" className="size-3" strokeWidth={4} />
+                  )}
+                </span>
+                {option}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <span
+        className={cn(
+          sticker,
+          '-left-3 bottom-0 -rotate-6 bg-[#2347d9] text-white'
+        )}
+      >
+        {codes[1]}
+      </span>
+      <span className={cn(sticker, '-right-3 bottom-6 rotate-6 bg-white')}>
+        {codes[2]}
+      </span>
+      <span
+        className={cn(
+          sticker,
+          '-right-3 -top-4 flex size-20 rotate-12 flex-col items-center justify-center bg-[#ffb020] px-0 leading-tight'
+        )}
+      >
+        <span className="text-xl" style={condensed(125)}>
+          {copy.home.sticker[0]}
+        </span>
+        {copy.home.sticker[1]}
+      </span>
+    </div>
+  );
+}
+
+/** Marquee: the row twice, so a translate of -50 % loops. */
+function Marquee() {
+  const row = (
+    <ul className="flex shrink-0 items-center">
+      {copy.home.marquee.map(item => (
+        <li
+          key={item}
+          className="flex items-center gap-6 whitespace-nowrap px-6 font-black text-3xl uppercase tracking-tight"
+        >
+          {item}
+          <Icon name="cloud" className="size-6" fill="currentColor" />
+        </li>
+      ))}
+    </ul>
+  );
+  return (
+    <div className="flex w-full overflow-hidden border-black border-y-2 bg-[#ffb020] py-3">
+      <div data-a="marquee" className="flex w-max">
+        {row}
+        {row}
+      </div>
+    </div>
+  );
+}
+
+/** ExampleResult: the Exam results screen, standing in for a screenshot. */
+function ExampleResult({ view }: { view: HomeView }) {
+  const cells = exampleCells;
+  const pointed = cells[view.pointed] as ExampleCell;
+  const right = cells.filter(cell => cell.right).length;
+  const findings = [
+    {
+      key: 'misconception' as const,
+      fill: 'bg-[#e23b48]',
+      label: copy.results.misconceptions,
+      hint: copy.results.misconceptionsHint
+    },
+    {
+      key: 'lucky' as const,
+      fill: 'bg-[#ffb020]',
+      label: copy.results.luckyGuesses,
+      hint: copy.results.luckyGuessesHint
+    }
+  ];
+  return (
+    <div>
+      <div data-hand className="relative select-none">
+        <div className="flex h-64 items-end gap-px border-black border-b-2">
+          {cells.map((cell, i) => (
+            <div
+              key={i}
+              data-a={`sky-col-${i}`}
+              className={cn(
+                'flex-1 origin-bottom',
+                cell.right ? 'bg-[#15a06e]' : 'bg-[#e23b48]',
+                i === view.pointed && 'relative z-10 outline-2 outline-black',
+                view.spot &&
+                  cell.finding !== view.spot &&
+                  i !== view.pointed &&
+                  'opacity-15'
+              )}
+              style={{ height: `${cell.height}%` }}
+            />
+          ))}
+        </div>
+        <div
+          data-a="sky-marker"
+          className="absolute top-full h-2 -translate-x-1/2 bg-black"
+          style={{
+            left: `${((view.pointed + 0.5) / cells.length) * 100}%`,
+            width: `${100 / cells.length}%`
+          }}
+        />
+      </div>
+      <p
+        className="mt-5 flex items-start gap-3 font-extrabold text-2xl leading-tight"
+        style={condensed(88)}
+      >
+        <span
+          className={cn(
+            'mt-0.5 size-5 shrink-0 border-2 border-black',
+            pointed.right ? 'bg-[#15a06e]' : 'bg-[#e23b48]'
+          )}
+        />
+        {copy.home.column(view.pointed + 1, pointed.rating, pointed.right)}
+      </p>
+      <p className="mt-2 font-medium text-black/60 text-sm">
+        {copy.home.example} {copy.results.stripLegend}
+      </p>
+
+      <div
+        data-a="result-foot"
+        className="mt-8 grid grid-cols-[auto_1fr] items-end gap-16"
+      >
+        <div>
+          <p
+            className="font-black text-[8rem] leading-none tabular-nums"
+            style={condensed(125)}
+          >
+            {EXAMPLE_SCORE}
+          </p>
+          <p className="mt-4 inline-block border-2 border-black bg-[#15a06e] px-3 py-1 font-black">
+            {copy.results.passingScore(true, String(EXAMPLE_PASSING))}
+          </p>
+          <p
+            className="mt-3 font-extrabold text-xl leading-tight"
+            style={condensed(88)}
+          >
+            {copy.results.scoreLine(right, cells.length)}.
+          </p>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          {findings.map(finding => {
+            const on = view.spot === finding.key;
+            return (
+              <span
+                key={finding.key}
+                data-a={`find-${finding.key}`}
+                data-hand
+                className={cn(
+                  'block border-2 border-black p-4 text-left',
+                  on
+                    ? cn('translate-x-1 translate-y-1', finding.fill)
+                    : 'bg-white shadow-[4px_4px_0px_0px_#000]'
+                )}
+              >
+                <span className="flex items-baseline gap-3">
+                  <span
+                    className="font-black text-4xl tabular-nums"
+                    style={condensed(125)}
+                  >
+                    {cells.filter(cell => cell.finding === finding.key).length}
+                  </span>
+                  <span className="font-black text-lg">{finding.label}</span>
+                </span>
+                <span className="mt-1 block font-medium leading-snug">
+                  {finding.hint}
+                </span>
+              </span>
+            );
+          })}
         </div>
       </div>
     </div>
   );
 }
 
+/**
+ * The landing page as far as its example result: the sticker hero, the
+ * marquee, and the Skyline. At 1024 px the container pads 24 px a side.
+ */
 function HomePage({ view }: { view: HomeView }) {
-  const answers = [
-    { text: 'Amazon EC2', ok: false },
-    { text: 'AWS Fargate', ok: true },
-    { text: 'Amazon EKS', ok: false }
-  ];
   return (
     <>
       <AppHeader home />
-      <section
-        className="relative w-full overflow-hidden border-black border-b-2 bg-white"
-        style={DOTGRID}
-      >
-        <div className="pointer-events-none absolute -top-40 -right-40 size-[28rem] bg-[#2347d9]/20 blur-3xl" />
-        <div className="relative mx-auto w-full px-6 py-28">
-          <div className="grid grid-cols-[1.05fr_0.95fr] items-center gap-12">
-            <div className="max-w-2xl">
-              <span
-                className="inline-flex items-center gap-2 border-2 border-black bg-[#ffb020] px-3 py-1 font-black text-black text-xs uppercase tracking-wide"
-                style={{ boxShadow: '3px 3px 0 0 #000' }}
-              >
-                <Icon name="sparkles" className="size-3.5" />
-                {copy.home.badge}
-              </span>
-              <h1 className="mt-6 font-black text-7xl text-black leading-[0.92] tracking-tight">
-                {copy.home.lead}
-                <span className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
-                  <span
-                    className="inline-block border-2 border-black bg-[#2347d9] px-3 py-1 text-white"
-                    style={{ rotate: '-1deg', boxShadow: '5px 5px 0 0 #000' }}
-                  >
-                    <span className="relative flex flex-wrap whitespace-pre-wrap text-white">
-                      <span className="relative flex flex-wrap whitespace-pre-wrap">
-                        <span className="inline-flex overflow-hidden">
-                          {Array.from(view.chip).map((char, i) => (
-                            <span
-                              key={`${view.chip}-${i}`}
-                              data-a={`chip-${i}`}
-                              className="inline-block"
-                            >
-                              {char}
-                            </span>
-                          ))}
-                        </span>
+      <section className="overflow-hidden bg-white" style={DOTGRID}>
+        <div className="mx-auto grid w-full grid-cols-[1.1fr_0.9fr] items-center gap-16 px-6 py-20">
+          <div>
+            <p className="inline-block -rotate-1 border-2 border-black bg-[#ffb020] px-3 py-1 font-black text-sm shadow-[3px_3px_0px_0px_#000]">
+              {copy.home.badge}
+            </p>
+            {/* clamp(3.25rem, 8vw, 6.5rem) in a 1024 px window. */}
+            <h1
+              className={cn('mt-6 text-[81.92px]', DISPLAY)}
+              style={condensed(70)}
+            >
+              {copy.home.lead}
+              <span className="mt-2 flex flex-wrap items-center gap-x-[0.2em] gap-y-2">
+                {copy.home.tail}
+                <span className="inline-block -rotate-1 border-2 border-black bg-[#2347d9] px-[0.12em] pt-[0.08em] pb-[0.04em] text-white shadow-[6px_6px_0px_0px_#000]">
+                  <span className="relative flex flex-wrap whitespace-pre-wrap">
+                    <span className="relative flex flex-wrap whitespace-pre-wrap">
+                      <span className="inline-flex overflow-hidden">
+                        {Array.from(view.code).map((char, i) => (
+                          <span
+                            key={`${view.code}-${i}`}
+                            data-a={`chip-${i}`}
+                            className="inline-block"
+                          >
+                            {char}
+                          </span>
+                        ))}
                       </span>
                     </span>
                   </span>
-                  <span>{copy.home.cert}</span>
                 </span>
-                <span className="mt-3 block">{copy.home.tail}</span>
-              </h1>
-              <p className="mt-6 max-w-md font-medium text-black/70 text-lg">
-                {copy.home.subtitle}
-              </p>
-              <div className="mt-8 flex flex-row gap-3">
-                <span className={cn(button('default', 'lg'), HARD_4)}>
-                  {copy.home.primary}
-                  <Icon name="right" className="ml-2" />
-                </span>
-                <span className={cn(button('outline', 'lg'), HARD_4)}>
-                  {copy.home.secondary}
-                </span>
-              </div>
-            </div>
-
-            <div className="relative mx-auto h-[440px] w-full max-w-md">
-              <div
-                className="absolute inset-x-8 top-12 h-72 border-2 border-black bg-[#ffb020] shadow-[8px_8px_0px_0px_#000]"
-                style={{ rotate: '-6deg' }}
-              />
-              <div
-                className="absolute inset-x-0 top-2 border-2 border-black bg-white p-5 shadow-[12px_12px_0px_0px_#000]"
-                style={{ rotate: '-2deg' }}
-              >
-                <div className="flex items-center justify-between">
-                  <span className="border-2 border-black bg-[#2347d9] px-2 py-0.5 font-black text-[11px] text-white uppercase">
-                    AWS · SAA
-                  </span>
-                  <span
-                    className="font-bold text-black/50 text-xs tabular-nums"
-                    style={{ fontFamily: MONO }}
-                  >
-                    Q 07 / 65
-                  </span>
-                </div>
-                <p className="mt-4 font-bold text-black text-sm leading-snug">
-                  {copy.home.mockQuestion}
-                </p>
-                <div className="mt-4 space-y-2">
-                  {answers.map(a => (
-                    <div
-                      key={a.text}
-                      className={cn(
-                        'flex items-center gap-2 border-2 border-black px-3 py-2 font-bold text-xs',
-                        a.ok
-                          ? 'bg-[#2347d9] text-white'
-                          : 'bg-white text-black shadow-[3px_3px_0px_0px_#000]'
-                      )}
-                    >
-                      <span
-                        className={cn(
-                          'flex size-4 items-center justify-center border-2 border-black',
-                          a.ok ? 'bg-black text-white' : 'bg-white'
-                        )}
-                      >
-                        {a.ok && <Icon name="check" className="size-3" />}
-                      </span>
-                      {a.text}
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-4 h-2.5 w-full overflow-hidden border-2 border-black bg-white">
-                  <div
-                    className="h-full bg-[#15a06e]"
-                    style={{ width: '62%' }}
-                  />
-                </div>
-              </div>
-              <FloatSticker
-                i={0}
-                className="top-4 -left-3"
-                fill="bg-[#2347d9] text-white"
-                rotate={-12}
-              >
-                AWS
-              </FloatSticker>
-              <FloatSticker
-                i={1}
-                className="top-28 -right-2"
-                fill="bg-white text-black"
-                rotate={6}
-              >
-                Azure
-              </FloatSticker>
-              <FloatSticker
-                i={2}
-                className="bottom-6 -left-1"
-                fill="bg-[#15a06e] text-black"
-                rotate={3}
-              >
-                GCP
-              </FloatSticker>
-              <div
-                className="absolute -top-3 -right-4 z-20 flex size-20 items-center justify-center border-2 border-black bg-[#ffb020] text-center font-black text-[11px] uppercase leading-tight shadow-[4px_4px_0px_0px_#000]"
-                style={{ rotate: '12deg' }}
-              >
-                {copy.home.free[0]}
-                <br />
-                {copy.home.free[1]}
-              </div>
+              </span>
+            </h1>
+            <p className="mt-7 max-w-[44ch] font-medium text-lg leading-snug">
+              {copy.home.subtitle}
+            </p>
+            <div className="mt-7 flex flex-row gap-3">
+              <span className={cn(button('default', 'lg'), HARD_4)}>
+                {copy.home.primary}
+              </span>
+              <span className={cn(button('outline', 'lg'), HARD_4)}>
+                {copy.home.secondary}
+              </span>
             </div>
           </div>
+          <HeroCluster />
+        </div>
+      </section>
+
+      <Marquee />
+
+      <section className="border-black border-b-2">
+        <div className="mx-auto w-full px-6 py-24">
+          <div className="mb-14">
+            <h2 className={cn('text-7xl', DISPLAY)} style={condensed(70)}>
+              {copy.home.resultTitle}
+            </h2>
+            <p className="mt-4 max-w-[58ch] font-medium text-black/70 text-lg leading-snug">
+              {copy.home.resultSubtitle}
+            </p>
+          </div>
+          <ExampleResult view={view} />
         </div>
       </section>
     </>
@@ -1453,8 +1563,11 @@ export function LiveCloudCertify({
               const k = v.width / VIEW_W;
               const w = r.width / k;
               last = {
-                x: (r.left - v.left) / k + Math.min(w * 0.5, 150),
-                y: (r.top - v.top + r.height * 0.55) / k
+                x:
+                  (r.left - v.left) / k +
+                  Math.min(w * 0.5, 150) +
+                  (move.offset?.x ?? 0),
+                y: (r.top - v.top + r.height * 0.55) / k + (move.offset?.y ?? 0)
               };
             }
           }
