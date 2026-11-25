@@ -7,15 +7,19 @@ import { useParams } from 'next/navigation';
 import React, {
   createContext,
   type ReactElement,
+  type RefObject,
   useContext,
   useEffect,
   useRef,
   useTransition
 } from 'react';
 
-const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
+const Lottie = dynamic(
+  () => import('lottie-react').then(mod => mod.LottieSvg),
+  { ssr: false }
+);
 
-import type { LottieComponentProps, LottieRefCurrentProps } from 'lottie-react';
+import type { LottieHandle } from 'lottie-react';
 import { useHotkeys } from 'react-hotkeys-hook';
 
 import { usePathname, useRouter } from '@/i18n/navigation';
@@ -322,14 +326,14 @@ function Home({ navigate, switchLocale, currentLocale, onClose }: HomeProps) {
   const t = useT();
   const k = t.common.kbar;
 
-  const copyLinkRef = useRef<LottieRefCurrentProps>(null);
-  const emailRef = useRef<LottieRefCurrentProps>(null);
-  const sourceRef = useRef<LottieRefCurrentProps>(null);
-  const homeRef = useRef<LottieRefCurrentProps>(null);
-  const aboutRef = useRef<LottieRefCurrentProps>(null);
-  const projectsRef = useRef<LottieRefCurrentProps>(null);
-  const craftRef = useRef<LottieRefCurrentProps>(null);
-  const mcpRef = useRef<LottieRefCurrentProps>(null);
+  const copyLinkRef = useRef<LottieHandle>(null);
+  const emailRef = useRef<LottieHandle>(null);
+  const sourceRef = useRef<LottieHandle>(null);
+  const homeRef = useRef<LottieHandle>(null);
+  const aboutRef = useRef<LottieHandle>(null);
+  const projectsRef = useRef<LottieHandle>(null);
+  const craftRef = useRef<LottieHandle>(null);
+  const mcpRef = useRef<LottieHandle>(null);
 
   const iconStyle = { width: 20, height: 20 };
   const baseIconProps = {
@@ -343,11 +347,7 @@ function Home({ navigate, switchLocale, currentLocale, onClose }: HomeProps) {
       <CommandGroup heading={k.sections.goto}>
         <Item
           icon={
-            <Lottie
-              lottieRef={homeRef}
-              animationData={homeIcon}
-              {...baseIconProps}
-            />
+            <Lottie lottieRef={homeRef} src={homeIcon} {...baseIconProps} />
           }
           shortcut="G H"
           onSelect={() => navigate('/')}
@@ -356,11 +356,7 @@ function Home({ navigate, switchLocale, currentLocale, onClose }: HomeProps) {
         </Item>
         <Item
           icon={
-            <Lottie
-              lottieRef={aboutRef}
-              animationData={aboutIcon}
-              {...baseIconProps}
-            />
+            <Lottie lottieRef={aboutRef} src={aboutIcon} {...baseIconProps} />
           }
           shortcut="G A"
           onSelect={() => navigate('/about')}
@@ -371,7 +367,7 @@ function Home({ navigate, switchLocale, currentLocale, onClose }: HomeProps) {
           icon={
             <Lottie
               lottieRef={projectsRef}
-              animationData={projectsIcon}
+              src={projectsIcon}
               {...baseIconProps}
             />
           }
@@ -382,11 +378,7 @@ function Home({ navigate, switchLocale, currentLocale, onClose }: HomeProps) {
         </Item>
         <Item
           icon={
-            <Lottie
-              lottieRef={craftRef}
-              animationData={craftIcon}
-              {...baseIconProps}
-            />
+            <Lottie lottieRef={craftRef} src={craftIcon} {...baseIconProps} />
           }
           shortcut="G C"
           onSelect={() => navigate('/craft')}
@@ -394,13 +386,7 @@ function Home({ navigate, switchLocale, currentLocale, onClose }: HomeProps) {
           {k.actions.craft}
         </Item>
         <Item
-          icon={
-            <Lottie
-              lottieRef={mcpRef}
-              animationData={mcpIcon}
-              {...baseIconProps}
-            />
-          }
+          icon={<Lottie lottieRef={mcpRef} src={mcpIcon} {...baseIconProps} />}
           shortcut="G M"
           onSelect={() => navigate('/mcp')}
         >
@@ -412,7 +398,7 @@ function Home({ navigate, switchLocale, currentLocale, onClose }: HomeProps) {
           icon={
             <Lottie
               lottieRef={copyLinkRef}
-              animationData={copyLinkIcon}
+              src={copyLinkIcon}
               {...baseIconProps}
             />
           }
@@ -430,11 +416,7 @@ function Home({ navigate, switchLocale, currentLocale, onClose }: HomeProps) {
         </Item>
         <Item
           icon={
-            <Lottie
-              lottieRef={emailRef}
-              animationData={emailIcon}
-              {...baseIconProps}
-            />
+            <Lottie lottieRef={emailRef} src={emailIcon} {...baseIconProps} />
           }
           shortcut="E"
           onSelect={() => navigate('/contact')}
@@ -443,11 +425,7 @@ function Home({ navigate, switchLocale, currentLocale, onClose }: HomeProps) {
         </Item>
         <Item
           icon={
-            <Lottie
-              lottieRef={sourceRef}
-              animationData={sourceIcon}
-              {...baseIconProps}
-            />
+            <Lottie lottieRef={sourceRef} src={sourceIcon} {...baseIconProps} />
           }
           shortcut="S"
           onSelect={() => {
@@ -533,18 +511,14 @@ function Item({
   children: string;
   shortcut?: string;
   onSelect?: (value: string) => void;
-  icon: ReactElement<LottieComponentProps> | ReactElement;
+  icon: ReactElement<{ lottieRef?: RefObject<LottieHandle | null> }>;
 }) {
   const selected = useContext(SelectedContext) === children;
   const reduced = useReducedMotion();
 
   // Lottie icons play while their item is highlighted.
   useEffect(() => {
-    const lottieRef = (
-      icon.props as {
-        lottieRef?: { current: { play: () => void; stop: () => void } };
-      }
-    ).lottieRef;
+    const { lottieRef } = icon.props;
     if (selected) lottieRef?.current?.play();
     else lottieRef?.current?.stop();
   }, [selected, icon]);
