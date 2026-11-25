@@ -8,9 +8,17 @@ export const env = createEnv({
   server: {
     NODE_ENV: z.enum(['development', 'test', 'production'])
   },
-  client: {},
+  client: {
+    // Optional so builds without PostHog credentials still work;
+    // instrumentation-client.ts skips init unless both are set.
+    NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN: z.string().min(1).optional(),
+    NEXT_PUBLIC_POSTHOG_HOST: z.url().optional()
+  },
   runtimeEnv: {
-    NODE_ENV: process.env.NODE_ENV
+    NODE_ENV: process.env.NODE_ENV,
+    NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN:
+      process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN,
+    NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST
   },
   skipValidation: !!process.env.CI
 });

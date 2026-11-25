@@ -4,11 +4,11 @@ export const privacy = {
   tagline: 'Privacy information for visitors to snowye.dev.',
   metaDescription:
     'Learn what information snowye.dev processes, why it is used, which external services may receive data, and how to ask privacy questions.',
-  updated: 'Last updated: September 4, 2026.',
+  updated: 'Last updated: November 24, 2026.',
   sections: [
     {
       title: 'Information this site processes',
-      body: 'This website does not ask you to create an account and does not sell personal information. Like most websites, its hosting infrastructure may process technical request data such as your IP address, browser or user-agent information, requested URL, referrer, and request time. This information can be present in short-lived security and operational logs. Privacy-friendly aggregate analytics may also be used to understand page performance and general traffic without building advertising profiles.'
+      body: 'This website does not ask you to create an account and does not sell personal information. Like most websites, its hosting infrastructure may process technical request data such as your IP address, browser or user-agent information, requested URL, referrer, and request time. This information can be present in short-lived security and operational logs. The site also uses PostHog for product analytics: it stores a pseudonymous identifier in a cookie and local storage, and records page views, clicks, and session replays (with form inputs masked) to understand how pages are used. This data is not used to build advertising profiles.'
     },
     {
       title: 'Why information is used',
@@ -16,7 +16,7 @@ export const privacy = {
     },
     {
       title: 'External services and links',
-      body: 'This site links to services operated by other organizations, including Cal.com, GitHub, LinkedIn, Instagram, and email providers. Opening those links or using an embedded service means the relevant provider may process information under its own privacy policy. Vercel provides hosting and analytics infrastructure. This notice does not control the practices of third-party websites, so review their terms before sharing information with them.'
+      body: 'This site links to services operated by other organizations, including Cal.com, GitHub, LinkedIn, Instagram, and email providers. Opening those links or using an embedded service means the relevant provider may process information under its own privacy policy. Vercel provides hosting infrastructure, and PostHog provides analytics. This notice does not control the practices of third-party websites, so review their terms before sharing information with them.'
     },
     {
       title: 'Retention, choices, and contact',
