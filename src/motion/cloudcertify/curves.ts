@@ -52,7 +52,13 @@ export const curves = {
   /** ExamStrip's columns: duration-300 ease-[var(--ease-out)]. */
   strip: tween(0.3, appEaseOut),
   /** transition-colors and transition-opacity: Tailwind's default 150 ms. */
-  all: tween(0.15, tailwindEase)
+  all: tween(0.15, tailwindEase),
+  /** The landing's example result: `skyline-rise 0.5s var(--ease-out)`. */
+  skylineRise: tween(0.5, appEaseOut),
+  /** Then `skyline-verdict 0.25s linear`, from the column's mid-Exam colour. */
+  skylineVerdict: tween(0.25, p => p),
+  /** Its columns leaving or entering the spotlight: transition-opacity duration-200. */
+  spotlight: tween(0.2, tailwindEase)
 };
 
 /** Option `i` rises in on its own delay, `0.04 + i * 0.035`, and keeps it for later changes. */
@@ -70,7 +76,7 @@ export const pulse = (t: number) => {
 
 /**
  * Motion keyframes over `duration`, evenly spaced, each segment on `ease`:
- * the shake on a wrong pick, the nod on a right one, the stickers' float.
+ * the shake on a wrong pick, the nod on a right one.
  */
 export const keyframes =
   (values: number[], duration: number, ease: (p: number) => number) =>

@@ -3,6 +3,8 @@
  * as the pipeline wrote them, and its own en-US copy.
  */
 
+type Rating = 'guess' | 'unsure' | 'confident';
+
 export type Answer = { id: string; text: string; correct?: boolean };
 
 export type Question = {
@@ -160,26 +162,55 @@ export const copy = {
       `You got ${correct} out of ${total} questions correct`,
     longestRun: (count: number) => `Longest run: ${count}.`,
     missedReturn: 'What you missed comes back in later mixes.',
-    nextDrill: 'Start next drill'
+    nextDrill: 'Start next drill',
+    luckyGuesses: 'Lucky guesses',
+    luckyGuessesHint: 'Guessed, and got it right. Worth studying anyway.',
+    misconceptions: 'Misconceptions',
+    misconceptionsHint: 'You were sure, and you were wrong. Start here.',
+    stripLegend: 'Height is how sure you were. Green is right, red is wrong.'
   },
   footer: {
     coffee: 'Buy me a coffee',
     rights: '© 2026 CloudCertify. All rights reserved.'
   },
   home: {
-    badge: 'Free, no card or account',
-    lead: 'Pass your',
-    cert: 'cert',
-    tail: 'the first time.',
+    badge: 'Free, no card',
+    lead: 'Miss it here,',
+    tail: 'not on the',
     subtitle:
-      'Real exam-style questions, focused domain drills and full-length simulations for AWS, Google Cloud and Azure. Built to get you certified, not to upsell you.',
-    primary: 'Start learning',
-    secondary: 'Browse certifications',
+      'Free practice for the AWS exams. Every question explains its answer, and the result shows which ones you only got right by guessing.',
+    primary: 'Start practicing',
+    secondary: 'See the exams',
     mockQuestion:
       'Which service runs containers without managing servers or clusters?',
-    free: ['100%', 'free'],
+    sticker: ['100%', 'free'],
     links: ['Certifications', 'Pricing'],
     dashboard: 'Dashboard',
-    chips: ['AWS', 'GCP', 'Azure']
+    /**
+     * The exam codes the hero rotates through: the available Certifications
+     * in the order the API lists them, read off their titles.
+     */
+    codes: ['CLF-C02', 'DVA-C02', 'SOA-C03', 'SAA-C03', 'ANS-C01', 'SCS-C03'],
+    marquee: [
+      'Free',
+      'No card',
+      'AWS exams',
+      'Every answer explained',
+      'Drills by domain',
+      'Full practice exams'
+    ],
+    resultTitle: 'A result that shows your blind spots.',
+    resultSubtitle:
+      'Rate how sure you are as you answer, and your result shows the answers you were confident about and got wrong.',
+    example:
+      'An example Cloud Practitioner result, one column for each of the 65 questions. Pick a column to see how it went.',
+    column: (number: number, rating: Rating, right: boolean) =>
+      `Question ${number}: you ${{ confident: 'were sure', unsure: 'were unsure', guess: 'guessed' }[rating]} and got it ${right ? 'right' : 'wrong'}.${
+        rating === 'confident' && !right
+          ? ' A misconception.'
+          : rating === 'guess' && right
+            ? ' A lucky guess.'
+            : ''
+      }`
   }
 };
