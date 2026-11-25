@@ -191,6 +191,6 @@ The requested path does not exist or may have moved.
 }
 
 export const config = {
-  // Match all routes except API, static files, _next, _vercel and the email API.
-  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
+  // Match all routes except API, the PostHog relay, static files, _next and _vercel.
+  matcher: ['/((?!api|relay|_next|_vercel|.*\\..*).*)']
 };
